@@ -1,10 +1,7 @@
 
 ## Getting Started 
-<figure>
-  <video controls="true" allowfullscreen="true">
-    <source src="https://raw.githubusercontent.com/devgateway/dg-wp-react/main/docs/Getting%20Started%20WP%20Integration.mp4" type="video/mp4">
-  </video>
-</figure>
+ 
+ [![Getting Started](https://j.gifs.com/WLgvvX.gif )](https://raw.githubusercontent.com/devgateway/dg-wp-react/main/docs/Getting%20Started%20WP%20Integration.mp4)
 
 ## WP Setup
 - Run dev_services.sh to start docker containers using development network configuration
