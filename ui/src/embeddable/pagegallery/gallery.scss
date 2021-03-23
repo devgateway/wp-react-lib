@@ -1,0 +1,38 @@
+@import "../../vars";
+
+.tcdi.dashboard.gallery {
+
+
+  .item {
+
+    .preview {
+      border: 2px solid $light-gray;
+      border-radius: 5px;
+      height: 100%;
+      padding: 0px;
+
+      .ui.container.entry-content,
+      figure, img, .wp-block-image {
+        width: 100% !important;
+        margin-bottom: .4rem;
+        padding: 0px;
+      }
+
+      p {
+        padding-bottom: .4rem;
+        font-weight: 400;
+      }
+
+      .wp-block-columns {
+        padding: 0px 1rem;
+
+      }
+
+      p {
+
+      }
+    }
+
+
+  }
+}
