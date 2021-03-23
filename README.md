@@ -41,8 +41,7 @@ TBW
 ## Taxonomy Provider
 TBW
 ## Taxonomy Consumer
-TBW
-## Embeddable components
+
 TBW
 ## Templates
 TBW
