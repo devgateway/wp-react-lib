@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Container} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {getCategories, setFilter} from "../../data/module";
-import {DropDownFilter} from '../../components/Components'
+import {DropDownFilter} from './Components'
 import './filter.scss'
 
 const Filter = ({
