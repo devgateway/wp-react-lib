@@ -37,11 +37,16 @@ TBW
 ## Post Provider
 TBW
 ## Post Consumer
-
+TBW
+## Taxonomy Provider
+TBW
+## Taxonomy Consumer
+TBW
 ## Embeddable components
 TBW
 ## Templates
 TBW
+## WP React Embeddable Componets
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
