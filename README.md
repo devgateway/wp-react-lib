@@ -11,12 +11,12 @@
     - DG React Components
 
 
-UI Setup
+##UI Setup
 - run npm or pnpm install
 - run npm start
 
 
-First Page
+##First Page
 - Open to http://localhost/wp-login.php
 - Go to pages click in new page
 - Title home , ensure page slug is home
@@ -24,14 +24,14 @@ First Page
 - open localhost:3000 (react ui)
 
 
-Adding page menu
+##Adding page menu
 - Open to http://localhost/wp-login.php
 - Go to Appearance > Menu
 - Create a new menu or update the current one setting the menu name to "main"
 - open localhost:3000
 
 
-Using embeddable components
+##Using embeddable components
 TBW
 
 
