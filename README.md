@@ -1,3 +1,48 @@
+
+## WP Setup
+- Run dev_services.sh to start docker containers using development network configuration
+- Open localhost
+- Follow setup wizard
+- Go to Settings  Permalink Settings, choose  Post name
+- Go to Appearance themes and activate dg-no theme
+- Go to Pugins and activate the following plugins
+    - WP Multilang
+    - WP-REST-API V2 Menus
+    - DG React Components
+
+
+UI Setup
+- run npm or pnpm install
+- run npm start
+
+
+First Page
+- Open to http://localhost/wp-login.php
+- Go to pages click in new page
+- Title home , ensure page slug is home
+- enter some content
+- open localhost:3000 (react ui)
+
+
+Adding page menu
+- Open to http://localhost/wp-login.php
+- Go to Appearance > Menu
+- Create a new menu or update the current one setting the menu name to "main"
+- open localhost:3000
+
+
+Using embeddable components
+TBW
+
+
+##Page Provider
+TBW
+##Page Consumer
+TBW
+##Post Provider
+TBW
+##Post Consumer
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
