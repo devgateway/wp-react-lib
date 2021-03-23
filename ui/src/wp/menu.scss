@@ -1,0 +1,105 @@
+.main.menu.fixed {
+  left: auto !important;
+  -webkit-box-shadow: 0 17px 14px -6px rgba(214, 214, 214, 1) !important;
+  -moz-box-shadow: 0 17px 14px -6px rgba(214, 214, 214, 1) !important;
+  box-shadow: 0 17px 14px -6px rgba(214, 214, 214, 1) !important;
+  opacity: 1;
+}
+
+.main.menu {
+  min-height: 83px;
+  margin: 0;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 30px;
+  max-width: 1366px;
+  margin: auto;
+  background-color: #FFF !important;
+
+  > .item:first-child:after {
+    content: '';
+    height: 46px;
+    margin-left: 10px;
+    border-right: 1px solid #DDD !important;
+  }
+
+  .item.divided {
+    .flag {
+    }
+
+    b {
+      font-size: 18px;
+      line-height: 50px;
+      color: #4c4d50;
+      font-weight: 900;
+      font-family: "Roboto";
+    }
+
+    .flag:before {
+      height: 20px;
+      width: 20px;
+    }
+
+    .header {
+    }
+  }
+  .item {
+    color: #5089a6;
+    height: 40px;
+    width: auto !important;
+    margin-right: 0.8vw !important;
+
+    .brand.logo,
+    .home.icon {
+      color: #5089a6;
+      border: 0;
+      width: auto !important;
+      height: auto !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .input {
+      input {
+        width: 14vw;
+        border-radius: 3px;
+        border: 1px solid #cad3df;
+        font-size: 0.9em;
+        height: 30px;
+        background-color: #eceff4 !important;
+      }
+
+      .icon {
+        height: 30px;
+        min-width: 30px;
+        width: 2vw;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        background-color: #5089a6;
+        color: #FFF;
+      }
+    }
+  }
+}
+
+.right{
+  &.menu{
+    .item{
+      text-transform: uppercase;
+      a{
+        color: #54657e;
+      }
+      &:nth-of-type(3){
+        &:after{
+          content: "";
+          background-image: url('/menu-arrow.svg');
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 55% 55%;
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+  }
+}
