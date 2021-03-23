@@ -1,0 +1,45 @@
+.inline.list {
+
+  .entry-content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  *,
+  .colum,
+  .grid,
+  .row {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .header {
+    .flag {
+      min-width: 40px;
+    }
+  }
+
+  > .title {
+    padding: 0;
+    margin: 0;
+
+    h2.title {
+      padding: 0 !important;
+      margin: 0 !important;
+      color: $green;
+      font-weight: 400;
+    }
+
+    .plus {
+      color: $gray;
+    }
+
+    .minus {
+      color: $gray;
+    }
+  }
+
+  .content {
+    padding-bottom: 2vh !important;
+  }
+}

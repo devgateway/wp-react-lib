@@ -1,0 +1,136 @@
+.tcdi.tabbed.posts.container {
+
+  min-height: 500px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.ui.grid.tabbed.posts {
+  margin-bottom: 20px;
+
+  padding: 0 2vw;
+  background-color: transparent !important;
+
+  .row {
+    padding: 0;
+    margin: 0;
+  }
+
+  .column {
+    margin: 0;
+    padding: .2vw;
+
+    button {
+      height: 60px;
+      border-radius: 5px;
+
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+      color: #FFF !important;
+      text-align: left;
+
+      .icon {
+        display: none;
+      }
+
+
+      .title {
+        font-size: 1.3rem;
+        margin: auto auto auto 5%;
+      }
+    }
+
+
+  }
+
+  .column.has-icon {
+    button {
+      text-align: left;
+
+      .icon {
+        display: block;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: auto;
+        float: left;
+        min-width: 40px;
+        min-height: 30px;
+      }
+
+      .title {
+        font-size: 1.3rem;
+        margin: auto auto auto 2%;
+      }
+    }
+  }
+
+  button:hover {
+    color: #FFF;
+  }
+
+  .active {
+    button {
+      color: #FFF;
+      background-color: $health-color !important;
+    }
+  }
+}
+
+
+.ui.menu.tabbed.posts {
+  padding: 0px;
+  margin-left: 0em;
+  margin-bottom: 20px;
+  .title {
+    font-size: 18px;
+  }
+
+  .item {
+    margin: 0px;
+    padding: 0px;
+    color: $gray !important;
+    border: 0px;
+    font-size: 1.2em;
+
+    &:last-child {
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  .item.active {
+    color: $green !important;
+    font-weight: 700;
+    padding-left: $base-unit;
+
+    &:after {
+      color: $gray;
+      font-weight: normal;
+    }
+  }
+
+  a.item.active::before {
+    content: '';
+    background-image: url('/green_arrow_active.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 18px !important;
+    height: 20px !important;
+    background-color: transparent !important;
+    display: block !important;
+    position: relative !important;
+    margin-left: -18px;
+    margin-right: $base-unit - 2;
+
+  }
+
+  .item::after {
+    content: '|';
+    margin-left: 18px;
+    margin-right: 18px
+  }
+
+}
