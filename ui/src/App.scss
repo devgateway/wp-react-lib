@@ -1,0 +1,28 @@
+@import "vars";
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.ui {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.ui.container.narrow {
+  max-width: 1080px;
+}
+
+.ui.container.fluid.desktop {
+  max-width: 1366px !important;
+}
+
+
+.ui.primary.button {
+  background-color: $light-blue!important;
+
+}
+
+.ui.secondary.button {
+   background-color: $green!important;
+
+ }
