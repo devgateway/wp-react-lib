@@ -40,6 +40,8 @@ const LOAD_CHILD_PAGES = 'LOAD_CHILD_PAGES'
 const LOAD_CHILD_PAGES_DONE = 'LOAD_CHILD_PAGES_DONE'
 const LOAD_CHILD_PAGES_ERROR = 'LOAD_CHILD_PAGES_ERROR'
 
+const CLEAN_PAGE_DATA = 'CLEAN_PAGE_DATA'
+
 
 const initialState = Immutable.Map()
 
@@ -87,9 +89,14 @@ export const getPosts = (params) => (dispatch, getState) => {
     })
 }
 
-export const getPages = (params) => (dispatch, getState) => {
 
-    const locale = getState().getIn(['intl', 'locale'])
+export const clean = (params) => (dispatch, getState) => {
+    debugger;
+    dispatch({type: CLEAN_PAGE_DATA, ...params})
+
+}
+export const getPages = (params) => (dispatch, getState) => {
+    const {locale} = params
     dispatch({type: LOAD_PAGES, locale})
     wp.getPages({...params, lang: locale}).then(data => {
         dispatch({type: LOAD_PAGES_DONE, data, ...params})
@@ -244,7 +251,7 @@ export default (state = initialState, action) => {
         }
         case LOAD_POSTS_ERROR: {
 
-            const  {store = 'posts'} = action
+            const {store = 'posts'} = action
             return state
                 .setIn([store, 'loading'], false)
                 .setIn([store, 'error'], action.error)
@@ -337,6 +344,13 @@ export default (state = initialState, action) => {
             return state
                 .setIn(['pages', store, 'loading'], false)
                 .setIn(['pages', store, 'error'], action.error)
+        }
+
+        case CLEAN_PAGE_DATA: {
+            const {data, store} = action
+            return state.setIn(['pages', store, 'loading'], true)
+                .deleteIn(['pages', store, 'error'])
+                .deleteIn(['pages', store, 'items'])
         }
 
         /*WP pages*/

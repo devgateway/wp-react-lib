@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
-import {getPages} from '../module'
+import {getPages, clean} from '../module'
 import {PageContext} from './Context'
 import {Container, Dimmer, Loader, Segment} from "semantic-ui-react";
 import PropTypes from 'prop-types'
@@ -21,17 +21,24 @@ class PageProvider extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const {before, perPage, page, fields, parent, slug, store} = this.props
-        if (prevProps.parent != parent || prevProps.slug != slug) {
-            this.props.onLoad({before, perPage, page, fields, parent, slug, store})
+        const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
+
+        if (prevProps.parent != parent || prevProps.slug != slug || locale != prevProps.intl.locale) {
+            this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale})
         }
     }
 
     componentDidMount() {
-        const {before, perPage, page, fields, parent, slug, store} = this.props
-        this.props.onLoad({before, perPage, page, fields, parent, slug, store})
+
+        const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
+        this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale})
     }
 
+
+    componentWillUnmount(){
+        const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
+        this.props.onClean({store})
+    }
     render() {
         const {pages, loading, error} = this.props
 
@@ -62,13 +69,16 @@ const mapStateToProps = (state, ownProps) => {
     const store = ownProps.store
 
     return {
+
         error: state.getIn(['wordpress', 'pages', store, 'error']),
         pages: state.getIn(['wordpress', 'pages', store, 'items']),
         loading: state.getIn(['wordpress', 'pages', store, 'loading'])
     }
 }
 
+
 const mapActionCreators = {
+    onClean:clean,
     onLoad: getPages
 };
 

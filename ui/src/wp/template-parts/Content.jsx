@@ -25,7 +25,6 @@ const replaceLinks = (html) => {
 }
 
 const Enhance = (props) => {
-    debugger
     const Component = props.as ? props.as : Container;
     return <Component {...props}>{props.children}</Component>
 }
@@ -34,6 +33,10 @@ const Enhance = (props) => {
 class Content extends React.Component {
 
     componentDidMount() {
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
 
@@ -61,8 +64,7 @@ class Content extends React.Component {
             }
 
 
-            return <EmbeddedGateway parent={post.id}>
-
+            return <EmbeddedGateway  parent={post.id} >
                         <Enhance {...this.props}  key={post.id} className="entry-content">
                             {post && visibility['date'] == true &&
                             <div className="date"><FormattedDate value={post.date} day="numeric" month="long" year="numeric"/>

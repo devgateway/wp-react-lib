@@ -32,24 +32,31 @@ class EmbeddedGateway extends React.Component {
 
     constructor() {
         super();
-
+        this.renderEmbeddedComponents = this.renderEmbeddedComponents.bind(this)
     }
 
-    componentDidMount() {
-        const locale = this.props.intl.locale
-        const elements = ReactDOM.findDOMNode(this).getElementsByClassName("tcdi-component")
 
+    renderEmbeddedComponents() {
+        const {intl: {locale}} = this.props
+        if (this.props.parent === 2596) {
+            debugger
+        }
+        const node = ReactDOM.findDOMNode(this)
+
+        const elements = node.getElementsByClassName("tcdi-component")
         if (elements != null) {
 
+
             Array.from(elements).forEach(element => {
+
                 const component = element.getAttribute('data-component')
+                element.removeAttribute("data-component")
                 if (component) {
                     const props = {...this.props}
                     const attrs = element.attributes
                     for (var i = attrs.length - 1; i >= 0; i--) {
                         props[attrs[i].name] = attrs[i].value;
                     }
-
                     const C = components[component];
 
                     ReactDOM.render(
@@ -58,13 +65,31 @@ class EmbeddedGateway extends React.Component {
                                 <C {...props} childContent={element.innerHTML}/>
                             </IntlProvider>
                         </Provider>, element);
+
+
                 }
             })
         }
     }
 
+
+    componentDidMount() {
+        this.renderEmbeddedComponents()
+    }
+
+
+    componentWillUnmount() {
+        //ReactDOM.unmountComponentAtNode(contenedor)
+    }
+
+
     render() {
-        return <React.Fragment>{this.props.children}</React.Fragment>
+        const {parent, intl: {locale}} = this.props
+        return <React.Fragment>
+            <div>
+                {this.props.children}
+            </div>
+        </React.Fragment>
     }
 };
 

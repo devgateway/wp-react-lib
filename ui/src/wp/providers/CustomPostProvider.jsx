@@ -16,7 +16,6 @@ const toId = (category, categories) => {
 
 /*
   Will load a post base ond passed properties and put in PostContext
-  @deprecated
 */
 
 class CustomPostProvider extends React.Component {

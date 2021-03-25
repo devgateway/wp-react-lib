@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 
 import {getMedia} from '../module'
-import {withRouter} from 'react-router' // react-router v4/v5
 
 
 export const MediaContext = React.createContext()
@@ -22,12 +21,14 @@ class PageProvider extends React.Component {
     }
 
     render() {
-        const {slug, media} = this.props
+        const {media, id} = this.props
         return (<MediaContext.Provider value={media}>
             {this.props.children}
         </MediaContext.Provider>);
 
     }
+
+
 }
 
 const mapStateToProps = (state, ownProps) => {

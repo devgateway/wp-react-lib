@@ -1,4 +1,5 @@
 import React from 'react'
+import {injectIntl} from "react-intl";
 
 
 function moduleIsAvailable(path) {
@@ -70,4 +71,4 @@ class WPContent extends React.Component {
 }
 
 
-export default WPContent
+export default injectIntl(WPContent)

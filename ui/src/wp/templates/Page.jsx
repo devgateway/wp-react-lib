@@ -9,12 +9,14 @@ import Content from "../template-parts/Content";
 
 const Page = (props) => {
 
-    const {onLoad, pages, location} = props
-      if (pages) {
+    const {onLoad, pages, location,intl: {locale}} = props
+
+
+    if (pages) {
 
         return pages.map(page => {
             return (<React.Fragment>
-                        <Content key={page.id} post={page} visibility={{title: false}} {...props}/>
+                          <Content key={page.id} post={page} visibility={{title: false}} {...props}/>
 
                 </React.Fragment>)
         })
