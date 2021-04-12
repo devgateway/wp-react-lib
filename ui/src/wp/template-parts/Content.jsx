@@ -8,11 +8,11 @@ const replaceLinks = (html) => {
 
     var link;
     var regex = /href\s*=\s*(['"])(https?:\/\/.+?)\1/ig;
-    if (document.location.hostname==='localhost'){
+    if (document.location.hostname === 'localhost') {
         var re = new RegExp("^(http|https)://localhost", "i");
-    }else{
+    } else {
         //replace wp.someurl
-        var re = new RegExp("^(http|https)://"+"wp."+document.location.hostname, "i");
+        var re = new RegExp("^(http|https)://" + "wp." + document.location.hostname, "i");
     }
     let newHtml = html
     while ((link = regex.exec(html)) !== null) {
@@ -26,7 +26,17 @@ const replaceLinks = (html) => {
 
 const Enhance = (props) => {
     const Component = props.as ? props.as : Container;
-    return <Component {...props}>{props.children}</Component>
+
+    const filteredProps = ['post', 'pageNumber', 'visibility', 'intl', "as"]
+    const newProps = {}
+
+    Object.keys(props).filter(p => p).forEach(e => {
+        if (filteredProps.indexOf(e) == -1) {
+            newProps[e] = props[e]
+        }
+    })
+
+    return <Component {...newProps}>{props.children}</Component>
 }
 
 
@@ -45,10 +55,10 @@ class Content extends React.Component {
             intl,
             post,
             pageNumber,
-            visibility = {'title': true, 'content': true, 'intro': true, 'link': true},
-            as
+            showTitle, showContent, showIntro, showLink, showDate,showLoading,
+            as,
+            intl: {locale}
         } = this.props
-
 
         if (post) {
             const contentParts = post.content ? post.content.rendered.split("<!--more-->") : []
@@ -63,27 +73,17 @@ class Content extends React.Component {
                 theContent = content
             }
 
-
-            return <EmbeddedGateway  parent={post.id} >
-                        <Enhance {...this.props}  key={post.id} className="entry-content">
-                            {post && visibility['date'] == true &&
-                            <div className="date"><FormattedDate value={post.date} day="numeric" month="long" year="numeric"/>
-                            </div>}
-                            {post && visibility['title'] != false &&
-                            <h2><div className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/></h2>}
-                            {post && visibility['intro'] != false &&
-                            <div className="excerpt" dangerouslySetInnerHTML={{__html: replaceLinks(intro)}}/>}
-                            {post && visibility['content'] != false &&
-                            <div className="entry-content" dangerouslySetInnerHTML={{__html: replaceLinks(theContent)}}/>}
-                            {post && visibility['link'] === true &&
-                            <a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + intl.locale + '/')}
-                               className="link">
-                                Read More</a>}
+            return <EmbeddedGateway parent={post.id}>
+                        <Enhance className="entry-content" {...this.props}>
+                            {showDate &&<Container fluid className="date"><FormattedDate value={post.date} day="numeric" month="long" year="numeric"/></Container>}
+                            {showTitle &&<Container fluid className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
+                            {showIntro &&<Container fluid className="excerpt" dangerouslySetInnerHTML={{__html: replaceLinks(intro)}}/>}
+                            {showContent &&<Container fluid className="content" dangerouslySetInnerHTML={{__html: replaceLinks(theContent)}}/>}
+                            {showLink === true &&<a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + intl.locale + '/')} className="link">Read More</a>}
                         </Enhance>
-
-            </EmbeddedGateway>
+                </EmbeddedGateway>
         } else {
-            return visibility['showLoading'] ? 'Loading' : false;
+            return showLoading ? 'Loading' : false;
         }
     }
 

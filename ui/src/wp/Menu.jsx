@@ -3,11 +3,11 @@ import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 import {getMenu} from './module'
 import {withRouter} from 'react-router' // react-router v4/v5
-import {Button, Grid, Header, Icon, Input, Menu, Placeholder, Popup} from 'semantic-ui-react'
+import withTracker from "../withTracker"
+
+import {Button, Flag, Grid, Header, Icon, Input, Menu, Popup,} from 'semantic-ui-react'
 
 import './menu.scss'
-
-//TODO make it more generic
 
 const getLink = (o, locale) => {
     switch (o.type_label.toUpperCase()) {
@@ -75,10 +75,15 @@ const MenuWrapper = (props) => {
     return (<Menu className="main" text stackable fixed={fixed ? 'top' : null}>
         <Menu.Item>
 
-            <Placeholder style={{height: 50, width: 50}}>
-                <Placeholder.Image/>
-            </Placeholder>
+            <img className="brand logo" size="large" src='/logo_full.png'/>
         </Menu.Item>
+
+        <Menu.Menu size="mini">
+            <Menu.Item className="divided" fitted>
+                <Flag name="za"/> <b>South Africa</b>
+            </Menu.Item>
+
+        </Menu.Menu>
         <Menu.Menu position="right">
             <ItemsWalker items={items ? items.items : null} locale={intl.locale}/>
 
@@ -100,4 +105,4 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default injectIntl(withRouter(connect(mapStateToProps, mapActionCreators)((MenuWrapper))));
+export default injectIntl(withRouter(connect(mapStateToProps, mapActionCreators)(withTracker(MenuWrapper))));

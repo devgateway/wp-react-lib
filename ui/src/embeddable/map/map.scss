@@ -1,0 +1,131 @@
+@import '../../vars';
+
+body {
+  background-color: transparent!important;
+}
+
+.map.component {
+
+  position: relative;
+  background-color: transparent;
+
+  .control.panel {
+    display: none;
+    position: absolute;
+    top: 10vh;
+    margin-left: 0.5vw;
+
+    .reset,
+    .zoom {
+      display: none;
+      padding: 0.2vw;
+      margin-top: 0.2vw;
+      height: auto !important;
+      width: auto !important;
+    }
+
+    .icon {
+      background-color: $blue;
+      padding: 5px;
+      width: 30px;
+      height: 25px;
+      font-size: 14px;
+      color: #FFF;
+    }
+  }
+
+  path {
+    stroke: #000;
+    stroke-width: 0.4;
+  }
+
+  rect.country-map-label {
+    fill: #5baf95;
+  }
+
+  circle.active {
+    fill: #FFF;
+    stroke: #5baf95;
+    stroke-width: 2;
+  }
+
+  text {
+    tspan.label {
+      font-weight: bold;
+      fill: #5baf95;
+      cursor: pointer;
+      pointer-events: all;
+    }
+  }
+
+  text.focus {
+    tspan.label {
+      color: #FFF;
+      fill: #FFF !important;
+    }
+  }
+
+  path.active {
+    cursor: pointer;
+  }
+
+  path.focus {
+    fill: #5089a6;
+  }
+
+  circle.focus {
+    stroke: #67a0bd;
+    fill: #84acc0;
+  }
+
+  .big.label {
+    cursor: pointer;
+    font-size: 40px;
+    text-transform: uppercase;
+    fill: #FFF;
+  }
+
+  .big.numeric.label {
+    padding: 0;
+    //border: 1px solid red !important;
+    font-size: 140px;
+    fill: #5baf95;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
+
+.tooltip {
+  padding: 10px;
+  font-size: 1em;
+  color: #DDD;
+  border-radius: 2%;
+  padding: 10px;
+  background-color: #5c5c5c;
+  min-width: 220px;
+
+  .header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDD;
+  }
+
+  .value {
+    color: #FFF;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 5px;
+  }
+
+  .footer {
+    padding-top: 5px;
+
+    .confidence {
+      font-weight: bold;
+      color: #FFF;
+    }
+  }
+}

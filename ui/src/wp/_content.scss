@@ -31,14 +31,6 @@
   text-align: center;
 }
 
-.wp-block-group {
-  p {
-    margin: .1rem;
-    padding: 0;
-  }
-
-
-}
 
 
 figure {
@@ -52,9 +44,11 @@ figure {
 
 .padded {
   padding: 1em;
+
   &.padded-sm {
     padding: 2em;
   }
+
   &.padded-md {
     padding: 3em;
   }
@@ -108,8 +102,10 @@ ul.wp.post.list {
     margin: 0px;
   }
 }
+
 .form-block-half {
   padding: 3em;
+
   p {
     &.has-big-font-size {
       margin-bottom: 0.3em;
@@ -128,4 +124,42 @@ ul.wp.post.list {
 
 p + .wp-block-separator {
   margin-top: -20px;
+}
+
+
+p:empty {
+  display: none;
+}
+
+.wp-block-buttons {
+  .wp-block-button__link {
+    font-size: 16px !important;
+  }
+}
+
+.wp-block-group.compacted {
+  .wp-block-columns {
+    margin-bottom: 10px;
+    margin: 0px;
+    padding: 0px !important;
+
+    * {
+
+    }
+
+    .wp-block-column:not(:first-child) {
+      margin-left: 3px;
+    }
+  }
+}
+
+.wp-block-group {
+  p {
+    margin-bottom: .1rem;
+    margin-top: .1rem;
+    padding: 0;
+  }
+
+
+
 }

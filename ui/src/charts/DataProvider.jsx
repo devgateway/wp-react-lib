@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 
 
-import prevalence from '../factsheets/static/prevalence/module'
-import ecigarettes from '../factsheets/static/ecigarettes/module'
+import prevalence from '../_factsheets/static/prevalence/module'
+import ecigarettes from '../_factsheets/static/ecigarettes/module'
 
 const modules = {
     prevalence,

@@ -13,7 +13,7 @@ class DataProvider extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger;
+
         if (prevProps.filters!=this.props.filters){
             const {source,store} = this.props
             this.props.onLoadData({source,store})

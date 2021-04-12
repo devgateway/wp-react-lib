@@ -8,6 +8,7 @@ const uIComponent = (name) => asyncComponent(() => import("./"+name));
 
 const Infographic = (props) => {
     let params = queryString.parse(props.location.search)
+    debugger;
     const UIComponent=uIComponent(props.match.params.name)
     return (<Container fluid={true}>
                 <UIComponent {...params}></UIComponent>

@@ -1,8 +1,10 @@
 .featured.tabs {
+  display: flex;
+
   .grid.desktop {
+    flex-basis: 100%;
     padding: 0;
     margin: 0;
-    border: 1px solid #aeaeae;
 
     .cover {
       display: flex;
@@ -13,41 +15,39 @@
       border: 1px solid #b8ccd8;
       border-top: 0;
       margin-top: 0 !important;
-      padding: 2vw;
+      padding: 10%;
       text-align: center;
       justify-content: flex-end;
-      .title{
-        font-size: 2.5rem;
-      }
+
       .entry-content, .excerpt {
         display: flex;
         flex-direction: column;
         height: 100%;
-        margin-top: 10%;
 
-        p{
-          min-height: 30vh;
+        blco
+        p {
           margin-bottom: 0;
         }
       }
 
       .label {
         cursor: pointer;
-        line-height: 3vh;
 
         .icon {
           margin-right: 4%;
         }
-        font-size: 1.5vmin;
-        margin-left: auto;
-        margin-right: auto;
+
+        font-size: 16px;
+        font-weight: 400;
+        margin: auto;
+        margin-top: auto;
+        margin-bottom: 5%;
         width: 60%;
-        min-height: 5vh;
         border: 1px solid #FFF;
         color: #FFF;
-        background-color: transparent!important;
-        margin-top: auto;
-        margin-bottom: 50px;
+        background-color: transparent !important;
+
+
       }
 
       p {
@@ -62,9 +62,75 @@
     }
 
     .column.expanded {
+      padding: 0px;
+      border: 1px solid $light-gray;
+
+      .segment {
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0px 10px;
+        height: 70px;
+        border: 0px;
+        border-radius: 0px;
+
+        img {
+          margin-left: 2%;
+          height: 40px !important;
+
+        }
+
+        .title {
+          font-size: inherit;
+          color: #FFF;
+        }
+
+        h2 {
+          font-weight: 300;
+          padding: 10px;
+          margin: 0px;
+        }
+
+
+      }
+
       .entry-content {
-        padding: 2vw;
         color: #000;
+        margin: 0px;
+        padding: 4%;
+
+      }
+
+      .label {
+        display: inline;
+        position: relative;
+        margin-bottom: 1% !important;
+        margin-top: auto !important;
+        cursor: pointer;
+        float: right;
+        width: 120px;
+        color: #FFF;
+        background-color: $green;
+        margin-right: 1% !important;
+        left: auto !important;
+        top: auto !important;
+        bottom: 10px;
+        right: 10px;
+
+        .icon {
+          background-color: $green;
+          position: relative !important;
+          left: auto !important;
+          top: auto !important;
+          bottom: auto !important;;
+          right: auto !important;
+          padding: 0px;
+          margin-right: 10%;
+
+        }
+
+
       }
 
       .full-link {
@@ -76,43 +142,8 @@
       }
     }
 
-    .column.active {
-      border: 0 !important;
 
-      .cover {
-        border: 0 !important;
-      }
-    }
-
-    .column {
-      min-height: 70vh;
-    }
   }
 
-  .grid.mobile {
-    padding: 0;
-    margin: 0;
 
-    .row {
-      padding: 0;
-      margin: 0;
-    }
-
-    .column {
-      padding: 0;
-      margin: 0;
-    }
-
-    .excerpt {
-      .wp-block-image {
-        padding: 10vh;
-        display: none;
-      }
-
-      .entry-content {
-        padding: 0;
-        margin: 0;
-      }
-    }
-  }
 }

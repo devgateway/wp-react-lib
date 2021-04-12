@@ -2,7 +2,7 @@ import PostProvider from "../../wp/providers/PostProvider";
 import PostConsumer from "../../wp/consumers/PostConsumer";
 //import Carousel from "../../wp/components/carousel";
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import React from "react";
+import React, {useState} from "react";
 import {Container} from "semantic-ui-react";
 import {CarouselProvider, DotGroup, Slide, Slider} from "pure-react-carousel";
 import TheIntro from "../../wp/template-parts/TheIntro";
@@ -42,14 +42,16 @@ const _Carousel = (props) => {
 
 }
 const PostCarousel = (props) => {
+    const [random, setRandomStore] = useState(Math.random() * (99999 - 1) + 1);
     const {
-        "data-type":type,
-        "data-taxonomy":taxonomy,
-        "data-categories":categories,
-        "data-items":items
+        "data-type": type,
+        "data-taxonomy": taxonomy,
+        "data-categories": categories,
+        "data-items": items,
+        editing, parent
     } = props
-    return <Container fluid={true}>
-        <PostProvider type={type} taxonomy={taxonomy} categories={categories} store={"carousel"} page={1}
+    return <Container className={`tcdi post carousel ${editing ? 'editing' : ''}`} fluid={true}>
+        <PostProvider type={type} taxonomy={taxonomy} categories={categories} store={"carousel" + random} page={1}
                       perPage={items}>
             <PostConsumer>
                 <Carousel></Carousel>

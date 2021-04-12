@@ -14,7 +14,7 @@ const Filter = ({
     }, [])
 
     if (categories) {
-        debugger;
+
 
     }
     return <Container fluid={true} className={"filter"}>

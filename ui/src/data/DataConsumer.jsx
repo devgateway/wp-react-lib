@@ -8,7 +8,7 @@ const PostConsumer = (props) => {
         <DataContext.Consumer>
 
             {(data) => {
-                debugger;
+
                 return data && <React.Fragment>
                      {React.Children.map(props.children, (child => {
                     return React.cloneElement(child, {data})

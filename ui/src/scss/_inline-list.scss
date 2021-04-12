@@ -1,45 +1,37 @@
 .inline.list {
+  padding: 0px;
 
-  .entry-content {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
+  .ui.grid {
 
-  *,
-  .colum,
-  .grid,
-  .row {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
 
-  .header {
-    .flag {
-      min-width: 40px;
+    border-bottom: 1px solid $light-gray;
+    padding: 0px 0px 30px 0px;
+    margin:0px 0px 30px 0px;
+
+    .column {
+      padding: 0px;
+
     }
-  }
+    .ui.container.entry-content{
+      padding: 0px 14px;
 
-  > .title {
-    padding: 0;
-    margin: 0;
-
-    h2.title {
-      padding: 0 !important;
-      margin: 0 !important;
-      color: $green;
-      font-weight: 400;
     }
 
-    .plus {
-      color: $gray;
-    }
+    .ui.label {
 
-    .minus {
-      color: $gray;
-    }
-  }
+      img {
+        height: auto !important;
+        width: 100% !important;
+        min-width: 30px;
+        margin: 0px;
+      }
 
-  .content {
-    padding-bottom: 2vh !important;
+      height: auto;
+      background-color: transparent;
+      text-align: center;
+      padding: 0px;
+      margin: 0px;
+
+    }
   }
 }

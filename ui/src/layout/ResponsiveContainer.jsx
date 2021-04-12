@@ -8,6 +8,7 @@ import MainMenu from '../wp/Menu.jsx'
 import {Media} from "../AppMedia"
 import Footer from "./Footer";
 import {Route} from "react-router";
+import {injectIntl} from "react-intl";
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -78,19 +79,20 @@ MobileContainer.propTypes = {
 }
 
 class ResponsiveContainer extends Component {
-    componentDidMount() {
 
+    componentDidUpdate(prevProps) {
+      debugger;
     }
 
     render() {
-        const {children, fixed, location} = this.props
+        const {children, fixed,locale} = this.props
         return (<div>
             <style>
                 {Media.mediaStyles}
             </style>
 
             <DesktopContainer fixed={fixed}>
-                {children}
+                    {children}
             </DesktopContainer>
             <Footer></Footer>
         </div>)
@@ -98,8 +100,4 @@ class ResponsiveContainer extends Component {
 }
 
 
-ResponsiveContainer.propTypes = {
-    children: PropTypes.node,
-}
-
-export default withRouter(ResponsiveContainer)
+export default ResponsiveContainer

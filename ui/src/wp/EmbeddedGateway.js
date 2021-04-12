@@ -13,17 +13,23 @@ import Filter from "../embeddable/filter";
 const TabbedPosts = asyncComponent(() => import("../embeddable/tabbedposts/"));
 const PostsCarousel = asyncComponent(() => import("../embeddable/postscarousel/"));
 const PageGallery = asyncComponent(() => import("../embeddable/pagegallery/"));
+const PageModules = asyncComponent(() => import("../embeddable/pagemodules/"));
+const FeaturedTabs = asyncComponent(() => import("../embeddable/featuredtabs/"));
+const InlineList = asyncComponent(() => import("../embeddable/inlinelist/"));
 const messages = {
     'en': messages_en
 };
 
 const components = {
+    map: Map,
     pageGallery: PageGallery,
     postsCarousel: PostsCarousel,
     chart: Chart,
     filter: Filter,
     tabbedPosts: TabbedPosts,
-
+    pageModules: PageModules,
+    featuredTabs: FeaturedTabs,
+    inlineList:InlineList
 }
 
 const store = getStore();
@@ -38,9 +44,7 @@ class EmbeddedGateway extends React.Component {
 
     renderEmbeddedComponents() {
         const {intl: {locale}} = this.props
-        if (this.props.parent === 2596) {
-            debugger
-        }
+
         const node = ReactDOM.findDOMNode(this)
 
         const elements = node.getElementsByClassName("tcdi-component")
@@ -86,9 +90,9 @@ class EmbeddedGateway extends React.Component {
     render() {
         const {parent, intl: {locale}} = this.props
         return <React.Fragment>
-            <div>
+
                 {this.props.children}
-            </div>
+
         </React.Fragment>
     }
 };

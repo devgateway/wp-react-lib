@@ -12,16 +12,7 @@ class Footer extends Component {
         return (<Container fluid className={"tcdi footer"}>
             <Container>
                 <Grid columns={4}>
-                    <Grid.Column>
-                        <Header as={"h4"}>Development Gateway</Header>
-
-                        <p>
-                            Vivamus ac neque eu tortor efficitur posuere a in odio.<br/>
-                            Praesent rutrum mauris feugiat magna iaculis auctor.<br/>
-                            Curabitur tincidunt massa a eros imperdiet, nec faucibus lorem imperdiet.<br/>
-                        </p>
-
-                    </Grid.Column>
+                    <Grid.Column><img src={"/home/footer_logo.png"}></img></Grid.Column>
                     <Grid.Column>
                         <Header as={"h4"}>Development Gateway</Header>
 
@@ -33,22 +24,21 @@ class Footer extends Component {
                         </p>
                     </Grid.Column>
                     <Grid.Column>
-                        <Header as={"h4"}>What is Lorem Ipsum?</Header>
+                        <Header as={"h4"}>University of Cape Town</Header>
                         <p>
-                            Vivamus ac neque eu tortor efficitur posuere a in odio.<br/>
-                            Praesent rutrum mauris feugiat magna iaculis auctor.<br/>
-                            Curabitur tincidunt massa a eros imperdiet, nec faucibus lorem imperdiet.<br/>
+                            University of Cape Town<br/>
+                            Research Unit on the Economic Excisable Products (REEP)<br/>
+                            School of Economics<br/>
+                            Bremner Building, Lovers Walk, University of Cape Town, Rondebosch, 7701 South Africa<br/>
+                            Tel: +27 (0)21 650 3608
                         </p>
 
                     </Grid.Column>
                     <Grid.Column>
                         <Header>Contact Us</Header>
-                            <p>
-                                Vivamus ac neque eu tortor efficitur posuere a in odio.<br/>
-                                Praesent rutrum mauris feugiat magna iaculis auctor.<br/>
-                                Curabitur tincidunt massa a eros imperdiet, nec faucibus lorem imperdiet.<br/>
-                            </p>
-
+                        <p>
+                        info@tcdi.org
+                        </p>
                     </Grid.Column>
 
                 </Grid>
@@ -62,7 +52,7 @@ class Footer extends Component {
                         </Grid.Column>
                         <Grid.Column width={5}>
                             <p>
-
+                                © UI Chest, 2015. All Rights Reserved.
                             </p>
                         </Grid.Column>
 

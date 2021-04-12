@@ -10,7 +10,7 @@ import {getTextWidth, lightenDarkenColor} from './utils.js'
 import './chart.scss'
 
 const Chart = ({legends, options, intl, format, colors, groupMode, height}) => {
-    debugger;
+
     const [filter, setFilter] = useState([])
     const applyFilter = (values) => {
         if (filter) {
@@ -109,7 +109,7 @@ const Chart = ({legends, options, intl, format, colors, groupMode, height}) => {
         setFilter(newFilter)
     }
 
-    debugger;
+
     return (
         <div style={{height:height}}>
             {options && options.data && <ResponsiveBar

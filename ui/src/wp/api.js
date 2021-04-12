@@ -1,21 +1,24 @@
 import {get} from '../api/commons.js'
 
 const API_ROOT = document.location.href.indexOf('localhost') > -1 ?
-     'http://localhost/wp-json'
+    "https://wp.tobacco.dgstg.org/wp-json"
+    // 'http://localhost/wp-json'
     : "https://wp." + document.location.host + '/wp-json'
-
-const URL_MENU = API_ROOT + '/menus/v1/menus/' //WP Plugin required
+const URL_MENU = API_ROOT + '/menus/v1/menus/'
 const URL_API_BASE = API_ROOT + '/wp/v2/'
 const URL_POSTS = API_ROOT + '/wp/v2/posts'
+
 const URL_POST = API_ROOT + '/wp/v2/posts?slug='
 const URL_PAGE = API_ROOT + '/wp/v2/pages?'
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
+
 
 export const getTaxonomy = (name, lang) => {
     return get(URL_API_BASE + "" + name + '?lang=' + lang + '&per_page=100')
 
 }
 
+//TODO:make a unique getPost method
 export const getPostsByTypeAndTaxonomy = (type, category, value, lang = 'en', page = 1, perPage = 1) => {
     return get(URL_API_BASE + type + "?_embed&" + category + '=' + value + '&lang=' + lang + '&per_page=' + perPage + '&page=' + page)
 }
@@ -29,7 +32,7 @@ export const getPosts = (params) => {
     const {lang, slug, wType:type, taxonomy, categories, before, perPage, page, fields,} = params
 
     let url = URL_API_BASE + (type ? type : 'posts')
-        + '?lang=' + lang
+        + '?_embed=true&lang=' + lang
         + (slug ? '&slug=' + slug : '')
 
     if (!slug) {

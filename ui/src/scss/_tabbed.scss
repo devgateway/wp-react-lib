@@ -1,14 +1,26 @@
+
 .tcdi.tabbed.posts.container {
 
   min-height: 500px;
-  padding: 0px;
-  margin: 0px;
+  padding: 0px 20px;
+
+  .ui.container.entry-content {
+    margin: 0px;
+    padding: 20px 0px;
+  }
+
+  .label {
+    font-weight: 400;
+    margin: 0px;
+    font-size: 18px;
+  }
+
+  .icon {
+
+  }
 }
 
 .ui.grid.tabbed.posts {
-  margin-bottom: 20px;
-
-  padding: 0 2vw;
   background-color: transparent !important;
 
   .row {
@@ -23,21 +35,16 @@
     button {
       height: 60px;
       border-radius: 5px;
-
       width: 100%;
       padding: 0px;
       margin: 0px;
       color: #FFF !important;
       text-align: left;
 
-      .icon {
-        display: none;
-      }
+      .label {
+        color: #FFF;
+        background-color: transparent !important;
 
-
-      .title {
-        font-size: 1.3rem;
-        margin: auto auto auto 5%;
       }
     }
 
@@ -49,20 +56,21 @@
       text-align: left;
 
       .icon {
+        border: 0px;
         display: block;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         width: auto;
         float: left;
-        min-width: 40px;
-        min-height: 30px;
+        height: 40px;
+
+        width: auto;
+        margin-left: 10px;
+        margin-right: 0px;
       }
 
-      .title {
-        font-size: 1.3rem;
-        margin: auto auto auto 2%;
-      }
+
     }
   }
 
@@ -80,20 +88,25 @@
 
 
 .ui.menu.tabbed.posts {
+
   padding: 0px;
-  margin-left: 0em;
-  margin-bottom: 20px;
-  .title {
-    font-size: 18px;
-  }
+  margin: 0px;
+
 
   .item {
+
     margin: 0px;
     padding: 0px;
     color: $gray !important;
     border: 0px;
-    font-size: 1.2em;
+    font-size: 18px;
 
+    .label {
+      background-color: transparent !important;
+      color: $gray;
+      padding: 0px;
+
+    }
     &:last-child {
       &:after {
         content: none;
@@ -102,6 +115,14 @@
   }
 
   .item.active {
+
+    .label {
+      background-color: transparent !important;
+      color: $green;
+      font-weight: bold;
+      padding: 0px;
+
+    }
     color: $green !important;
     font-weight: 700;
     padding-left: $base-unit;
@@ -132,5 +153,6 @@
     margin-left: 18px;
     margin-right: 18px
   }
+
 
 }

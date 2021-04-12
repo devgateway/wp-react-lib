@@ -48,7 +48,7 @@ export const DropDownFilter = ({
                                    icon = 'filter',
                                    onChange
                                }) => {
-    debugger;
+
     return <Dropdown
         fluid
         placeholder={placeholder}

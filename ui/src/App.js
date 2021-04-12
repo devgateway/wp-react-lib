@@ -15,8 +15,10 @@ import smoothscroll from 'smoothscroll-polyfill';
 import asyncComponent from "./AsyncComponent";
 import ResponsiveContainer from './layout'
 import Category from './wp/templates/Category'
+
 import PostProvider from "./wp/providers/PostProvider";
 import {Page, Post, PostConsumer} from "./wp";
+
 import WPContent from "./wp/WPContent";
 import PageProvider from "./wp/providers/PageProvider";
 import PageConsumer from "./wp/consumers/PageConsumer";
@@ -43,21 +45,23 @@ class IntlRoutes extends Component {
     }
 
     componentDidMount() {
-        const locale = this.props.location.pathname.split("/")[1]
+        const locale=this.props.match.params.lan
+
         store.dispatch(updateIntl({locale, messages: messages[this.props.match.params.lan]}))
 
     }
 
     componentDidUpdate() {
-        const locale = this.props.location.pathname.split("/")[1]
-        store.dispatch(updateIntl({locale, messages: messages[this.props.match.params.lan]}))
+        const locale=this.props.match.params.lan
+
+        store.dispatch(updateIntl({locale, messages: messages[locale]}))
 
     }
 
     render() {
         const self = this;
         const props = this.props;
-        const locale = this.props.location.pathname.split("/")[1]
+        const locale=this.props.match.params.lan
 
         return (<IntlProvider key={locale} locale={locale} messages={messages[locale]}>
             <style type="text/css">${mediaStyle}</style>
@@ -95,7 +99,19 @@ class IntlRoutes extends Component {
 
                 </Route>
                 <Route path="/:lan/:parent/:slug/" exact render={props => (
-                    <Redirect to={`/${props.match.params.lan}/${props.match.params.slug}`}/>)}>
+                    <ResponsiveContainer>
+
+                        <PostProvider type={props.match.params.parent}  slug={props.match.params.slug} store={props.match.params.slug}>
+
+                            <PostConsumer>
+                                <WPContent visibility={{link: false, intro: false, title: true, date: true}} {...props}
+                                           defaultTemplate={Post}/>
+                            </PostConsumer>
+                        </PostProvider>
+
+                    </ResponsiveContainer>
+                )}>
+
 
                 </Route>
                 <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (

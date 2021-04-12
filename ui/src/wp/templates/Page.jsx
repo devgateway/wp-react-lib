@@ -5,6 +5,7 @@ import {injectIntl} from 'react-intl';
 import {withRouter} from 'react-router' // react-router v4/v5
 import withTracker from "../../withTracker"
 import Content from "../template-parts/Content";
+import TheContent from "../template-parts/TheContent";
 
 
 const Page = (props) => {
@@ -16,9 +17,8 @@ const Page = (props) => {
 
         return pages.map(page => {
             return (<React.Fragment>
-                          <Content key={page.id} post={page} visibility={{title: false}} {...props}/>
-
-                </React.Fragment>)
+                                <TheContent post={page} {...props}/>
+                        </React.Fragment>)
         })
     } else {
         return null

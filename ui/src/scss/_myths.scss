@@ -13,13 +13,14 @@
     }
 
     img {
-      margin-right: 10px;
-      width: 37px;
-      height: 39px;
+      margin-right: $base-unit;
+      width: $base-unit * 4;
+      height: auto;
     }
   }
 
   .title {
+    cursor: text;
     margin-left: 3.2em;
     display: flex;
     flex-direction: row;
@@ -32,25 +33,31 @@
       margin: 0;
 
       p {
-        margin-left: -($base-unit * 4);
-        text-indent: $base-unit * 4.5;
+        font-size: 1.3em;
+        font-weight: 400;
+        line-height: 130%;
+        margin-left: -($base-unit * 6.5);
+        text-indent: $base-unit * 7;
       }
     }
 
     .ui.label {
       width: 100px;
       border-radius: 0;
-      margin: 7px 0 0;
-      font-weight: 800;
+      margin: 0;
+      font-weight: 400;
       color: $red;
-      font-size: 0.9em;
+      font-size: 1.3em;
+      line-height: $base-unit * 3;
       padding: 0px 0.2em 0px 0px;
-      border: 0;
+      border: none;
 
       img {
-        margin: -3px 7px;
-        width: auto !important;
+        border: 1px solid transparent;
+        display: inline-block;
         height: auto !important;
+        margin: 0;
+        width: $base-unit * 3 !important;
       }
     }
   }
@@ -65,31 +72,42 @@
     color: $health-color;
     padding-bottom: $base-unit * 2 !important;
 
+    .excerpt {
+      display:none;
+    }
+
     p {
       font-size: 1.3em;
       font-weight: 400;
-      line-height: 140%;
+      line-height: 130%;
       margin-top: 0;
-      margin-left: -($base-unit * 6.3);
+      margin-left: -($base-unit * 7);
       padding-bottom: $base-unit * 1.7;
       padding-top: 0;
-      text-indent: 0;
+
+      &:first-child {
+        margin-left: -($base-unit * 7);
+        text-indent: ($base-unit * 7);
+      }
     }
 
     .label {
       justify-content: center;
       color: $health-color;
       align-items: center;
-      font-size: 1.2em;
-      font-weight: 800 !important;
+      font-size: 1.3em;
+      font-weight: 400;
       border: 0;
-      padding: $base-unit - 6 $base-unit 0 0;
-      height: $base-unit * 2;
+      line-height: $base-unit * 3;
+      padding: 0 0.2em 0 0;
+      height: $base-unit * 3.5;
 
       img {
-        margin: -5px 1px auto 3px;
-        width: auto !important;
+        border: 1px solid transparent;
+        display: inline-block;
         height: auto !important;
+        margin: 0;
+        width: $base-unit * 3 !important;
       }
 
     }
@@ -101,7 +119,6 @@
 
       > p {
         padding: 0;
-        margin: 0;
       }
     }
   }

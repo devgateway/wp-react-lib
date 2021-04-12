@@ -76,25 +76,21 @@ export const getPostByTaxonomy = (wpType, taxonomy, category, categoryId, page, 
 }
 
 export const getPosts = (params) => (dispatch, getState) => {
-
     const locale = getState().getIn(['intl', 'locale'])
     dispatch({type: LOAD_POSTS, ...params})
-
     wp.getPosts({...params, lang: locale}).then(data => {
-
         dispatch({type: LOAD_POSTS_DONE, data, ...params})
     }).catch(error => {
-
         dispatch({type: LOAD_POSTS_ERROR, error, ...params})
     })
 }
 
 
 export const clean = (params) => (dispatch, getState) => {
-    debugger;
     dispatch({type: CLEAN_PAGE_DATA, ...params})
 
 }
+
 export const getPages = (params) => (dispatch, getState) => {
     const {locale} = params
     dispatch({type: LOAD_PAGES, locale})

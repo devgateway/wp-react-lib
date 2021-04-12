@@ -46,7 +46,7 @@ export const getData = ({source, store, params}) => (dispatch, getState) => {
     const filters = getState().get('data').getIn(['filters'])
 
     if (filters) {
-        debugger;
+
         params = {...filters.toJS()}
     }
 
@@ -85,7 +85,7 @@ export default (state = initialState, action) => {
             return state
         case LOAD_CATEGORIES_DONE:
             const {data} = action
-            debugger;
+
             return state.setIn(['categories'], Immutable.fromJS(data))
 
         case LOAD_CATEGORIES_ERROR:
