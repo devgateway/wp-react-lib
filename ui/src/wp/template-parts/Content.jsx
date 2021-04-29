@@ -3,26 +3,7 @@ import {FormattedDate, injectIntl} from 'react-intl';
 
 import EmbeddedGateway from '../EmbeddedGateway.js'
 import {Container} from "semantic-ui-react";
-
-const replaceLinks = (html) => {
-
-    var link;
-    var regex = /href\s*=\s*(['"])(https?:\/\/.+?)\1/ig;
-    if (document.location.hostname === 'localhost') {
-        var re = new RegExp("^(http|https)://localhost", "i");
-    } else {
-        //replace wp.someurl
-        var re = new RegExp("^(http|https)://" + "wp." + document.location.hostname, "i");
-    }
-    let newHtml = html
-    while ((link = regex.exec(html)) !== null) {
-        let href = link[2]
-        let newLink = href.replace(re, '#en')
-        newHtml = html.replaceAll(link[2], newLink)
-    }
-
-    return newHtml;
-}
+import {replaceHTMLinks} from "../htmlUtils";
 
 const Enhance = (props) => {
     const Component = props.as ? props.as : Container;
@@ -55,7 +36,7 @@ class Content extends React.Component {
             intl,
             post,
             pageNumber,
-            showTitle, showContent, showIntro, showLink, showDate,showLoading,
+            showTitle, showContent, showIntro, showLink, showDate, showLoading,
             as,
             intl: {locale}
         } = this.props
@@ -74,14 +55,21 @@ class Content extends React.Component {
             }
 
             return <EmbeddedGateway parent={post.id}>
-                        <Enhance className="entry-content" {...this.props}>
-                            {showDate &&<Container fluid className="date"><FormattedDate value={post.date} day="numeric" month="long" year="numeric"/></Container>}
-                            {showTitle &&<Container fluid className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
-                            {showIntro &&<Container fluid className="excerpt" dangerouslySetInnerHTML={{__html: replaceLinks(intro)}}/>}
-                            {showContent &&<Container fluid className="content" dangerouslySetInnerHTML={{__html: replaceLinks(theContent)}}/>}
-                            {showLink === true &&<a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + intl.locale + '/')} className="link">Read More</a>}
-                        </Enhance>
-                </EmbeddedGateway>
+                <Enhance className="entry-content" {...this.props}>
+                    {showDate &&
+                    <Container fluid className="date"><FormattedDate value={post.date} day="numeric" month="long"
+                                                                     year="numeric"/></Container>}
+                    {showTitle &&
+                    <span fluid className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
+                    {showIntro &&
+                    <Container fluid className="excerpt" dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro)}}/>}
+                    {showContent &&
+                    <Container fluid className="content" dangerouslySetInnerHTML={{__html: replaceHTMLinks(theContent)}}/>}
+                    {showLink === true &&
+                    <a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + intl.locale + '/')}
+                       className="link">Read More</a>}
+                </Enhance>
+            </EmbeddedGateway>
         } else {
             return showLoading ? 'Loading' : false;
         }

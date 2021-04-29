@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Checkbox, Container, Grid} from "semantic-ui-react";
+import {Button, Container, Grid} from "semantic-ui-react";
 import DataProvider from "../../data/DataProvider";
 import {connect} from "react-redux";
 import Bar from "../../charts/Bar";
@@ -7,7 +7,6 @@ import DataConsumer from "../../data/DataConsumer";
 import {buildBarOptions, buildDivergingOptions, buildPieOptions} from './chartOptionsBuilder'
 import './charts.scss'
 import HalfPie from "../../charts/HalfPie";
-import Content from "../../wp/template-parts/Content";
 import TheContent from "../../wp/template-parts/TheContent";
 
 const BarChar = (props) => {

@@ -5,6 +5,7 @@ import {intlReducer} from 'react-intl-redux'
 import wordpress from '../wp/module'
 import data from "../data/module.js";
 import embeddable from '../embeddable/module'
+
 const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
     wordpress,

@@ -4,6 +4,7 @@ import {withRouter} from 'react-router' // react-router v4/v5
 import asyncComponent from "../AsyncComponent";
 import {injectIntl} from "react-intl";
 import {Container} from "semantic-ui-react";
+
 const uIComponent = (name) => asyncComponent(() => import("./"+name));
 
 const Infographic = (props) => {

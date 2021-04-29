@@ -1,9 +1,8 @@
-import {Container, Grid, Image, Menu, Visibility} from "semantic-ui-react";
+import {Container, Image, Menu, Visibility} from "semantic-ui-react";
 import React from "react";
 import PageProvider from "../../wp/providers/PageProvider";
 import {PageConsumer} from "../../wp";
 import './modules.scss'
-import Content from "../../wp/template-parts/Content";
 import MediaProvider from "../../wp/providers/MediaProvider";
 import MediaConsumer from "../../wp/consumers/MediaConsumer";
 

@@ -7,7 +7,6 @@ import TheTitle from "../../wp/template-parts/TheTitle";
 import Content from "../../wp/template-parts/Content";
 import MediaProvider from "../../wp/providers/MediaProvider";
 import MediaConsumer from "../../wp/consumers/MediaConsumer";
-import {SectionHeader} from "../pagemodules";
 import TheIcon from "../../wp/template-parts/TheIcon";
 
 

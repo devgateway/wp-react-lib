@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 import {getPostByTaxonomy} from '../module'
-import {withRouter} from 'react-router' // react-router v4/v5
 import {PostContext} from './Context'
 
 const toId = (category, categories) => {

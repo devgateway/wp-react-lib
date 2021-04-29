@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, Container, Grid, Label, Menu, Segment} from 'semantic-ui-react'
+import {Button, Container, Grid, Label, Menu} from 'semantic-ui-react'
 import {PostConsumer, PostProvider} from "../../wp";
 import TheIntro from "../../wp/template-parts/TheIntro";
 import '../embeddable.scss'

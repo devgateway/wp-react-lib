@@ -3,11 +3,8 @@ import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 import {getMenu} from './module'
 import {withRouter} from 'react-router' // react-router v4/v5
-import withTracker from "../withTracker"
+import {Icon, Menu,} from 'semantic-ui-react'
 
-import {Button, Flag, Grid, Header, Icon, Input, Menu, Popup,} from 'semantic-ui-react'
-
-import './menu.scss'
 
 const getLink = (o, locale) => {
     switch (o.type_label.toUpperCase()) {
@@ -32,64 +29,34 @@ const getLabel = (e, locale) => {
 
 
 function ItemsWalker({items, locale}) {
-    return (<Menu.Menu position="right">{items && items.sort((a, b) => a.menu_order - b.menu_order).map(e =>
+    return (
+        <div>
+            <Menu.Menu position="right">{items && items.sort((a, b) => a.menu_order - b.menu_order).map(e =>
+                <Menu.Item active={false}>
 
-        <Menu.Item key={e.ID}
-                   name='features'
-                   active={false}>
+                    {e.child_items ? getLabel(e, locale) : getLabel(e, locale)}
+                </Menu.Item>
+            )}
 
-            {e.child_items ?
-                <Popup flowing trigger={<div dangerouslySetInnerHTML={{__html: e.title}}/>} flowing hoverable>
-                    <Grid centered divided stackable columns={e.child_items.length}>
+                <Menu.Item>
 
-                        {e.child_items.map(e1 =>
-                            <Grid.Column key={e1.title} textAlign='center'>
-                                <Header as='h4'><span dangerouslySetInnerHTML={{__html: e1.title}}/></Header>
-                                <Button><a href={getLink(e1, locale)}>Click here to see more</a></Button>
-                            </Grid.Column>
-                        )}
-                    </Grid>
-                </Popup> : getLabel(e, locale)
-            }
-        </Menu.Item>
-    )}
+                </Menu.Item>
+            </Menu.Menu>
 
-        <Menu.Item>
-            <Input icon='search' placeholder='Search...'/>
-        </Menu.Item>
-    </Menu.Menu>)
+        </div>
+    )
 }
 
 
 const MenuWrapper = (props) => {
     const {onLoad, loading, location, slug, intl, fixed, mobile, items} = props
-
     const activeItem = null
-
-
     useEffect(() => {
         onLoad(slug)
     }, [onLoad, slug]);
 
 
-    return (<Menu className="main" text stackable fixed={fixed ? 'top' : null}>
-        <Menu.Item>
-
-            <img className="brand logo" size="large" src='/logo_full.png'/>
-        </Menu.Item>
-
-        <Menu.Menu size="mini">
-            <Menu.Item className="divided" fitted>
-                <Flag name="za"/> <b>South Africa</b>
-            </Menu.Item>
-
-        </Menu.Menu>
-        <Menu.Menu position="right">
-            <ItemsWalker items={items ? items.items : null} locale={intl.locale}/>
-
-        </Menu.Menu>
-
-    </Menu>)
+    return <ItemsWalker items={items ? items.items : null} locale={intl.locale}/>
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -105,4 +72,4 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default injectIntl(withRouter(connect(mapStateToProps, mapActionCreators)(withTracker(MenuWrapper))));
+export default injectIntl(withRouter(connect(mapStateToProps, mapActionCreators)((MenuWrapper))));

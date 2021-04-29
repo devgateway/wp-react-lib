@@ -3,8 +3,11 @@
   background-color: #5089a6;
   line-height: 16px !important;
 
+  .column {
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+  }
   .header {
-    padding: 1rem;
     font-weight: 400;
     color: white;
     text-transform: uppercase;
@@ -15,11 +18,17 @@
     font-weight: 400;
     font-size: 15px;
     color: white;
-    padding: 1rem;
+    padding: 1rem 0;
+    a{
+      color: #ffffff;
+      &:hover {
+        color: #f0f0f0;
+      }
+    }
   }
 
   .tcdi.secondary-menu.container {
-
     background-color: #175372;
+    text-align: center;
   }
 }

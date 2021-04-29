@@ -33,6 +33,7 @@ class DataProvider extends React.Component {
         } else if (loading) {
             return (<Container>
                 <Dimmer active inverted>
+                    <h1>Data Loading</h1>
                     <Loader inverted content='Loading'/>
                 </Dimmer>
             </Container>)
