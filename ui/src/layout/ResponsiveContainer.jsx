@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import {Container, Icon, Menu, Sidebar,} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import './layout.scss'
-import MainMenu from '../wp/Menu.jsx'
 import {Media} from "../AppMedia"
 import Footer from "./Footer";
 import Header from "./Header";
@@ -56,7 +55,7 @@ class MobileContainer extends Component {
                     vertical
                     visible={sidebarOpened}>
                     <Container>
-                        <MainMenu slug="main"/>
+
                     </Container>
 
                 </Sidebar>
