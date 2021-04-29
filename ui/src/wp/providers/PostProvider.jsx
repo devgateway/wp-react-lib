@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 import {getPosts} from '../module'
 import {PostContext} from './Context'
-import {Container, Dimmer, Loader, Segment} from "semantic-ui-react";
+import {Container, Loader, Segment} from "semantic-ui-react";
 
 class PostProvider extends React.Component {
 
@@ -30,16 +30,12 @@ class PostProvider extends React.Component {
             </Segment>
         } else if (loading) {
             return (<Container>
-                <Dimmer active inverted>
-                    <Loader inverted content='Loading'/>
-                </Dimmer>
-            </Container>)
+                     <Loader></Loader>
+                   </Container>)
         } else {
-
             return <Container>
                 <Segment color={"red"}>
-
-                    <p>No entries found</p>
+                        <p>No entries found</p>
                 </Segment>
             </Container>
         }

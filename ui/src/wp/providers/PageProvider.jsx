@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
-import {getPages, clean} from '../module'
+import {clean, getPages} from '../module'
 import {PageContext} from './Context'
-import {Container, Dimmer, Loader, Segment} from "semantic-ui-react";
+import {Container, Loader, Segment} from "semantic-ui-react";
 import PropTypes from 'prop-types'
 
 /*
@@ -24,24 +24,32 @@ class PageProvider extends React.Component {
         const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
 
         if (prevProps.parent != parent || prevProps.slug != slug || locale != prevProps.intl.locale) {
+            if(this.props.debugger){
+
+            }
             this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale})
         }
     }
 
     componentDidMount() {
-
         const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
+        if(this.props.debugger){
+
+        }
         this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale})
     }
 
 
     componentWillUnmount(){
+
         const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
+        if(this.props.debugger){
+
+        }
         this.props.onClean({store})
     }
     render() {
         const {pages, loading, error} = this.props
-
         if (pages && pages.length > 0) {
             return <PageContext.Provider value={pages}>{this.props.children}</PageContext.Provider>
         } else if (error) {
@@ -49,10 +57,8 @@ class PageProvider extends React.Component {
                 <p>The service is not available please try again in a few minutes</p></Segment>
         } else if (loading) {
             return (<Container>
-                <Dimmer active inverted>
-                    <Loader inverted content='Loading'/>
-                </Dimmer>
-            </Container>)
+                        <Loader inverted content='Loading'/>
+                   </Container>)
         } else if (loading == false) {
             return <Container>
                 <Segment color={"red"}>

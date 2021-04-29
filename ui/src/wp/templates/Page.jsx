@@ -14,9 +14,9 @@ const Page = (props) => {
 
 
     if (pages) {
-
         return pages.map(page => {
             return (<React.Fragment>
+
                                 <TheContent post={page} {...props}/>
                         </React.Fragment>)
         })

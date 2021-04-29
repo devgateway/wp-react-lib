@@ -1,0 +1,169 @@
+
+.container.header {
+  height: 150px;
+  padding: 0px;
+  margin: 0px;
+  box-shadow: none;
+  left: auto;
+
+  .background {
+    border-bottom: 1px solid $light-gray;
+    background-color: #f9f9f9;
+
+  }
+
+  .menu.branding {
+    background-color: #f9f9f9;
+    height: 96px;
+  }
+
+  .menu, .branding {
+    padding: 0px;
+    margin: 0px;
+    max-width: 1366px;
+    margin: auto;
+
+
+    .flag:not(.icon):before {
+
+    }
+
+    .divider {
+      div {
+
+        border-left: 1px solid $light-gray;
+        height: 46px;
+
+      }
+
+    }
+
+    .item {
+      cursor: pointer;
+      color: $light-blue;
+      font-size: 15px;
+
+      margin: 0px 1%;
+    }
+
+    .pages {
+      align-self: flex-end;
+      height: 96px;
+      width: 100%;
+
+      .item:nth-child(1) {
+        margin-left: 4%;
+      }
+      .item {
+        margin: 0px;
+        text-transform: uppercase;
+        justify-content: center;
+        height: 90px;
+        min-width: 12%;
+        padding: 0px 3%;
+        color: $light-blue;
+        align-self: flex-end;
+      }
+
+      .item.selected {
+        font-weight: bold;
+        margin-bottom: -1px;
+        height: 91px;
+        color: $light-blue;
+        background-color: #FFF;
+        border-bottom: 1px solid #FFF !important;
+      }
+    }
+  }
+
+  .container.child {
+    .menu {
+      max-width: 100%;
+      margin-top: 0px;
+      padding: 0px;
+      border-bottom: 1px solid $light-gray;
+      justify-content: center;
+
+      .item {
+        margin-top: 1px;
+
+        a {
+          color: $light-gray;
+        }
+
+        text-transform: uppercase;
+        padding: 0px 10px;
+
+        .mark {
+          width: 15px;
+          height: 17px;
+          background-size: 15px 15px;
+          margin-right: 11px;
+          background-image: url("/header_arrow_gray.png");
+          background-repeat: no-repeat;
+        }
+      }
+
+      .item.selected {
+
+        .mark {
+          width: 15px;
+          height: 16px;
+          background-size: 15px 15px;
+          margin-right: 10px;
+          background-image: url("/header_arrow_green.png");
+          background-repeat: no-repeat;
+        }
+      }
+
+      .item.selected {
+        color: $green;
+      }
+
+      .item.active {
+        a {
+          font-weight: 800;
+          color: $green;
+
+        }
+      }
+    }
+  }
+}
+
+.url.breadcrumbs {
+  margin-top: 10px;
+
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .entry-content {
+    display: inline !important;;
+  }
+
+  .title {
+    font-size: 16px;
+
+
+  }
+
+  height: 30px;
+}
+
+
+.ui.search {
+  input.prompt {
+    border-radius: 0px;
+  }
+
+  i.search.icon {
+    color: #FFF;
+    background-color: #5089a6;
+  }
+}

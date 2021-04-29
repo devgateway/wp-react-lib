@@ -1,6 +1,4 @@
 import React from 'react'
-import {FormattedDate, injectIntl} from 'react-intl';
-import Content from "../template-parts/Content";
 import TheContent from "../template-parts/TheContent";
 
 

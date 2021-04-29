@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Container, Grid, Header, Image} from "semantic-ui-react";
+import {Container, Grid, Header} from "semantic-ui-react";
 import './footer.scss'
 
 class Footer extends Component {
@@ -18,7 +18,7 @@ class Footer extends Component {
 
                         <p>
                             Development Gateway, Inc.<br/>
-                            1110 Vermont Ave. NW., Suite 500<br/>
+                            1100 13th Street, NW, Suite 800<br/>
                             Washington, DC 20005, USA<br/>
                             Tel: +1.202.572.9200
                         </p>
@@ -37,7 +37,7 @@ class Footer extends Component {
                     <Grid.Column>
                         <Header>Contact Us</Header>
                         <p>
-                        info@tcdi.org
+                        <a href="mailto:info@tobaccocontroldata.org">info@tobaccocontroldata.org</a>
                         </p>
                     </Grid.Column>
 
@@ -47,12 +47,10 @@ class Footer extends Component {
                 <Container>
 
                     <Grid >
-                        <Grid.Column width={11}>
 
-                        </Grid.Column>
-                        <Grid.Column width={5}>
+                        <Grid.Column width={16}>
                             <p>
-                                © UI Chest, 2015. All Rights Reserved.
+                                © Tobacco Control Initiative, 2021. All Rights Reserved.
                             </p>
                         </Grid.Column>
 

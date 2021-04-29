@@ -1,33 +1,22 @@
 @import '../vars';
 
-
-.tcdi.dashboard {
-  display: block;
-  margin-bottom: 100px;
-
-}
-
 .green {
-  .container.section {
-    margin-left: 0vw !important;
-  }
 
-
-
+  .pages{
+   }
   .left.navigator {
-    z-index: 100;
-    top: 200px;
-    position: fixed;
-    margin-left: -7vw;
-    margin-bottom: 100px;
-
+    top:10px;
+    float: left;
+    position: sticky !important;
+    width: 100px;
+    margin-left: -8vw;
     .ui.menu {
       background-color: $health-color;
       margin: 0;
       padding: 0;
-      width:4vw;
-      min-width: 90px;
-      max-width: 120px;
+      width: 90px;
+      min-width: 70px;
+      max-width: 100px;
       display: flex;
 
       .header {
@@ -39,27 +28,25 @@
 
       .item {
         border-bottom: 1px solid #FFF;
-        padding: 10%;
+        padding:10% 1%;
         box-sizing: border-box;
         text-align: center;
 
         .label {
-          padding: 5%;
-          font-size: .7rem;
+          padding: 3%;
+          font-size: .6rem;
           margin: auto;
           background: none;
           text-transform: uppercase;
           width: 100%;
           border: 0;
-          line-height: 120%;
-          font-weight: 400;
         }
 
         img {
           height: auto;
-          width: 75%;
+          width: 65%;
           cursor: pointer;
-          margin: auto;
+          margin: -3px auto 5px auto;
         }
 
         color: #FFF !important;
@@ -76,6 +63,7 @@
   @media screen and (max-width: 1300px) {
 
     .left.navigator {
+
       .ui.menu {
         background-color: $health-color;
         margin: 0;

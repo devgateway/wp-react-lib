@@ -5,6 +5,7 @@ import PageProvider from "../../wp/providers/PageProvider";
 import {PageConsumer} from "../../wp";
 import {connect} from "react-redux";
 import './gallery.scss'
+
 const DashboardGallery = ({pages,width}) => {
     return (<Grid  columns={3} stackable={true}>
         {pages && pages.map(p =>

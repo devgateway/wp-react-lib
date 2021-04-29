@@ -159,7 +159,34 @@ p:empty {
     margin-top: .1rem;
     padding: 0;
   }
+}
+
+.ui {
+  &.input {
+    > input {
+      &::placeholder,
+      &::-webkit-input-placeholder{
+        font-family: $font-family;
+        font-size: 0.8em;
+      }
+    }
+    &.error{
+      > input{
+        &::placeholder,
+        &::-webkit-input-placeholder{
+          color: #9f3a38;
+          font-family: $font-family;
+        }
+      }
+    }
+  }
+}
 
 
 
+.ui.default.dropdown:not(.button)>.text,
+.ui.dropdown:not(.button)>.default.text{
+  font-family: $font-family;
+  font-size: 0.9em;
+  top: -3px;
 }

@@ -1,0 +1,58 @@
+
+.chart.container {
+  margin: 0px;
+  padding: 0px;
+  padding: 0px;
+
+  .body {
+    padding: 0px;
+    margin: 0px;
+
+    .ui.container.entry-content {
+      padding: 0px !important;
+      margin: 0px !important;;
+    }
+  }
+
+  .footnote {
+
+    .column {
+      height: 30px;
+      vertical-align: bottom;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: auto;
+    margin-bottom: 0px;
+
+    p {
+      height: 20px;
+      font-size: 14px;
+      padding: 0px;
+      margin: 0px;
+      margin-top: 1px;
+    }
+
+    .button {
+      height: 20px !important;
+      font-size: 14px;
+      background-color: transparent !important;;
+      font-weight: 100;
+      padding: 0px !important;;
+      margin: 0px;
+      color: #000 !important;
+      display: inline;
+      width: auto !important;
+      padding-left: 5px !important;
+      padding-right: 2px !important;
+    }
+
+    .button.active {
+      color: #5aade4 !important;
+    }
+  }
+}

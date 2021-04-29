@@ -66,6 +66,7 @@ class WPContent extends React.Component {
         const C = this.state.component
         return <React.Fragment>
             {(C != null) ? <C pages={items} posts={items} {...this.props} /> : null}
+
         </React.Fragment>
     }
 }

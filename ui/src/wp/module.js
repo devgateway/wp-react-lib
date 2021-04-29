@@ -200,9 +200,10 @@ export default (state = initialState, action) => {
             const {
                 data, slug
             } = action
+
             return state.setIn(['menu', slug, 'loading'], false)
                 .deleteIn(['menu', slug, 'error'])
-                .setIn(['menu', slug, 'items'], data)
+                .setIn(['menu', slug, 'menu'], data)
         }
         case LOAD_MENU_ERROR: {
             const {
