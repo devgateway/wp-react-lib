@@ -23,7 +23,7 @@ class PageProvider extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
 
-        if (prevProps.parent != parent || prevProps.slug != slug || locale != prevProps.intl.locale) {
+        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.intl.locale) {
             if(this.props.debugger){
 
             }
@@ -43,13 +43,10 @@ class PageProvider extends React.Component {
     componentWillUnmount(){
 
         const {before, perPage, page, fields, parent, slug, store, intl: {locale}} = this.props
-        if(this.props.debugger){
-
-        }
         this.props.onClean({store})
     }
     render() {
-        const {pages, loading, error} = this.props
+        const {pages, loading, error, fallbackComponent} = this.props
         if (pages && pages.length > 0) {
             return <PageContext.Provider value={pages}>{this.props.children}</PageContext.Provider>
         } else if (error) {
@@ -59,13 +56,17 @@ class PageProvider extends React.Component {
             return (<Container>
                         <Loader inverted content='Loading'/>
                    </Container>)
-        } else if (loading == false) {
+        } else if (loading === false) {
+          if (fallbackComponent) {
+            return <>{fallbackComponent}</>;
+          } else {
             return <Container>
-                <Segment color={"red"}>
-                    <h1>404</h1>
-                    <p>Can't find this page</p>
-                </Segment>
+              <Segment color={"red"}>
+                <h1>404</h1>
+                <p>Can't find this page</p>
+              </Segment>
             </Container>
+          }
         }
         return null
     }
