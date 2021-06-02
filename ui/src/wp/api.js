@@ -1,13 +1,9 @@
 import {get} from '../api/commons.js'
 
-const API_ROOT = document.location.href.indexOf('localhost') > -1 ?
-    // "https://wp.tobacco.dgstg.org/wp-json"
-     'http://localhost/wp-json'
-    : "https://wp." + document.location.host + '/wp-json'
+const API_ROOT = process.env.REACT_APP_WP_API
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
 const URL_API_BASE = API_ROOT + '/wp/v2/'
 const URL_POSTS = API_ROOT + '/wp/v2/posts'
-
 const URL_POST = API_ROOT + '/wp/v2/posts?slug='
 const URL_PAGE = API_ROOT + '/wp/v2/pages?'
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
@@ -74,7 +70,6 @@ export const getPage = (slug, lang) => {
 export const getMedia = (slug, lang) => {
     return get(URL_MEDIA + '/' + slug + '?lang=' + lang)
 }
-
 
 export const getPagesByParent = (parentId, lang) => {
     return get(URL_PAGE + 'parent=' + parentId + '&lang=' + lang)

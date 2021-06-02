@@ -3,20 +3,22 @@ import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 import DataContext from './DataContext'
 import {getData} from "./module";
-import {Container, Dimmer, Loader, Segment} from "semantic-ui-react";
+import {Container, Loader, Segment} from "semantic-ui-react";
 
 class DataProvider extends React.Component {
 
     componentDidMount() {
-        const {source,store} = this.props
-        this.props.onLoadData({source,store})
+        const {app, source, store, params} = this.props
+
+        this.props.onLoadData({app, source, store, params})
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
-        if (prevProps.filters!=this.props.filters){
-            const {source,store} = this.props
-            this.props.onLoadData({source,store})
+        if (prevProps.filters != this.props.filters) {
+            const {app, source, store, params} = this.props
+
+            this.props.onLoadData({app, source, store, params})
         }
     }
 
@@ -32,10 +34,9 @@ class DataProvider extends React.Component {
             </Segment>
         } else if (loading) {
             return (<Container>
-                <Dimmer active inverted>
-                    <h1>Data Loading</h1>
-                    <Loader inverted content='Loading'/>
-                </Dimmer>
+                <h1>Data Loading</h1>
+                <Loader inverted content='Loading'/>
+
             </Container>)
         } else {
 
@@ -56,7 +57,7 @@ const mapStateToProps = (state, ownProps) => {
 
     return {
         data: state.getIn(['data', ...store, 'data']),
-        filters: state.getIn(['data','filters']),
+        filters: state.getIn(['data', 'filters']),
 
         error: state.getIn(['data', ...store, 'error']),
         loading: state.getIn(['data', ...store, 'loading']),

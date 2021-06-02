@@ -1,8 +1,15 @@
 import {get} from '../api/commons'
 
-const API_ROOT = document.location.href.indexOf('localhost') > -1 ? 'https://prevalence.tobacco.dgstg.org' : "https://prevalence.tobacco.dgstg.org"
-const URL_TAXONOMY = API_ROOT + '/categories'
-const URL_STATS = API_ROOT + '/stats'
+
+const PREVALENCE_API_ROOT = process.env.REACT_APP_PREVALENCE_API
+const POLICY_API_ROOT = process.env.REACT_APP_POLICY_API
+
+const PREVALENCE_URL_TAXONOMY = PREVALENCE_API_ROOT + '/categories'
+
+const APIS = {
+    prevalence: PREVALENCE_API_ROOT,
+    policy: POLICY_API_ROOT
+}
 
 function queryParams(params) {
     return Object.keys(params)
@@ -11,11 +18,10 @@ function queryParams(params) {
 }
 
 export const getCategories = (params) => {
-    return get(URL_TAXONOMY, params)
+    return get(PREVALENCE_URL_TAXONOMY, params)
 }
 
-
-export const getData = (path, params) => {
-
-    return get(URL_STATS + "/" + path+(params?'?'+queryParams(params):''))
+export const getData = ({source, app, params}) => {
+    return get(APIS[app] + "/stats/" + source + (params ? '?' + queryParams(params) : ''))
 }
+

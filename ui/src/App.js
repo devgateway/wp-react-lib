@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import './App.scss';
-import './wp/wp.scss';
-import './scss/green.scss'
-
-import {mediaStyle} from './AppMedia'
 import {Provider} from 'react-redux'
 import {Redirect, Route, Switch} from 'react-router' // react-router v4/v5
+import withTracker from "./withTracker"
 import {ConnectedRouter} from 'connected-react-router/immutable'
 import getStore, {history} from './redux/store'
 import messages_en from "./translations/en.json";
@@ -34,7 +30,7 @@ const messages = {
 
 
 const InjectTitle = injectIntl(({intl}) => {
-    document.title = intl.formatMessage({id: 'app.title', defaultMessage: "Tobacco"})
+    document.title = intl.formatMessage({id: 'app.title', defaultMessage: process.env.REACT_APP_TITLE})
     return null
 })
 
@@ -45,15 +41,13 @@ class IntlRoutes extends Component {
     }
 
     componentDidMount() {
-        const locale=this.props.match.params.lan
-
+        const locale = this.props.match.params.lan
         store.dispatch(updateIntl({locale, messages: messages[this.props.match.params.lan]}))
 
     }
 
     componentDidUpdate() {
-        const locale=this.props.match.params.lan
-
+        const locale = this.props.match.params.lan
         store.dispatch(updateIntl({locale, messages: messages[locale]}))
 
     }
@@ -61,92 +55,127 @@ class IntlRoutes extends Component {
     render() {
         const self = this;
         const props = this.props;
-        const locale=this.props.match.params.lan
-
+        const locale = this.props.match.params.lan
         return (<IntlProvider key={locale} locale={locale} messages={messages[locale]}>
-            <style type="text/css">${mediaStyle}</style>
-            <InjectTitle/>
-            <Switch>
-                <Route path="/:lan/category/:slug/">
-                    <ResponsiveContainer>
-                        <Category/>
-                    </ResponsiveContainer>
-                </Route>
-                <Route path="/:lan" exact render={props => (<ResponsiveContainer>
 
-                    <PageProvider slug={"home"} store={"home"}>
-                        <PageConsumer>
-                            <WPContent {...props} defaultTemplate={Page}></WPContent>
-                        </PageConsumer>
-                    </PageProvider>
-                </ResponsiveContainer>)}>
-                </Route>
+                    <InjectTitle/>
+                    <Switch>
 
-                <Route exact={true} path="/:lan/embeddable/:name">
-                    <Embeddables/>
-                </Route>
+                        {
+                            //Category Route
+                        }
+                        <Route path="/:lan/category/:slug/">
+                            <ResponsiveContainer>
+                                <Category/>
+                            </ResponsiveContainer>
+                        </Route>
+
+                        {
+                            //default route (home)
+                        }
+                        <Route path="/:lan" exact render={props => (
+
+                            <PageProvider slug={"home"} store={"home"}>
+                                <ResponsiveContainer>
+                                    <PageConsumer>
+                                        <WPContent showContent={true} {...props} defaultTemplate={Page}></WPContent>
+                                    </PageConsumer>
+                                </ResponsiveContainer>
+                            </PageProvider>
+
+                        )}>
+                        </Route>
+                        <Route exact={true} path="/:lan/embeddable/:name">
+                            <Embeddables/>
+                        </Route>
+
+                        {
+                            //page route
+                        }
+                        <Route path="/:lan/:slug/" exact render={props => {
+
+                            return (
+
+                                <PageProvider slug={props.match.params.slug} store={props.match.params.slug}>
+                                    <ResponsiveContainer>
+                                        <PageConsumer>
+                                            <WPContent showContent={true} {...props} defaultTemplate={Page}></WPContent>
+                                        </PageConsumer>
+                                    </ResponsiveContainer>
+                                </PageProvider>
+                            )
+                        }}>
+                        </Route>
+                        {
+                            //child route
+                        }
+                        <Route path="/:lan/:parent/:slug/" exact render={props => (
+                                <PageProvider slug={props.match.params.slug} store={props.match.params.slug}>
+                                    <ResponsiveContainer>
+
+                                        <PageConsumer>
+                                            <WPContent showContent={true} {...props} defaultTemplate={Page}></WPContent>
+                                        </PageConsumer>
+                                    </ResponsiveContainer>
+                                </PageProvider>
+
+                        )}>
 
 
-                <Route path="/:lan/:slug/" exact render={props => {
-                    return (<ResponsiveContainer>
-                        <PageProvider slug={props.match.params.slug} store={props.match.params.slug}>
-                            <PageConsumer>
-                                <WPContent visibility={{intro: false}} {...props} defaultTemplate={Page}></WPContent>
-                            </PageConsumer>
-                        </PageProvider>
-                    </ResponsiveContainer>)
-                }}>
+                        </Route>
 
-                </Route>
-                <Route path="/:lan/:parent/:slug/" exact render={props => (
-                    <ResponsiveContainer>
+                        {
+                            //post route
+                        }
+                        <Route path="/:lan/:parent/:year/:month/:day/:slug/" exact render={props => (
 
-                        <PostProvider type={props.match.params.parent}  slug={props.match.params.slug} store={props.match.params.slug}>
+                            <PostProvider type={props.match.params.parent} slug={props.match.params.slug}
+                                          store={props.match.params.slug}>
+                                <ResponsiveContainer>
+                                    <PostConsumer>
+                                        <WPContent visibility={{link: false, intro: false, title: true, date: true}} {...props}
+                                                   defaultTemplate={Post}/>
+                                    </PostConsumer>
+                                </ResponsiveContainer>
+                            </PostProvider>
 
-                            <PostConsumer>
-                                <WPContent visibility={{link: false, intro: false, title: true, date: true}} {...props}
-                                           defaultTemplate={Post}/>
-                            </PostConsumer>
-                        </PostProvider>
+                        )}>
+                        </Route>
 
-                    </ResponsiveContainer>
-                )}>
+                        <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (
+                            <ResponsiveContainer>
+                                <PostProvider slug={props.match.params.slug} store={props.match.params.slug}>
+                                    <PostConsumer>
+                                        <WPContent visibility={{link: false, intro: false, title: true, date: true}} {...props}
+                                                   defaultTemplate={Post}/>
+                                    </PostConsumer>
+                                </PostProvider>
+                            </ResponsiveContainer>
+                        )}>
+                        </Route>
 
+                    </Switch>
 
-                </Route>
-                <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (
-                    <ResponsiveContainer>
-
-                        <PostProvider slug={props.match.params.slug} store={props.match.params.slug}>
-
-                            <PostConsumer>
-                                <WPContent visibility={{link: false, intro: false, title: true, date: true}} {...props}
-                                           defaultTemplate={Post}/>
-                            </PostConsumer>
-                        </PostProvider>
-
-                    </ResponsiveContainer>
-                )}>
-                </Route>
-            </Switch>
         </IntlProvider>)
     }
 }
 
+const WithTracker=withTracker(IntlRoutes)
 const MainRoutes = (props) => {
-    return (<ConnectedRouter history={history}>
-        <Switch>
-            <Route path="/:lan" render={(props) =>
-                <IntlRoutes {...props}/>}>
-            </Route>
-            <Redirect to="/en"></Redirect>
-        </Switch>
-    </ConnectedRouter>)
-}
+        return (<ConnectedRouter history={history}>
+
+                    <Switch>
+                            <Route path="/:lan" render={(props) =><WithTracker {...props}/>}></Route>
+                            <Redirect to="/en"></Redirect>
+                    </Switch>
+
+        </ConnectedRouter>)
+    }
 
 const store = getStore()
 
-class AppWrapper extends Component {
+class AppWrapper
+    extends Component {
     render() {
         return (<Provider store={store}>
             <MainRoutes/>

@@ -1,23 +1,26 @@
+const replacementTarget = [
+    "localhost",
+    "wp.tobacco.dgstg.org",
+    "wordpress-za.tobacco.dgstg.org",
+    "wordpress-za.tobaccocontroldata.org"
+]
+let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
+
 export const replaceLink = (url, locale) => {
-    let localhost = new RegExp("^(http|https)://localhost", "ig");
-    let prod = new RegExp("^(http|https)://" + "wp.tobacco.dgstg.org", "ig");
-    return url.replaceAll(localhost, "#" + locale).replaceAll(prod, "#" + locale)
+    return url.replaceAll(all, "#" + locale)
 }
 
 export const replaceHTMLinks = (html) => {
+
+    debugger;
     let link;
     let regex = /href\s*=\s*(['"])(https?:\/\/.+?)\1/ig;
-    if (document.location.hostname === 'localhost') {
-        var re = new RegExp("^(http|https)://localhost", "i");
-    } else {
-        //replace wp.someurl
-        var re = new RegExp("^(http|https)://" + "wp." + document.location.hostname, "i");
-    }
+
     let newHtml = html
     while ((link = regex.exec(html)) !== null) {
         let href = link[2]
-        let newLink = href.replace(re, '#en')
-        newHtml = html.replaceAll(link[2], newLink)
+        let newLink = href.replace(all, '#en') //TODO:fix it!
+        newHtml = newHtml.replaceAll(link[2], newLink)
     }
 
     let anchor = /href="#([^"]*)"/ig;

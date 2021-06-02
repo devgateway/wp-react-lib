@@ -1,6 +1,7 @@
 FROM node:12.16.3 AS compiler
 WORKDIR /tmp/ui
 COPY package*.json ./
+COPY *.env ./
 RUN npm install
 RUN npm rebuild node-sass
 COPY public ./public/
@@ -11,5 +12,6 @@ RUN npm run build \
 FROM alpine:latest
 COPY --from=compiler /tmp/ui.tgz /usr/src/ui.tgz
 COPY update.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/update.sh
 VOLUME /var/www/ui
 CMD ["/usr/local/bin/update.sh"]

@@ -33,8 +33,13 @@ export const newsletterSubscription = (params) => (dispatch, getState) => {
 export const sendShowCaseForm = (params) => (dispatch, getState) => {
     dispatch({type: SHOW_CASE_SEND})
     sendShowCase(params).then((res) => {
-        dispatch({type: SHOW_CASE_SEND_DONE})
+        if (res.status===500){
+            dispatch({type: SHOW_CASE_SEND_FAILURE})
+        }else{
+            dispatch({type: SHOW_CASE_SEND_DONE})
+        }
     }).catch((err) => {
+        debugger
         dispatch({type: SHOW_CASE_SEND_FAILURE})
     })
 }

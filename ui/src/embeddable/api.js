@@ -1,6 +1,6 @@
 import {post} from '../api/commons'
 
-const API_ROOT = document.location.href.indexOf('localhost') > -1 ? 'http://localhost:8083' : "https://utils.tobacco.dgstg.org"
+const API_ROOT = process.env.REACT_APP_UTIL_API
 
 
 export const sendShowCase = (params) => {
@@ -16,6 +16,7 @@ export const sendShowCase = (params) => {
     data.append("token", token)
 
     return fetch(API_ROOT + "/showCaseForm", {
+        mode: 'cors',
         method: 'POST',
         body: data,
     });
@@ -23,6 +24,5 @@ export const sendShowCase = (params) => {
 }
 
 export const subscribe = (params) => {
-
     return post(API_ROOT + "/subscribe", params)
 }

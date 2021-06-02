@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Search} from "semantic-ui-react";
+import {Container, Flag, Menu,Search} from "semantic-ui-react";
 
 
 const WpSearch=()=>{
