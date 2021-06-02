@@ -1,0 +1,46 @@
+.container.tcdi.footer {
+  margin-top: 100px;
+  background-color: #5089a6;
+  line-height: 16px !important;
+
+  .bottom-bar{
+    background-color: #175372;
+    color: #ffffff;
+    left: 0;
+    margin-top: -20px;
+    padding: 20px 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .column {
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+  }
+  .header {
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase;
+    margin: 0px;
+  }
+
+  p {
+    font-weight: 400;
+    // font-size: 15px;
+    color: white;
+    padding: 1rem 0;
+    a{
+      color: #ffffff;
+      &:hover {
+        color: #f0f0f0;
+      }
+    }
+  }
+
+  .tcdi.secondary-menu.container {
+    background-color: #175372;
+    text-align: center;
+  }
+}

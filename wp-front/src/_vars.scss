@@ -1,0 +1,27 @@
+$font-family: 'Roboto', sans-serif;
+
+$blue: #3e53a6;
+$light-blue: #5089a6;
+$dark-gray: #5c5d63;
+$gray: #66676d;
+$light-gray: #dadada;
+$separator-grey: #ececec;
+$red: #ba5555;
+
+$blue: #3e53a6;
+$green: #5baf95;
+
+$health-color: #5baf95;
+$light-green: #31ba1a;
+
+$charts-options-height: 66px;
+$charts-options-font-size: 1.02rem;
+
+@mixin gray-raleway-font {
+  font-size: $charts-options-font-size;
+  color: $gray;
+  font-weight: 500;
+  font-family: "Raleway";
+}
+
+$base-unit: 10px;

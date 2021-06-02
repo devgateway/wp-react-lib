@@ -1,0 +1,26 @@
+/* iPads (portrait and landscape) ----------- */
+/* Smartphones (portrait and landscape) ----------- */
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px), screen and (min-device-width: 320px) and (max-device-width: 480px), screen and (max-width: 320px) {
+  * {
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px), screen and (max-width: 320px) {
+  * {
+
+  }
+
+  .ui.container.section {
+
+    .menu, .header {
+      border: 0 !important;
+
+      .item {
+        border: 0 !important;
+        display: none;
+      }
+    }
+  }
+}
