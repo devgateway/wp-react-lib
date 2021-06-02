@@ -4,3 +4,5 @@
 /wp-content/themes/twentytwenty/
 /wp-content/themes/twentytwentyone/
 /data/
+/wp-front/node_modules/
+/wp-react/dist/
