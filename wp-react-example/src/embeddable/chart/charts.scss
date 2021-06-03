@@ -1,0 +1,42 @@
+@import "../../vars";
+.chart.container {
+  margin: 0px;
+  padding:0px;
+
+  .body {
+    padding: 0px;
+    margin: 0px;
+    min-height: 470px;
+
+  }
+
+  .footnote {
+    padding: 0px;
+    margin: 0px;
+    font-size: 1rem;
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+    p,button{
+      font-size:16px;
+
+    }
+    .column{
+
+      padding: 0px;
+    }
+
+    .button {
+      background-color: transparent;
+      font-weight: 100;
+      padding: 2%;
+      color:$light-gray;
+
+    }
+
+    .button.active {
+      color:#5aade4;
+    }
+  }
+}
