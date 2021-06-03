@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Western Cape",
+    "value": 24.70,
+    "level": "21.7 - 27.7"
+  },
+  {
+    "name": "Eastern Cape",
+    "value": 24.90,
+    "level": "20.3 - 29.5"
+  },
+  {
+    "name": "Northern Cape",
+    "value": 37.90,
+    "level": "33.7 - 42.1"
+  },
+  {
+    "name": "Free State",
+    "value": 27.00,
+    "level": "20.7 - 33.4"
+  },
+  {
+    "name": "KwaZulu-Natal",
+    "value": 22.80,
+    "level": "19.3 - 26.3"
+  },
+  {
+    "name": "North West",
+    "value": 25.40,
+    "level": "19.5 - 31.4"
+  },
+  {
+    "name": "Gauteng",
+    "value": 29.10,
+    "level": " 25.2 - 32.9"
+  },
+  {
+    "name": "Mpumalanga",
+    "value": 27.50,
+    "level": "21.5 - 33.5"
+  },
+  {
+    "name": "Limpopo",
+    "value": 27.50,
+    "level": "20.3 - 34.7"
+  }
+]
