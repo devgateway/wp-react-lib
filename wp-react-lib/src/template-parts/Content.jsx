@@ -5,7 +5,7 @@ import EmbeddedGateway from '../embeddable/EmbeddedGateway'
 
 import {Container} from "semantic-ui-react";
 
-import {replaceHTMLinks} from "../util";
+import {replaceHTMLinks}  from "../util";
 
 const Enhance = (props) => {
     const Component = props.as ? props.as : Container;

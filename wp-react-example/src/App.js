@@ -8,13 +8,9 @@ import {updateIntl} from 'react-intl-redux'
 import {injectIntl, IntlProvider} from "react-intl";
 import smoothscroll from 'smoothscroll-polyfill';
 import ResponsiveContainer from './layout'
-import {components} from "./embeddable";
 
-
-
-import {ComponentsProvider,Category, Page, PageConsumer, PageProvider, Post, PostConsumer, PostProvider, WPContent} from "dg-wp-react/src/index";
-
-//import {ComponentsProvider,Category, Page, PageConsumer, PageProvider, Post, PostConsumer, PostProvider, WPContent} from "dg-wp-react/src/index";
+//import {components} from "./embeddable";
+import {Category, Page, PageConsumer, PageProvider, Post, PostConsumer, PostProvider, WPContent} from "wp-react-lib";
 
 
 // kick off the polyfill!
@@ -72,7 +68,8 @@ class IntlRoutes extends Component {
                     <PageProvider slug={"home"} locale={locale} store={"home"}>
                         <ResponsiveContainer>
                             <PageConsumer>
-                                <WPContent locale={locale} showContent={true} {...props} defaultTemplate={Page}></WPContent>
+                                <WPContent locale={locale} showContent={true} {...props}
+                                           defaultTemplate={Page}></WPContent>
                             </PageConsumer>
                         </ResponsiveContainer>
                     </PageProvider>
@@ -93,7 +90,8 @@ class IntlRoutes extends Component {
                         <PageProvider slug={props.match.params.slug} store={props.match.params.slug}>
                             <ResponsiveContainer>
                                 <PageConsumer>
-                                    <WPContent locale={locale} showContent={true} {...props} defaultTemplate={Page}></WPContent>
+                                    <WPContent locale={locale} showContent={true} {...props}
+                                               defaultTemplate={Page}></WPContent>
                                 </PageConsumer>
                             </ResponsiveContainer>
                         </PageProvider>
@@ -107,7 +105,8 @@ class IntlRoutes extends Component {
                     <PageProvider slug={props.match.params.slug} store={props.match.params.slug}>
                         <ResponsiveContainer>
                             <PageConsumer>
-                                <WPContent locale={locale} showContent={true} {...props} defaultTemplate={Page}></WPContent>
+                                <WPContent locale={locale} showContent={true} {...props}
+                                           defaultTemplate={Page}></WPContent>
                             </PageConsumer>
                         </ResponsiveContainer>
                     </PageProvider>
@@ -138,8 +137,10 @@ class IntlRoutes extends Component {
                 </Route>
 
                 <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (
+
+
                     <ResponsiveContainer>
-                        <PostProvider
+                          <PostProvider
                             slug={props.match.params.slug}
                             store={props.match.params.slug}
                             locale={locale}

@@ -33,7 +33,7 @@ export {
     PageProvider,
     MediaProvider,
     MenuProvider,
-        ComponentsProvider,
+    ComponentsProvider,
     TaxonomyProvider,
     PostConsumer,
     PageConsumer,

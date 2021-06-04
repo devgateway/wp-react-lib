@@ -1,7 +1,6 @@
 import {Container, Flag, Menu} from "semantic-ui-react";
 import React, {useEffect, useState} from "react";
-
-import {MenuProvider, MenuConsumer, utils} from "dg-wp-react";
+import {MenuConsumer, MenuProvider, utils} from 'wp-react-lib';
 
 import {injectIntl} from "react-intl";
 import {withRouter} from "react-router";
@@ -64,14 +63,10 @@ const MyMenuItems = injectIntl(withRouter(({
     return menu && <React.Fragment>
 
         {menu.items.map(i => (
-            <Menu.Item
-                className={`divided ${i.child_items ? 'has-child-items' : ''} 
-                 ${selected && selected.ID == i.ID ? 'selected' : ''}  ${active == i.slug ? "active" : ""}`}
-            >
-
+            <Menu.Item className={`divided ${i.child_items ? 'has-child-items' : ''} ${selected && selected.ID == i.ID ? 'selected' : ''}  ${active == i.slug ? "active" : ""}`}>
                 {withIcons && <div className={"mark"}></div>} {i.child_items ?
                 <span onMouseOver={e => onSetSelected(i)}>{i.title}</span> :
-                <a onMouseOver={e => onSetSelected(i)} href={utils.replaceHTMLinks(i.url, locale)}>{i.title}</a>}
+                <a onMouseOver={e => onSetSelected(i)} href={utils.replaceLink(i.url, locale)}>{i.title}</a>}
 
             </Menu.Item>))}
 
