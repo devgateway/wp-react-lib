@@ -2,7 +2,7 @@ import React from 'react'
 import asyncComponent from "../AsyncComponent";
 
 const TabbedPosts = asyncComponent(() => import("./tabbedposts/"));
-//const PostsCarousel = asyncComponent(() => import("./postscarousel/"));
+const PostsCarousel = asyncComponent(() => import("./postscarousel/"));
 //const PageGallery = asyncComponent(() => import("./pagegallery/"));
 //const PageModules = asyncComponent(() => import("./pagemodules/"));
 //const FeaturedTabs = asyncComponent(() => import("./featuredtabs/"));
@@ -13,7 +13,7 @@ const TabbedPosts = asyncComponent(() => import("./tabbedposts/"));
 
 const components = {
     //   pageGallery: PageGallery,
-    //   postsCarousel: PostsCarousel,
+    postsCarousel: PostsCarousel,
 //    chart: Chart,
 //    filter: Filter,
     tabbedPosts: TabbedPosts,

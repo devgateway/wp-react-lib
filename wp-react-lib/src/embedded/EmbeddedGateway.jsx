@@ -14,7 +14,7 @@ class EmbeddedGateway extends React.Component {
     }
 
     renderEmbeddedComponents() {
-        debugger;
+
         const {locale, store, getComponent} = this.props
 
         const node = ReactDOM.findDOMNode(this)
@@ -73,12 +73,15 @@ const WithContext = (props) => {
     return (<AppContext.Consumer>
 
         {
-            ({store, getComponent, locale}) => {
-                return <React.Fragment>
-                    <EmbeddedGateway  locale={locale} store={store} getComponent={getComponent}>
-                        {props.children}
-                    </EmbeddedGateway>
-                </React.Fragment>
+            (data) => {
+                if (data) {
+                    return<EmbeddedGateway locale={data.locale} store={data.store} getComponent={data.getComponent} {...props}>
+                            {props.children}
+                        </EmbeddedGateway>
+
+                } else {
+                    return  <React.Fragment>{props.children} </React.Fragment>
+                }
             }
         }
     </AppContext.Consumer>)

@@ -6,9 +6,12 @@
     padding: 0px;
 
   }
+
   .wp-block-group {
-    padding: 1rem;
+    min-height: 555px;
+    padding: 1rem 2rem;
   }
+
   .wp-block-columns {
     .wp-block-column {
       padding: 0px;
@@ -16,10 +19,17 @@
     }
 
   }
+
   padding: 0px;
+
   li {
     padding: 0px;
-    height: 448px;
+    min-height: 565px;
+
+    .ui.fluid.container.entry-content {
+
+
+    }
 
     .wp-block-buttons {
       padding: 10px 0px;
@@ -36,7 +46,7 @@
 }
 
 .carousel__dot-group {
-  margin: auto;
+  margin: 0px auto auto;
   text-align: center;
 
 
