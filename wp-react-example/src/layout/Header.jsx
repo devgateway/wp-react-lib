@@ -1,6 +1,6 @@
 import {Container, Flag, Menu} from "semantic-ui-react";
 import React, {useEffect, useState} from "react";
-import {MenuConsumer, MenuProvider, utils} from 'wp-react-lib';
+import {MenuConsumer, MenuProvider, utils} from '../wp-react-lib/src/index';
 
 import {injectIntl} from "react-intl";
 import {withRouter} from "react-router";

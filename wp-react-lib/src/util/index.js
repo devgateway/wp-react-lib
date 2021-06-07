@@ -1,11 +1,10 @@
-
 export const replaceLink = (url, locale) => {
     const replacementTarget = process.env.REACT_APP_WP_HOSTS.split(",")
     let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
     return url.replaceAll(all, "#" + locale)
 }
 
-export const replaceHTMLinks = (html) => {
+export const replaceHTMLinks = (html, locale) => {
     const replacementTarget = process.env.REACT_APP_WP_HOSTS.split(",")
 
     let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
@@ -16,7 +15,7 @@ export const replaceHTMLinks = (html) => {
     let newHtml = html
     while ((link = regex.exec(html)) !== null) {
         let href = link[2]
-        let newLink = href.replace(all, '#en') //TODO:fix it!
+        let newLink = href.replace(all, '#' + locale) //TODO:fix it!
         newHtml = newHtml.replaceAll(link[2], newLink)
     }
 

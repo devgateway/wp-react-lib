@@ -2,11 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from "react-redux";
 import {IntlProvider} from "react-intl";
-import {ComponentsContext} from "../providers/Context";
+import {AppContext} from "../providers/Context"
 
-const components = {
-
-}
+const components = {}
 
 class EmbeddedGateway extends React.Component {
 
@@ -16,28 +14,29 @@ class EmbeddedGateway extends React.Component {
     }
 
     renderEmbeddedComponents() {
-        const {locale, store, messages} = this.props
-
-        console.log(ComponentsContext.data)
+        debugger;
+        const {locale, store, getComponent} = this.props
 
         const node = ReactDOM.findDOMNode(this)
 
         const elements = node.getElementsByClassName("tcdi-component")
-
         if (!(elements == null)) {
             Array.from(elements).forEach((element, index) => {
+
                 const component = element.getAttribute('data-component')
                 element.removeAttribute("data-component")
+
+
                 if (component) {
                     const props = {...this.props}
                     const attrs = element.attributes
                     for (let i = attrs.length - 1; i >= 0; i--) {
                         props[attrs[i].name] = attrs[i].value;
                     }
-                    const C = components[component];
+                    const C = getComponent(component);
                     ReactDOM.render(
                         <Provider store={store}>
-                            <IntlProvider locale={locale} messages={messages[locale]}>
+                            <IntlProvider locale={locale}>
                                 <C unique={"embeddable_" + index} {...props} childContent={element.innerHTML}/>
                             </IntlProvider>
                         </Provider>, element);
@@ -50,6 +49,7 @@ class EmbeddedGateway extends React.Component {
 
 
     componentDidMount() {
+        debugger;
         this.renderEmbeddedComponents()
     }
 
@@ -68,4 +68,21 @@ class EmbeddedGateway extends React.Component {
     }
 }
 
-export default EmbeddedGateway
+
+const WithContext = (props) => {
+    return (<AppContext.Consumer>
+
+        {
+            ({store, getComponent, locale}) => {
+                return <React.Fragment>
+                    <EmbeddedGateway  locale={locale} store={store} getComponent={getComponent}>
+                        {props.children}
+                    </EmbeddedGateway>
+                </React.Fragment>
+            }
+        }
+    </AppContext.Consumer>)
+
+}
+
+export default WithContext;

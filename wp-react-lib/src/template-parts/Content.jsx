@@ -1,7 +1,7 @@
 import React from 'react'
 import {FormattedDate} from 'react-intl';
 
-import EmbeddedGateway from '../embeddable/EmbeddedGateway'
+import EmbeddedGateway from '../embedded/EmbeddedGateway'
 
 import {Container} from "semantic-ui-react";
 
@@ -41,8 +41,8 @@ class Content extends React.Component {
             showDate,
             showLoading,
             as,
-            locale
-
+            locale,
+            messages
         } = this.props
 
         if (post) {
@@ -51,16 +51,16 @@ class Content extends React.Component {
             const content = contentParts.length > 1 ? contentParts[1] : contentParts[0]
             const pages = content ? content.split("<!--nextpage-->") : '';
 
-            let theContent = ''
+            let body = ''
             if (pageNumber != null && pages.length > 0) {
-                theContent = pages[pageNumber]
+                body = pages[pageNumber]
             } else {
-                theContent = content
+                body = content
             }
 
             //TODO: Use htmlUtils link replace function line in 74
 
-            return <EmbeddedGateway locale={locale} parent={post.id}>
+            return <EmbeddedGateway locale={locale} messages={messages} parent={post.id} >
                 <Enhance className="entry-content" {...this.props}>
                     {showDate &&
                     <Container fluid className="date"><FormattedDate value={post.date} day="numeric" month="long"
@@ -68,10 +68,10 @@ class Content extends React.Component {
                     {showTitle &&
                     <span fluid className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
                     {showIntro &&
-                    <Container fluid className="excerpt" dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro)}}/>}
+                    <Container fluid className="excerpt" dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro,locale)}}/>}
                     {showContent &&
                     <Container fluid className="content"
-                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(theContent)}}/>}
+                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(body,locale)}}/>}
                     {showLink === true &&
 
                     <a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + locale + '/')}
