@@ -13,6 +13,8 @@ services:
     volumes:
       - ./data/wordpress:/var/www/html
       - ./wp-content:/var/www/html/wp-content
+      - ./wp-react-blocks-plugin:/var/www/html/wp-content/plugins/wp-react-blocks-plugin
+      - ./wp-react-theme:/var/www/html/wp-content/themes/wp-react-theme
     networks:
       - frontend  #for dev purpose we use a bridged network
     logging:

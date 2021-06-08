@@ -1,28 +1,25 @@
-import React, {useState} from "react";
-import {Button, Container, Grid} from "semantic-ui-react";
-import DataProvider from "../../data/DataProvider";
-import {connect} from "react-redux";
-import Bar from "../../charts/Bar";
-import DataConsumer from "../../data/DataConsumer";
-import {buildBarOptions, buildDivergingOptions, buildPieOptions} from './chartOptionsBuilder'
-import './charts.scss'
-import HalfPie from "../../charts/HalfPie";
-import TheContent from "../../wp/template-parts/TheContent";
+import React, {useRef, useState} from "react";
+import {Button, Container, Grid, Segment} from "semantic-ui-react";
 
-const BarChar = (props) => {
-    const {data, legends, colors, height, groupMode} = props
-    const options = buildBarOptions(data, true)
-    return <Bar groupMode={groupMode} height={height} legends={legends} colors={colors} options={options}
-                format={{style: "percent", currency: "EUR"}}></Bar>
-}
+import {connect} from "react-redux";
+
+import {buildDivergingOptions, buildPieOptions} from './prevalenceBuilder'
+
+import HalfPie from "./HalfPie";
+import Bar from "./Bar";
+import Line from "./Line";
+import PrevalenceBarDataframe from './PrevalenceBarDataFrame'
+import PolicyDataFrame from './PolicyDataFrame'
+import DataProvider from "../data/DataProvider";
+import {PostContent} from "wp-react-lib";
+import DataConsumer from "../data/DataConsumer";
 
 const PieChart = (props) => {
     const {data, legends, colors, height} = props
     const options = buildPieOptions(data, true)
     return <HalfPie height={height} legends={legends} colors={colors} options={options}
-                    format={{style: "percent", currency: "EUR"}}></HalfPie>
+                    format={{style: "percent"}}></HalfPie>
 }
-
 
 const Diverging = (props) => {
     const {data, legends, colors, height} = props
@@ -35,22 +32,58 @@ const Diverging = (props) => {
 const Chart = (props) => {
     const {filters} = props
     const {
+        parent,
         editing = false,
+        unique,
         childContent,
+        "data-app": app = "prevalence",
         "data-height": height = 500,
         "data-chart-type": type = 'bar',
         'data-source': source = 'gender/smoke',
+        'data-color-by': colorBy = 'index',
+        'data-color-scheme': scheme = 'nivo',
+        'data-group-mode': groupMode = 'grouped',
         'data-legends-left': left = 'Left Legend',
         'data-legends-bottom': bottom = 'Bottom Legend',
-        'data-color-scheme': scheme = 'nivo',
-        'data-color-by': colorBy = 'index',
-        'data-group-mode': groupMode = 'stacked',
         'data-dualmode': dualMode,
-        'data-chart-source-label': dataSourceLabel="Source",
-        'data-chart-data-source': dataSource ="NDIS",
-        'data-toggle-info-label': toggleInfoLabel ="Info Graphic",
-        'data-toggle-chart-label': toggleChartLabel ="Chart",
+
+        'data-legend-position': legendPosition = "right",
+        'data-show-legends': showLegends = "true",
+
+        'data-chart-source-label': dataSourceLabel = "Source",
+        'data-chart-data-source': dataSource = "Data Source",
+
+        'data-toggle-info-label': toggleInfoLabel = "Info Graphic",
+        'data-toggle-chart-label': toggleChartLabel = "Chart",
+        'data-params': params = '{}',
+        'data-number-format': format = '{"style":"percent", "minimumFractionDigits": 1, "maximumFractionDigits": 1}',
+        'data-tick-rotation': tickRotation = 0,
+        'data-tick-color': tickColor = "rgb(92,93,99)",
+        'data-keys': keys = null,
+        'data-style': style = "decimal",
+        "data-decimals": decimals = "2",
+        'data-currency': currency = ""
+
     } = props
+
+
+    const ref = useRef(null);
+
+    function filter(node) {
+
+        if (node.classList) {
+            return !node.classList.contains("ignore")
+        }
+        return true;
+    }
+
+
+    const numberFormat = {style, minimumFractionDigits: parseInt(decimals), maximumFractionDigits: parseInt(decimals)}
+
+    if (currency != "") {
+        numberFormat["currency"] = currency
+    }
+    const itemWidth = props["data-legends-width"] ? parseInt(props["data-legends-width"]) : 180
     const [mode, setMode] = useState(editing ? "chart" : 'info')
 
     const legends = {
@@ -62,50 +95,100 @@ const Chart = (props) => {
         colorBy: colorBy
     }
     let child = null
-    if (type === 'bar') {
-        child = <BarChar height={`${height}px`} legends={legends} colors={colors} groupMode={groupMode}></BarChar>
+
+    const contentHeight = (editing ? height - 120 : height - 40)
+
+    const chartProps = {
+        tickColor: decodeURIComponent(tickColor),
+        tickRotation: tickRotation,
+        showLegends: showLegends == "true",
+        itemWidth: itemWidth,
+        height: `${contentHeight}px`,
+        legendPosition: legendPosition,
+        legends: legends,
+        colors: colors,
+        groupMode: groupMode,
+        format: numberFormat
     }
+
+
+    if (type === 'bar') {
+        const DataFrame = app == "policy" ? PolicyDataFrame : PrevalenceBarDataframe
+
+        child = <DataFrame type={"bar"} includeTotal={true} keys={keys ? keys.split(',') : []}>
+            <Bar {...chartProps}></Bar>
+        </DataFrame>
+    }
+    if (type === 'line') {
+        if (app === "policy") {
+
+            child = <PolicyDataFrame type={"line"} keys={keys ? keys.split(',') : []}>
+                <Line {...chartProps}></Line>
+            </PolicyDataFrame>
+        } else {
+            child = <Segment color={"red"}>Chart type not supported yet</Segment>
+
+        }
+    }
+
     if (type == 'halfPie') {
-        child = <PieChart height={`${height}px`} legends={legends} colors={colors} groupMode={groupMode}></PieChart>
+        child =
+            <PieChart {...chartProps}></PieChart>
     }
     if (type == 'diverging1') {
         child = <h1>Soon</h1>
     }
-    const dual= (dualMode === 'true')
+    const dual = (dualMode === 'true')
 
-    return <Container className={"chart container"} fluid={true}>
 
-        <DataProvider  store={source.split("/")} source={source}>
+    return (<div ref={ref}>
+            <Container className={"chart container"} style={{"minHeight": height + 'px'}} fluid={true}>
 
-                {(!dual|| mode == 'chart') &&  <Container className={"body"} fluid={true}><DataConsumer>
-                    {child}
-                </DataConsumer></Container>}
+                <DataProvider params={JSON.parse(decodeURIComponent(params))} app={app}
+                              store={[unique, ...source.split("/")]} source={source}>
 
-        </DataProvider>
+                    {(!dual || (mode == 'chart')) && (
+                        <Container style={{"height": `${contentHeight}px`}} className={"body"}
+                                   fluid={true}>
+                            <DataConsumer>
+                                {child}
+                            </DataConsumer>
+                        </Container>)
+                    }
+                </DataProvider>
 
-        {dual&&childContent && mode == 'info' && <Container  className={"body"}>
-            <TheContent post={{content: {rendered: childContent}}}></TheContent>
-            </Container>}
+                {dual && childContent && mode == 'info' &&
+                <Container fluid={true} style={{"height": contentHeight + 'px'}} className={"body"}>
+                    <PostContent post={{content: {rendered: childContent}}}></PostContent>
+                </Container>}
 
-        {!editing && dual && <Grid className={"footnote"}>
-            <Grid.Column width={1}></Grid.Column>
-            <Grid.Column width={7}>
-            <Button className={(mode==='info')?"active":""} onClick={e=>setMode('info')}>{toggleInfoLabel}</Button> |
-            <Button className={(mode==='chart')?"active":""}  onClick={e=>setMode('chart')}>{toggleChartLabel}</Button>
-            </Grid.Column>
-            <Grid.Column textAlign={"right"} width={7}>
-            <p>{dataSourceLabel} : {dataSource}</p>
-            </Grid.Column>
-            <Grid.Column width={1}></Grid.Column>
-        </Grid>}
-    </Container>
+                {!editing && <Grid columns={2} className={"footnote"}>
+
+                    <Grid.Column>
+                        {dual &&
+                        <p className={"ignore"}>
+                            <Button className={(mode === 'info') ? "active" : ""}
+                                    onClick={e => setMode('info')}>{toggleInfoLabel}</Button>
+                            |
+                            <Button className={(mode === 'chart') ? "active" : ""}
+                                    onClick={e => setMode('chart')}>{toggleChartLabel}
+                            </Button>
+                        </p>
+                        }
+                    </Grid.Column>
+
+                    <Grid.Column textAlign={"right"}>
+                        <p>{dataSourceLabel} : {dataSource}</p>
+                    </Grid.Column>
+                </Grid>}
+            </Container>
+        </div>
+    )
+
 }
 
-
 const mapStateToProps = (state, ownProps) => {
-    return {
-
-    }
+    return {}
 }
 
 const mapActionCreators = {};

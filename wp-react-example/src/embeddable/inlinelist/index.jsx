@@ -1,12 +1,6 @@
 import React, {useState} from 'react'
 import {Container, Grid, Label} from 'semantic-ui-react'
-import PostProvider from "../../wp/providers/PostProvider";
-import PostConsumer from "../../wp/consumers/PostConsumer";
-import TheIntro from "../../wp/template-parts/TheIntro";
-import MediaProvider from "../../wp/providers/MediaProvider";
-import MediaConsumer from "../../wp/consumers/MediaConsumer";
-import TheIcon from "../../wp/template-parts/TheIcon";
-
+import {MediaConsumer, MediaProvider, PostIntro,PostIcon} from "wp-react-lib";
 
 class ListOfPost extends React.Component {
 
@@ -21,12 +15,12 @@ class ListOfPost extends React.Component {
                             <MediaProvider
                                 id={p.meta_fields && p.meta_fields.icon ? p.meta_fields.icon[0] : null}>
                                 <MediaConsumer>
-                                    <TheIcon as={Label}></TheIcon>
+                                    <PostIcon as={Label}></PostIcon>
                                 </MediaConsumer>
                             </MediaProvider>
                         </Grid.Column>}
                         <Grid.Column width={showIcons ? 15 : 16}>
-                            <TheIntro as={Container} fluid post={p}/>
+                            <PostIntro as={Container} fluid post={p}/>
                         </Grid.Column>
 
                     </Grid>

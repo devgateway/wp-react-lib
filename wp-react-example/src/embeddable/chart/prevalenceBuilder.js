@@ -1,3 +1,5 @@
+
+
 export const buildBarOptions = (data, includeTotal) => {
     const usePercents = true
     if (data && data.children) {
@@ -8,6 +10,7 @@ export const buildBarOptions = (data, includeTotal) => {
         const indexBy = data.children[0].type
         const keys = new Set();
         var total = 0;
+
         data.children.forEach(d => {
             const row = {}
             row[d.type] = d.value //Male /African ect (dimension value)
@@ -77,6 +80,8 @@ export const buildBarOptions = (data, includeTotal) => {
         return null
     }
 }
+
+
 const noDataFilter = (c) => c.value != 'No Data'
 export const buildPieOptions = (data, includeTotal) => {
     if (data && data.children) {
