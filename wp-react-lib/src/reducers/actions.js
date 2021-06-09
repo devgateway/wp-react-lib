@@ -47,11 +47,39 @@ export const getPostByTaxonomy = (wpType, taxonomy, category, categoryId, page, 
 }
 
 export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, store, locale = "en") => (dispatch, getState) => {
+
     dispatch({type: LOAD_POSTS, slug, taxonomy, categories, before, perPage, page, fields, store, locale})
+
     wp.getPosts(slug, type, taxonomy, categories, before, perPage, page, fields, locale).then(data => {
-        dispatch({type: LOAD_POSTS_DONE, data, slug, taxonomy, categories, before, perPage, page, fields, locale})
+
+        dispatch({
+            type: LOAD_POSTS_DONE,
+            data,
+            slug,
+            taxonomy,
+            categories,
+            before,
+            perPage,
+            page,
+            fields,
+            store,
+            locale
+        })
+
     }).catch(error => {
-        dispatch({type: LOAD_POSTS_ERROR, error, slug, taxonomy, categories, before, perPage, page, fields, locale})
+        dispatch({
+            type: LOAD_POSTS_ERROR,
+            error,
+            slug,
+            taxonomy,
+            categories,
+            before,
+            perPage,
+            page,
+            fields,
+            store,
+            locale
+        })
     })
 }
 
@@ -59,6 +87,7 @@ export const clean = (params) => (dispatch, getState) => {
     dispatch({type: CLEAN_PAGE_DATA, ...params})
 
 }
+
 export const getPages = (before, perPage, page, fields, parent, slug, store, locale = "en") => (dispatch, getState) => {
     dispatch({type: LOAD_PAGES, store})
     wp.getPages(before, perPage, page, fields, parent, slug, store, locale)
@@ -68,7 +97,6 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
         dispatch({type: LOAD_PAGES_ERROR, error, before, perPage, page, fields, parent, slug, store, locale})
     })
 }
-
 
 /*
 Gt WP Menus  (WP-REST-API V2 Menus plugin requiered)
@@ -81,7 +109,6 @@ export const getMenu = (slug, locale = "en") => (dispatch, getState) => {
         dispatch({type: LOAD_MENU_ERROR, slug, error})
     })
 }
-
 
 export const getMedia = (id, locale = "en") => (dispatch, getState) => {
     dispatch({type: LOAD_MEDIA, id})

@@ -24,7 +24,7 @@ import PostLabel from "./template-parts/PostLabel";
 import PostTitle from "./template-parts/PostTitle";
 import PostIcon from "./template-parts/PostIcon";
 
-import WPContent from "./WPContent";
+
 
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
@@ -46,7 +46,6 @@ export {
     MenuConsumer,
     MediaConsumer,
     TaxonomyConsumer,
-    WPContent,
     utils,
     wordpress,
     PostContent,

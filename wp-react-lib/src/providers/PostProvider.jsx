@@ -21,6 +21,7 @@ class PostProvider extends React.Component {
             store = "posts",
             locale
         } = this.props
+        debugger;
         //this.props.onLoadPost({slug, wType: type, taxonomy, categories, before, perPage, page, fields, store,locale})
         this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale)
     }
@@ -30,7 +31,7 @@ class PostProvider extends React.Component {
     }
 
     render() {
-        const {posts, category, loading, error} = this.props
+        const {posts, loading, error} = this.props
         if (posts && posts.length > 0) {
             return <PostContext.Provider value={posts}>{this.props.children}</PostContext.Provider>
         } else if (error) {
@@ -40,7 +41,7 @@ class PostProvider extends React.Component {
             </Segment>
         } else if (loading) {
             return (<Container>
-                <Loader></Loader>
+                    <Loader>Loading</Loader>
             </Container>)
         } else {
             return <Container>

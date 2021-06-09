@@ -14,12 +14,11 @@ class EmbeddedGateway extends React.Component {
     }
 
     renderEmbeddedComponents() {
-
         const {locale, store, getComponent} = this.props
-
         const node = ReactDOM.findDOMNode(this)
-
         const elements = node.getElementsByClassName("tcdi-component")
+
+        debugger;
         if (!(elements == null)) {
             Array.from(elements).forEach((element, index) => {
 
@@ -63,7 +62,7 @@ class EmbeddedGateway extends React.Component {
 
     render() {
         return <React.Fragment>
-            {this.props.children}
+                {this.props.children}
         </React.Fragment>
     }
 }

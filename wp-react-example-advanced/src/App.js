@@ -61,6 +61,7 @@ class IntlRoutes extends Component {
         const self = this;
         const props = this.props;
         const locale = this.props.match.params.lan
+        debugger;
         return (
             <IntlProvider key={locale} locale={locale} messages={messages[locale]}>
                 <AppContextProvider getComponent={getComponentByNameIgnoreCase} store={store} locale={locale}>
@@ -83,8 +84,7 @@ class IntlRoutes extends Component {
                                 store={"home"}>
                                 <ResponsiveContainer>
                                     <PageConsumer>
-                                        <WPContent locale={locale} showContent={true} {...props}
-                                                   defaultTemplate={Page}></WPContent>
+                                        <Page locale={locale}></Page>
                                     </PageConsumer>
                                 </ResponsiveContainer>
                             </PageProvider>
@@ -98,7 +98,7 @@ class IntlRoutes extends Component {
                             return (<Container fluid={true}>
                                 {UIComponent ? <UIComponent {...params}></UIComponent> :
                                     <Segment color={"red"} textAlign={"center"}><h1>Wrong Component Name</h1></Segment>}
-                                </Container>)
+                            </Container>)
                         }}>
                         </Route>
 
@@ -115,8 +115,7 @@ class IntlRoutes extends Component {
                                     store={props.match.params.slug}>
                                     <ResponsiveContainer>
                                         <PageConsumer>
-                                            <WPContent locale={locale} showContent={true} {...props}
-                                                       defaultTemplate={Page}></WPContent>
+                                           <Page locale={locale}></Page>
                                         </PageConsumer>
                                     </ResponsiveContainer>
                                 </PageProvider>
@@ -133,8 +132,7 @@ class IntlRoutes extends Component {
                                 store={props.match.params.slug}>
                                 <ResponsiveContainer>
                                     <PageConsumer>
-                                        <WPContent locale={locale} showContent={true} {...props}
-                                                   defaultTemplate={Page}></WPContent>
+                                        <Page locale={locale}></Page>
                                     </PageConsumer>
                                 </ResponsiveContainer>
                             </PageProvider>
@@ -144,30 +142,9 @@ class IntlRoutes extends Component {
 
                         </Route>
 
-                        {
-                            //post route
-                        }
-                        <Route path="/:lan/:parent/:year/:month/:day/:slug/" exact render={props => (
 
-                            <PostProvider type={props.match.params.parent}
-                                          slug={props.match.params.slug}
-                                          store={props.match.params.slug}
-                                          locale={locale}>
-                                <ResponsiveContainer>
-                                    <PostConsumer>
-                                        <WPContent
-                                            visibility={{link: false, intro: false, title: true, date: true}} {...props}
-                                            defaultTemplate={Post}/>
-                                    </PostConsumer>
-                                </ResponsiveContainer>
-                            </PostProvider>
-
-                        )}>
-                        </Route>
 
                         <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (
-
-
                             <ResponsiveContainer>
                                 <PostProvider
                                     slug={props.match.params.slug}
@@ -175,9 +152,7 @@ class IntlRoutes extends Component {
                                     locale={locale}
                                 >
                                     <PostConsumer>
-                                        <WPContent
-                                            visibility={{link: false, intro: false, title: true, date: true}} {...props}
-                                            defaultTemplate={Post}/>
+                                        <Post locale={locale}></Post>
                                     </PostConsumer>
                                 </PostProvider>
                             </ResponsiveContainer>

@@ -60,23 +60,23 @@ class Content extends React.Component {
             //TODO: Use htmlUtils link replace function line in 74
 
             return <EmbeddedGateway locale={locale} messages={messages} parent={post.id}>
-                    <Enhance className="entry-content" {...this.props}>
-                        {showDate &&
-                        <Container fluid className="date">{post.date.toLocaleString()}</Container>}
-                        {showTitle &&
-                        <span  className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
-                        {showIntro &&
-                        <Container fluid className="excerpt"
-                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro, locale)}}/>}
-                        {showContent &&
-                        <Container fluid className="content"
-                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
-                        {showLink === true &&
+                <Enhance className="entry-content" {...this.props}>
+                    {showDate &&
+                    <Container fluid className="date">{post.date.toLocaleString()}</Container>}
+                    {showTitle &&
+                    <span className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
+                    {showIntro &&
+                    <Container fluid className="excerpt"
+                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro, locale)}}/>}
+                    {showContent &&
+                    <Container fluid className="content"
+                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
+                    {showLink === true &&
 
-                        <a href={replaceLink(post.link)}
-                           className="link">Read More</a>}
-                    </Enhance>
-                </EmbeddedGateway>
+                    <a href={replaceLink(post.link)}
+                       className="link">Read More</a>}
+                </Enhance>
+            </EmbeddedGateway>
         } else {
             return showLoading ? 'Loading' : false;
         }
