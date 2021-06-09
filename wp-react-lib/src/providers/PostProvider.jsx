@@ -9,7 +9,7 @@ class PostProvider extends React.Component {
 
     componentDidMount() {
         //TODO pass locale parameter to get the post in the right language
-        const {type = 'posts', taxonomy, categories, before, perPage, page, fields, slug, store, locale} = this.props
+        const {type = 'posts', taxonomy, categories, before, perPage, page, fields, slug, store="posts", locale} = this.props
         this.props.onLoadPost({slug, wType: type, taxonomy, categories, before, perPage, page, fields, store})
     }
 
@@ -41,7 +41,7 @@ class PostProvider extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const {store} = ownProps
+    const {store="posts"} = ownProps
     return {
         posts: state.getIn(['wordpress', store, 'items']),
         error: state.getIn(['wordpress', store, 'error']),

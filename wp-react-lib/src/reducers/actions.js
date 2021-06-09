@@ -104,8 +104,6 @@ export const getMenu = (slug) => (dispatch, getState) => {
 //get single post by slug and type
 export const getPost = (slug, wpType) => (dispatch, getState) => {
     const locale = getState().getIn(['intl', 'locale'])
-
-
     dispatch({type: LOAD_POST, slug})
     wp.getPost(slug, wpType, locale).then(data => {
         dispatch({

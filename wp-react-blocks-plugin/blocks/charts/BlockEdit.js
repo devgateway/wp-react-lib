@@ -420,7 +420,9 @@ class BlockEdit extends Component {
                         <div className={"chart container"} style={divStyles}>
                             {mode == "chart" && <iframe scrolling={"no"} style={divStyles}
                                                         src={process.env.EMBEDDABLE_URI + "/chart?" + queryString}/>}
-                            {mode == "info" && <div><InnerBlocks/></div>}
+                            {mode == "info" && <div>
+                                <InnerBlocks/>
+                            </div>}
                             <Grid className={"footnote"}>
                                 <Grid.Column width={8}>
                                     {dualMode && <p>

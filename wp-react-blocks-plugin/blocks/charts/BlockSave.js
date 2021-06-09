@@ -82,12 +82,9 @@ const SaveComponent = (props) => {
              data-style={formatStyle}
              data-decimals={decimalPoints}
              data-currency={currency}
-             data-params={encodeURIComponent(JSON.stringify(params))}
-
-
-        >
-            <InnerBlocks.Content/>
-        </div>
+             data-params={encodeURIComponent(JSON.stringify(params))}>
+                            <InnerBlocks.Content/>
+            </div>
 
 
     );

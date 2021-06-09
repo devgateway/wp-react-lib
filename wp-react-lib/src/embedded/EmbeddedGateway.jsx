@@ -71,7 +71,6 @@ class EmbeddedGateway extends React.Component {
 
 const WithContext = (props) => {
     return (<AppContext.Consumer>
-
         {
             (data) => {
                 if (data) {

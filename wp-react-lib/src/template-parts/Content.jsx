@@ -1,11 +1,10 @@
 import React from 'react'
-import {FormattedDate} from 'react-intl';
 
 import EmbeddedGateway from '../embedded/EmbeddedGateway'
 
 import {Container} from "semantic-ui-react";
 
-import {replaceHTMLinks}  from "../util";
+import {replaceHTMLinks} from "../util";
 
 const Enhance = (props) => {
     const Component = props.as ? props.as : Container;
@@ -60,24 +59,24 @@ class Content extends React.Component {
 
             //TODO: Use htmlUtils link replace function line in 74
 
-            return <EmbeddedGateway locale={locale} messages={messages} parent={post.id} >
-                <Enhance className="entry-content" {...this.props}>
-                    {showDate &&
-                    <Container fluid className="date"><FormattedDate value={post.date} day="numeric" month="long"
-                                                                     year="numeric"/></Container>}
-                    {showTitle &&
-                    <span fluid className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
-                    {showIntro &&
-                    <Container fluid className="excerpt" dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro,locale)}}/>}
-                    {showContent &&
-                    <Container fluid className="content"
-                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(body,locale)}}/>}
-                    {showLink === true &&
+            return <EmbeddedGateway locale={locale} messages={messages} parent={post.id}>
+                    <Enhance className="entry-content" {...this.props}>
+                        {showDate &&
+                        <Container fluid className="date">{post.date.toLocaleString()}</Container>}
+                        {showTitle &&
+                        <span  className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
+                        {showIntro &&
+                        <Container fluid className="excerpt"
+                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro, locale)}}/>}
+                        {showContent &&
+                        <Container fluid className="content"
+                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
+                        {showLink === true &&
 
-                    <a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + locale + '/')}
-                       className="link">Read More</a>}
-                </Enhance>
-            </EmbeddedGateway>
+                        <a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + locale + '/')}
+                           className="link">Read More</a>}
+                    </Enhance>
+                </EmbeddedGateway>
         } else {
             return showLoading ? 'Loading' : false;
         }

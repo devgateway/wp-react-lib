@@ -92,8 +92,8 @@ class BlockEdit extends BlockEditWithFilters {
                 >
 
                     <div style={divStyles}>
-                        <iframe style={divStyles} scrolling={"no"}
-                                src={process.env.EMBEDDABLE_URI + "/inlinelist?" + queryString}/>
+                        <iframe style={divStyles} scrolling={"no"} src={process.env.EMBEDDABLE_URI + "/inlinelist?" + queryString}/>
+
                     </div>
                 </ResizableBox>
             </div>

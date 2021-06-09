@@ -1,0 +1,91 @@
+p {
+  color: $gray;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+
+h1 {
+  color: $gray;
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 1.9rem !important;
+  color: $gray;
+}
+
+h3 {
+  font-size: 1.3rem !important;
+  color: $gray;
+}
+
+h4 {
+  font-size: 1.07rem !important;
+  color: $gray;
+}
+
+h5 {
+  font-size: 1rem !important;
+  color: $gray;
+}
+
+h6 {
+  font-size: .7rem !important;
+  color: $gray;
+}
+
+/* Styles */
+
+.has-standard-12-font-size {
+  font-size: 12px;
+}
+
+.has-standard-16-font-size {
+  font-size: 16px;
+}
+
+.has-standard-18-font-size {
+  font-size: 18px;
+}
+
+.has-standard-24-font-size {
+  font-size: 24px;
+}
+
+.has-standard-30-font-size {
+  font-size: 30px;
+}
+
+.has-standard-36-font-size {
+  font-size: 36px;
+}
+
+.has-standard-64-font-size {
+  font-size: 64px;
+  line-height: 110%;
+}
+
+
+.has-condensed-text {
+  font-stretch: condensed;
+  line-height: 115% !important;
+}
+
+
+.has-weight-300 {
+  font-weight: 300;
+}
+
+.has-weight-400 {
+  font-weight: 400;
+}
+
+.has-weight-700 {
+  font-weight: 700;
+}
