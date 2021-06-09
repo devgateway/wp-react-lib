@@ -6,9 +6,9 @@ const MediaConsumer = (props) => {
     return (
         <MediaContext.Consumer>
             {
-                (media) => {
+                ({media, locale}) => {
                     return media && <React.Fragment>
-                        {React.Children.map(props.children, (child => React.cloneElement(child, {media})))}
+                        {React.Children.map(props.children, (child => React.cloneElement(child, {media, locale})))}
                     </React.Fragment>
                 }
             }

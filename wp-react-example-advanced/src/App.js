@@ -17,8 +17,7 @@ import {
     PageProvider,
     Post,
     PostConsumer,
-    PostProvider,
-    WPContent
+    PostProvider
 } from "wp-react-lib";
 import queryString from "query-string";
 import {Container, Segment} from "semantic-ui-react";
@@ -84,7 +83,7 @@ class IntlRoutes extends Component {
                                 store={"home"}>
                                 <ResponsiveContainer>
                                     <PageConsumer>
-                                        <Page locale={locale}></Page>
+                                        <Page></Page>
                                     </PageConsumer>
                                 </ResponsiveContainer>
                             </PageProvider>
@@ -115,7 +114,7 @@ class IntlRoutes extends Component {
                                     store={props.match.params.slug}>
                                     <ResponsiveContainer>
                                         <PageConsumer>
-                                           <Page locale={locale}></Page>
+                                            <Page></Page>
                                         </PageConsumer>
                                     </ResponsiveContainer>
                                 </PageProvider>
@@ -132,7 +131,7 @@ class IntlRoutes extends Component {
                                 store={props.match.params.slug}>
                                 <ResponsiveContainer>
                                     <PageConsumer>
-                                        <Page locale={locale}></Page>
+                                        <Page></Page>
                                     </PageConsumer>
                                 </ResponsiveContainer>
                             </PageProvider>
@@ -143,7 +142,6 @@ class IntlRoutes extends Component {
                         </Route>
 
 
-
                         <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (
                             <ResponsiveContainer>
                                 <PostProvider
@@ -152,7 +150,7 @@ class IntlRoutes extends Component {
                                     locale={locale}
                                 >
                                     <PostConsumer>
-                                        <Post locale={locale}></Post>
+                                        <Post></Post>
                                     </PostConsumer>
                                 </PostProvider>
                             </ResponsiveContainer>

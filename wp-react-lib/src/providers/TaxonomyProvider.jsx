@@ -6,7 +6,7 @@ import {TaxonomyContext} from './Context'
 class TaxonomyProvider extends React.Component {
 
     componentDidMount() {
-        const {taxonomy, locale = "en"} = this.props
+        const {taxonomy, locale} = this.props
         if (this.props.taxonomies.length == 0) {
             this.props.onLoad(taxonomy ? taxonomy : 'categories', locale)
         }
@@ -16,10 +16,11 @@ class TaxonomyProvider extends React.Component {
     }
 
     render() {
-        const {taxonomies, loading} = this.props
+        const {taxonomies, locale} = this.props
 
         if (taxonomies) {
-            return <TaxonomyContext.Provider value={taxonomies}>{this.props.children}</TaxonomyContext.Provider>
+            return <TaxonomyContext.Provider
+                value={{taxonomies, locale}}>{this.props.children}</TaxonomyContext.Provider>
         } else {
             return <h3>Loading</h3>
         }

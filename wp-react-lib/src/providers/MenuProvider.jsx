@@ -19,8 +19,8 @@ class MenuProvider extends React.Component {
     }
 
     render() {
-        const {menu, slug} = this.props
-        return (<MenuContext.Provider value={menu}>
+        const {menu, locale} = this.props
+        return (<MenuContext.Provider value={{menu,locale}}>
             {this.props.children}
         </MenuContext.Provider>);
 

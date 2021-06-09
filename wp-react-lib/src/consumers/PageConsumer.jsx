@@ -9,9 +9,9 @@ const PageConsumer = (props) => {
             <PageContext.Consumer>
                 {
 
-                    (pages) => {
+                    ({pages,locale}) => {
                         return pages && <React.Fragment>
-                            {React.Children.map(props.children, (child => React.cloneElement(child, {pages: pages})))}
+                            {React.Children.map(props.children, (child => React.cloneElement(child, {pages: pages, locale})))}
                         </React.Fragment>
                     }
                 }

@@ -31,9 +31,9 @@ class PostProvider extends React.Component {
     }
 
     render() {
-        const {posts, loading, error} = this.props
+        const {posts, loading, error, locale} = this.props
         if (posts && posts.length > 0) {
-            return <PostContext.Provider value={posts}>{this.props.children}</PostContext.Provider>
+            return <PostContext.Provider value={{posts, locale}}>{this.props.children}</PostContext.Provider>
         } else if (error) {
             return <Segment color={"red"}>
                 <h1>500</h1>
@@ -41,7 +41,7 @@ class PostProvider extends React.Component {
             </Segment>
         } else if (loading) {
             return (<Container>
-                    <Loader>Loading</Loader>
+                <Loader>Loading</Loader>
             </Container>)
         } else {
             return <Container>
