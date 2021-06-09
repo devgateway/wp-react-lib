@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'semantic-ui-css/semantic.min.css'
-import App from './App';
+import ExampleBasic from './ExampleBasic';
+import ExampleRoutes from './ExampleRoutes'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ExampleRoutes />
   </React.StrictMode>,
   document.getElementById('root')
 );
