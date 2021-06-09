@@ -4,7 +4,7 @@ import EmbeddedGateway from '../embedded/EmbeddedGateway'
 
 import {Container} from "semantic-ui-react";
 
-import {replaceHTMLinks} from "../util";
+import {replaceHTMLinks, replaceLink} from "../util";
 
 const Enhance = (props) => {
     const Component = props.as ? props.as : Container;
@@ -73,7 +73,7 @@ class Content extends React.Component {
                                    dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
                         {showLink === true &&
 
-                        <a href={post.link.replace(/^[a-z]{1,}\:\/{2}([a-z]{1,}.){1,}\//, '#' + locale + '/')}
+                        <a href={replaceLink(post.link)}
                            className="link">Read More</a>}
                     </Enhance>
                 </EmbeddedGateway>

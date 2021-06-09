@@ -32,7 +32,7 @@ const BreadCrumbs = withRouter(injectIntl(({menu, match, intl}) => {
         <a href={"#"}> Home </a>
         {path.map(i => !i.child_items ? <a className={i.slug == match.params.slug ? 'active' : ''}
                                            href={utils.replaceLink(i.url, intl.locale)}> {i.post_title}</a> :
-            <span>{i.post_title} </span>)}
+            <span>{i.post_title}  </span>)}
     </React.Fragment>
 
 }))

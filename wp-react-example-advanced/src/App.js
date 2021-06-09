@@ -65,7 +65,6 @@ class IntlRoutes extends Component {
             <IntlProvider key={locale} locale={locale} messages={messages[locale]}>
                 <AppContextProvider getComponent={getComponentByNameIgnoreCase} store={store} locale={locale}>
                     <Switch>
-
                         {
                             //Category Route
                         }
@@ -74,7 +73,6 @@ class IntlRoutes extends Component {
                                 <Category/>
                             </ResponsiveContainer>
                         </Route>
-
                         {
                             //default route (home)
                         }
@@ -100,8 +98,7 @@ class IntlRoutes extends Component {
                             return (<Container fluid={true}>
                                 {UIComponent ? <UIComponent {...params}></UIComponent> :
                                     <Segment color={"red"} textAlign={"center"}><h1>Wrong Component Name</h1></Segment>}
-
-                            </Container>)
+                                </Container>)
                         }}>
                         </Route>
 
