@@ -20,35 +20,6 @@ const store = createStore(
     )
 )
 
-//Load Home Page
-function Home() {
-    return (
-        <Provider store={store}>
-            <div className="App">
-                <PageProvider slug={"home"}>
-                    <PageConsumer>
-                        <Page></Page>
-                    </PageConsumer>
-                </PageProvider>
-            </div>
-        </Provider>
-    );
-}
-
-//Load List of Posts
-function Posts() {
-    return (
-        <Provider store={store}>
-            <div className="App">
-                <PostProvider store={"posts"}>
-                    <PostConsumer>
-                        <Post showTilte></Post>
-                    </PostConsumer>
-                </PostProvider>
-            </div>
-        </Provider>
-    );
-}
 
 const List = ({posts}) => {
     return <ul>{posts.map(post => <li><h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/></li>)}</ul>

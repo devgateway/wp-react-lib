@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'semantic-ui-css/semantic.min.css'
-import ExampleBasic from './ExampleBasic';
+import ExamplePage from './ExamplePage';
+import ExamplePosts from './ExamplePosts';
 import ExampleRoutes from './ExampleRoutes'
 import reportWebVitals from './reportWebVitals';
 
