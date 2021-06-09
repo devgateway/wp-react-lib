@@ -63,28 +63,26 @@ export const queryParams = (params) => {
 }
 
 
-export const getTaxonomy = (name, lang) => {
-    return get(URL_API_BASE + "" + name + '?lang=' + lang + '&per_page=100')
+export const getTaxonomy = (name, locale) => {
+    return get(URL_API_BASE + "" + name + '?lang=' + locale + '&per_page=100')
 
 }
 
 //TODO:make a unique getPost method
-export const getPostsByTypeAndTaxonomy = (type, category, value, lang = 'en', page = 1, perPage = 1) => {
-    return get(URL_API_BASE + type + "?_embed&" + category + '=' + value + '&lang=' + lang + '&per_page=' + perPage + '&page=' + page)
+export const getPostsByTypeAndTaxonomy = (type, category, value, locale, page = 1, perPage = 1) => {
+    return get(URL_API_BASE + type + "?_embed&" + category + '=' + value + '&lang=' + locale + '&per_page=' + perPage + '&page=' + page)
 }
 
-export const getMenu = (name, lang) => {
-    return get(URL_MENU + name + '?lang=' + lang)
+export const getMenu = (name, locale) => {
+    return get(URL_MENU + name + '?lang=' + locale)
 }
 
-export const getPosts = (params) => {
+export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, locale) => {
     //language , categories id, date before, record per page, number of page, fields to be included, post type
-    const {lang, slug, wType: type, taxonomy, categories, before, perPage, page, fields} = params
-
+    //const {lang, slug, wType: type, taxonomy, categories, before, perPage, page, fields} = params
     let url = URL_API_BASE + (type ? type : 'posts')
-        + '?_embed=true&lang=' + lang
+        + '?_embed=true&lang=' + locale
         + (slug ? '&slug=' + slug : '')
-
     if (!slug) {
         url += (categories ? (taxonomy ? '&' + taxonomy : '&categories')
             + "=" + (categories ? categories : "") : '') //ids
@@ -93,14 +91,13 @@ export const getPosts = (params) => {
             + (page ? '&page=' + page : '')
             + (fields ? '&_fields=' + fields : '')
     }
+    url += "&lang=" + locale
     return get(url)
 }
 
-export const getPages = (params) => {
-    const {lang, slug, before, perPage, page, parent, fields,} = params
-
+export const getPages = (before, perPage, page, fields, parent, slug, store, locale) => {
     let url = URL_PAGE
-        + 'lang=' + lang
+        + 'lang=' + locale
         + (slug ? '&slug=' + slug : '')
     if (!slug) {
         url += (before ? "&before=" + before.toISOString() : "")
@@ -113,18 +110,7 @@ export const getPages = (params) => {
 }
 
 
-export const getPost = (slug, type, lang) => {
-    return get(API_ROOT + '/wp/v2/' + type + '?slug=' + slug + '&lang=' + lang)
+export const getMedia = (slug, locale) => {
+    return get(URL_MEDIA + '/' + slug + '?lang=' + locale)
 }
 
-export const getPage = (slug, lang) => {
-    return get(URL_PAGE + 'slug=' + slug + '&lang=' + lang)
-}
-
-export const getMedia = (slug, lang) => {
-    return get(URL_MEDIA + '/' + slug + '?lang=' + lang)
-}
-
-export const getPagesByParent = (parentId, lang) => {
-    return get(URL_PAGE + 'parent=' + parentId + '&lang=' + lang)
-}

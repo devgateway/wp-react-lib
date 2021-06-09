@@ -84,7 +84,6 @@ export default (state = initialState, action) => {
 
         }
         case LOAD_POSTS_DONE: {
-
             const {data, store = 'posts'} = action
             return state.setIn([store, 'loading'], false)
                 .deleteIn([store, 'error'])
