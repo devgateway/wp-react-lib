@@ -4,21 +4,9 @@ import {Provider} from 'react-redux'
 import {combineReducers} from 'redux-immutable';
 import {Map} from 'immutable'
 import thunk from 'redux-thunk'
-import {
-    Page,
-    PageConsumer,
-    PageProvider,
-    Post,
-    PostConsumer,
-    PostContent,
-    PostProvider,
-    PostTitle,
-    wordpress
-} from "wp-react-lib";
+import {Page, PageConsumer, PageProvider, Post, PostConsumer, PostProvider, wordpress} from "wp-react-lib";
 
 const initialState = Map()
-
-
 const getRootReducer = () => combineReducers({
     wordpress,
 })
@@ -28,7 +16,6 @@ const store = createStore(
     compose(
         applyMiddleware(
             thunk // for dispatching history actions
-
         )
     )
 )
@@ -63,7 +50,7 @@ function Posts() {
     );
 }
 
-const List=({posts})=>{
+const List = ({posts}) => {
     return <ul>{posts.map(post => <li><h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/></li>)}</ul>
 }
 
