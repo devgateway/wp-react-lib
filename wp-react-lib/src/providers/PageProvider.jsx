@@ -12,19 +12,21 @@ class PageProvider extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const {before, perPage, page, fields, parent, slug, store, locale} = this.props
-
+        debugger;
         if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale) {
             this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale})
         }
     }
 
     componentDidMount() {
+        debugger;
         const {before, perPage, page, fields, parent, slug, store, locale} = this.props
         this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale})
     }
 
 
     componentWillUnmount() {
+
         const {before, perPage, page, fields, parent, slug, store, locale} = this.props
         this.props.onClean({store})
     }

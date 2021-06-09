@@ -25,10 +25,8 @@ function Home() {
     return (
         <Provider store={store}>
             <div className="App">
-                <PageProvider slug={"home"}>
-                    <PageConsumer>
-                        <Page></Page>
-                    </PageConsumer>
+                <PageProvider slug={"home"} store={"post"}>
+
                 </PageProvider>
             </div>
         </Provider>

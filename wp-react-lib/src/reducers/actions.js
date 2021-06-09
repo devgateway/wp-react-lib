@@ -1,8 +1,5 @@
 import {
     CLEAN_PAGE_DATA,
-    LOAD_CHILD_PAGES,
-    LOAD_CHILD_PAGES_DONE,
-    LOAD_CHILD_PAGES_ERROR,
     LOAD_CUSTOM_POSTS_BY_TAXONOMY,
     LOAD_CUSTOM_POSTS_BY_TAXONOMY_DONE,
     LOAD_CUSTOM_POSTS_BY_TAXONOMY_ERROR,
@@ -12,15 +9,9 @@ import {
     LOAD_MENU,
     LOAD_MENU_DONE,
     LOAD_MENU_ERROR,
-    LOAD_PAGE,
-    LOAD_PAGE_DONE,
-    LOAD_PAGE_ERROR,
     LOAD_PAGES,
     LOAD_PAGES_DONE,
     LOAD_PAGES_ERROR,
-    LOAD_POST,
-    LOAD_POST_DONE,
-    LOAD_POST_ERROR,
     LOAD_POSTS,
     LOAD_POSTS_DONE,
     LOAD_POSTS_ERROR,
@@ -28,14 +19,16 @@ import {
     LOAD_TAXONOMY_DONE,
     LOAD_TAXONOMY_ERROR
 } from "./constans";
+
 import * as wp from '../api'
+
 //used to transform categories to id
-export const loadTaxonomy = (name, locale) => (dispatch, getState) => {
+export const loadTaxonomy = (taxonomy, locale) => (dispatch, getState) => {
     dispatch({type: LOAD_TAXONOMY})
-    wp.getTaxonomy(name, locale).then(data => {
-        dispatch({type: LOAD_TAXONOMY_DONE, data, name})
+    wp.getTaxonomy(taxonomy, locale).then(data => {
+        dispatch({type: LOAD_TAXONOMY_DONE, data, taxonomy})
     }).catch(error => {
-        dispatch({type: LOAD_TAXONOMY_ERROR, name})
+        dispatch({type: LOAD_TAXONOMY_ERROR, taxonomy})
     })
 }
 
@@ -82,8 +75,7 @@ export const getPages = (params) => (dispatch, getState) => {
 /*
 Gt WP Menus  (WP-REST-API V2 Menus plugin requiered)
 */
-export const getMenu = (slug) => (dispatch, getState) => {
-    const locale = getState().getIn(['intl', 'locale'])
+export const getMenu = (slug, locale) => (dispatch, getState) => {
 
     dispatch({
         type: LOAD_MENU, slug
@@ -101,38 +93,9 @@ export const getMenu = (slug) => (dispatch, getState) => {
     })
 }
 
-//get single post by slug and type
-export const getPost = (slug, wpType) => (dispatch, getState) => {
-    const locale = getState().getIn(['intl', 'locale'])
-    dispatch({type: LOAD_POST, slug})
-    wp.getPost(slug, wpType, locale).then(data => {
-        dispatch({
-            type: LOAD_POST_DONE,
-            data,
-            slug
-        })
-    }).catch(error => {
-        dispatch({
-            type: LOAD_POST_ERROR,
-            error,
-            slug
-        })
-    })
-}
 
-export const getPage = (slug) => (dispatch, getState) => {
-    const locale = getState().getIn(['intl', 'locale'])
-    dispatch({type: LOAD_PAGE, slug})
-    wp.getPage(slug, locale).then(data => {
-        dispatch({type: LOAD_PAGE_DONE, data, slug})
-    }).catch(error => {
-        dispatch({type: LOAD_PAGE_ERROR, error, slug})
-    })
-}
+export const getMedia = (id, locale) => (dispatch, getState) => {
 
-
-export const getMedia = (id) => (dispatch, getState) => {
-    const locale = getState().getIn(['intl', 'locale'])
     dispatch({type: LOAD_MEDIA, id})
     wp.getMedia(id, locale).then(data => {
         dispatch({type: LOAD_MEDIA_DONE, data, id})
@@ -142,24 +105,3 @@ export const getMedia = (id) => (dispatch, getState) => {
 }
 
 
-export const getChildPages = (parentId) => (dispatch, getState) => {
-    const locale = getState().getIn(['intl', 'locale'])
-    dispatch({type: LOAD_CHILD_PAGES, parentId})
-    wp.getPagesByParent(parentId, locale).then(data => {
-
-        dispatch({type: LOAD_CHILD_PAGES_DONE, data, parentId})
-    }).catch(error => {
-        dispatch({type: LOAD_CHILD_PAGES_ERROR, error, parentId})
-    })
-}
-
-
-export const getOptionId = (name, lang, getState) => {
-    const item = getState().getIn(['wordpress', 'options', 'items'])
-        ? getState().getIn(['wordpress', 'options', 'items']).find(i => i.slug == name + '-' + lang)
-        : null
-
-    if (item) {
-        return item.id
-    } else return null;
-}

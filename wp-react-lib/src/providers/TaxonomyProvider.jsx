@@ -5,11 +5,10 @@ import {TaxonomyContext} from './Context'
 
 class TaxonomyProvider extends React.Component {
 
-
     componentDidMount() {
-        //TODO: pass locale
+        const {taxonomy, locale = "en"} = this.props
         if (this.props.taxonomies.length == 0) {
-            this.props.onLoad(this.props.taxonomy ? this.props.taxonomy : 'categories')
+            this.props.onLoad(taxonomy ? taxonomy : 'categories', locale)
         }
     }
 

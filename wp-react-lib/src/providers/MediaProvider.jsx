@@ -13,7 +13,7 @@ class MediaProvider extends React.Component {
         //TODO:pass locale
         const {onLoad, loading, id, locale} = this.props
         if (id) {
-            this.props.onLoad(id)
+            this.props.onLoad(id, locale)
         }
     }
 

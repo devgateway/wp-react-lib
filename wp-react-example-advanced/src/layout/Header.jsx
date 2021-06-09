@@ -81,7 +81,7 @@ const Header = ({intl, match}) => {
     return <React.Fragment>
 
 
-        <MenuProvider slug={"main"}>
+        <MenuProvider slug={"main"} locale={intl.locale}>
             <Container fluid={true} className="header">
                 <Container fluid={true} className={"background"}>
 

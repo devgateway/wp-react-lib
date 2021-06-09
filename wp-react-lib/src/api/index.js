@@ -79,7 +79,7 @@ export const getMenu = (name, lang) => {
 
 export const getPosts = (params) => {
     //language , categories id, date before, record per page, number of page, fields to be included, post type
-    const {lang, slug, wType: type, taxonomy, categories, before, perPage, page, fields,} = params
+    const {lang, slug, wType: type, taxonomy, categories, before, perPage, page, fields} = params
 
     let url = URL_API_BASE + (type ? type : 'posts')
         + '?_embed=true&lang=' + lang

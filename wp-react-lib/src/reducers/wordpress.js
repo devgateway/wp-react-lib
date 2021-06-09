@@ -61,6 +61,7 @@ export default (state = initialState, action) => {
 
         /*WP Categories*/
         case LOAD_TAXONOMY: {
+            const {slug} = action
             return state.setIn(['categories', 'loading'], true)
         }
         case LOAD_TAXONOMY_DONE: {
