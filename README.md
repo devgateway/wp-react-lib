@@ -93,7 +93,7 @@ wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  s
 - page : Number of page that has to be returned.
 - fields: Specify which field will be returned in the post object.
 - slug: Filter by post slug.
-- store: Specify the immutable path where post will store, useful when having multiple 	components loading different posts
+- store: Specify the immutable path where returned posts will be stored, useful when having multiple  components loading different posts
 - locale: Specify the post language (MultiLang plugin required)
 
 
