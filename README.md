@@ -85,16 +85,17 @@ wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  s
     }  
 ### Post Provider Properties
 
-- type
-- taxonomy,
-- categories,
-- before,
-- perPage,
-- page,
-- fields,
-- slug,
-- store
-- locale
+- type  :  You can specify your custom post type.
+- taxonomy : Taxonomy used for filtering posts, categories is used by default.
+- categories: array of  categories ids for filtering the post by the taxonomy.
+- before : ISO date used to filter posts by date before ,
+- perPage: Number of post loaded per page
+- page : Number of page that has to be returned.
+- fields: Specify which field will be returned in the post object.
+- slug: Filter by post slug.
+- store: Specify the immutable path where post will store, useful when having multiple 	components loading different posts
+- locale: Specify the post language (MultiLang plugin required)
+
 
 
 ## Routing
