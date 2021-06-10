@@ -154,7 +154,7 @@ For details about how to send pull requests, please read [CONTRIBUTING.md](https
 
 ## Autor
 
-* **Seba Dimunzio** - *Architecture and code* - [sdimunzio](https://github.com/sdimunzio)
+* **Sebastian Dimunzio** - *Architecture and code* - [sdimunzio](https://github.com/sdimunzio)
 
 The list of all contributors to this project can be read at [contributors](https://github.com/devgateway/wp-react-lib/graphs/contributors). 
 
