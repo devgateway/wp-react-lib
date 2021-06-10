@@ -1,0 +1,267 @@
+
+.container.header {
+  height: 150px;
+  padding: 0px;
+  margin: 0px;
+  box-shadow: none;
+  left: auto;
+
+  .background {
+    border-bottom: 1px solid $light-gray;
+    background-color: #f9f9f9;
+
+  }
+
+  .menu.branding {
+    background-color: #f9f9f9;
+    height: 96px;
+  }
+
+  .branding {
+    &.menu {
+      img {
+        margin-top: $base-unit - 3;
+      }
+    }
+  }
+
+  .menu, .branding {
+    padding: 0px;
+    margin: 0px;
+    max-width: 1366px;
+    margin: auto;
+
+
+    .flag:not(.icon):before {
+
+    }
+
+    .divider {
+
+
+      div {
+
+        border-left: 1px solid $light-gray;
+        height: 46px;
+
+      }
+
+    }
+
+    .item.fitted {
+      color: #000;
+      font-size: 22px;
+    }
+
+    .item {
+
+
+      cursor: pointer;
+      font-size: 15px;
+
+      margin: 0px 1%;
+    }
+
+    .pages {
+      align-self: flex-end;
+      height: 96px;
+      width: 100%;
+
+      .item:nth-child(1) {
+        margin-left: 4%;
+      }
+
+      .item {
+
+        a {
+          color: $menu-link-color;
+
+          &:hover {
+            color: $light-blue;
+          }
+        }
+
+        box-sizing: border-box;
+        margin: 0px;
+        text-transform: uppercase;
+        justify-content: center;
+        height: 71px;
+        min-width: 12%;
+        padding: 0px 4%;
+
+        align-self: flex-end;
+        border: 1px solid transparent;
+        padding-bottom: 25px;
+      }
+
+      .item.selected {
+        font-weight: bold;
+        height: 71px;
+        color: $light-blue;
+        background-color: #FFF;
+        border-bottom: 1px solid #FFF !important;
+
+        a {
+          color: $light-blue;
+        }
+      }
+
+      .item.has-child-items {
+        color: $menu-link-color;
+        padding-bottom: 27px;
+
+        span::after {
+          transform: rotate(90deg);
+          content: '\203A';
+          margin-left: 10px;
+          float: right;
+          display: block;
+        }
+      }
+
+      .item.selected.has-child-items {
+        color: $light-blue;
+        border: 1px solid $light-gray;
+        margin-bottom: -1px;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        margin-bottom: -1px;
+        padding-bottom: 28px;
+
+        span::after {
+          transform: rotate(-90deg);
+          content: '\203A';
+          margin-left: $base-unit;
+          float: right;
+          display: block;
+        }
+
+      }
+
+
+    }
+  }
+
+  .container.child {
+    .menu {
+      max-width: 100%;
+      margin-top: 0px;
+      padding: 0px;
+      border-bottom: 1px solid $light-gray;
+      justify-content: center;
+
+      .item {
+        margin-top: 1px;
+
+        a {
+          color: #9798a0;
+        }
+
+        text-transform: uppercase;
+        padding: 0px 10px;
+        margin: 0px .5%;
+
+        .mark {
+          width: 15px;
+          height: 17px;
+          background-size: 15px 15px;
+          margin-right: 11px;
+          /* webpackIgnore: true */
+          background-image: url("/child-menu-arrow.svg");
+          background-repeat: no-repeat;
+        }
+      }
+
+      .item.selected {
+
+        .mark {
+          width: 15px;
+          height: 16px;
+          background-size: 15px 15px;
+          margin-right: 10px;
+          /* webpackIgnore: true */
+          background-image: url("/header_arrow_green.png");
+          background-repeat: no-repeat;
+        }
+      }
+
+      .item.selected {
+        color: $green;
+      }
+
+      .item.active {
+        .mark {
+          @extend .mark;
+          /* webpackIgnore: true */
+          background-image: url("/child-menu-arrow-active.svg");
+        }
+
+        a {
+          font-weight: 800;
+          color: $green;
+
+        }
+      }
+    }
+  }
+}
+
+.url.breadcrumbs {
+  margin-top: $base-unit * 3;
+  font-size: 16px;
+
+  span {
+    color: $breadcrumb-grey;
+  }
+
+  span {
+    color: $breadcrumb-grey;
+  }
+
+  span:after, a:not(:last-child):after {
+    color: $breadcrumb-grey;
+    font-family: "Roboto";
+    content: '/';
+    display: inline;
+    font-size: 16px;
+    margin: 0px 10px;
+  }
+
+  a {
+    color: $breadcrumb-grey;
+  }
+
+
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .active {
+    color: $green;
+  }
+
+  .entry-content {
+    display: inline !important;;
+  }
+
+  .title {
+    font-size: 16px;
+
+
+  }
+
+  height: 30px;
+}
+
+
+.ui.search {
+  input.prompt {
+    border-radius: 0px;
+  }
+
+  i.search.icon {
+    color: #FFF;
+    background-color: #5089a6;
+  }
+}

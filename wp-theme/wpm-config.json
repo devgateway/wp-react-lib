@@ -1,0 +1,15 @@
+{
+  "post_types": {
+    "post": {},
+    "prevalence": {},
+    "illicit": {},
+    "health": {},
+    "agriculture": {}
+  },
+  "taxonomies": {
+    "prevalence_category": {},
+    "illicit_category": {},
+    "health_category": {},
+    "agriculture_category": {}
+  }
+}

@@ -1,129 +1,142 @@
 
-## Getting Started 
- 
- [![Getting Started](https://j.gifs.com/WLgvvX.gif )](https://raw.githubusercontent.com/devgateway/dg-wp-react/main/docs/Getting%20Started%20WP%20Integration.mp4)
+# WordPress React Lib
+An easy way to integrate your react application with the world's **most popular** content management system . **wp-react-lib** uses the [Wordpress REST API](https://developer.wordpress.org/rest-api/) to load content into your classic React.js stack, it also allows embedding your own React.js components within pages and posts.
 
-## WP Setup
-- Run dev_services.sh to start docker containers using development network configuration
+# Dependecies
+
+wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store as the following example:
+
+    import {applyMiddleware, compose, createStore} from 'redux'  
+    import {combineReducers} from 'redux-immutable';  
+    import {Map} from 'immutable'  
+    import thunk from 'redux-thunk'  
+    import {wordpress} from "wp-react-lib";
+    
+    const initialState = Map()  
+    const getRootReducer = () => combineReducers({  
+      wordpress,  
+    })  
+    const store = createStore(  
+      getRootReducer(), // root reducer with router state      
+      initialState,  
+      compose(applyMiddleware(thunk))  
+    )
+    
+
+
+## Preparing WordPress
+
+- Run dev_services.sh to start docker containers using development enviroment
 - Open localhost
-- Follow setup wizard
-- Go to Settings  Permalink Settings, choose  Post name
-- Go to Appearance themes and activate dg-no theme
-- Go to Pugins and activate the following plugins
-    - WP Multilang
-    - WP-REST-API V2 Menus
-    - DG React Components
-
-
-## UI Setup
-- run npm or pnpm install
+- Follow WordPress setup wizard
+- Go to settings  permalinks, choose  day and name
+  - *This configuration depends of your react routes setup*
+- Go to appearance themes and activate wp-react-theme
+  - *By activating this theme WordPress will disable its front-end*
+- Go to pPugins and activate the following plugins
+  - WP Multilang
+  - WP-REST-API V2 Menus
+  - **WP React Lib Components**
+- Update .env file  accordingly
+- run npm install
 - run npm start
 
+## Loading pages
 
-## First Page
-- Open to http://localhost/wp-login.php
-- Go to pages click in new page
-- Title home , ensure page slug is home
-- enter some content
-- open localhost:3000 (react ui)
+     <Provider store={store}>  
+	     <div className="App">  
+		     <PageProvider slug={"home"}>  
+			     <PageConsumer> 
+				     <Page/> 
+			     </PageConsumer> 
+		     </PageProvider> 
+	     </div>
+     </Provider>
 
 
-## Adding page menu
-- Open to http://localhost/wp-login.php
-- Go to Appearance > Menu
-- Create a new menu or update the current one setting the menu name to "main"
-- open localhost:3000
 
-## Page Provider
-TBW
-## Page Consumer
-TBW
-## Post Provider
-TBW
-## Post Consumer
-TBW
-## Taxonomy Provider
-TBW
-## Taxonomy Consumer
+## Loading Posts
 
-TBW
-## Templates
-TBW
-## WP React Embeddable Components
+     <Provider store={store}>        
+		     <div className="App">    
+               <PostProvider slug={"my-post-slug"}>    
+                  <PostConsumer>   
+                     <Post/>   
+                  </PostConsumer>   
+               </PostProvider>   
+            </div>  
+     </Provider>  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Loading List of Posts
 
-## Available Scripts
+     const List = ({posts}) => {        return <ul>  
+     {posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} </ul>       }    
+             
+        function ShowPosts() {    
+                return (    
+                <Provider store={store}>    
+                  <div className="App">    
+                     <PostProvider>    
+                           <PostConsumer> <List></List>   
+                     </PostConsumer>   
+                  </PostProvider>   
+                  </div>   
+               </Provider>  );    
+    }  
+### Post Provider Properties
 
-In the project directory, you can run:
+- type  :  You can specify your custom post type.
+- taxonomy : Taxonomy used for filtering posts, categories is used by default.
+- categories: array of  categories ids for filtering the post by the taxonomy.
+- before : ISO date used to filter posts by date before ,
+- perPage: Number of post loaded per page
+- page : Number of page that has to be returned.
+- fields: Specify which field will be returned in the post object.
+- slug: Filter by post slug.
+- store: Specify the immutable path where returned posts will be stored, useful when having multiple  components loading different posts
+- locale: Specify the post language (MultiLang plugin required)
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Routing
 
-### `npm test`
+*Using router for loading pages*
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more
-information.
+    <Route exact path="/:slug" render={(props)=>{  
+        return (<div className="App">  
+			     <PageProvider slug={props.match.params.slug}>  
+				     <PageConsumer> 
+					     <Page></Page> 
+				     </PageConsumer> 
+			     </PageProvider> 
+		     </div>}}>  
+</Route>)
 
-### `npm run build`
+*Using router for loading posts*
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (  
+          <PostProvider  slug={props.match.params.slug} >  
+		     <PostConsumer> 
+			     <Post></Post> 
+		     </PostConsumer> 
+	     </PostProvider> 
+	     )}>  
+    </Route>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Embedded Components
 
-### `npm run eject`
+You can  create and embed your own React components in WordPress editor, configure them, save its metadata, and render them in your React UI as part of your react application.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Embedded Components Workflow
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will
-remove the single build dependency from your project.
+![](docs/flow1.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right
-into your project so you have full control over them. All of the commands except `eject` will still work, but they will
-point to the copied scripts so you can tweak them. At this point you’re on your own.
+![](docs/flow2.png)  
+### Embeddable Components
+To create an embeddable component you need
+- Create your React component
+- Add a route that exposes your component without your ui layout
+- Create a wordpress plugin that wraps your component and put it available as a wordpress block.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you
-shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in
-the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved
-here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
