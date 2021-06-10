@@ -123,9 +123,9 @@ React UI ->> React UI: Provide Store and Intl configuration
 React UI ->> React UI: Render component using ReactDOM.render  
 ```  
 ### Embeddable Components
-To create an embeddable compoment you need
-- Create your react component
-- Add a route that exposes your compoment without your ui layout
+To create an embeddable component you need
+- Create your React component
+- Add a route that exposes your component without your ui layout
 - Create a wordpress plugin that wraps your component and put it available as a wordpress block.
 
 Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
