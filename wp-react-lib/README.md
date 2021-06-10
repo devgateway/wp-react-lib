@@ -6,23 +6,22 @@ An easy way to integrate your react application with the world's **most popular*
 
 wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  store as the as the foll wing example:
 
-
-import {applyMiddleware, compose, createStore} from 'redux'  
-import {combineReducers} from 'redux-immutable';  
-import {Map} from 'immutable'  
-import thunk from 'redux-thunk'  
-import {wordpress} from "wp-react-lib";
-
-const initialState = Map()  
-const getRootReducer = () => combineReducers({  
-wordpress,  
-})  
-const store = createStore(  
-getRootReducer(), // root reducer with router state      
-initialState,  
-compose(applyMiddleware(thunk))  
-)
-
+    import {applyMiddleware, compose, createStore} from 'redux'  
+    import {combineReducers} from 'redux-immutable';  
+    import {Map} from 'immutable'  
+    import thunk from 'redux-thunk'  
+    import {wordpress} from "wp-react-lib";
+    
+    const initialState = Map()  
+    const getRootReducer = () => combineReducers({  
+      wordpress,  
+    })  
+    const store = createStore(  
+      getRootReducer(), // root reducer with router state      
+      initialState,  
+      compose(applyMiddleware(thunk))  
+    )
+    
 
 
 ## Preparing WordPress
@@ -43,10 +42,6 @@ compose(applyMiddleware(thunk))
 - run npm start
 
 ## Loading pages
-
-
-
-
 
      <Provider store={store}>  
 	     <div className="App">  
@@ -73,7 +68,6 @@ compose(applyMiddleware(thunk))
      </Provider>  
 
 ## Loading List of Posts
-
 
      const List = ({posts}) => {        return <ul>  
      {posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} </ul>       }    
@@ -102,6 +96,33 @@ compose(applyMiddleware(thunk))
 - store
 - locale
 
+
+## Routing
+
+*Using router for loading pages*
+
+    <Route exact path="/:slug" render={(props)=>{  
+        return (<div className="App">  
+			     <PageProvider slug={props.match.params.slug}>  
+				     <PageConsumer> 
+					     <Page></Page> 
+				     </PageConsumer> 
+			     </PageProvider> 
+		     </div>}}>  
+</Route>)
+
+*Using router for loading posts*
+
+    <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (  
+          <PostProvider  slug={props.match.params.slug} >  
+		     <PostConsumer> 
+			     <Post></Post> 
+		     </PostConsumer> 
+	     </PostProvider> 
+	     )}>  
+    </Route>
+
+
 ## Embedded Components
 
 You can  create and embed your own react components in WordPress editor, configure them, save its metadata, and render them in your React UI as part of your react application.
@@ -123,9 +144,9 @@ React UI ->> React UI: Provide Store and Intl configuration
 React UI ->> React UI: Render component using ReactDOM.render  
 ```  
 ### Embeddable Components
-To create an embeddable compoment you need
-- Create your react component
-- Add a route that exposes your compoment without your ui layout
+To create an embeddable component you need
+- Create your React component
+- Add a route that exposes your component without your ui layout
 - Create a wordpress plugin that wraps your component and put it available as a wordpress block.
 
 Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
