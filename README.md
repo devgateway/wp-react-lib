@@ -158,7 +158,7 @@ For details about how to send pull requests, please read [CONTRIBUTING.md](https
 
 The list of all contributors to this project can be read at [contributors](https://github.com/devgateway/wp-react-lib/graphs/contributors). 
 
-## License 📄
+## License
 
 This project is under - Apache License 2.0 - for more details please check [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
