@@ -126,7 +126,7 @@ wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  s
 
 ## Embedded Components
 
-You can  create and embed your own react components in WordPress editor, configure them, save its metadata, and render them in your React UI as part of your react application.
+You can  create and embed your own React components in WordPress editor, configure them, save its metadata, and render them in your React UI as part of your react application.
 
 ### Embedded Components Workflow
 
