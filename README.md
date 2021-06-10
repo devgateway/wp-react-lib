@@ -96,6 +96,33 @@ wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  s
 - store
 - locale
 
+
+## Routing
+
+*Using router for loading pages*
+
+    <Route exact path="/:slug" render={(props)=>{  
+        return (<div className="App">  
+			     <PageProvider slug={props.match.params.slug}>  
+				     <PageConsumer> 
+					     <Page></Page> 
+				     </PageConsumer> 
+			     </PageProvider> 
+		     </div>}}>  
+</Route>)
+
+*Using router for loading posts*
+
+    <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (  
+          <PostProvider  slug={props.match.params.slug} >  
+		     <PostConsumer> 
+			     <Post></Post> 
+		     </PostConsumer> 
+	     </PostProvider> 
+	     )}>  
+    </Route>
+
+
 ## Embedded Components
 
 You can  create and embed your own react components in WordPress editor, configure them, save its metadata, and render them in your React UI as part of your react application.
