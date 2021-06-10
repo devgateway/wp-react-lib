@@ -150,7 +150,7 @@ Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
 
 ## Contributing
 
-For details about how to send pull requests, please read [CONTRIBUTING.md](https://github.com/devgateway/wp-react-lib/blob/main/contributting.md).
+For details about how to send pull requests, please read [CONTRIBUTING.md](https://github.com/devgateway/wp-react-lib/blob/main/CONTRIBUTING.md).
 
 ## Autor
 
