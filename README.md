@@ -1,6 +1,6 @@
 
 # WordPress React Lib
-An easy way to integrate your react application with the world's **most popular** content management system . **wp-react-lib** uses the [Wordpress REST API](https://developer.wordpress.org/rest-api/) to load content into your classic React.js stack, it also allows embedding your own React.js components within pages and posts.
+An easy way to integrate your react application with the world's **most popular** content management system. **wp-react-lib** uses the [Wordpress REST API](https://developer.wordpress.org/rest-api/) to load content into your classic React.js stack, it also allows embedding your own React.js components within pages and posts.
 
 # Dependecies
 
@@ -26,18 +26,18 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
 
 ## Preparing WordPress
 
-- Run dev_services.sh to start docker containers using development enviroment
+- Run dev_services.sh to start docker container using development enviroment
 - Open localhost
 - Follow WordPress setup wizard
-- Go to settings  permalinks, choose  day and name
-  - *This configuration depends of your react routes setup*
-- Go to appearance themes and activate wp-react-theme
-  - *By activating this theme WordPress will disable its front-end*
-- Go to pPugins and activate the following plugins
-  - WP Multilang
-  - WP-REST-API V2 Menus
-  - **WP React Lib Components**
-- Update .env file  accordingly
+  - Go to settings/permalinks, then choose day and name
+    - *This configuration depends of your react routes setup*
+  - Go to appearance/themes and activate wp-react-theme
+    - *By activating this theme WordPress will disable its front-end*
+  - Go to plugins and activate the following plugins
+    - WP Multilang
+    - WP-REST-API V2 Menus
+    - **WP React Lib Components**
+- Update .env file accordingly
 - run npm install
 - run npm start
 
@@ -45,11 +45,11 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
 
      <Provider store={store}>  
 	     <div className="App">  
-		     <PageProvider slug={"home"}>  
-			     <PageConsumer> 
-				     <Page/> 
-			     </PageConsumer> 
-		     </PageProvider> 
+		  <PageProvider slug={"home"}>  
+			  <PageConsumer> 
+				 <Page/> 
+			  </PageConsumer> 
+		  </PageProvider> 
 	     </div>
      </Provider>
 
@@ -58,19 +58,20 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
 ## Loading Posts
 
      <Provider store={store}>        
-		     <div className="App">    
-               <PostProvider slug={"my-post-slug"}>    
-                  <PostConsumer>   
-                     <Post/>   
-                  </PostConsumer>   
-               </PostProvider>   
-            </div>  
+	<div className="App">    
+           <PostProvider slug={"my-post-slug"}>    
+              <PostConsumer>   
+                 <Post/>   
+              </PostConsumer>   
+           </PostProvider>   
+        </div>  
      </Provider>  
 
 ## Loading List of Posts
 
-     const List = ({posts}) => {        return <ul>  
-     {posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} </ul>       }    
+     const List = ({posts}) => {        
+	return <ul>  
+     		{posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} </ul>}    
              
         function ShowPosts() {    
                 return (    
@@ -81,20 +82,21 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
                      </PostConsumer>   
                   </PostProvider>   
                   </div>   
-               </Provider>  );    
-    }  
+               </Provider> );    
+    	}  
+    
 ### Post Provider Properties
 
-- type  :  You can specify your custom post type.
-- taxonomy : Taxonomy used for filtering posts, categories is used by default.
-- categories: array of  categories ids for filtering the post by the taxonomy.
-- before : ISO date used to filter posts by date before ,
+- type: You can specify your custom post type.
+- taxonomy: Taxonomy used for filtering posts, categories is used by default.
+- categories: Array of  categories ids for filtering the post by the taxonomy.
+- before : ISO date used to filter posts by date before
 - perPage: Number of post loaded per page
-- page : Number of page that has to be returned.
+- page: Number of page that has to be returned.
 - fields: Specify which field will be returned in the post object.
 - slug: Filter by post slug.
 - store: Specify the immutable path where returned posts will be stored, useful when having multiple  components loading different posts
-- locale: Specify the post language (MultiLang plugin required)
+- locale: Specify the post language (multiLang plugin required)
 
 
 
@@ -109,18 +111,20 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
 					     <Page></Page> 
 				     </PageConsumer> 
 			     </PageProvider> 
-		     </div>}}>  
-</Route>)
+		     </div>
+	}}>  
+    </Route>
 
 *Using router for loading posts*
 
-    <Route path="/:lan/:year/:month/:day/:slug/" exact render={props => (  
-          <PostProvider  slug={props.match.params.slug} >  
+    <Route path="/:lan/:year/:month/:day/:slug/" exact render=
+        {props => (  
+             <PostProvider  slug={props.match.params.slug} >  
 		     <PostConsumer> 
 			     <Post></Post> 
 		     </PostConsumer> 
 	     </PostProvider> 
-	     )}>  
+	 )}>  
     </Route>
 
 
