@@ -58,7 +58,7 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
 ## Loading Posts
 
      <Provider store={store}>        
-	<div className="App">    
+        <div className="App">    
            <PostProvider slug={"my-post-slug"}>    
               <PostConsumer>   
                  <Post/>   
@@ -70,8 +70,11 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
 ## Loading List of Posts
 
      const List = ({posts}) => {        
-	return <ul>  
-     		{posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} </ul>}    
+       return 
+         <ul>  
+           {posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} 
+	 </ul>
+     }    
              
         function ShowPosts() {    
                 return (    
@@ -144,3 +147,21 @@ To create an embeddable component you need
 - Create a wordpress plugin that wraps your component and put it available as a wordpress block.
 
 Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
+
+## Contributing
+
+For details about how to send pull requests, please read [CONTRIBUTING.md](https://github.com/devgateway/wp-react-lib/contributting.md).
+
+## Autor
+
+* **Seba Dimunzio** - *Architecture and code* - [sdimunzio](https://github.com/sdimunzio)
+
+The list of all contributors to this project can be read at [contributors](https://github.com/devgateway/wp-react-lib/graphs/contributors). 
+
+## License 📄
+
+This project is under - Apache License 2.0 - for more details please check [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+## Contact information
+
+[For any comments or suggestions, please contact us](mailto:info@developmentgateway.org "Development Gateway's Email")
