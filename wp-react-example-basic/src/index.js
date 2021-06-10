@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ExampleRoutes />
+    <ExamplePosts />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -21,7 +21,7 @@ export const reducers = {
 }
 
 
-export const components = {
+ const components = {
     //   pageGallery: PageGallery,
     postsCarousel: PostsCarousel,
     chart: Chart,

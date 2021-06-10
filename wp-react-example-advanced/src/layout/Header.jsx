@@ -124,12 +124,7 @@ const Header = ({intl, match}) => {
             </Container>
 
 
-            <Container className={"url breadcrumbs"}>
-                <MenuConsumer>
-                    <BreadCrumbs></BreadCrumbs>
-                </MenuConsumer>
 
-            </Container>
         </MenuProvider>
     </React.Fragment>
 

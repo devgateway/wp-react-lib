@@ -99,11 +99,10 @@ const Wrapper = (props) => {
     } = props
 
     return <Container className={`tcdi tabbed posts ${editing ? 'editing' : ''}`} fluid={true}>
-        <PostProvider type={type} taxonomy={taxonomy} categories={categories}
-                      store={"tabbedposts_" + parent} page={1}
-                      perPage={items}>
-            <PostConsumer>
-
+                <PostProvider type={type} taxonomy={taxonomy} categories={categories}
+                              store={"tabbedposts_" + parent} page={1}
+                              perPage={items}>
+                    <PostConsumer>
                 {theme == 'light' ? <SingleTabbedView showLabels={showLabels == "true"}></SingleTabbedView> :
                     <GridTabbedView showLabels={showLabels === 'true'}
                                     showIcons={showIcons == 'true'}></GridTabbedView>}
