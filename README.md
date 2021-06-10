@@ -129,21 +129,10 @@ wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  s
 You can  create and embed your own react components in WordPress editor, configure them, save its metadata, and render them in your React UI as part of your react application.
 
 ### Embedded Components Workflow
-```mermaid  
-sequenceDiagram  
-React UI/Embeddable Component ->> Wordpress Edit: Loads a component into an iframe  
-Wordpress Edit ->> Wordpress Edit: Configure component options  
-Wordpress Edit ->> React UI/Embeddable Component: Reload with query string parameters  
-Wordpress Edit ->> Wordpress Save: Save config in a div element passing data-nnn attributes.  
-```  
-```mermaid  
-sequenceDiagram  
-Wordpress API ->> React UI:  Get page or post  
-React UI ->> React UI: Under current node find alls div having .ui.component class name  
-React UI ->> React UI: Async load component by name  
-React UI ->> React UI: Provide Store and Intl configuration  
-React UI ->> React UI: Render component using ReactDOM.render  
-```  
+
+![](docs/flow1.png)
+
+![](docs/flow2.png)  
 ### Embeddable Components
 To create an embeddable component you need
 - Create your React component
