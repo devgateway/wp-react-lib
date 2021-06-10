@@ -6,23 +6,22 @@ An easy way to integrate your react application with the world's **most popular*
 
 wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  store as the as the foll wing example:
 
-
-import {applyMiddleware, compose, createStore} from 'redux'  
-import {combineReducers} from 'redux-immutable';  
-import {Map} from 'immutable'  
-import thunk from 'redux-thunk'  
-import {wordpress} from "wp-react-lib";
-
-const initialState = Map()  
-const getRootReducer = () => combineReducers({  
-wordpress,  
-})  
-const store = createStore(  
-getRootReducer(), // root reducer with router state      
-initialState,  
-compose(applyMiddleware(thunk))  
-)
-
+    import {applyMiddleware, compose, createStore} from 'redux'  
+    import {combineReducers} from 'redux-immutable';  
+    import {Map} from 'immutable'  
+    import thunk from 'redux-thunk'  
+    import {wordpress} from "wp-react-lib";
+    
+    const initialState = Map()  
+    const getRootReducer = () => combineReducers({  
+      wordpress,  
+    })  
+    const store = createStore(  
+      getRootReducer(), // root reducer with router state      
+      initialState,  
+      compose(applyMiddleware(thunk))  
+    )
+    
 
 
 ## Preparing WordPress
@@ -43,10 +42,6 @@ compose(applyMiddleware(thunk))
 - run npm start
 
 ## Loading pages
-
-
-
-
 
      <Provider store={store}>  
 	     <div className="App">  
@@ -73,7 +68,6 @@ compose(applyMiddleware(thunk))
      </Provider>  
 
 ## Loading List of Posts
-
 
      const List = ({posts}) => {        return <ul>  
      {posts.map(post =>(<li> <h1 dangerouslySetInnerHTML={{__html: post.title.rendered}}/> </li>))} </ul>       }    
