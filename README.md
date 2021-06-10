@@ -4,7 +4,7 @@ An easy way to integrate your react application with the world's **most popular*
 
 # Dependecies
 
-wp-react-lib@0.1.0 uses  Redux and Immutable (*) , you need to configure your  store as the as the foll wing example:
+wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store as the following example:
 
     import {applyMiddleware, compose, createStore} from 'redux'  
     import {combineReducers} from 'redux-immutable';  
