@@ -81,9 +81,10 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
                 <Provider store={store}>    
                   <div className="App">    
                      <PostProvider>    
-                           <PostConsumer> <List></List>   
-                     </PostConsumer>   
-                  </PostProvider>   
+                       <PostConsumer> 
+			   <List></List>   
+                       </PostConsumer>   
+                     </PostProvider>   
                   </div>   
                </Provider> );    
     	}  
