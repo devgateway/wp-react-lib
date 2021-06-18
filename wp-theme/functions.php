@@ -592,6 +592,62 @@ function get_post_meta_for_api( $object ) {
 }
 
 
+function add_admin_menu() {
+    add_menu_page(
+        __( 'React UI Settings'),
+        __( 'React UI Settings'),
+        'manage_options',
+        'ui-settings',
+        'ui_admin_page_content',
+        'dashicons-schedule',
+        10
+    );
+}
+add_action( 'admin_menu', 'add_admin_menu' );
+
+function ui_admin_page_content() {
+    ?>
+    <h1> <?php esc_html_e( 'Ui Settings', 'my-plugin-textdomain' ); ?> </h1>
+        <form method="POST" action="options.php">
+        <?php
+        settings_fields( 'ui-settings' );
+        do_settings_sections( 'ui-settings' );
+        submit_button();
+        ?>
+        </form>
+        <?php
+}
 
 
+add_action( 'admin_init', 'ui_settings_init' );
 
+function ui_settings_init() {
+
+    add_settings_section(
+        'ui_settings_form_section',
+        __( 'General'),
+        'my_setting_section_callback_function',
+        'ui-settings'
+    );
+
+		add_settings_field(
+		   'react_ui_url',
+		   __( 'Enter react ui URL here'),
+		   'react_ui_url_markup',
+		   'ui-settings',
+		   'ui_settings_form_section'
+		);
+
+		register_setting( 'ui-settings', 'react_ui_url' );
+}
+
+
+function my_setting_section_callback_function() {
+    echo '<p> </p>';
+}
+
+function react_ui_url_markup() {
+    ?>
+    <input type="text" size="100" id="my_setting_field" name="react_ui_url" value="<?php echo get_option( 'react_ui_url' ); ?>">
+    <?php
+}
