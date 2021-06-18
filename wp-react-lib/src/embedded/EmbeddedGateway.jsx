@@ -33,12 +33,17 @@ class EmbeddedGateway extends React.Component {
                         props[attrs[i].name] = attrs[i].value;
                     }
                     const C = getComponent(component);
+                    if (C){
                     ReactDOM.render(
                         <Provider store={store}>
                             <IntlProvider locale={locale}>
                                 <C unique={"embeddable_" + index} {...props} childContent={element.innerHTML}/>
                             </IntlProvider>
                         </Provider>, element);
+                    }else{
+                        ReactDOM.render(
+                            <span style={{"color":"red"}}>{component} not found </span>, element);
+                    }
 
 
                 }

@@ -46,11 +46,11 @@ export const getPostByTaxonomy = (wpType, taxonomy, category, categoryId, page, 
         })
 }
 
-export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, store, locale = "en") => (dispatch, getState) => {
+export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, store, locale = "en", previewNonce, previewId) => (dispatch, getState) => {
 
     dispatch({type: LOAD_POSTS, slug, taxonomy, categories, before, perPage, page, fields, store, locale})
 
-    wp.getPosts(slug, type, taxonomy, categories, before, perPage, page, fields, locale).then(data => {
+    wp.getPosts(slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId).then(data => {
 
         dispatch({
             type: LOAD_POSTS_DONE,
@@ -63,7 +63,9 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
             page,
             fields,
             store,
-            locale
+            locale,
+            previewNonce,
+            previewId
         })
 
     }).catch(error => {
@@ -78,7 +80,9 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
             page,
             fields,
             store,
-            locale
+            locale,
+            previewNonce,
+            previewId
         })
     })
 }
@@ -88,13 +92,39 @@ export const clean = (params) => (dispatch, getState) => {
 
 }
 
-export const getPages = (before, perPage, page, fields, parent, slug, store, locale = "en") => (dispatch, getState) => {
+export const getPages = (before, perPage, page, fields, parent, slug, store, locale = "en", previewNonce, previewId) => (dispatch, getState) => {
     dispatch({type: LOAD_PAGES, store})
-    wp.getPages(before, perPage, page, fields, parent, slug, store, locale)
+    wp.getPages(before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId)
         .then(data => {
-            dispatch({type: LOAD_PAGES_DONE, data, before, perPage, page, fields, parent, slug, store, locale})
+            dispatch({
+                type: LOAD_PAGES_DONE,
+                data,
+                before,
+                perPage,
+                page,
+                fields,
+                parent,
+                slug,
+                store,
+                locale,
+                previewNonce,
+                previewId
+            })
         }).catch(error => {
-        dispatch({type: LOAD_PAGES_ERROR, error, before, perPage, page, fields, parent, slug, store, locale})
+        dispatch({
+            type: LOAD_PAGES_ERROR,
+            error,
+            before,
+            perPage,
+            page,
+            fields,
+            parent,
+            slug,
+            store,
+            locale,
+            previewNonce,
+            previewId
+        })
     })
 }
 

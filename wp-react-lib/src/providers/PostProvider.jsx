@@ -8,7 +8,6 @@ import {Container, Loader, Segment} from "semantic-ui-react";
 class PostProvider extends React.Component {
 
     componentDidMount() {
-        //TODO pass locale parameter to get the post in the right language
         const {
             type = 'posts',
             taxonomy,
@@ -19,11 +18,13 @@ class PostProvider extends React.Component {
             fields,
             slug,
             store = "posts",
-            locale
+            locale,
+            previewNonce,
+            previewId
         } = this.props
         debugger;
         //this.props.onLoadPost({slug, wType: type, taxonomy, categories, before, perPage, page, fields, store,locale})
-        this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale)
+        this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale,previewNonce,previewId)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

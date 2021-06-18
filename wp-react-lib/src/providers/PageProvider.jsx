@@ -11,17 +11,17 @@ Will load a post base ond passed properties and put in PostContext
 class PageProvider extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const {before, perPage, page, fields, parent, slug, store, locale} = this.props
+        const {before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId} = this.props
         debugger;
-        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale) {
-            this.props.onLoad(before, perPage, page, fields, parent, slug, store, locale)
+        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId) {
+            this.props.onLoad(before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId)
         }
     }
 
     componentDidMount() {
         debugger;
-        const {before, perPage, page, fields, parent, slug, store, locale} = this.props
-        this.props.onLoad(before, perPage, page, fields, parent, slug, store, locale)
+        const {before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId} = this.props
+        this.props.onLoad(before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId)
     }
 
 

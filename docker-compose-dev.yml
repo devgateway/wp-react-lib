@@ -31,6 +31,7 @@ services:
       - ./data/wordpress:/var/www/html:ro
       - ./wp-react-blocks-plugin:/var/www/html/wp-content/plugins/wp-react-blocks-plugin
       - ./wp-content:/var/www/html/wp-content
+      - ./wp-theme:/var/www/html/wp-content/themes/wp-react-theme
       -  ui:/var/www/ui:ro
     depends_on:
       - wordpress

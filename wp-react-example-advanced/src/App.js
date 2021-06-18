@@ -101,6 +101,43 @@ class IntlRoutes extends Component {
                         }}>
                         </Route>
 
+
+                        <Route path={"/:lan/preview/post/:id"} exact render={props => {
+                            const searchParams = new URLSearchParams(props.location.search)
+                            const preview = searchParams.get("preview")
+                            const previewNonce = searchParams.get("_wpnonce")
+
+                            return (
+                                <ResponsiveContainer>
+                                    <PostProvider store={"preview"} perPage={1} view={preview} previewNonce={previewNonce} previewId={props.match.params.id}>
+                                        <PostConsumer>
+                                            <Post showIntro={true} showContent={false}/>
+                                            <hr/>
+                                            <Post showIntro={false} showContent={true}/>
+                                        </PostConsumer>
+
+                                    </PostProvider>
+                                </ResponsiveContainer>
+                            )
+                        }}>
+                        </Route>
+                        <Route path={"/:lan/preview/page/:id"} exact render={props => {
+                            const searchParams = new URLSearchParams(props.location.search)
+                            const preview = searchParams.get("preview")
+                            const previewNonce = searchParams.get("_wpnonce")
+                            return (
+                                <ResponsiveContainer>
+                                    <PageProvider store={"preview"} perPage={1} view={preview} previewNonce={previewNonce} previewId={props.match.params.id}>
+                                        <PageConsumer>
+                                            <Page/>
+                                        </PageConsumer>
+
+                                    </PageProvider>
+                                </ResponsiveContainer>
+                            )
+                        }}>
+                        </Route>
+
                         {
                             //page route
                         }
