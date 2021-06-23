@@ -574,7 +574,6 @@ function edit_disable_header( $term, $taxonomy ) {
 
 
 
-add_action( 'rest_api_init', 'create_api_posts_meta_field' );
 
 function create_api_posts_meta_field() {
 
@@ -592,62 +591,66 @@ function get_post_meta_for_api( $object ) {
 }
 
 
-function add_admin_menu() {
-    add_menu_page(
-        __( 'React UI Settings'),
-        __( 'React UI Settings'),
-        'manage_options',
-        'ui-settings',
-        'ui_admin_page_content',
-        'dashicons-schedule',
-        10
-    );
-}
-add_action( 'admin_menu', 'add_admin_menu' );
-
-function ui_admin_page_content() {
-    ?>
-    <h1> <?php esc_html_e( 'Ui Settings', 'my-plugin-textdomain' ); ?> </h1>
-        <form method="POST" action="options.php">
-        <?php
-        settings_fields( 'ui-settings' );
-        do_settings_sections( 'ui-settings' );
-        submit_button();
-        ?>
-        </form>
-        <?php
-}
 
 
-add_action( 'admin_init', 'ui_settings_init' );
 
-function ui_settings_init() {
+add_filter( 'wp_is_application_passwords_available', '__return_true' );
 
+
+
+function add_setting_section(){
+/* Create settings section */
     add_settings_section(
-        'ui_settings_form_section',
-        __( 'General'),
-        'my_setting_section_callback_function',
-        'ui-settings'
+        'wp-react-section',                   // Section ID
+        'WP React Settings',  // Section title
+        'my_settings_section_description', // Section callback function
+        'general'                          // Settings page slug
     );
 
-		add_settings_field(
-		   'react_ui_url',
-		   __( 'Enter react ui URL here'),
-		   'react_ui_url_markup',
-		   'ui-settings',
-		   'ui_settings_form_section'
-		);
+     /* Create settings field */
+        add_settings_field(
+            'my-settings-field-id',       // Field ID
+            'WP React URI',       // Field title
+            'my_settings_field_callback', // Field callback function
+            'general',                    // Settings page slug
+            'wp-react-section'               // Section ID
+        );
+   }
 
-		register_setting( 'ui-settings', 'react_ui_url' );
+/* Settings Init */
+function my_settings_init(){
+
+
+    /* Register Settings */
+        register_setting(
+            'general',             // Options group
+            'react_ui_url',      // Option name/database
+         array(
+                 'show_in_rest' => true,
+                 'type' => 'string'
+               )
+        );
 }
 
-
-function my_setting_section_callback_function() {
-    echo '<p> </p>';
+/* Sanitize Callback Function */
+function my_settings_sanitize( $input ){
+    return isset( $input ) ? true : false;
 }
 
-function react_ui_url_markup() {
+/* Setting Section Description */
+function my_settings_section_description(){
+    echo  "<p>Enter React APP base URL (include hash symbol if using hash history) </p>" ;
+}
+
+/* Settings Field Callback */
+function my_settings_field_callback(){
     ?>
-    <input type="text" size="100" id="my_setting_field" name="react_ui_url" value="<?php echo get_option( 'react_ui_url' ); ?>">
+    <label for="droid-identification">
+
+        <input id="react_ui_url" class="regular-text" type="text"  name="react_ui_url" value="<?php echo(get_option( 'react_ui_url' )) ?>">
+    </label>
     <?php
 }
+add_action( 'admin_init', 'my_settings_init' );
+add_action( 'admin_init', 'add_setting_section' );
+add_action('rest_api_init', 'my_settings_init');
