@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Container, Grid, Label} from 'semantic-ui-react'
-import {MediaConsumer, MediaProvider, PostIntro,PostIcon} from "wp-react-lib";
+import {MediaConsumer, MediaProvider, PostConsumer, PostIcon, PostIntro, PostProvider} from "wp-react-lib";
+
 
 class ListOfPost extends React.Component {
 
@@ -45,7 +46,7 @@ const Root = (props) => {
         "data-show-post-icons": showIcons,
         parent,
         editing,
-        component,
+        component, unique
 
     } = props
 
@@ -54,7 +55,7 @@ const Root = (props) => {
         <PostProvider type={type}
                       taxonomy={taxonomy}
                       categories={categories}
-                      store={"inline_list_" + random}
+                      store={"inline_list_" + parent + "_" + unique}
                       page={1}
                       perPage={items}>
             <PostConsumer>

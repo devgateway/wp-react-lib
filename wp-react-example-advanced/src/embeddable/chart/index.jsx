@@ -1,18 +1,20 @@
 import React, {useRef, useState} from "react";
-import {Button, Container, Grid, Segment} from "semantic-ui-react";
-
+import {Button, Container, Grid, Icon, Segment} from "semantic-ui-react";
+import DataProvider from "../data/DataProvider";
 import {connect} from "react-redux";
-
+import {toBlob} from 'html-to-image';
+import {saveAs} from 'file-saver';
+import DataConsumer from "../data/DataConsumer";
 import {buildDivergingOptions, buildPieOptions} from './prevalenceBuilder'
 
 import HalfPie from "./HalfPie";
 import Bar from "./Bar";
 import Line from "./Line";
+
+import {PostContent} from "wp-react-lib";
 import PrevalenceBarDataframe from './PrevalenceBarDataFrame'
 import PolicyDataFrame from './PolicyDataFrame'
-import DataProvider from "../data/DataProvider";
-import {PostContent} from "wp-react-lib";
-import DataConsumer from "../data/DataConsumer";
+import CSVDataFrame from "./CSVDataFrame";
 
 const PieChart = (props) => {
     const {data, legends, colors, height} = props
@@ -62,24 +64,28 @@ const Chart = (props) => {
         'data-keys': keys = null,
         'data-style': style = "decimal",
         "data-decimals": decimals = "2",
-        'data-currency': currency = ""
+        'data-currency': currency = "",
+        "data-csv": csv = ""
 
     } = props
-
 
     const ref = useRef(null);
 
     function filter(node) {
-
         if (node.classList) {
             return !node.classList.contains("ignore")
         }
         return true;
     }
 
+    const exportPng = () => {
+        toBlob(ref.current, {filter, "backgroundColor": "#FFF", style: {"padding": "0px", "margin": "0px"}})
+            .then(function (blob) {
+                saveAs(blob, 'export.png');
+            });
+    }
 
     const numberFormat = {style, minimumFractionDigits: parseInt(decimals), maximumFractionDigits: parseInt(decimals)}
-
     if (currency != "") {
         numberFormat["currency"] = currency
     }
@@ -96,7 +102,7 @@ const Chart = (props) => {
     }
     let child = null
 
-    const contentHeight = (editing ? height - 120 : height - 40)
+    const contentHeight = (editing ? height - 145 : height - 40)
 
     const chartProps = {
         tickColor: decodeURIComponent(tickColor),
@@ -113,39 +119,62 @@ const Chart = (props) => {
 
 
     if (type === 'bar') {
-        const DataFrame = app == "policy" ? PolicyDataFrame : PrevalenceBarDataframe
-
+        let DataFrame
+        switch (app) {
+            case  "policy":
+                DataFrame = PolicyDataFrame
+                break
+            case  "prevalence":
+                DataFrame = PrevalenceBarDataframe
+                break
+            case  "csv":
+                DataFrame = CSVDataFrame
+                break
+        }
+        debugger
         child = <DataFrame type={"bar"} includeTotal={true} keys={keys ? keys.split(',') : []}>
-            <Bar {...chartProps}></Bar>
+                   <Bar {...chartProps}></Bar>
         </DataFrame>
     }
+
+
     if (type === 'line') {
         if (app === "policy") {
-
             child = <PolicyDataFrame type={"line"} keys={keys ? keys.split(',') : []}>
                 <Line {...chartProps}></Line>
             </PolicyDataFrame>
-        } else {
+        }
+        else  if (app === "csv") {
+            child = <CSVDataFrame type={"line"} keys={keys ? keys.split(',') : []}>
+                <Line {...chartProps}></Line>
+            </CSVDataFrame>
+        }
+        else {
             child = <Segment color={"red"}>Chart type not supported yet</Segment>
 
         }
     }
 
     if (type == 'halfPie') {
-        child =
-            <PieChart {...chartProps}></PieChart>
+        child = child = <h1>To be implemented</h1>
     }
-    if (type == 'diverging1') {
-        child = <h1>Soon</h1>
-    }
-    const dual = (dualMode === 'true')
 
+    if (type == 'diverging1') {
+        child = <h1>To be implemented</h1>
+    }
+
+    const dual = (dualMode === 'true')
 
     return (<div ref={ref}>
             <Container className={"chart container"} style={{"minHeight": height + 'px'}} fluid={true}>
-
-                <DataProvider params={JSON.parse(decodeURIComponent(params))} app={app}
-                              store={[unique, ...source.split("/")]} source={source}>
+                <Button className={"download ignore"} onClick={e => exportPng()}>
+                    Download
+                    <Icon name={"download"}></Icon>
+                </Button>
+                <DataProvider params={JSON.parse(decodeURIComponent(params))}
+                              app={app}
+                              csv={csv}
+                              store={[app, unique, ...source.split("/")]} source={source}>
 
                     {(!dual || (mode == 'chart')) && (
                         <Container style={{"height": `${contentHeight}px`}} className={"body"}

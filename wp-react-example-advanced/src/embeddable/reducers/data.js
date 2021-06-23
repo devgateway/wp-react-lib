@@ -1,6 +1,6 @@
-import * as api from '../data/api'
+import * as api from './data-api'
 import Immutable from 'immutable'
-
+import Papa from 'papaparse'
 
 const LOAD_DATA = 'LOAD_DATA'
 const LOAD_DATA_DONE = 'LOAD_DATA_DONE'
@@ -39,8 +39,18 @@ export const getCategories = () => (dispatch, getState) => {
     })
 }
 
+export const setData = ({app, csv, store, params}) => (dispatch, getState) => {
+    const filters = getState().get('data').getIn(['filters'])
+    if (filters) {
+        params = {...params, ...filters.toJS()}
+    }
 
-export const getData = ({app,source, store, params}) => (dispatch, getState) => {
+    const data = Papa.parse(csv, {header: true});
+    dispatch({type: LOAD_DATA_DONE, store, data})
+
+}
+
+export const getData = ({app, source, store, params}) => (dispatch, getState) => {
     const filters = getState().get('data').getIn(['filters'])
     if (filters) {
         params = {...params, ...filters.toJS()}
@@ -86,7 +96,7 @@ export default (state = initialState, action) => {
             return state
         case SET_FILTER: {
             const {param, value} = action
-            if (value.length==0){
+            if (value.length == 0) {
                 return state.deleteIn(['filters', param], value)
             }
             return state.setIn(['filters', param], value)

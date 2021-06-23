@@ -23,7 +23,7 @@ services:
     ports:
       - 9090:80
 
-  nginx:
+  nginx:e
     image: nginx:alpine
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro

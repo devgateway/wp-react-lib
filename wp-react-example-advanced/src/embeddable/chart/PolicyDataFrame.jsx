@@ -41,7 +41,8 @@ const BarData = ({children, data, keys}) => {
         total: 'Total Consumption'
     }
     const vals=[]
-    const chartData = data.children.map(d => {
+
+    const chartData = data&&data.children?data.children.map(d => {
         const row = new Object();
         row[d.type] = d.value;
         keys.forEach(k => {
@@ -49,7 +50,7 @@ const BarData = ({children, data, keys}) => {
             row[keyLabels[k]] = d[k]
         })
         return row;
-    });
+    }):[];
 
 
 

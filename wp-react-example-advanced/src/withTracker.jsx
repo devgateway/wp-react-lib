@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import GoogleAnalytics from "react-ga";
-import {getAnaliticUserCode} from './api/commons'
 
 
-GoogleAnalytics.initialize(getAnaliticUserCode());
-
+GoogleAnalytics.initialize(process.env.REACT_APP_GA_CODE);
 const withTracker = (WrappedComponent, options = {}) => {
+
     const trackPage = page => {
         GoogleAnalytics.set({
             page,

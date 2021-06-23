@@ -29,7 +29,19 @@ h1.type{
 
 
 @import "header";
+
+
+@import 'illicit';
+@import 'tabbed';
+@import 'myths';
 @import 'responsive';
+@import 'floating';
+@import 'featured';
+@import 'inline-list';
+@import 'charts';
+@import 'carousel';
+@import 'pagemodules';
 @import "footer";
-@import "tabbed";
-@import "carousel";
+@import "newsLetter";
+@import "showCase";
+@import "download"

@@ -2,6 +2,7 @@ export const post = (url, params, isBlob) => {
 
     return new Promise((resolve, reject) => {
         fetch(url, {
+
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
@@ -30,7 +31,7 @@ export const post = (url, params, isBlob) => {
 export const get = (url, params = {}) => {
     return new Promise((resolve, reject) => {
 
-        fetch(url)
+        fetch(url, )
             .then(
                 function (response) {
                     if (response.status !== 200) {
@@ -54,7 +55,3 @@ export const queryParams = (params) => {
 }
 
 
-
-
-
-export const getAnaliticUserCode = () => "CODE"

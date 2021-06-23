@@ -1,9 +1,9 @@
 import {Container, Flag, Menu} from "semantic-ui-react";
 import React, {useEffect, useState} from "react";
-import {MenuConsumer, MenuProvider, utils} from 'wp-react-lib';
-
+import {MenuConsumer, MenuProvider, utils} from "wp-react-lib";
 import {injectIntl} from "react-intl";
 import {withRouter} from "react-router";
+
 
 const getPath = (menu, match) => {
     let path = [];
@@ -32,7 +32,7 @@ const BreadCrumbs = withRouter(injectIntl(({menu, match, intl}) => {
         <a href={"#"}> Home </a>
         {path.map(i => !i.child_items ? <a className={i.slug == match.params.slug ? 'active' : ''}
                                            href={utils.replaceLink(i.url, intl.locale)}> {i.post_title}</a> :
-            <span>{i.post_title}  </span>)}
+            <span>{i.post_title} </span>)}
     </React.Fragment>
 
 }))
@@ -63,9 +63,12 @@ const MyMenuItems = injectIntl(withRouter(({
     return menu && <React.Fragment>
 
         {menu.items.map(i => (
-            <Menu.Item className={`divided ${i.child_items ? 'has-child-items' : ''} ${selected && selected.ID == i.ID ? 'selected' : ''}  ${active == i.slug ? "active" : ""}`}>
-                {withIcons && <div className={"mark"}></div>} {i.child_items ?
-                <span onMouseOver={e => onSetSelected(i)}>{i.title}</span> :
+            <Menu.Item
+                className={`divided ${i.child_items ? 'has-child-items' : ''} 
+                 ${selected && selected.ID == i.ID ? 'selected' : ''}  ${active == i.slug ? "active" : ""}`}
+                >
+
+                {withIcons && <div  className={"mark"}></div>} {i.child_items ? <span onMouseOver={e => onSetSelected(i)}>{i.title}</span> :
                 <a onMouseOver={e => onSetSelected(i)} href={utils.replaceLink(i.url, locale)}>{i.title}</a>}
 
             </Menu.Item>))}
@@ -81,13 +84,13 @@ const Header = ({intl, match}) => {
     return <React.Fragment>
 
 
-        <MenuProvider slug={"main"} locale={intl.locale}>
+        <MenuProvider slug={"main"}>
             <Container fluid={true} className="header">
                 <Container fluid={true} className={"background"}>
 
                     <Menu className={"branding"} text>
                         <Menu.Item>
-                            <a href="/"><img className="brand logo" size="large" src='logo.png' width={"100px"}/></a>
+                            <a href="/"><img className="brand logo" size="large" src='/logo_full.png'/></a>
                         </Menu.Item>
 
                         <Menu.Item className={"divider"}>
@@ -96,8 +99,8 @@ const Header = ({intl, match}) => {
 
                         <Menu.Item fitted>
 
-                            <Flag name="ar"/>
-                            WP React
+                            <Flag name="za"/>
+                            South Africa
                         </Menu.Item>
 
                         <Menu.Menu className={"pages"}>
@@ -124,7 +127,12 @@ const Header = ({intl, match}) => {
             </Container>
 
 
+            <Container className={"url breadcrumbs"}>
+                <MenuConsumer>
+                    <BreadCrumbs></BreadCrumbs>
+                </MenuConsumer>
 
+            </Container>
         </MenuProvider>
     </React.Fragment>
 

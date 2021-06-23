@@ -8,7 +8,7 @@ import {updateIntl} from 'react-intl-redux'
 import {injectIntl, IntlProvider} from "react-intl";
 import smoothscroll from 'smoothscroll-polyfill';
 import ResponsiveContainer from './layout'
-import {getComponentByNameIgnoreCase} from "embeddable";
+import {getComponentByNameIgnoreCase} from "./embeddable";
 import {
     AppContextProvider,
     Category,
@@ -109,11 +109,10 @@ class IntlRoutes extends Component {
 
                             return (
                                 <ResponsiveContainer>
-                                    <PostProvider store={"preview"} perPage={1} view={preview} previewNonce={previewNonce} previewId={props.match.params.id}>
+                                    <PostProvider store={"preview"} perPage={1} view={preview}
+                                                  previewNonce={previewNonce} previewId={props.match.params.id}>
                                         <PostConsumer>
-                                            <Post showIntro={true} showContent={false}/>
-                                            <hr/>
-                                            <Post showIntro={false} showContent={true}/>
+                                            <Post preview={true} showIntro={true}/>
                                         </PostConsumer>
 
                                     </PostProvider>
@@ -127,9 +126,10 @@ class IntlRoutes extends Component {
                             const previewNonce = searchParams.get("_wpnonce")
                             return (
                                 <ResponsiveContainer>
-                                    <PageProvider store={"preview"} perPage={1} view={preview} previewNonce={previewNonce} previewId={props.match.params.id}>
+                                    <PageProvider store={"preview"} perPage={1} view={preview}
+                                                 previewNonce={previewNonce} previewId={props.match.params.id}>
                                         <PageConsumer>
-                                            <Page/>
+                                            <Page preview={true}/>
                                         </PageConsumer>
 
                                     </PageProvider>

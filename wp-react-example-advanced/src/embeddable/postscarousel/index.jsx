@@ -1,4 +1,4 @@
-import {PostConsumer, PostContent, PostIntro, PostProvider} from "wp-react-lib";
+import {PostConsumer, PostIntro, PostProvider} from "wp-react-lib";
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import React, {useState} from "react";
@@ -30,7 +30,7 @@ const _Carousel = (props) => {
         <CarouselProvider totalSlides={posts.length}>
             <Slider>
                 {posts.map(p => <Slide index={i++}>
-                    <PostContent post={p}/>
+                    <PostIntro post={p}/>
                 </Slide>)}
             </Slider>
             <DotGroup/>
@@ -45,10 +45,11 @@ const PostCarousel = (props) => {
         "data-taxonomy": taxonomy,
         "data-categories": categories,
         "data-items": items,
-        editing, parent
+        editing, parent, unique
     } = props
     return <Container className={`tcdi post carousel ${editing ? 'editing' : ''}`} fluid={true}>
-        <PostProvider type={type} taxonomy={taxonomy} categories={categories} store={"carousel" + random} page={1}
+        <PostProvider type={type} taxonomy={taxonomy} categories={categories}
+                      store={"carousel_" + parent + "_" + unique} page={1}
                       perPage={items}>
             <PostConsumer>
                 <Carousel></Carousel>

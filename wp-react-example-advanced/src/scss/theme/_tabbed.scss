@@ -1,5 +1,6 @@
 
 .tcdi.tabbed.posts.container {
+  margin: 0px;
 
   min-height: 500px;
   padding: 0px 20px;
@@ -20,8 +21,10 @@
   }
 }
 
+
 .ui.grid.tabbed.posts {
   background-color: transparent !important;
+
   .row {
     padding: 0;
     margin: 0;
@@ -38,7 +41,7 @@
       width: 100%;
       padding: 0px;
       margin: 0px;
-      color: #FFF ;
+      color: #FFF;
       text-align: left;
 
       .label {
@@ -48,8 +51,8 @@
       }
     }
 
-    .one.button{
-      width: auto!important;
+    .one.button {
+      width: auto !important;
 
     }
   }
@@ -84,7 +87,7 @@
   .active {
     button {
       color: #FFF;
-      background-color: $health-color ;
+      background-color: $health-color;
     }
   }
 }
@@ -107,6 +110,7 @@
       padding: 0px;
 
     }
+
     &:last-child {
       &:after {
         content: none;
@@ -123,6 +127,7 @@
       padding: 0px;
 
     }
+
     color: $green !important;
     font-weight: 700;
     padding-left: $base-unit;
@@ -155,4 +160,12 @@
   }
 
 
+}
+
+
+.container.tcdi.tabbed.posts.editing {
+
+  .button {
+    margin-top: 20px;
+  }
 }
