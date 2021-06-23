@@ -26,4 +26,6 @@ function add_custom_block_categories( $categories, $post ) {
 
 add_filter( 'block_categories', 'add_custom_block_categories', 10, 2);
 
+
+
 include 'blocks/index.php';

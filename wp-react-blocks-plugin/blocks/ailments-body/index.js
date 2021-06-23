@@ -9,6 +9,7 @@ import {
 } from '@wordpress/block-editor';
 import {Panel, PanelBody, PanelRow, ResizableBox, TextControl} from '@wordpress/components';
 import {Generic} from '../icons/index.js'
+import {BlockEditWithFilters} from "../commons";
 
 const EditComponent = (props) => {
 
@@ -23,12 +24,12 @@ const EditComponent = (props) => {
         },
     } = props;
 
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     const onChangeAlignment = newAlignment => {
         props.setAttributes({alignment: newAlignment});
     };
     let divClass;
-    let divStyles = {"text-align": alignment, width:"100%", height:height+"px"};
+    let divStyles = {"text-align": alignment, width: "100%", height: height + "px"};
     if (backgroundColor != undefined) {
         if (backgroundColor.class != undefined) {
             divClass = backgroundColor.class;
@@ -95,7 +96,7 @@ const EditComponent = (props) => {
                     <div className={divClass} style={divStyles}>
 
                         <iframe scrolling={"no"} style={divStyles}
-                                src={process.env.EMBEDDABLE_URI + "/body"}/>
+                                src={props.src}/>
                     </div>
                 </ResizableBox>
             </div>
@@ -103,7 +104,6 @@ const EditComponent = (props) => {
         </div>
     );
 }
-
 const SaveComponent = (props) => {
     const {setAttributes} = props;
     const {
@@ -123,13 +123,18 @@ const SaveComponent = (props) => {
 
     );
 }
-registerBlockType(process.env.BLOCKS_NS+'/ailments', {
+
+class EditWithSettings extends BlockEditWithFilters {
+    render() {
+        return <EditComponent src={this.state.react_ui_url + "/en/embeddable/body?"} {...this.props}></EditComponent>
+    }
+}
+
+
+registerBlockType(process.env.BLOCKS_NS + '/ailments', {
     title: __('Ailments Body'),
-
     icon: Generic,
-
     category: process.env.BLOCKS_CATEGORY,
-
     attributes: {
         width: {
             type: 'number',
@@ -144,6 +149,6 @@ registerBlockType(process.env.BLOCKS_NS+'/ailments', {
         },
 
     },
-    edit: withColors('backgroundColor', {textColor: 'color'})(EditComponent),
+    edit: withColors('backgroundColor', {textColor: 'color'})(EditWithSettings),
     save: SaveComponent,
 });

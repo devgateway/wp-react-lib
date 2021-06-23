@@ -1,38 +1,19 @@
-import {Component} from '@wordpress/element'
-import {InspectorControls, PanelColorSettings, useBlockProps} from '@wordpress/block-editor';
-import {
-    CheckboxControl,
-    FormToggle,
-    Panel,
-    PanelBody,
-    PanelRow,
-    RangeControl,
-    ResizableBox,
-    SelectControl
-} from '@wordpress/components';
+import {InspectorControls, useBlockProps} from '@wordpress/block-editor';
+
+
+import {FormToggle, Panel, PanelBody, PanelRow, RangeControl, ResizableBox} from '@wordpress/components';
 import {__} from '@wordpress/i18n';
 
-import {BlockEditWithFilters,Filter} from '../commons/index.js'
-
-
-const MyDropdown = (selected, options, onChange) => (
-    <SelectControl
-        label={__('Select some users:')}
-        value={[selected]} // e.g: value = [ 'a', 'c' ]
-        onChange={(value) => {
-            onChange({value})
-        }}
-        options={options}
-    />
-);
+import {BlockEditWithFilters} from '../commons/index.js'
+import {SizeConfig} from '../commons/index'
 
 
 class BlockEdit extends BlockEditWithFilters {
 
     constructor(props) {
         super(props);
-
     }
+
     render() {
         const {
             className, isSelected,
@@ -49,8 +30,6 @@ class BlockEdit extends BlockEditWithFilters {
                 useLabels
             },
         } = this.props;
-
-
         const queryString = `editing=true&data-type=${type}&data-taxonomy=${taxonomy}&data-categories=${categories}&data-items=${count}&data-height=${height}&data-theme=${theme}&data-show-icons=${showIcons}&data-show-labels=${useLabels}`
         const divStyles = {height: height + 'px', width: '100%'}
         return (
@@ -65,7 +44,6 @@ class BlockEdit extends BlockEditWithFilters {
                                     checked={theme == 'light'}
                                     onChange={() => setAttributes({theme: theme == 'light' ? 'buttons' : 'light'})}
                                 />
-
                             </PanelRow>
                             <PanelRow>
                                 <p>{__("Use Labels")}</p>
@@ -92,13 +70,14 @@ class BlockEdit extends BlockEditWithFilters {
                                     max={10}/>
                             </PanelRow>
                         </PanelBody>
+                        <SizeConfig initialOpen={false} setAttributes={setAttributes} height={height}></SizeConfig>
                         {this.renderFilters()}
                     </Panel>
                 </InspectorControls>
 
                 <ResizableBox
                     size={{height}}
-                    style={{"margin": "auto",width: "100%"}}
+                    style={{"margin": "auto", width: "100%"}}
                     minHeight="200"
                     minWidth="100"
                     enable={{
@@ -114,17 +93,16 @@ class BlockEdit extends BlockEditWithFilters {
                     onResizeStop={(event, direction, elt, delta) => {
                         setAttributes({
                             height: parseInt(height + delta.height, 10),
-
                         });
                         toggleSelection(true);
                     }}
                     onResizeStart={() => {
                         toggleSelection(false);
-                    }}
-                >
-                <div style={divStyles}>
-                        <iframe  style={divStyles} scrolling={"no"} src={process.env.EMBEDDABLE_URI + "/tabbedposts?" + queryString}/>
-                </div>
+                    }}>
+                    <div style={divStyles}>
+                        <iframe style={divStyles} scrolling={"no"}
+                                src={this.state.react_ui_url + "/en/embeddable/tabbedposts?" + queryString}/>
+                    </div>
                 </ResizableBox>
             </div>
         );
@@ -134,9 +112,11 @@ class BlockEdit extends BlockEditWithFilters {
 
 
 const Edit = (props) => {
-    const blockProps = useBlockProps();
-    return <div {...blockProps}><BlockEdit {...props}/></div>;
-
+    const blockProps = useBlockProps({className: 'wp-react-component'});
+    return <div {...blockProps}>
+        <BlockEdit {...props}/>
+    </div>;
 }
+
 export default Edit;
 

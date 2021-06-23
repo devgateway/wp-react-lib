@@ -24,7 +24,7 @@ const EditComponent = (props) => {
         },
     } = props;
 
-    const blockProps = useBlockProps();
+     const blockProps = useBlockProps({className: 'wp-react-component'});
     const onChangeAlignment = newAlignment => {
         props.setAttributes({alignment: newAlignment});
     };

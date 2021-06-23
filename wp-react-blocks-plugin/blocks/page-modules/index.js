@@ -1,21 +1,20 @@
 import {__} from '@wordpress/i18n';
 import {registerBlockType} from '@wordpress/blocks';
-import {useBlockProps, withColors, InspectorControls} from '@wordpress/block-editor';
+import {InspectorControls, useBlockProps} from '@wordpress/block-editor';
 import {Generic} from '../icons/index.js'
-import {ResizableBox, Panel,TextControl,
-    PanelBody,
-    PanelRow} from '@wordpress/components';
+import {Panel, PanelBody, PanelRow, ResizableBox, TextControl} from '@wordpress/components';
+import {BlockEditWithFilters} from "../commons";
 
 const EditComponent = (props) => {
-    const {attributes: {width, height,navLabel, topTopLabel}, toggleSelection, setAttributes} = props;
+    const {attributes: {width, height, navLabel, topTopLabel}, toggleSelection, setAttributes} = props;
 
     const urlParams = new URLSearchParams(window.location.search);
     const parent = urlParams.get('post');
 
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     const queryString = `editing=true&parent=${parent}&data-nav-label=${navLabel}&data-to-top-label=${topTopLabel}`;
     const divClass = ""
-    const divStyles = {height: height + 'px', width:'100%'}
+    const divStyles = {height: height + 'px', width: '100%'}
 
     return (
         <div>
@@ -45,7 +44,7 @@ const EditComponent = (props) => {
             </InspectorControls>
             <ResizableBox
                 size={{height}}
-                style={{"margin": "auto",width:"100%"}}
+                style={{"margin": "auto", width: "100%"}}
                 minHeight="200"
                 minWidth="500"
                 enable={{
@@ -70,12 +69,12 @@ const EditComponent = (props) => {
                 }}
             >
 
-            <div  {...blockProps}>
+                <div  {...blockProps}>
                     <iframe
-                            style={{...divStyles}} className={divClass}
-                            scrolling={"no"}
-                            src={process.env.EMBEDDABLE_URI + "/pagemodules?" + queryString}/>
-                            </div>
+                        style={{...divStyles}} className={divClass}
+                        scrolling={"no"}
+                        src={props.src + queryString}/>
+                </div>
 
 
             </ResizableBox>
@@ -84,12 +83,20 @@ const EditComponent = (props) => {
 }
 const SaveComponent = (props) => {
     const {navLabel, topTopLabel} = props.attributes;
-    return (<div  className={"tcdi-component"} data-component={"pageModules"} data-nav-label={navLabel} data-to-top-label={topTopLabel}>
-              </div>
-        );
+    return (<div className={"tcdi-component"} data-component={"pageModules"} data-nav-label={navLabel}
+                 data-to-top-label={topTopLabel}>
+        </div>
+    );
 }
 
-registerBlockType(process.env.BLOCKS_NS+'/page-modules',
+class EditWithSettings extends BlockEditWithFilters {
+    render() {
+        return <EditComponent
+            src={this.state.react_ui_url + "/en/embeddable/pagemodules?"} {...this.props}></EditComponent>
+    }
+}
+
+registerBlockType(process.env.BLOCKS_NS + '/page-modules',
     {
         title: __('Page Modules'),
         icon: Generic,
@@ -107,17 +114,17 @@ registerBlockType(process.env.BLOCKS_NS+'/page-modules',
                 type: "number",
                 default: 800
             },
-            topTopLabel:{
-              type: 'String',
-              default: "TO THE TOP",
+            topTopLabel: {
+                type: 'String',
+                default: "TO THE TOP",
             },
-            navLabel:{
+            navLabel: {
                 type: 'String',
                 default: "Sections",
             }
         }
         ,
-        edit: withColors('backgroundColor', {textColor: 'color'})(EditComponent),
+        edit: EditWithSettings,
         save: SaveComponent,
     }
 )

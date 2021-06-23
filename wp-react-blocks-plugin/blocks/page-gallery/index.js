@@ -3,6 +3,7 @@ import {registerBlockType} from '@wordpress/blocks';
 import {useBlockProps, withColors} from '@wordpress/block-editor';
 import {ResizableBox} from '@wordpress/components';
 import Generic from "../icons";
+import {BlockEditWithFilters} from "../commons";
 
 const EditComponent = (props) => {
     const {attributes: {height}, toggleSelection, setAttributes} = props;
@@ -10,7 +11,7 @@ const EditComponent = (props) => {
     const urlParams = new URLSearchParams(window.location.search);
     const parent = urlParams.get('post');
 
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     const queryString = `editing=true&parent=${parent}`;
     const divClass = ""
     const divStyles = {height: height + 'px', width: '100%'}
@@ -48,7 +49,7 @@ const EditComponent = (props) => {
                     <iframe
                         style={{...divStyles}} className={divClass}
                         scrolling={"no"}
-                        src={process.env.EMBEDDABLE_URI + "/pagegallery?" + queryString}/>
+                        src={props.src + queryString}/>
 
 
                 </div>
@@ -68,7 +69,15 @@ const SaveComponent = (props) => {
     );
 }
 
-registerBlockType(process.env.BLOCKS_NS+'/page-gallery',
+
+class EditWithSettings extends BlockEditWithFilters {
+    render() {
+        return <EditComponent
+            src={this.state.react_ui_url + "/en/embeddable/pagegallery?"} {...this.props}></EditComponent>
+    }
+}
+
+registerBlockType(process.env.BLOCKS_NS + '/page-gallery',
     {
         title: __('Child Pages Gallery'),
         icon: Generic,
@@ -85,7 +94,7 @@ registerBlockType(process.env.BLOCKS_NS+'/page-gallery',
 
         }
         ,
-        edit: withColors('backgroundColor', {textColor: 'color'})(EditComponent),
+        edit: EditWithSettings,
         save: SaveComponent,
     }
 )

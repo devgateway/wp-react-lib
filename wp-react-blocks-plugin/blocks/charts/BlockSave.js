@@ -30,7 +30,8 @@ const SaveComponent = (props) => {
             formatStyle,
             decimalPoints,
             currency,
-            yearFilter
+            yearFilter,
+            csv
         }
     } = props;
     const blockProps = useBlockProps.save({
@@ -51,43 +52,43 @@ const SaveComponent = (props) => {
         params["year"]=year
     }
 
+        return (
+            <div className={"tcdi-component"}
+                 data-component={"chart"}
+                 data-height={height}
+                 data-chart-type={type}
+                 data-source={source}
+                 data-color-by={colorBy}
+                 data-color-scheme={scheme}
+                 data-scheme={scheme}
+                 data-group-mode={groupMode}
+                 data-legends-left={leftLegend}
+                 data-dualMode={dualMode}
+                 data-legends-bottom={bottomLegend}
+                 data-toggle-info-label={toggleInfoLabel}
+                 data-toggle-chart-label={toggleChartLabel}
+                 data-chart-source-label={dataSourceLabel}
+                 data-chart-data-source={dataSource}
+                 data-legends-width={legendsWidth}
+                 data-show-legends={showLegends}
+                 data-legend-position={legendPosition}
+                 data-app={app}
+                 data-tick-rotation={tickRotation}
+                 data-tick-color={tickColor}
+                 data-keys={keys.join(',')}
+                 data-style={formatStyle}
+                 data-decimals={decimalPoints}
+                 data-currency={currency}
+                 data-csv={csv}
+                 data-params={encodeURIComponent(JSON.stringify(params))}>
+                 <div className={"csv"}  dangerouslySetInnerHTML={{ __html: `<!-- ${csv} -->` }}>
 
-    return (
-        <div className={"tcdi-component"}
-             data-component={"chart"}
-             data-height={height}
-             data-chart-type={type}
-             data-source={source}
-             data-color-by={colorBy}
-             data-color-scheme={scheme}
-             data-scheme={scheme}
-             data-group-mode={groupMode}
-             data-legends-left={leftLegend}
-             data-dualMode={dualMode}
-             data-legends-bottom={bottomLegend}
-             data-toggle-info-label={toggleInfoLabel}
-             data-toggle-chart-label={toggleChartLabel}
-
-             data-chart-source-label={dataSourceLabel}
-             data-chart-data-source={dataSource}
-
-             data-legends-width={legendsWidth}
-             data-show-legends={showLegends}
-             data-legend-position={legendPosition}
-             data-app={app}
-
-             data-tick-rotation={tickRotation}
-             data-tick-color={tickColor}
-             data-keys={keys.join(',')}
-             data-style={formatStyle}
-             data-decimals={decimalPoints}
-             data-currency={currency}
-             data-params={encodeURIComponent(JSON.stringify(params))}>
-                            <InnerBlocks.Content/>
+                 </div>
+                 <InnerBlocks.Content/>
             </div>
 
 
-    );
+        );
 }
 
 

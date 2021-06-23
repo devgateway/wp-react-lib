@@ -1,13 +1,5 @@
 import {InspectorControls, PanelColorSettings, useBlockProps} from '@wordpress/block-editor';
-import {
-    TextControl,
-    Panel,
-    PanelBody,
-    PanelRow,
-    RangeControl,
-    ResizableBox,
-    SelectControl
-} from '@wordpress/components';
+import {Panel, PanelBody, PanelRow, RangeControl, ResizableBox, TextControl} from '@wordpress/components';
 import {__} from '@wordpress/i18n';
 
 import {BlockEditWithFilters} from '../commons'
@@ -59,29 +51,29 @@ class BlockEdit extends BlockEditWithFilters {
                     <Panel header={__("Tabs Configuration")}>
                         <PanelBody title={__("Items & Labels")}>
                             <PanelRow>
-                                    <RangeControl
-                                        label="Items"
-                                        value={count}
-                                        onChange={(count) => setAttributes({count})}
-                                        min={2}
-                                        max={10}
-                                    />
+                                <RangeControl
+                                    label="Items"
+                                    value={count}
+                                    onChange={(count) => setAttributes({count})}
+                                    min={2}
+                                    max={10}
+                                />
 
                             </PanelRow>
                             <PanelRow>
-                                    <TextControl
-                                        label={__('Read More Label')}
-                                        value={readMoreLabel}
-                                        onChange={(readMoreLabel) => setAttributes({readMoreLabel})}
-                                    />
+                                <TextControl
+                                    label={__('Read More Label')}
+                                    value={readMoreLabel}
+                                    onChange={(readMoreLabel) => setAttributes({readMoreLabel})}
+                                />
 
                             </PanelRow>
 
                         </PanelBody>
 
-                    {this.renderFilters()}
+                        {this.renderFilters()}
 
-                        <PanelBody  title={__("Colors")}>
+                        <PanelBody title={__("Colors")}>
                             {new Array(count).fill(1).map((v, i) =>
                                 <PanelRow>
                                     <PanelColorSettings
@@ -132,7 +124,7 @@ class BlockEdit extends BlockEditWithFilters {
                 >
                     <div style={divStyles}>
                         {<iframe style={divStyles} scrolling={"no"}
-                                 src={process.env.EMBEDDABLE_URI + "/featuredtabs?" + queryString}/>}
+                                 src={this.state.react_ui_url + "/en/embeddable/featuredtabs?" + queryString}/>}
 
                     </div>
                 </ResizableBox>
@@ -144,7 +136,7 @@ class BlockEdit extends BlockEditWithFilters {
 
 
 const Edit = (props) => {
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     return <div {...blockProps}><BlockEdit {...props}/></div>;
 
 }

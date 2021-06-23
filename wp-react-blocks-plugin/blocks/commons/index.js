@@ -1,9 +1,10 @@
 import {__} from '@wordpress/i18n';
-import {PanelBody, PanelRow, TextControl,SelectControl,CheckboxControl} from '@wordpress/components';
+import {CheckboxControl, PanelBody, PanelRow, SelectControl, TextControl} from '@wordpress/components';
 import {Component} from '@wordpress/element'
+import apiFetch from '@wordpress/api-fetch';
 
 
-export const SizeConfig = ({height, setAttributes ,initialOpen}) => {
+export const SizeConfig = ({height, setAttributes, initialOpen}) => {
     return (<PanelBody initialOpen={initialOpen} title={__("Size")}>
         <PanelRow>
             <TextControl
@@ -17,8 +18,28 @@ export const SizeConfig = ({height, setAttributes ,initialOpen}) => {
 
 }
 
+export class BaseBlockEdit extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            react_ui_url: ''
+        }
+    }
 
-export class BlockEditWithFilters extends Component {
+    componentDidMount() {
+        apiFetch({path: '/wp/v2/settings'}).then((data) => {
+            this.setState({
+                react_ui_url: data["react_ui_url"],
+                site_language: data["site_language"],
+                current_language: new URLSearchParams(document.location.search).get("edit_lang")
+            });
+        });
+
+    }
+}
+
+
+export class BlockEditWithFilters extends BaseBlockEdit {
 
     constructor(props) {
         super(props);
@@ -57,6 +78,7 @@ export class BlockEditWithFilters extends Component {
     }
 
     componentDidMount() {
+        super.componentDidMount()
         this.getTypes();
         this.getTaxonomies()
 
@@ -117,12 +139,11 @@ export class BlockEditWithFilters extends Component {
             path: '/wp/v2/' + taxonomy + '?per_page=100',
         }).then(data => {
 
-            this.setState({taxonomyValues: data,});
+            this.setState({taxonomyValues: data});
         });
     }
 
     getTaxonomies() {
-
 
         wp.apiFetch({
             path: '/wp/v2/taxonomies?per_page=100',
@@ -208,7 +229,7 @@ export class BlockEditWithFilters extends Component {
 
             }
         } = this.props
-        return( <PanelBody title={__("Filter")}>
+        return (<PanelBody title={__("Filter")}>
             <PanelRow>
                 <SelectControl
                     label={__("Post Type")} options={this.typeOptions()}

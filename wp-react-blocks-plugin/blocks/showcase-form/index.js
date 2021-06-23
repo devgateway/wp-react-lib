@@ -9,9 +9,12 @@ import {
 } from '@wordpress/block-editor';
 import {Panel, PanelBody, PanelRow, TextControl} from '@wordpress/components';
 import Generic from "../icons";
+import {BlockEditWithFilters} from "../commons";
+
 
 const EditComponent = (props) => {
     const {
+        src,
         backgroundColor,
         setBackgroundColor,
         toggleSelection,
@@ -26,14 +29,13 @@ const EditComponent = (props) => {
             resetLabel,
             successMessage,
             failureMessage,
-
             width,
             height,
             alignment
         },
     } = props;
 
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: 'wp-react-component'});
 
     const onChangeAlignment = newAlignment => {
         props.setAttributes({alignment: newAlignment});
@@ -151,7 +153,7 @@ const EditComponent = (props) => {
             <div {...blockProps} >
                 <div className={divClass} style={{...divStyles, width, height}}>
                     <iframe scrolling={"no"} style={{width, height}}
-                            src={process.env.EMBEDDABLE_URI + "/showcase?" + queryString}/>
+                            src={src + queryString}/>
                 </div>
 
             </div>
@@ -159,7 +161,6 @@ const EditComponent = (props) => {
         </div>
     );
 }
-
 const SaveComponent = (props) => {
     const {setAttributes} = props;
     const {
@@ -183,8 +184,13 @@ const SaveComponent = (props) => {
     );
 }
 
+class EditWithSettings extends BlockEditWithFilters {
+    render() {
+        return <EditComponent src={this.state.react_ui_url + "/en/embeddable/showcaseForm?"} {...this.props}></EditComponent>
+    }
+}
 
-registerBlockType(process.env.BLOCKS_NS+'/showcase',
+registerBlockType(process.env.BLOCKS_NS + '/showcase',
     {
         title: __('Showcase Form'),
         icon: Generic,
@@ -219,7 +225,7 @@ registerBlockType(process.env.BLOCKS_NS+'/showcase',
 
         }
         ,
-        edit: withColors('backgroundColor', {textColor: 'color'})(EditComponent),
+        edit: withColors('backgroundColor', {textColor: 'color'})(EditWithSettings),
         save: SaveComponent,
     }
 )

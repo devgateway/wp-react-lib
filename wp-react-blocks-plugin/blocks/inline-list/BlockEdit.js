@@ -4,7 +4,6 @@ import {__} from '@wordpress/i18n';
 import SizeConfig, {BlockEditWithFilters} from "../commons";
 
 class BlockEdit extends BlockEditWithFilters {
-
     constructor(props) {
         super(props);
 
@@ -92,8 +91,8 @@ class BlockEdit extends BlockEditWithFilters {
                 >
 
                     <div style={divStyles}>
-                        <iframe style={divStyles} scrolling={"no"} src={process.env.EMBEDDABLE_URI + "/inlinelist?" + queryString}/>
-
+                        <iframe style={divStyles} scrolling={"no"}
+                                src={this.state.react_ui_url + "/en/embeddable/inlinelist?" + queryString}/>
                     </div>
                 </ResizableBox>
             </div>
@@ -104,7 +103,7 @@ class BlockEdit extends BlockEditWithFilters {
 
 
 const Edit = (props) => {
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     return <div {...blockProps}><BlockEdit {...props}/></div>;
 
 }

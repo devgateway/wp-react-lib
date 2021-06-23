@@ -1,23 +1,9 @@
-import {Component} from '@wordpress/element'
 import {InspectorControls, useBlockProps} from '@wordpress/block-editor';
-import {Panel, PanelBody, PanelRow, SelectControl,TextControl} from '@wordpress/components';
+import {Panel, PanelBody, PanelRow, SelectControl, TextControl} from '@wordpress/components';
 import {__} from '@wordpress/i18n';
+import {BaseBlockEdit} from '../commons/index'
 
-
-class BlockEdit extends Component {
-
-
-    constructor(props) {
-        super(props);
-
-
-    }
-
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-
-    }
-
+class BlockEdit extends BaseBlockEdit {
 
     render() {
         const {
@@ -29,10 +15,9 @@ class BlockEdit extends Component {
             }
         } = this.props;
 
-
         const queryString = `data-type=${type}&data-param=${param}&data-placeholder=${placeHolder}&editing=true`
         const divStyles = {}
-
+        console.log("test")
         return ([isSelected && (<InspectorControls>
                 <Panel header={__("Chart Configuration")}>
                     <PanelBody>
@@ -84,11 +69,9 @@ class BlockEdit extends Component {
             </InspectorControls>),
 
                 (<div>
-
-                        <iframe id={"id_description_iframe"} onLoad={e=>this.iframeLoaded()} scrolling={"no"} style={divStyles}
-                                src={process.env.EMBEDDABLE_URI + "/filter?" + queryString}/>
-
-                    </div>
+                    <iframe id={"id_description_iframe"} onLoad={e => this.iframeLoaded()} scrolling={"no"}
+                        style={divStyles} src={this.state.react_ui_url + "/en/embeddable/filter?" + queryString}/>
+                </div>
 
                 )]
         );
@@ -99,8 +82,7 @@ class BlockEdit extends Component {
 
 const Edit = (props) => {
 
-    const blockProps = useBlockProps();
-
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     return <div {...blockProps}><BlockEdit {...props}/></div>;
 
 

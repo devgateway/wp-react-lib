@@ -1,7 +1,5 @@
-import {Component} from '@wordpress/element'
 import {InspectorControls, PanelColorSettings, useBlockProps} from '@wordpress/block-editor';
 import {
-    __experimentalNumberControl as NumberControl,
     AnglePickerControl,
     Button,
     ButtonGroup,
@@ -18,11 +16,12 @@ import {
 import {InnerBlocks} from '@wordpress/editor'; // or wp.editor
 import {__} from '@wordpress/i18n';
 import {Button as Btn, Grid} from 'semantic-ui-react'
-import {SizeConfig} from '../commons/index'
+import {BaseBlockEdit, SizeConfig} from '../commons/index'
 import PrevalenceSourceConfig from './PrevalenceSourceConfig'
 import PolicySourceConfig from "./PolicySourceConfig";
+import CSVSourceConfig from "./CSVSourceConfig";
 
-class BlockEdit extends Component {
+class BlockEdit extends BaseBlockEdit {
 
 
     constructor(props) {
@@ -60,37 +59,6 @@ class BlockEdit extends Component {
 
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const {
-            setAttributes,
-            attributes: {},
-        } = this.props;
-
-        if (prevProps.attributes) {
-        }
-
-    }
-
-    componentDidMount() {
-        const {
-            setAttributes,
-            isSelected,
-            attributes: {
-                height,
-                type,
-                source,
-                bottom,
-                left,
-                scheme,
-                colorBy
-            }
-        } = this.props;
-
-    }
-
-    onSelect() {
-
-    }
 
     render() {
         const {
@@ -107,6 +75,7 @@ class BlockEdit extends Component {
                 prevalenceLevel2,
                 prevalenceLevel3,
                 policyLevel1,
+                csv,
                 mode,
                 dualMode,
                 toggleInfoLabel,
@@ -131,13 +100,13 @@ class BlockEdit extends Component {
         const levels = app == 'prevalence' ? [prevalenceLevel1, prevalenceLevel2, prevalenceLevel3] : [policyLevel1];
         const source = levels.filter(l => l != 'none' && l != null).join('/')
 
-        let params={}
-        if (yearFilter!=null&&yearFilter.trim()!=="" && app==='policy'){
-            const year=yearFilter.split(",").map(d=>parseInt(d))
-            params["year"]=year
+        let params = {}
+        if (yearFilter != null && yearFilter.trim() !== "" && app === 'policy') {
+            const year = yearFilter.split(",").map(d => parseInt(d))
+            params["year"] = year
         }
 
-        const queryString = `data-style=${formatStyle}&data-decimals=${decimalPoints}&data-currency=${currency}&data-params=${encodeURIComponent(JSON.stringify(params))}${tickColor!=null?`&data-tick-color=${tickColor}`:""}&data-tick-rotation=${tickRotation}&data-keys=${keys.join(',')}&data-app=${app}&data-height=${height}&data-chart-type=${type}&data-source=${source}&data-color-by=${colorBy}&data-color-scheme=${scheme}&data-group-mode=${groupMode}&data-legends-left=${leftLegend}&data-legends-bottom=${bottomLegend}&data-dualmode=${dualMode}&editing=true&data-legend-position=${legendPosition}&data-edit-mode=${mode}&data-legends-width=${legendsWidth}&data-show-legends=${showLegends}&data-toggle-info-label=${toggleInfoLabel}&data-toggle-chart-label=${toggleChartLabel}&data-chart-source-label=${dataSourceLabel}&data-chart-data-source=${dataSource}`
+        const queryString = `data-style=${formatStyle}&data-decimals=${decimalPoints}&data-currency=${currency}&data-params=${encodeURIComponent(JSON.stringify(params))}${tickColor != null ? `&data-tick-color=${tickColor}` : ""}&data-tick-rotation=${tickRotation}&data-keys=${keys.join(',')}&data-app=${app}&data-height=${height}&data-chart-type=${type}&data-source=${source}&data-color-by=${colorBy}&data-color-scheme=${scheme}&data-group-mode=${groupMode}&data-legends-left=${leftLegend}&data-legends-bottom=${bottomLegend}&data-dualmode=${dualMode}&editing=true&data-legend-position=${legendPosition}&data-edit-mode=${mode}&data-legends-width=${legendsWidth}&data-show-legends=${showLegends}&data-toggle-info-label=${toggleInfoLabel}&data-toggle-chart-label=${toggleChartLabel}&data-chart-source-label=${dataSourceLabel}&data-chart-data-source=${dataSource}&data-csv=${encodeURIComponent(csv)}`
         const divStyles = {height: height - 85 + 'px', width: '100%'}
         return ([isSelected && (
                 <InspectorControls>
@@ -188,7 +157,8 @@ class BlockEdit extends Component {
                                     }}
                                     options={[
                                         {label: 'Prevalence', value: 'prevalence'},
-                                        {label: 'Policy', value: 'policy'}
+                                        {label: 'Policy', value: 'policy'},
+                                        {label: 'CSV', value: 'csv'}
                                     ]}
                                 />
                             </PanelRow>
@@ -210,6 +180,12 @@ class BlockEdit extends Component {
                             policyLevel1={policyLevel1}>
                         </PolicySourceConfig>}
 
+                        {app == 'csv' &&
+                        <CSVSourceConfig
+                            setAttributes={setAttributes}
+                            csv={csv}>
+                        </CSVSourceConfig>}
+
 
                         <PanelBody initialOpen={false} title={__("Chart Type")}>
                             <PanelRow>
@@ -221,7 +197,7 @@ class BlockEdit extends Component {
                                     }}
                                     options={[
                                         {label: 'Bar', value: 'bar'},
-                                        {label: 'Half Pie',value: 'halfPie'},
+                                        {label: 'Half Pie', value: 'halfPie'},
                                         {label: 'Line', value: 'line'}]}
                                 />
 
@@ -241,7 +217,7 @@ class BlockEdit extends Component {
 
                         </PanelBody>
                         <PanelBody initialOpen={false} title={__("Colors")}>
-                            {type!='line'&&    <PanelRow>
+                            {type != 'line' && <PanelRow>
                                 <SelectControl
                                     label={__('Color By')}
                                     value={[colorBy]} // e.g: value = [ 'a', 'c' ]
@@ -284,15 +260,15 @@ class BlockEdit extends Component {
                             <PanelRow>
                                 <TextControl
                                     label={__("Decimal Points")}
-                                    onChange={ decimalPoints=>setAttributes({decimalPoints}) }
-                                    value={ decimalPoints }
+                                    onChange={decimalPoints => setAttributes({decimalPoints})}
+                                    value={decimalPoints}
                                 />
                             </PanelRow>
                             <PanelRow>
                                 <TextControl
                                     label={__("Currency")}
-                                    onChange={ currency=>setAttributes({currency}) }
-                                    value={ currency }
+                                    onChange={currency => setAttributes({currency})}
+                                    value={currency}
                                 />
                             </PanelRow>
                         </PanelBody>
@@ -338,16 +314,16 @@ class BlockEdit extends Component {
                                 <AnglePickerControl value={tickRotation}
                                                     onChange={value => setAttributes({tickRotation: value})}/>
                             </PanelRow>
-                            {(colorBy == 'id' || type=='line') && <PanelRow>
+                            {(colorBy == 'id' || type == 'line') && <PanelRow>
                                 <PanelColorSettings
                                     title={__('Color settings')}
                                     colorSettings={[
                                         {
                                             value: decodeURIComponent(tickColor),
                                             onChange: (color) => {
-                                                if (color){
+                                                if (color) {
                                                     setAttributes({tickColor: encodeURIComponent(color)})
-                                                }else{
+                                                } else {
                                                     setAttributes({tickColor: null})
                                                 }
                                             },
@@ -419,10 +395,8 @@ class BlockEdit extends Component {
                     >
                         <div className={"chart container"} style={divStyles}>
                             {mode == "chart" && <iframe scrolling={"no"} style={divStyles}
-                                                        src={process.env.EMBEDDABLE_URI + "/chart?" + queryString}/>}
-                            {mode == "info" && <div>
-                                <InnerBlocks/>
-                            </div>}
+                                                        src={this.state.react_ui_url + "/en/embeddable/chart?" + queryString}/>}
+                            {mode == "info" && <div><InnerBlocks/></div>}
                             <Grid className={"footnote"}>
                                 <Grid.Column width={8}>
                                     {dualMode && <p>
@@ -446,14 +420,9 @@ class BlockEdit extends Component {
     }
 }
 
-
 const Edit = (props) => {
-
-    const blockProps = useBlockProps();
-
+    const blockProps = useBlockProps({className: 'wp-react-component'});
     return <div {...blockProps}><BlockEdit {...props}/></div>;
-
-
 }
 export default Edit;
 

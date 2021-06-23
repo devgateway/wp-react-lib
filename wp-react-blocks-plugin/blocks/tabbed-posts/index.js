@@ -30,7 +30,6 @@ registerBlockType(process.env.BLOCKS_NS+'/tabbed-posts',
                 type: 'number',
                 default: 700,
             },
-
             theme: {
                 type: 'string',
                 default: "buttons",
@@ -43,7 +42,6 @@ registerBlockType(process.env.BLOCKS_NS+'/tabbed-posts',
                 type:"boolean",
                 default:false
             }
-
 
         },
         edit: BlockEdit,

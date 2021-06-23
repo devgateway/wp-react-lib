@@ -9,6 +9,7 @@ import {
 } from '@wordpress/block-editor';
 import {Generic} from '../icons/index.js'
 import {Panel, PanelBody, PanelRow, TextControl} from '@wordpress/components';
+import {BlockEditWithFilters} from "../commons";
 
 const EditComponent = (props) => {
     const {
@@ -43,7 +44,7 @@ const EditComponent = (props) => {
             style: divStyles,
             className: divClass
         }
-);
+    );
 
 
     const queryString = `editing=true&label=${label}&placeholder=${placeholder}&successmessage=${successMessage}&failuremessage=${failureMessage}&alignment=${alignment}`;
@@ -110,15 +111,14 @@ const EditComponent = (props) => {
                 </Panel>
             </InspectorControls>
             <div {...blockProps}  >
-                    <iframe scrolling={"no"}
-                            src={process.env.EMBEDDABLE_URI + "/newsletter?" + queryString}/>
+                <iframe scrolling={"no"}
+                        src={props.src + queryString}/>
 
             </div>
 
         </div>
     );
 }
-
 const SaveComponent = (props) => {
     const {setAttributes} = props;
     const {
@@ -141,7 +141,7 @@ const SaveComponent = (props) => {
             className: divClass
         }
     );
-    return (<div { ...blockProps }>
+    return (<div {...blockProps}>
             <div {...props.attributes} className={"tcdi-component"} data-component={"newsletter"}></div>
         </div>
 
@@ -149,8 +149,14 @@ const SaveComponent = (props) => {
     );
 }
 
+class EditWithSettings extends BlockEditWithFilters {
+    render() {
+        return <EditComponent
+            src={this.state.react_ui_url + "/en/embeddable/newsletter?"} {...this.props}></EditComponent>
+    }
+}
 
-registerBlockType(process.env.BLOCKS_NS+'/newsletter',
+registerBlockType(process.env.BLOCKS_NS + '/newsletter',
     {
         title: __('Newsletter Form'),
         icon: Generic,
@@ -176,7 +182,7 @@ registerBlockType(process.env.BLOCKS_NS+'/newsletter',
 
         }
         ,
-        edit: withColors('backgroundColor', {textColor: 'color'})(EditComponent),
+        edit: withColors('backgroundColor', {textColor: 'color'})(EditWithSettings),
         save: SaveComponent,
     }
 )
