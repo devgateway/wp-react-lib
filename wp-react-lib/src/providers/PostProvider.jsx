@@ -22,13 +22,30 @@ class PostProvider extends React.Component {
             previewNonce,
             previewId
         } = this.props
-        debugger;
-        //this.props.onLoadPost({slug, wType: type, taxonomy, categories, before, perPage, page, fields, store,locale})
-        this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale,previewNonce,previewId)
+        this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce, previewId)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        //TODO reload?
+        const {
+            type = 'posts',
+            taxonomy,
+            categories,
+            before,
+            perPage,
+            page,
+            fields,
+            slug,
+            store = "posts",
+            locale,
+            previewNonce,
+            previewId
+        } = this.props
+
+        if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
+            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage
+        ) {
+            this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce, previewId)
+        }
     }
 
     render() {

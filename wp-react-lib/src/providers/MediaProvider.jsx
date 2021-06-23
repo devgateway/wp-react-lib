@@ -18,7 +18,7 @@ class MediaProvider extends React.Component {
     }
 
     render() {
-        const {media, id} = this.props
+        const {media, id, locale} = this.props
         return (<MediaContext.Provider value={{media,locale}}>
             {this.props.children}
         </MediaContext.Provider>);

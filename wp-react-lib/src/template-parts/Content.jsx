@@ -41,7 +41,8 @@ class Content extends React.Component {
             showLoading,
             as,
             locale,
-            messages
+            messages,
+            preview
         } = this.props
 
         if (post) {
@@ -57,9 +58,9 @@ class Content extends React.Component {
                 body = content
             }
 
-            //TODO: Use htmlUtils link replace function line in 74
 
-            return <EmbeddedGateway locale={locale} messages={messages} parent={post.id}>
+
+            return <EmbeddedGateway locale={locale} messages={messages} parent={preview?post.parent:post.id}>
                 <Enhance className="entry-content" {...this.props}>
                     {showDate &&
                     <Container fluid className="date">{post.date.toLocaleString()}</Container>}

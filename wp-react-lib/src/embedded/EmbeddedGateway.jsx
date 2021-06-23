@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom'
 import {Provider} from "react-redux";
 import {IntlProvider} from "react-intl";
 import {AppContext} from "../providers/Context"
+import {AppContextProvider} from "../../dist";
+import {getComponentByNameIgnoreCase} from "../../../ui/src/embeddable";
 
-const components = {}
 
 class EmbeddedGateway extends React.Component {
 
@@ -37,7 +38,9 @@ class EmbeddedGateway extends React.Component {
                     ReactDOM.render(
                         <Provider store={store}>
                             <IntlProvider locale={locale}>
-                                <C unique={"embeddable_" + index} {...props} childContent={element.innerHTML}/>
+                                <AppContextProvider getComponent={getComponent} store={store} locale={locale}>
+                                 <C unique={"embeddable_" + index} {...props} childContent={element.innerHTML}/>
+                                </AppContextProvider>
                             </IntlProvider>
                         </Provider>, element);
                     }else{
