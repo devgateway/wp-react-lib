@@ -1,0 +1,99 @@
+
+.download-feature {
+    justify-content: flex-end;
+    display: flex;
+    align-items: flex-start;
+}
+button.ui.button.download {
+    background-color: #55889F;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 200;
+}
+.download-icon{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #51AB8D;
+    border: 1px solid;
+    padding: 16px;
+    cursor: pointer;
+    position: relative;
+    z-index: 999;
+    background: #fff;
+    margin-right: 0 !important;
+    padding-bottom: 19px !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    cursor: pointer;
+}
+.active .download-icon {
+    padding-bottom: 25px !important;
+    border-bottom: none !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+} 
+
+label {
+    color: #8A8A8A;  
+}
+
+
+
+
+.ui.selection.dropdown{
+    border: unset !important;
+    min-width: 0 !important;
+    width: 165px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    border: unset;
+    box-shadow: none !important;
+}
+.dropdown.icon{
+    display: none;
+}
+.ui.selection.active.dropdown.menu{
+    border-top: 1px solid #96c8da !important;
+}
+
+    .visible.menu.transition{
+        position: absolute;
+        left: auto;
+        top: 41px;
+        right: 0;
+        padding: 15px 20px;
+        box-shadow: none;
+        border-color: #51AB8D;
+        border-radius: 0 !important;
+        border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
+        font-size: 16px;
+        color: #51AB8D;
+        font-weight: 600;
+    }
+    .visible.menu.transition .item {
+        padding: 12px 0px 0px 0px !important;
+        background: none !important;
+    }
+    .visible.menu.transition .item input {
+        margin-top: 0px;
+    }
+    .text {
+        color: gray;
+        font-size: 16px;
+    }
+    input[type=radio]:checked::before {
+        content: "";
+        border-radius: 50%;
+        width: .5rem;
+        height: .5rem;
+        margin: .1875rem;
+        background-color: #4FAB8C;
+        line-height: 1.14285714;
+        margin-left: 3.49999999px;
+        margin-top: 3.999999px;
+    }

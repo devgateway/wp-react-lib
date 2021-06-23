@@ -1,0 +1,40 @@
+@import '../../scss/vars';
+
+.body.parts {
+  padding: 0px;
+  margin: auto;
+
+  text.label {
+    cursor: pointer;
+    font-size: 14px;
+    fill: $gray;
+    font-weight: bold;
+  }
+
+  text.label:hover {
+    fill: $light-blue;
+  }
+
+  text.title {
+    cursor: pointer;
+    font-size: 16px;
+    fill: $blue;
+    font-weight: bold;
+  }
+
+  circle,
+  line {
+    stroke: $light-blue;
+  }
+
+  circle {
+    fill: $light-blue;
+  }
+
+  svg {
+    margin: auto;
+    width: 100%;
+  }
+
+
+}

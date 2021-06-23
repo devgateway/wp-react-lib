@@ -1,0 +1,163 @@
+.featured.tabs {
+  display: flex;
+
+  .grid.desktop {
+    flex-basis: 100%;
+    padding: 0;
+    margin: 0;
+
+    .cover {
+      display: flex;
+      flex-direction: column;
+      background-size: cover;
+      background-repeat: no-repeat !important;
+      height: 100%;
+      border: 1px solid #b8ccd8;
+      border-top: 0;
+      margin-top: 0 !important;
+      padding: 10%;
+      text-align: center;
+      justify-content: flex-end;
+
+      .entry-content, .excerpt {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        blco
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      .label {
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 160%;
+        margin: auto;
+        margin-top: auto;
+        margin-bottom: 5%;
+        width: 150px;
+        border: 1px solid #FFF;
+        color: #FFF;
+        background-color: transparent !important;
+        .icon {
+          margin-right: 4%;
+          &:before{
+            background: 20px 20px !important;
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI0LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIGZvY3VzYWJsZT0iZmFsc2UiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgkgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+CjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01MDguNSw0NjguOUwzODcuMSwzNDcuNWMtMi4zLTIuMy01LjMtMy41LTguNS0zLjVoLTEzLjJjMzEuNS0zNi41LDUwLjYtODQsNTAuNi0xMzZDNDE2LDkzLjEsMzIyLjksMCwyMDgsMAoJUzAsOTMuMSwwLDIwOHM5My4xLDIwOCwyMDgsMjA4YzUyLDAsOTkuNS0xOS4xLDEzNi01MC42djEzLjJjMCwzLjIsMS4zLDYuMiwzLjUsOC41bDEyMS40LDEyMS40YzQuNyw0LjcsMTIuMyw0LjcsMTcsMGwyMi42LTIyLjYKCUM1MTMuMiw0ODEuMiw1MTMuMiw0NzMuNiw1MDguNSw0NjguOXogTTIwOCwzNjhjLTg4LjQsMC0xNjAtNzEuNi0xNjAtMTYwUzExOS42LDQ4LDIwOCw0OHMxNjAsNzEuNiwxNjAsMTYwUzI5Ni40LDM2OCwyMDgsMzY4eiIvPgo8L3N2Zz4K") !important;
+            background-position: 0 0;
+            background-repeat: no-repeat;
+            background-size: 100% 100% !important;
+            display:block;
+            height: 20px;
+            width: 20px;
+            content: "";
+
+          }
+        }
+      }
+
+      p {
+        color: #FFF;
+      }
+    }
+
+    .column {
+      color: #FFF;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .column.expanded {
+      padding: 0px;
+      border: 1px solid $light-gray;
+
+      // tabs in expanded blocks
+      .ui.menu.tabbed.posts{
+        .label{
+          color: #5baf95;
+          position: relative;
+          right: auto;
+          left: auto;
+          top: auto;
+          span{
+            display: block;
+            margin-top: 30px;
+          }
+        }
+      }
+
+      .segment {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0px 10px;
+        height: 70px;
+        border: 0px;
+        border-radius: 0px;
+
+        img {
+          margin-left: 2%;
+          height: 40px !important;
+        }
+
+        .title {
+          font-size: inherit;
+          color: #FFF;
+          padding-top: 0;
+        }
+
+        h2 {
+          font-weight: 300;
+          padding: 10px;
+          margin: 0px;
+        }
+
+
+      }
+
+      .entry-content {
+        color: #000;
+        margin: 0px;
+        padding: 4%;
+
+      }
+
+      .label {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        cursor: pointer;
+        color: #FFF;
+        background-color: $green;
+
+        .icon {
+          background-color: $green;
+          position: relative !important;
+          left: auto !important;
+          top: auto !important;
+          bottom: auto !important;;
+          right: auto !important;
+          padding: 0px;
+          margin-right: 2px;
+        }
+
+
+      }
+
+      .full-link {
+        margin-top: 5vmin;
+        width: 80%;
+        padding: 2vmin;
+        border-bottom: 1px solid $light-gray;
+        border-top: 1px solid $light-gray;
+      }
+    }
+
+
+  }
+
+
+}

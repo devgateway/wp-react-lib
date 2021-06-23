@@ -1,0 +1,52 @@
+@import "../../scss/vars";
+
+.tcdi.dashboard.gallery {
+
+
+  .item {
+
+    .preview {
+      border: 2px solid $light-gray;
+      border-radius: 5px;
+      height: 100%;
+      padding: 0px;
+
+      .wp-block-columns{
+        bottom: $base-unit;
+        position: absolute;
+        z-index:1;
+      }
+
+      .wp-block-cover{
+        margin-bottom: $base-unit * 6;
+      }
+
+      .ui.container.entry-content,
+      figure, img, .wp-block-image {
+        width: 100% !important;
+        margin-bottom: .4rem;
+        padding: 0px;
+      }
+
+      .wp-block-image .aligncenter{
+        display: block;
+      }
+
+      p {
+        padding-bottom: .4rem;
+        font-weight: 400;
+      }
+
+      .wp-block-columns {
+        padding: 0px 1rem;
+
+      }
+
+      p {
+
+      }
+    }
+
+
+  }
+}

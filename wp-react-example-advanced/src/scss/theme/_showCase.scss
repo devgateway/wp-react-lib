@@ -1,0 +1,151 @@
+$font-family: 'Roboto', sans-serif;
+$base-unit: 10px;
+$extend: 100%;
+
+.tcdi.showcase {
+
+  width: $extend !important;
+
+  .input, textarea, .listbox, .dropdown {
+    width: $extend;
+    font-size: .9rem;
+    min-height: 20px;
+    height: $base-unit * 4;
+  }
+
+  .btn-reset{
+    background-color: #66676d;
+    color: #ffffff;
+    margin-right: $base-unit * 2;
+  }
+
+  textarea {
+    height: $base-unit * 10;
+    font-size: 0.8em;
+    padding: $base-unit;
+
+    &::placeholder,
+    &::-webkit-input-placeholder{
+      color: rgba(191,191,191,.87);
+    }
+  }
+
+  .validated {
+    .field.error {
+      iframe {
+        background-color: #fff6f6;
+        border: 1px solid #e0b4b4;
+
+      }
+
+      input {
+        background-color: #98511a;
+      }
+    }
+
+  }
+
+  .upload.files {
+
+    &.error{
+      background-color: transparent;
+    }
+
+    text-align: right;
+
+    .ui.green.label,
+    .ui.green.labels .label {
+      background-color: #5baf95 !important;
+    }
+
+    .ui.button {
+      font-size: .8rem;
+      margin-top: $base-unit;
+      margin-right: 0;
+    }
+  }
+
+  .form-buttons{
+    padding-top: $base-unit * 3;
+    button{
+      width: $base-unit * 10;
+    }
+  }
+
+  .dropzone {
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9em;
+    padding: $base-unit;
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: rgb(238, 238, 238);
+    border-style: dashed;
+    background-color: rgb(250, 250, 250);
+    color: rgba(191,191,191,.87);
+    outline: none;
+    transition: border 0.24s ease-in-out 0s;
+    p{
+      font-size: 0.9em;
+      padding-bottom: 15px;
+    }
+
+    ul {
+      list-style: none;
+      text-align: left;
+
+      li {
+        margin: 4px;
+      }
+    }
+  }
+
+  .upload.files.error {
+    .dropzone {
+      background-color: #ffffff;
+      border: none;
+      color: #9f3a38;
+    }
+  }
+}
+
+// form errors
+.notice, div.error, div.updated{
+  background-color: none;
+  border: none;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+.ui.input.error>input{
+  background-color: transparent;
+  border: none;
+}
+.notice,
+div.error,
+div.updated{
+  background-color: none;
+}
+.ui.search.dropdown{
+  > .text{
+    top: -3px;
+  }
+}
+.ui.negative.message{
+  p{
+    font-family: $font-family;
+    font-size: 0.9em;
+  }
+}
+.ui.success.message{
+  p{
+    font-family: $font-family;
+    font-size: 0.9em;
+  }
+}
+.ui.selection.dropdown.error{
+  background-color: #ffffff;
+  border-color: transparent;
+}

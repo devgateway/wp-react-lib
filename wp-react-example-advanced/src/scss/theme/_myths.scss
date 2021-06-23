@@ -1,0 +1,134 @@
+.myths.list {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2vh;
+
+    h2 {
+      margin: 0;
+    }
+
+    img {
+      margin-right: $base-unit;
+      width: $base-unit * 4;
+      height: auto;
+    }
+  }
+
+  .title {
+    cursor: text;
+    margin-left: 3.2em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+
+    .entry-content {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+
+      p {
+        font-size: 1.3em;
+        font-weight: 400;
+        line-height: 130%;
+        margin-left: -($base-unit * 6.5);
+        text-indent: $base-unit * 7;
+      }
+    }
+
+    .ui.label {
+      width: 100px;
+      border-radius: 0;
+      margin: 0;
+      font-weight: 400;
+      color: $red;
+      font-size: 1.3em;
+      line-height: $base-unit * 3;
+      padding: 0px 0.2em 0px 0px;
+      border: none;
+
+      img {
+        border: 1px solid transparent;
+        display: inline-block;
+        height: auto !important;
+        margin: 0;
+        width: $base-unit * 3 !important;
+      }
+    }
+  }
+
+  > .content {
+    display: flex !important;
+    margin-bottom: $base-unit * 1.5;
+    margin-left: 3.2em;
+    flex-direction: row;
+    border-bottom: 2px solid $separator-grey !important;
+    font-weight: 100;
+    color: $health-color;
+    padding-bottom: $base-unit * 2 !important;
+
+    .excerpt {
+      display:none;
+    }
+
+    p {
+      font-size: 1.3em;
+      font-weight: 400;
+      line-height: 130%;
+      margin-top: 0;
+      margin-left: -($base-unit * 7);
+      padding-bottom: $base-unit * 1.7;
+      padding-top: 0;
+
+      &:first-child {
+        margin-left: -($base-unit * 7);
+        text-indent: ($base-unit * 7);
+      }
+    }
+
+    .label {
+      justify-content: center;
+      color: $health-color;
+      align-items: center;
+      font-size: 1.3em;
+      font-weight: 400;
+      border: 0;
+      line-height: $base-unit * 3;
+      padding: 0 0.2em 0 0;
+      height: $base-unit * 3.5;
+
+      img {
+        border: 1px solid transparent;
+        display: inline-block;
+        height: auto !important;
+        margin: 0;
+        width: $base-unit * 3 !important;
+      }
+
+    }
+
+    .entry-content {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+
+      > p {
+        padding: 0;
+      }
+    }
+  }
+
+  > .title.odd {
+    margin-top: 10px;
+  }
+
+  > .content.odd {
+    .label {
+    }
+  }
+}

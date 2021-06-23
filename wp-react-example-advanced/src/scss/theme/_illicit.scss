@@ -1,0 +1,123 @@
+
+body.illicit {
+  background-image: url("/smoke-on-white_v2.png");
+  background-repeat: no-repeat;
+  background-size: 1366px 768px;
+  background-position: center top;
+  background-attachment: scroll;
+}
+
+.dashboard.illicit {
+  .section.illicit-prevalence {
+    .subsection {
+      background-color: #f4f4f4;
+
+      .loss {
+        .wp-block-columns {
+          padding: 1vw;
+        }
+
+        .wp-block-separator {
+          margin: 0;
+          padding: 0;
+          max-width: 90% !important;
+          border-color: $light-gray;
+          border-bottom: 0;
+        }
+
+        .wp-block-column {
+          * {
+          }
+        }
+      }
+
+      .products,
+      .taxes {
+        @media screen and (max-width: 781px) and (min-width: 600px) {
+          .wp-block-column:nth-child(1) {
+            flex-basis: calc(20% - 16px) !important;
+            flex-grow: 0;
+          }
+        }
+        @media (max-width: 599px) {
+          .wp-block-column:nth-child(1) {
+            display: none;
+            flex-grow: 0;
+          }
+        }
+
+        figure {
+          padding: 0;
+          margin: 0;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .types {
+        .grid:not(.header) {
+          margin: 0;
+          padding: 0 2vw;
+          background-color: transparent !important;
+
+          .row {
+            padding: 0;
+            margin: 0;
+          }
+
+          .column {
+            margin: 0;
+
+            button {
+              height: 60px;
+              border-radius: 1vmin;
+              display: flex;
+              text-align: left;
+              width: 100%;
+              color: #FFF;
+
+              .icon {
+                background-position: center;
+                background-repeat: no-repeat;
+                width: auto;
+                float: left;
+                min-width: 40px;
+                min-width: 40px;
+                min-height: 30px;
+              }
+
+              .title {
+                font-size: 1.5em;
+                margin: auto auto auto 2%;
+              }
+            }
+          }
+
+          .active {
+            button {
+              background-color: $green;
+            }
+          }
+        }
+      }
+
+      .map {
+
+        .map.component {
+
+          margin: 1.5vw;
+        }
+
+        .entry-content {
+          padding-top: 0;
+          margin-left: 3.5vw;
+          margin-right: 3.5vw;
+        }
+      }
+    }
+
+
+  }
+}

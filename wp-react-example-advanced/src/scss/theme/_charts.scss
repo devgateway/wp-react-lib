@@ -1,0 +1,110 @@
+
+.chart.container {
+  text-align: right;
+  margin: 0px;
+
+  padding: 0px;
+
+  .body {
+    padding: 0px;
+    margin: 0px;
+
+    .ui.container.entry-content {
+      padding: 0px !important;
+      margin: 0px !important;;
+
+    }
+
+    svg {
+      text {
+        font-size: 13px !important;
+      }
+    }
+  }
+
+  .footnote {
+    width: 100%;
+    text-align: left;
+    .grid{
+      width: 100%;
+    }
+    .column {
+
+      height: 40px;
+      vertical-align: bottom;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: auto;
+    margin-bottom: 0px;
+
+    p {
+      line-height: 40px;
+      font-size: 13px;
+      padding: 0px;
+      margin-left: 10px;
+      margin-right: 10px;
+      display: flex;
+
+    }
+
+    .button {
+      font-size: 17px;
+      background-color: #D6D6D6 !important;;
+      font-weight: 100;
+      border: 1px solid;
+      width: 157px !important;
+      height: 40px !important;
+      font-weight: 500;
+      color: white !important;
+      padding-left: 5px !important;
+      padding-right: 2px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .button.active {
+      background: #4F8BA5 !important;
+    }
+  }
+
+  .button.download {
+    cursor: pointer;
+    font-size: 14px;
+    background-color: transparent !important;;
+    font-weight: 100;
+    padding: 0px !important;;
+    color: #5aade4 !important;
+    border: 1px solid #5aade4 ;
+    width: auto !important;
+    height: 30px !important;
+    padding: 0px 7px 0px 7px !important;
+    margin-bottom: 15px !important;
+
+    .download.icon:before {
+      //display: block;
+      //content: "";
+      // width: 20px;
+      // height: 27px;
+      //  background-image: url("/download.png") !important;
+      margin-left: 10px !important;
+    //  margin-top: -7px;
+    }
+
+  }
+
+}
+
+.chart.tooltip {
+  border-radius: 4px;
+  opacity: .9;
+  padding: 7px;
+  font-size: 16px;
+  color: #FFF2F2;
+}
