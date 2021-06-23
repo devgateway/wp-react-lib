@@ -4,8 +4,6 @@ import {Provider} from "react-redux";
 import {IntlProvider} from "react-intl";
 import {AppContext} from "../providers/Context"
 import {AppContextProvider} from "../../dist";
-import {getComponentByNameIgnoreCase} from "../../../ui/src/embeddable";
-
 
 class EmbeddedGateway extends React.Component {
 
