@@ -22,7 +22,7 @@ class DataProvider extends React.Component {
 
         if (filters != prevProps.filters
             || app != prevProps.app
-            || prevProps.source != source, csv!=prevProps.csv) {
+            || prevProps.source != source || csv!=prevProps.csv) {
 
             if (app === "csv") {
                 this.props.onSetData({app, csv, store, params})
