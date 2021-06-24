@@ -2,23 +2,33 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {injectIntl} from 'react-intl';
 import DataContext from './DataContext'
-import {getData} from "../reducers/data";
+import {getData, setData} from "./module";
 import {Container, Loader, Segment} from "semantic-ui-react";
 
 class DataProvider extends React.Component {
 
     componentDidMount() {
-        const {app, source, store, params} = this.props
+        const {app, source, store, params, csv} = this.props
+        if (app === "csv") {
+            this.props.onSetData({app, csv, store, params})
+        } else {
+            this.props.onLoadData({app, source, store, params})
+        }
 
-        this.props.onLoadData({app, source, store, params})
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        const {filters, app, source, store, params, csv} = this.props
 
-        if (prevProps.filters != this.props.filters) {
-            const {app, source, store, params} = this.props
+        if (filters != prevProps.filters
+            || app != prevProps.app
+            || prevProps.source != source, csv!=prevProps.csv) {
 
-            this.props.onLoadData({app, source, store, params})
+            if (app === "csv") {
+                this.props.onSetData({app, csv, store, params})
+            } else {
+                this.props.onLoadData({app, source, store, params})
+            }
         }
     }
 
@@ -58,13 +68,13 @@ const mapStateToProps = (state, ownProps) => {
     return {
         data: state.getIn(['data', ...store, 'data']),
         filters: state.getIn(['data', 'filters']),
-
         error: state.getIn(['data', ...store, 'error']),
         loading: state.getIn(['data', ...store, 'loading']),
     }
 }
 
 const mapActionCreators = {
+    onSetData: setData,
     onLoadData: getData
 };
 

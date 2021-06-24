@@ -8,7 +8,7 @@ import {updateIntl} from 'react-intl-redux'
 import {injectIntl, IntlProvider} from "react-intl";
 import smoothscroll from 'smoothscroll-polyfill';
 import ResponsiveContainer from './layout'
-import {getComponentByNameIgnoreCase} from "./embeddable";
+import {getComponentByNameIgnoreCase} from "./embeddable/index";
 import {
     AppContextProvider,
     Category,
@@ -60,7 +60,6 @@ class IntlRoutes extends Component {
         const self = this;
         const props = this.props;
         const locale = this.props.match.params.lan
-        debugger;
         return (
             <IntlProvider key={locale} locale={locale} messages={messages[locale]}>
                 <AppContextProvider getComponent={getComponentByNameIgnoreCase} store={store} locale={locale}>

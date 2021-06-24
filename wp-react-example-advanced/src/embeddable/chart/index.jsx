@@ -131,7 +131,7 @@ const Chart = (props) => {
                 DataFrame = CSVDataFrame
                 break
         }
-        debugger
+
         child = <DataFrame type={"bar"} includeTotal={true} keys={keys ? keys.split(',') : []}>
                    <Bar {...chartProps}></Bar>
         </DataFrame>
@@ -164,6 +164,8 @@ const Chart = (props) => {
     }
 
     const dual = (dualMode === 'true')
+
+    debugger;
 
     return (<div ref={ref}>
             <Container className={"chart container"} style={{"minHeight": height + 'px'}} fluid={true}>

@@ -1,7 +1,6 @@
 import React from 'react'
 import asyncComponent from "../AsyncComponent";
 
-//TODO async reducers
 import data from './reducers/data'
 import embeddable from './reducers/embeddable'
 
@@ -23,6 +22,9 @@ export const reducers = {
     embeddable
 }
 
+
+
+
 const components = {
     pageGallery: PageGallery,
     postsCarousel: PostsCarousel,
@@ -39,8 +41,7 @@ const components = {
 }
 
 export const getComponentByNameIgnoreCase = (name) => {
+    console.log("name"+name)
     const k = Object.keys(components).filter(value => value.toLowerCase() == name.toLowerCase())
     return components[k]
 }
-
-

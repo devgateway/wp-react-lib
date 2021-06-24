@@ -91,7 +91,7 @@ const Wrapper = (props) => {
         parent, editing,unique
     } = props
 
-    debugger;
+
 
     return <Container className={`tcdi tabbed posts ${editing ? 'editing' : ''}`} fluid={true}>
 
