@@ -1,5 +1,3 @@
-
-
 export const buildBarOptions = (data, includeTotal) => {
     const usePercents = true
     if (data && data.children) {

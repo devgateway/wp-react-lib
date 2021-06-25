@@ -14,7 +14,7 @@ const NEWS_LETTER_SUBSCRIBE_FAILURE = "NEWS_LETTER_SUBSCRIBE_FAILURE"
 const initialState = Immutable.Map({})
 
 export const newsletterSubscription = (params) => (dispatch, getState) => {
-    return new Promise(((resolve,reject) =>{
+    return new Promise(((resolve, reject) => {
 
         dispatch({type: NEWS_LETTER_SUBSCRIBE})
         subscribe(params).then((res) => {
@@ -25,18 +25,17 @@ export const newsletterSubscription = (params) => (dispatch, getState) => {
             reject()
         })
 
-    } ))
+    }))
 }
-
 
 
 export const sendShowCaseForm = (params) => (dispatch, getState) => {
     dispatch({type: SHOW_CASE_SEND})
 
     sendShowCase(params).then((res) => {
-        if (res.status===500){
+        if (res.status === 500) {
             dispatch({type: SHOW_CASE_SEND_FAILURE})
-        }else{
+        } else {
             dispatch({type: SHOW_CASE_SEND_DONE})
         }
     }).catch((err) => {

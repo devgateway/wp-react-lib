@@ -18,7 +18,7 @@ import {
     Post,
     PostConsumer,
     PostProvider
-} from"@devgateway/wp-react-lib";
+} from "@devgateway/wp-react-lib";
 import queryString from "query-string";
 import {Container, Segment} from "semantic-ui-react";
 
@@ -126,7 +126,7 @@ class IntlRoutes extends Component {
                             return (
                                 <ResponsiveContainer>
                                     <PageProvider store={"preview"} perPage={1} view={preview}
-                                                 previewNonce={previewNonce} previewId={props.match.params.id}>
+                                                  previewNonce={previewNonce} previewId={props.match.params.id}>
                                         <PageConsumer>
                                             <Page preview={true}/>
                                         </PageConsumer>

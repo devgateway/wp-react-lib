@@ -11,13 +11,13 @@
       height: 100%;
       padding: 0px;
 
-      .wp-block-columns{
+      .wp-block-columns {
         bottom: $base-unit;
         position: absolute;
-        z-index:1;
+        z-index: 1;
       }
 
-      .wp-block-cover{
+      .wp-block-cover {
         margin-bottom: $base-unit * 6;
       }
 
@@ -28,7 +28,7 @@
         padding: 0px;
       }
 
-      .wp-block-image .aligncenter{
+      .wp-block-image .aligncenter {
         display: block;
       }
 

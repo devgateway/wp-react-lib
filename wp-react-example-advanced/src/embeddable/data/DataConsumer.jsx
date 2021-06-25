@@ -10,8 +10,8 @@ const PostConsumer = (props) => {
             {(data) => {
 
                 return data && <React.Fragment>
-                     {React.Children.map(props.children, (child => {
-                    return React.cloneElement(child, {data})
+                    {React.Children.map(props.children, (child => {
+                        return React.cloneElement(child, {data})
                     }))}
                 </React.Fragment>
             }}

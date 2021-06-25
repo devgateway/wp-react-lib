@@ -61,7 +61,6 @@ const Chart = ({
                }) => {
 
 
-
     const [filter, setFilter] = useState([])
 
     const applyFilter = (values) => {
@@ -100,7 +99,7 @@ const Chart = ({
                   y={-12}
                   rx={2}
                   ry={2} width={width} height={22}
-                  fill={ tickColor}/>
+                  fill={tickColor}/>
 
 
             <text transform={`rotate(${tickRotation})`}
@@ -175,17 +174,17 @@ const Chart = ({
 
     if (legendPosition == 'right' && showLegends) {
         Object.assign(legendsConfig, {anchor: "bottom-right", translateX: 40 + itemWidth, translateY: 0,})
-        margin = Object.assign(margin,{right: 20 + itemWidth, bottom: 60})
+        margin = Object.assign(margin, {right: 20 + itemWidth, bottom: 60})
     }
     if (legendPosition == 'bottom' && showLegends) {
         Object.assign(legendsConfig, {anchor: "bottom"})
         Object.assign(legendsConfig, {direction: "row"})
         Object.assign(legendsConfig, {anchor: "bottom-right", translateX: 0, translateY: 90})
-        margin = Object.assign(margin,{ bottom: 90})
+        margin = Object.assign(margin, {bottom: 90})
     }
     if (legendPosition == 'left' && showLegends) {
         Object.assign(legendsConfig, {anchor: "bottom-left", translateX: (40 + itemWidth) * -1, translateY: 0})
-        margin = Object.assign(margin,{left: itemWidth + 40})
+        margin = Object.assign(margin, {left: itemWidth + 40})
 
     }
 
@@ -198,7 +197,13 @@ const Chart = ({
 
                 margin={margin}
                 xScale={{type: 'point'}}
-                yScale={{type: 'linear', min: 'auto', max: options.maxValue, stacked: groupMode=="stacked", reverse: false}}
+                yScale={{
+                    type: 'linear',
+                    min: 'auto',
+                    max: options.maxValue,
+                    stacked: groupMode == "stacked",
+                    reverse: false
+                }}
                 axisTop={null}
                 axisRight={null}
                 lineWidth={3}
@@ -227,12 +232,12 @@ const Chart = ({
                 pointBorderColor={{from: 'serieColor'}}
                 pointLabelYOffset={-12}
                 useMesh={true}
-                legends={showLegends?[
+                legends={showLegends ? [
                     {
                         data: options.data.map(d => ({id: d.id, label: d.id, color: getColor(d.id)})),
                         ...legendsConfig
                     }
-                ]:[]}
+                ] : []}
 
                 animate={true}
                 motionStiffness={130}
@@ -240,7 +245,8 @@ const Chart = ({
                 tooltip={(d) => {
                     return (
                         <div className={"chart tooltip"} style={{"backgroundColor": d.point.serieColor}}>
-                            {d.point.serieId} ({d.point.data.x}) : {intl.formatNumber(format.style==='percent'? d.point.data.y/100:d.point.data.y , format)}
+                            {d.point.serieId} ({d.point.data.x})
+                            : {intl.formatNumber(format.style === 'percent' ? d.point.data.y / 100 : d.point.data.y, format)}
                         </div>
                     )
                 }}

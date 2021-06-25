@@ -3,7 +3,7 @@
   background-color: #5089a6;
   line-height: 16px !important;
 
-  .bottom-bar{
+  .bottom-bar {
     background-color: #175372;
     color: #ffffff;
     left: 0;
@@ -19,6 +19,7 @@
     padding-bottom: 1.5rem;
     padding-top: 1.5rem;
   }
+
   .header {
     font-weight: 400;
     color: white;
@@ -31,8 +32,10 @@
     // font-size: 15px;
     color: white;
     padding: 1rem 0;
-    a{
+
+    a {
       color: #ffffff;
+
       &:hover {
         color: #f0f0f0;
       }

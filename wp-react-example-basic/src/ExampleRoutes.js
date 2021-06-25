@@ -5,7 +5,7 @@ import {applyMiddleware, compose, createStore} from 'redux'
 import {combineReducers} from 'redux-immutable';
 import {Map} from 'immutable'
 import thunk from 'redux-thunk'
-import {Page, PageConsumer, PageProvider, wordpress} from"@devgateway/wp-react-lib";
+import {Page, PageConsumer, PageProvider, wordpress} from "@devgateway/wp-react-lib";
 import {Provider} from "react-redux";
 import {Redirect} from "react-router";
 
@@ -47,8 +47,8 @@ export default function BasicExample() {
                         <Route exact path={"/"}>
                             <Redirect to={"/home"}></Redirect>
                         </Route>
-                        <Route exact path="/:slug" render={(props)=>{
-                            return  <div className="App">
+                        <Route exact path="/:slug" render={(props) => {
+                            return <div className="App">
                                 <PageProvider slug={props.match.params.slug}>
                                     <PageConsumer>
                                         <Page></Page>

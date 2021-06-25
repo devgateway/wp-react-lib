@@ -191,7 +191,7 @@ class Index extends React.Component {
         } else {
             const values = {}
             elements.forEach(e => values[e.name] = e.value())
-          //  values['token'] = this.state.token
+            //  values['token'] = this.state.token
             this.props.onSubmit(values)
 
         }
@@ -279,7 +279,6 @@ class Index extends React.Component {
                 </Grid.Column>
 
 
-
                 <Grid.Row>
 
                     <Grid.Column textAlign={"left"} width={12} verticalAlign="bottom" className="form-buttons">
@@ -292,12 +291,12 @@ class Index extends React.Component {
                 </Grid.Row>
 
 
-                {(status == 'OK' || editing ) &&<Grid.Column width={16}>  <Message
+                {(status == 'OK' || editing) && <Grid.Column width={16}> <Message
                     success
                     content={<p>{successmessage}</p>}
                 /></Grid.Column>}
 
-                {(status == 'ERROR' || editing ) &&<Grid.Column width={16}> <Message negative>
+                {(status == 'ERROR' || editing) && <Grid.Column width={16}> <Message negative>
                     <p>{failuremessage}</p>
                 </Message></Grid.Column>}
 

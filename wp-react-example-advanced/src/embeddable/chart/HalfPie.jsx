@@ -36,7 +36,7 @@ const Chart = ({colors, height, options, intl, format}) => {
 
     return (
         <div className="has-interactive-panel">
-            <div style={{height:height}}>
+            <div style={{height: height}}>
                 {options && options.data &&
                 <ResponsivePie
                     data={applyFilter(options.data)}

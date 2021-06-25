@@ -1,4 +1,4 @@
-import {PostConsumer, PostIntro, PostProvider} from"@devgateway/wp-react-lib";
+import {PostConsumer, PostIntro, PostProvider} from "@devgateway/wp-react-lib";
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import React, {useState} from "react";

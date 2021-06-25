@@ -11,7 +11,7 @@ import HalfPie from "./HalfPie";
 import Bar from "./Bar";
 import Line from "./Line";
 
-import {PostContent} from"@devgateway/wp-react-lib";
+import {PostContent} from "@devgateway/wp-react-lib";
 import PrevalenceBarDataframe from './PrevalenceBarDataFrame'
 import PolicyDataFrame from './PolicyDataFrame'
 import CSVDataFrame from "./CSVDataFrame";
@@ -133,7 +133,7 @@ const Chart = (props) => {
         }
 
         child = <DataFrame type={"bar"} includeTotal={true} keys={keys ? keys.split(',') : []}>
-                   <Bar {...chartProps}></Bar>
+            <Bar {...chartProps}></Bar>
         </DataFrame>
     }
 
@@ -143,13 +143,11 @@ const Chart = (props) => {
             child = <PolicyDataFrame type={"line"} keys={keys ? keys.split(',') : []}>
                 <Line {...chartProps}></Line>
             </PolicyDataFrame>
-        }
-        else  if (app === "csv") {
+        } else if (app === "csv") {
             child = <CSVDataFrame type={"line"} keys={keys ? keys.split(',') : []}>
                 <Line {...chartProps}></Line>
             </CSVDataFrame>
-        }
-        else {
+        } else {
             child = <Segment color={"red"}>Chart type not supported yet</Segment>
 
         }

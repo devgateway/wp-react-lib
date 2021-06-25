@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {Container, Grid, Icon, Label, Segment, Transition} from 'semantic-ui-react'
 import {
-    PostContent,
-    PostTitle,
     MediaConsumer,
     MediaProvider,
     PostConsumer,
+    PostContent,
     PostIcon,
+    PostIntro,
     PostProvider,
-    PostIntro
-} from"@devgateway/wp-react-lib";
+    PostTitle
+} from "@devgateway/wp-react-lib";
 
 
 const FeaturedPost = ({post, onClick, active, moreLabel}) => {

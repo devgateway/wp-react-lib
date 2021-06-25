@@ -328,7 +328,8 @@ const Chart = ({
                     return (
                         <div className={"chart tooltip"} style={{"backgroundColor": color}}>
 
-                            {id}  ({d.data[options.indexBy]}) : {intl.formatNumber(format.style === 'percent' ? value / 100 : value, format)}
+                            {id} ({d.data[options.indexBy]})
+                            : {intl.formatNumber(format.style === 'percent' ? value / 100 : value, format)}
                         </div>
                     )
                 }}
@@ -338,7 +339,7 @@ const Chart = ({
                         basic: {whiteSpace: "pre", display: "flex", alignItems: "center"},
                         container: {
                             background: "transparent",
-                             boxShadow:""
+                            boxShadow: ""
                         },
                         table: {},
                         tableCell: {padding: "3px 5px"},

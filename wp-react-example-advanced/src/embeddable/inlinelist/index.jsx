@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Container, Grid, Label} from 'semantic-ui-react'
-import {MediaConsumer, MediaProvider, PostConsumer, PostIcon, PostIntro, PostProvider} from"@devgateway/wp-react-lib";
+import {MediaConsumer, MediaProvider, PostConsumer, PostIcon, PostIntro, PostProvider} from "@devgateway/wp-react-lib";
 
 
 class ListOfPost extends React.Component {

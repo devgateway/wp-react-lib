@@ -1,6 +1,6 @@
 import {Container, Flag, Menu} from "semantic-ui-react";
 import React, {useEffect, useState} from "react";
-import {MenuConsumer, MenuProvider, utils} from"@devgateway/wp-react-lib";
+import {MenuConsumer, MenuProvider, utils} from "@devgateway/wp-react-lib";
 import {injectIntl} from "react-intl";
 import {withRouter} from "react-router";
 
@@ -66,9 +66,10 @@ const MyMenuItems = injectIntl(withRouter(({
             <Menu.Item
                 className={`divided ${i.child_items ? 'has-child-items' : ''} 
                  ${selected && selected.ID == i.ID ? 'selected' : ''}  ${active == i.slug ? "active" : ""}`}
-                >
+            >
 
-                {withIcons && <div  className={"mark"}></div>} {i.child_items ? <span onMouseOver={e => onSetSelected(i)}>{i.title}</span> :
+                {withIcons && <div className={"mark"}></div>} {i.child_items ?
+                <span onMouseOver={e => onSetSelected(i)}>{i.title}</span> :
                 <a onMouseOver={e => onSetSelected(i)} href={utils.replaceLink(i.url, locale)}>{i.title}</a>}
 
             </Menu.Item>))}

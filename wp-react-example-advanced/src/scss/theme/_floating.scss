@@ -2,14 +2,16 @@
 
 .green {
 
-  .pages{
-   }
+  .pages {
+  }
+
   .left.navigator {
-    top:10px;
+    top: 10px;
     float: left;
     position: sticky !important;
     width: 100px;
     margin-left: -8vw;
+
     .ui.menu {
       background-color: $health-color;
       margin: 0;
@@ -28,7 +30,7 @@
 
       .item {
         border-bottom: 1px solid #FFF;
-        padding:10% 1%;
+        padding: 10% 1%;
         box-sizing: border-box;
         text-align: center;
 

@@ -45,7 +45,7 @@ class Index extends React.Component {
             </Message>)
         }
 
-        if (status === "ERROR" ) {
+        if (status === "ERROR") {
             message = (<Message negative>
                 <p>{failuremessage}</p>
             </Message>)

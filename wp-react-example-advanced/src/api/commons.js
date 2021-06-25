@@ -31,7 +31,7 @@ export const post = (url, params, isBlob) => {
 export const get = (url, params = {}) => {
     return new Promise((resolve, reject) => {
 
-        fetch(url, )
+        fetch(url,)
             .then(
                 function (response) {
                     if (response.status !== 200) {

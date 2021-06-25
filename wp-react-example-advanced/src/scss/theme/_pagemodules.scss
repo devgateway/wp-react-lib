@@ -3,7 +3,7 @@
   &.desktop {
     h2 {
       .title {
-         padding-top: $base-unit + 40;
+        padding-top: $base-unit + 40;
       }
     }
   }
@@ -35,6 +35,7 @@
 .container.section {
   margin-left: 0px;
   margin-bottom: 50px;
+
   .ui.menu.header {
     margin: 0;
     background-color: #FFF;

@@ -39,7 +39,7 @@ export default class Navigator extends Component {
                     <Label basic> {s.label}</Label>
                 </Menu.Item>)}
 
-                <Menu.Item header onClick={e=>window.scrollTo({
+                <Menu.Item header onClick={e => window.scrollTo({
                     top: 100,
                     left: 100,
                     behavior: 'smooth'

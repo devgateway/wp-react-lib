@@ -1,6 +1,6 @@
 import {Container, Image, Menu, Visibility} from "semantic-ui-react";
 import React, {createRef} from "react";
-import {MediaConsumer, MediaProvider, PageConsumer, PageProvider, PostContent} from"@devgateway/wp-react-lib";
+import {MediaConsumer, MediaProvider, PageConsumer, PageProvider, PostContent} from "@devgateway/wp-react-lib";
 
 import {injectIntl} from "react-intl";
 import FloatingNavigator from './FloatingNavigator'
@@ -34,7 +34,7 @@ class Module extends React.Component {
                     <SectionHeader title={page.title.rendered} subtitle={page.meta_fields.subtitle}/>
                 </MediaConsumer>
             </MediaProvider>
-            {page && <PostContent as={Container} fluid={true} post={page} />}
+            {page && <PostContent as={Container} fluid={true} post={page}/>}
         </Container>)
 
     }

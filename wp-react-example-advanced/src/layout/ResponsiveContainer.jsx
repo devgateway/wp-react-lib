@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import {Container, Icon, Menu, Sidebar,} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
-import MainMenu from 'wp-react-lib'
+import MainMenu from "@devgateway/wp-react-lib"
 import {Media} from "../AppMedia"
 import Footer from "./Footer";
 import Header from "./Header";

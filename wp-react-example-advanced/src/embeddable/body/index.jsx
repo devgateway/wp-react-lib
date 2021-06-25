@@ -131,7 +131,6 @@ class Body extends React.Component {
             {label: 'Reduced fertility (women only)', selector: null, tx: 85, ty: 250},
 
 
-
         ]
         let sy = 90;
         const root = d3.select('.body.parts')

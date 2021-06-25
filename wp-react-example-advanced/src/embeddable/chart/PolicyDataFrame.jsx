@@ -11,7 +11,7 @@ const LineData = ({children, data, keys}) => {
         total: 'Total Consumption'
     }
 
-    const vals=[]
+    const vals = []
     const chartData = Object.keys(data)
         .filter(k => keys.indexOf(k) > -1)
         .map(k => {
@@ -40,9 +40,9 @@ const BarData = ({children, data, keys}) => {
         consumption: 'Official Consumption',
         total: 'Total Consumption'
     }
-    const vals=[]
+    const vals = []
 
-    const chartData = data&&data.children?data.children.map(d => {
+    const chartData = data && data.children ? data.children.map(d => {
         const row = new Object();
         row[d.type] = d.value;
         keys.forEach(k => {
@@ -50,14 +50,13 @@ const BarData = ({children, data, keys}) => {
             row[keyLabels[k]] = d[k]
         })
         return row;
-    }):[];
-
+    }) : [];
 
 
     const options = {
         maxValue: Math.max(...vals) + Math.max(...vals) * .1,
         indexBy: "year",
-        keys: keys.map(k=>keyLabels[k]),
+        keys: keys.map(k => keyLabels[k]),
         data: chartData
     }
     return React.Children.map(children, child => React.cloneElement(child, {options}))

@@ -23,8 +23,6 @@ export const reducers = {
 }
 
 
-
-
 const components = {
     pageGallery: PageGallery,
     postsCarousel: PostsCarousel,
@@ -41,7 +39,7 @@ const components = {
 }
 
 export const getComponentByNameIgnoreCase = (name) => {
-    console.log("name"+name)
+    console.log("name" + name)
     const k = Object.keys(components).filter(value => value.toLowerCase() == name.toLowerCase())
     return components[k]
 }
