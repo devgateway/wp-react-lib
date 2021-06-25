@@ -5,7 +5,7 @@ import {applyMiddleware, compose, createStore} from 'redux'
 import {combineReducers} from 'redux-immutable';
 import {Map} from 'immutable'
 import thunk from 'redux-thunk'
-import {Page, PageConsumer, PageProvider, wordpress} from "wp-react-lib";
+import {Page, PageConsumer, PageProvider, wordpress} from"@devgateway/wp-react-lib";
 import {Provider} from "react-redux";
 import {Redirect} from "react-router";
 

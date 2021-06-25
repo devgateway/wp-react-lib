@@ -11,7 +11,7 @@ import HalfPie from "./HalfPie";
 import Bar from "./Bar";
 import Line from "./Line";
 
-import {PostContent} from "wp-react-lib";
+import {PostContent} from"@devgateway/wp-react-lib";
 import PrevalenceBarDataframe from './PrevalenceBarDataFrame'
 import PolicyDataFrame from './PolicyDataFrame'
 import CSVDataFrame from "./CSVDataFrame";

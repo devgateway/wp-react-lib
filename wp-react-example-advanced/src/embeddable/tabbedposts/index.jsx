@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Button, Container, Grid, Label, Menu} from 'semantic-ui-react'
-import  {PostLabel,MediaConsumer, MediaProvider, PostConsumer, PostIcon, PostIntro, PostProvider} from "wp-react-lib";
+import  {PostLabel,MediaConsumer, MediaProvider, PostConsumer, PostIcon, PostIntro, PostProvider} from"@devgateway/wp-react-lib";
 
 const ItemMenu = ({posts, activeItem, setActive,showLabels}) => {
 

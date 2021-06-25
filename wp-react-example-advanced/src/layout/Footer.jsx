@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Container} from "semantic-ui-react";
 
-import {Page, PageConsumer, PageProvider} from "wp-react-lib";
+import {Page, PageConsumer, PageProvider} from"@devgateway/wp-react-lib";
 
 
 class Footer extends Component {

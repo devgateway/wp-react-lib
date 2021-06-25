@@ -3,7 +3,7 @@ import {Button, Icon, Container, Dropdown  } from "semantic-ui-react";
 import {saveAs} from 'file-saver';
 import { exportComponentAsJPEG } from 'react-component-export-image';
 import {  toBlob } from 'html-to-image';
-import {PostContent} from "wp-react-lib";
+import {PostContent} from"@devgateway/wp-react-lib";
 const DownloadableContent = React.forwardRef((props, ref) => (
     <div ref={ref}>{props.children}</div>
 ));

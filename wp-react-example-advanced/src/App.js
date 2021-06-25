@@ -18,7 +18,7 @@ import {
     Post,
     PostConsumer,
     PostProvider
-} from "wp-react-lib";
+} from"@devgateway/wp-react-lib";
 import queryString from "query-string";
 import {Container, Segment} from "semantic-ui-react";
 

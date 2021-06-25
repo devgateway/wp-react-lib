@@ -1,5 +1,5 @@
 import {Container, Grid} from "semantic-ui-react";
-import {PageConsumer, PageProvider, PostIntro} from "wp-react-lib";
+import {PageConsumer, PageProvider, PostIntro} from"@devgateway/wp-react-lib";
 import React from "react";
 import {connect} from "react-redux";
 import './gallery.scss'

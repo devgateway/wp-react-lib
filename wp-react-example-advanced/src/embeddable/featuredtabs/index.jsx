@@ -9,7 +9,7 @@ import {
     PostIcon,
     PostProvider,
     PostIntro
-} from "wp-react-lib";
+} from"@devgateway/wp-react-lib";
 
 
 const FeaturedPost = ({post, onClick, active, moreLabel}) => {
