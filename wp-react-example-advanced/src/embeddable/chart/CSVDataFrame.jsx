@@ -2,13 +2,23 @@ import React from "react";
 
 
 const LineData = ({children, data}) => {
+
     const {data: json, meta: {fields}} = data
     const index = fields[0]
     const keys = fields.slice(1)
+
+    const chartData = json.map(j => {
+        const row = new Object()
+        row["id"] = j[fields[0]]
+        row["data"] = fields.slice(1).map(f => {
+            return {"x": f, "y": j[f]}
+        })
+        return row
+    })
+
+    debugger;
     const options = {
-        indexBy: index,
-        keys: keys,
-        data: json
+        data: chartData
     }
     return React.Children.map(children, child => React.cloneElement(child, {options}))
 }

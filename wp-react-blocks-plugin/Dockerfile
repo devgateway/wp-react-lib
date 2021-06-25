@@ -4,7 +4,6 @@ COPY blocks ./
 RUN npm install
 RUN npm run build
 
-
 FROM alpine:latest
 COPY --from=compiler /tmp/blocks/build/* /usr/src/
 RUN ls -la /usr/src/

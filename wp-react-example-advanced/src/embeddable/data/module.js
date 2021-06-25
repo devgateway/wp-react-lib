@@ -45,7 +45,7 @@ export const setData = ({app, csv, store, params}) => (dispatch, getState) => {
         params = {...params, ...filters.toJS()}
     }
 
-    const data = Papa.parse(csv,{header:true});
+    const data = Papa.parse(csv, {header: true});
     dispatch({type: LOAD_DATA_DONE, store, data})
 
 }

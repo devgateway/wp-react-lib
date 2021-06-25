@@ -165,8 +165,6 @@ const Chart = (props) => {
 
     const dual = (dualMode === 'true')
 
-    debugger;
-
     return (<div ref={ref}>
             <Container className={"chart container"} style={{"minHeight": height + 'px'}} fluid={true}>
                 <Button className={"download ignore"} onClick={e => exportPng()}>
