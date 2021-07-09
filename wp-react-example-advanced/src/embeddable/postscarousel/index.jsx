@@ -47,7 +47,7 @@ const PostCarousel = (props) => {
         "data-items": items,
         editing, parent, unique
     } = props
-    return <Container className={`tcdi post carousel ${editing ? 'editing' : ''}`} fluid={true}>
+    return <Container className={`wp-react-lib post carousel ${editing ? 'editing' : ''}`} fluid={true}>
         <PostProvider type={type} taxonomy={taxonomy} categories={categories}
                       store={"carousel_" + parent + "_" + unique} page={1}
                       perPage={items}>

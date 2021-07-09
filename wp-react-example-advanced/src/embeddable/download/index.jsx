@@ -64,7 +64,7 @@ const DownloadComponent = (props) => {
     }
     return (
 
-        <Container className={`tcdi download ${editing ? 'editing' : ''}`} fluid={true}>
+        <Container className={`wp-react-lib download ${editing ? 'editing' : ''}`} fluid={true}>
             <React.Fragment>
                 <div>
                     <div className='download-feature'>

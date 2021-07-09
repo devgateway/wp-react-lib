@@ -105,7 +105,7 @@ const Wrapper = (props) => {
     } = props
 
 
-    return <Container className={`tcdi tabbed posts ${editing ? 'editing' : ''}`} fluid={true}>
+    return <Container className={`wp-react-lib tabbed posts ${editing ? 'editing' : ''}`} fluid={true}>
 
         <PostProvider type={type} taxonomy={taxonomy} categories={categories}
                       store={"tabbedposts_" + parent + '_' + unique} page={1}

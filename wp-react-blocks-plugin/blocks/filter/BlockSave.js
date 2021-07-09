@@ -10,7 +10,7 @@ const SaveComponent = (props) => {
         }
     } = props;
     const blockProps = useBlockProps.save({
-        className: 'tcdi component chart'
+        className: 'wp-react-lib component chart'
     });
 
     const divClass = {}
@@ -18,7 +18,7 @@ const SaveComponent = (props) => {
 
 
     return (
-        <div className={"tcdi-component"}
+        <div className={"wp-react-lib-component"}
              data-component={"filter"}
 
              data-type={type}

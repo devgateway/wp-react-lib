@@ -109,7 +109,7 @@ const Root = (props) => {
         "data-read-more-label": moreLabel = "READ More",
         editing, parent, unique
     } = props
-    return <Container className={`tcdi featured tabs ${editing ? 'editing' : ''}`} fluid={true}>
+    return <Container className={`wp-react-lib featured tabs ${editing ? 'editing' : ''}`} fluid={true}>
 
         <PostProvider type={type} taxonomy={taxonomy} categories={categories}
                       store={"tabbedposts_" + parent + "_" + unique} page={1}

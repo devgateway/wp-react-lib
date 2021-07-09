@@ -15,7 +15,7 @@ class EmbeddedGateway extends React.Component {
     renderEmbeddedComponents() {
         const {locale, store, getComponent} = this.props
         const node = ReactDOM.findDOMNode(this)
-        const elements = node.getElementsByClassName("tcdi-component")
+        const elements = node.getElementsByClassName("wp-react-lib-component")
 
 
         if (!(elements == null)) {

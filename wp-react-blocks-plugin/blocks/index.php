@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: TCDI UI Components
+ * Plugin Name: WP React Lib UI Components
  * Plugin URI:
  * Description:
  * Version: 1.0.2

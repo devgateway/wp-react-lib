@@ -20,7 +20,7 @@ const DashboardGallery = ({pages, width}) => {
 }
 
 const Root = (props) => {
-    return (<Container fluid className="tcdi dashboard gallery">
+    return (<Container fluid className="wp-react-lib dashboard gallery">
 
             {props.parent &&
             <PageProvider parent={props.parent} store={"gallery_" + props.parent + '_' + props.unique} perPage={100}>

@@ -14,47 +14,47 @@ if (! function_exists('tdi_setup')) :
         add_theme_support( 'post-thumbnails' );
         add_theme_support( 'editor-font-sizes', array(
             array(
-                'name'      => __( 'Breadcrumbs (12px)', 'tcdi' ),
-                'shortName' => __( 'BR', 'tcdi' ),
+                'name'      => __( 'Breadcrumbs (12px)', 'wp-react-lib' ),
+                'shortName' => __( 'BR', 'wp-react-lib' ),
                 'size'      => 12,
                 'slug'      => 'standard_12'
             ),
             array(
-                'name'      => __( 'Links 16px', 'tcdi' ),
-                'shortName' => __( 'L', 'tcdi' ),
+                'name'      => __( 'Links 16px', 'wp-react-lib' ),
+                'shortName' => __( 'L', 'wp-react-lib' ),
                 'size'      => 16,
                 'slug'      => 'standard_16'
             ),
             array(
-                'name'      => __( 'Body Copy (18px)', 'tcdi' ),
-                'shortName' => __( 'BC', 'tcdi' ),
+                'name'      => __( 'Body Copy (18px)', 'wp-react-lib' ),
+                'shortName' => __( 'BC', 'wp-react-lib' ),
                 'size'      => 18,
                 'slug'      => 'standard_18'
             ),
 array(
-                'name'      => __( 'Title (24px)', 'tcdi' ),
-                'shortName' => __( 'T', 'tcdi' ),
+                'name'      => __( 'Title (24px)', 'wp-react-lib' ),
+                'shortName' => __( 'T', 'wp-react-lib' ),
                 'size'      => 24,
                 'slug'      => 'standard_24'
             ),
 
 array(
-                'name'      => __( 'Section (30px)', 'tcdi' ),
-                'shortName' => __( 'ST', 'tcdi' ),
+                'name'      => __( 'Section (30px)', 'wp-react-lib' ),
+                'shortName' => __( 'ST', 'wp-react-lib' ),
                 'size'      => 30,
                 'slug'      => 'standard_30'
             ),
 
              array(
-                             'name'      => __( 'Secondary (36px)', 'tcdi' ),
-                             'shortName' => __( 'SC', 'tcdi' ),
+                             'name'      => __( 'Secondary (36px)', 'wp-react-lib' ),
+                             'shortName' => __( 'SC', 'wp-react-lib' ),
                              'size'      => 36,
                              'slug'      => 'standard_36'
                          ),
 
    array(
-                             'name'      => __( 'Intro (64px)', 'tcdi' ),
-                             'shortName' => __( 'IT', 'tcdi' ),
+                             'name'      => __( 'Intro (64px)', 'wp-react-lib' ),
+                             'shortName' => __( 'IT', 'wp-react-lib' ),
                              'size'      => 64,
                              'slug'      => 'standard_64'
                          ),
@@ -62,42 +62,42 @@ array(
 
         add_theme_support('editor-color-palette', array(
             array(
-                'name'  => __('Blue', 'tcdi'),
+                'name'  => __('Blue', 'wp-react-lib'),
                 'slug'  => 'blue',
                 'color'	=> '#3e53a6',
             ),
             array(
-                'name'  => __('Light Blue', 'tcdi'),
+                'name'  => __('Light Blue', 'wp-react-lib'),
                 'slug'  => 'light-blue',
                 'color' => '#5089a6',
             ),
             array(
-                'name'  => __('Gray', 'tcdi'),
+                'name'  => __('Gray', 'wp-react-lib'),
                 'slug'  => 'gray',
                 'color' => '#54657e',
                ),
             array(
-                        'name'  => __('Green', 'tcdi'),
+                        'name'  => __('Green', 'wp-react-lib'),
                         'slug'  => 'green',
                         'color' => '#5baf95',
                     ),
             array(
-                'name'  => __('Dark Gray', 'tcdi'),
+                'name'  => __('Dark Gray', 'wp-react-lib'),
                 'slug'  => 'dark-gray',
                 'color' => '#5c5d63',
             ),
             array(
-                'name'  => __('White', 'tcdi'),
+                'name'  => __('White', 'wp-react-lib'),
                 'slug'  => 'white',
                 'color' => '#fff',
             ),
              array(
-                            'name'  => __('Black', 'tcdi'),
+                            'name'  => __('Black', 'wp-react-lib'),
                             'slug'  => 'black',
                             'color' => '#000',
                         ),
              array(
-                        'name'  => __('White', 'tcdi'),
+                        'name'  => __('White', 'wp-react-lib'),
                         'slug'  => 'red',
                         'color' => '#ba5555',
                         ),

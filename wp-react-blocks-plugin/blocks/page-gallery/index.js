@@ -62,7 +62,7 @@ const SaveComponent = (props) => {
     const divClass = {}
     const divStyles = {}
     return (<div className={divClass} style={divStyles}>
-            <div {...props.attributes} className={"tcdi-component"} data-component={"pageGallery"}></div>
+            <div {...props.attributes} className={"wp-react-lib-component"} data-component={"pageGallery"}></div>
         </div>
 
 

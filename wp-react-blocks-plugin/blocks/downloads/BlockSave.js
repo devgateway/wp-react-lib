@@ -15,20 +15,20 @@ const SaveComponent = (props) => {
             pngText,
             jpgText,
             title
-            
+
         },
     } = props;
 
     const divClass = {}
     const divStyles = {}
-    
+
     return (<div className={divClass} style={divStyles}>
-                <div 
+                <div
                      data-height={height}
-                     className={"tcdi-component"}
+                     className={"wp-react-lib-component"}
                      data-component={"download"}
                      data-show-checkpng={checkPng}
-                     
+
                      data-show-checkjpg={checkJpg}
                      data-show-buttonlabel={buttonLabel}
                      data-default-format={defaultFormat}

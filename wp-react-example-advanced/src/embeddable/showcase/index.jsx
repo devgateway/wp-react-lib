@@ -217,7 +217,7 @@ class Index extends React.Component {
         const {showValidation, token, reset} = this.state
 
 
-        return <Container fluid={true} className="tcdi showcase">
+        return <Container fluid={true} className="wp-react-lib showcase">
 
             {(status == 'ERROR' || editing) && <Message negative>
                 <p>{failuremessage}</p>
