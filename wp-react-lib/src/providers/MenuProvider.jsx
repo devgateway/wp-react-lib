@@ -14,13 +14,13 @@ class MenuProvider extends React.Component {
     componentDidMount() {
         const {onLoad, loading, slug, locale} = this.props
         if (slug) {
-            this.props.onLoad(slug, locale)
+            this.props.onLoad({slug, locale})
         }
     }
 
     render() {
         const {menu, locale} = this.props
-        return (<MenuContext.Provider value={{menu,locale}}>
+        return (<MenuContext.Provider value={{menu, locale}}>
             {this.props.children}
         </MenuContext.Provider>);
 

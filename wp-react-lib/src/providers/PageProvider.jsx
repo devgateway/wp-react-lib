@@ -11,30 +11,64 @@ Will load a post base ond passed properties and put in PostContext
 class PageProvider extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const {before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId} = this.props
-
-        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId) {
-            this.props.onLoad(before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId)
+        const {
+            before,
+            perPage,
+            page,
+            fields,
+            parent,
+            slug,
+            store = "pages",
+            locale,
+            previewNonce,
+            previewId,
+            search
+        } = this.props
+        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId | search != prevProps.search) {
+            this.props.onLoad({
+                before,
+                perPage,
+                page,
+                fields,
+                parent,
+                slug,
+                store,
+                locale,
+                previewNonce,
+                previewId,
+                search
+            })
         }
     }
 
     componentDidMount() {
-
-        const {before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId} = this.props
-        this.props.onLoad(before, perPage, page, fields, parent, slug, store, locale, previewNonce,previewId)
+        const {
+            before,
+            perPage,
+            page,
+            fields,
+            parent,
+            slug,
+            store = "pages",
+            locale,
+            previewNonce,
+            previewId,
+            search
+        } = this.props
+        this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search})
     }
 
 
     componentWillUnmount() {
 
-        const {before, perPage, page, fields, parent, slug, store, locale} = this.props
+        const {before, perPage, page, fields, parent, slug, store = "pages", locale} = this.props
         this.props.onClean({store})
     }
 
     render() {
-        const {pages, loading, error, fallbackComponent, locale} = this.props
+        const {pages, meta, loading, error, fallbackComponent, locale} = this.props
         if (pages && pages.length > 0) {
-            return <PageContext.Provider value={{pages, locale}}>{this.props.children}</PageContext.Provider>
+            return <PageContext.Provider value={{pages, meta, locale}}>{this.props.children}</PageContext.Provider>
         } else if (error) {
             return <Segment color={"red"}><h1>500</h1>
                 <p>The service is not available please try again in a few minutes</p></Segment>
@@ -59,13 +93,13 @@ class PageProvider extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const store = ownProps.store
 
+    const {store = "pages"} = ownProps
     return {
-
-        error: state.getIn(['wordpress', 'pages', store, 'error']),
-        pages: state.getIn(['wordpress', 'pages', store, 'items']),
-        loading: state.getIn(['wordpress', 'pages', store, 'loading'])
+        error: state.getIn(['wordpress', store, 'error']),
+        meta: state.getIn(['wordpress', store, 'meta']),
+        pages: state.getIn(['wordpress', store, 'items']),
+        loading: state.getIn(['wordpress', store, 'loading'])
     }
 }
 

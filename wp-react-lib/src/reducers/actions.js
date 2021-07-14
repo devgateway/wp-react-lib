@@ -15,6 +15,9 @@ import {
     LOAD_POSTS,
     LOAD_POSTS_DONE,
     LOAD_POSTS_ERROR,
+    LOAD_SEARCH,
+    LOAD_SEARCH_DONE,
+    LOAD_SEARCH_ERROR,
     LOAD_TAXONOMY,
     LOAD_TAXONOMY_DONE,
     LOAD_TAXONOMY_ERROR
@@ -23,52 +26,79 @@ import {
 import * as wp from '../api'
 
 //used to transform categories to id
-export const loadTaxonomy = (taxonomy, locale = "en") => (dispatch, getState) => {
+export const loadTaxonomy = ({taxonomy, locale = "en"}) => (dispatch, getState) => {
     dispatch({type: LOAD_TAXONOMY})
-    wp.getTaxonomy(taxonomy, locale).then(data => {
-        dispatch({type: LOAD_TAXONOMY_DONE, data, taxonomy})
+    wp.getTaxonomy(taxonomy, locale).then(response => {
+        const {data, meta} = response
+        dispatch({type: LOAD_TAXONOMY_DONE, data, meta, taxonomy})
     }).catch(error => {
         dispatch({type: LOAD_TAXONOMY_ERROR, taxonomy})
     })
 }
 
 // api -> getPostsTaxonomy=(type,category,value,lang)=>{
-export const getPostByTaxonomy = (wpType, taxonomy, category, categoryId, page, perPage, locale = "en") => (dispatch, getState) => {
+export const getPostByTaxonomy = ({
+                                      wpType,
+                                      taxonomy,
+                                      category,
+                                      categoryId,
+                                      page,
+                                      perPage,
+                                      locale = "en"
+                                  }) => (dispatch, getState) => {
     const payLoad = {wpType, taxonomy, category}
+
     dispatch({type: LOAD_CUSTOM_POSTS_BY_TAXONOMY, ...payLoad})
 
     wp.getPostsByTypeAndTaxonomy(wpType, taxonomy, categoryId, locale, page, perPage)
-        .then(data => {
-            dispatch({type: LOAD_CUSTOM_POSTS_BY_TAXONOMY_DONE, data: data, ...payLoad})
+        .then(response => {
+            const {data, meta} = response
+            dispatch({type: LOAD_CUSTOM_POSTS_BY_TAXONOMY_DONE, data, meta, ...payLoad})
         })
         .catch(error => {
             dispatch({type: LOAD_CUSTOM_POSTS_BY_TAXONOMY_ERROR, error, ...payLoad})
         })
 }
 
-export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, store, locale = "en", previewNonce, previewId) => (dispatch, getState) => {
+export const getPosts = ({
+                             slug,
+                             type,
+                             taxonomy,
+                             categories,
+                             before,
+                             perPage,
+                             page,
+                             fields,
+                             store,
+                             locale = "en",
+                             previewNonce,
+                             previewId,
+                             search
+                         }) => (dispatch, getState) => {
 
     dispatch({type: LOAD_POSTS, slug, taxonomy, categories, before, perPage, page, fields, store, locale})
 
-    wp.getPosts(slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId).then(data => {
+    wp.getPosts(slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search)
+        .then(response => {
+            const {data, meta} = response
+            dispatch({
+                type: LOAD_POSTS_DONE,
+                data,
+                slug,
+                taxonomy,
+                categories,
+                before,
+                perPage,
+                page,
+                meta,
+                fields,
+                store,
+                locale,
+                previewNonce,
+                previewId
+            })
 
-        dispatch({
-            type: LOAD_POSTS_DONE,
-            data,
-            slug,
-            taxonomy,
-            categories,
-            before,
-            perPage,
-            page,
-            fields,
-            store,
-            locale,
-            previewNonce,
-            previewId
-        })
-
-    }).catch(error => {
+        }).catch(error => {
         dispatch({
             type: LOAD_POSTS_ERROR,
             error,
@@ -92,13 +122,41 @@ export const clean = (params) => (dispatch, getState) => {
 
 }
 
-export const getPages = (before, perPage, page, fields, parent, slug, store, locale = "en", previewNonce, previewId) => (dispatch, getState) => {
+export const search = ({context, page, perPage, search, type, subtype, store, locale}) => (dispatch, getState) => {
+    dispatch({type: LOAD_SEARCH, store})
+    wp.search(context, page, perPage, search, type, subtype, locale)
+        .then(response => {
+            const {data, meta} = response
+
+            dispatch({type: LOAD_SEARCH_DONE, store, data, meta})
+        })
+        .catch(error => {
+            dispatch({type: LOAD_SEARCH_ERROR, store})
+        })
+}
+
+export const getPages = ({
+                             before,
+                             perPage,
+                             page,
+                             fields,
+                             parent,
+                             slug,
+                             store,
+                             locale = "en",
+                             previewNonce,
+                             previewId,
+                             search
+                         }) => (dispatch, getState) => {
+
     dispatch({type: LOAD_PAGES, store})
-    wp.getPages(before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId)
-        .then(data => {
+    wp.getPages(before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search)
+        .then(response => {
+            const {data, meta} = response
             dispatch({
                 type: LOAD_PAGES_DONE,
                 data,
+                meta,
                 before,
                 perPage,
                 page,
@@ -131,10 +189,11 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
 /*
 Gt WP Menus  (WP-REST-API V2 Menus plugin requiered)
 */
-export const getMenu = (slug, locale = "en") => (dispatch, getState) => {
+export const getMenu = ({slug, locale = "en"}) => (dispatch, getState) => {
     dispatch({type: LOAD_MENU, slug})
-    wp.getMenu(slug, locale).then(data => {
-        dispatch({type: LOAD_MENU_DONE, slug, data})
+    wp.getMenu(slug, locale).then(response => {
+        const {data, meta} = response
+        dispatch({type: LOAD_MENU_DONE, slug, data, meta})
     }).catch(error => {
         dispatch({type: LOAD_MENU_ERROR, slug, error})
     })
@@ -142,8 +201,9 @@ export const getMenu = (slug, locale = "en") => (dispatch, getState) => {
 
 export const getMedia = (id, locale = "en") => (dispatch, getState) => {
     dispatch({type: LOAD_MEDIA, id})
-    wp.getMedia(id, locale).then(data => {
-        dispatch({type: LOAD_MEDIA_DONE, data, id})
+    wp.getMedia(id, locale).then(response => {
+        const {data, meta} = response
+        dispatch({type: LOAD_MEDIA_DONE, data, meta, id})
     }).catch(error => {
         dispatch({type: LOAD_MEDIA_ERROR, error, id})
     })

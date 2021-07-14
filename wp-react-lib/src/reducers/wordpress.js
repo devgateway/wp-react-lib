@@ -25,9 +25,12 @@ import {
     LOAD_POSTS,
     LOAD_POSTS_DONE,
     LOAD_POSTS_ERROR,
+    LOAD_SEARCH,
+    LOAD_SEARCH_DONE,
+    LOAD_SEARCH_ERROR,
     LOAD_TAXONOMY,
     LOAD_TAXONOMY_DONE,
-    LOAD_TAXONOMY_ERROR
+    LOAD_TAXONOMY_ERROR,
 } from "./constans";
 
 
@@ -42,18 +45,14 @@ export default (state = initialState, action) => {
             return state.setIn(['menu', 'loading'], true)
         }
         case LOAD_MENU_DONE: {
-            const {
-                data, slug
-            } = action
-
+            const {data, slug, meta} = action
             return state.setIn(['menu', slug, 'loading'], false)
                 .deleteIn(['menu', slug, 'error'])
+                .setIn(['menu', slug, 'meta'], meta)
                 .setIn(['menu', slug, 'menu'], data)
         }
         case LOAD_MENU_ERROR: {
-            const {
-                data, slug
-            } = action
+            const {data, slug} = action
             return state
                 .setIn(['menu', slug, 'loading'], false)
                 .setIn(['menu', slug, 'error'], action.error)
@@ -66,7 +65,6 @@ export default (state = initialState, action) => {
         }
         case LOAD_TAXONOMY_DONE: {
             const {data, name} = action
-
             return state.setIn([name, 'loading'], false)
                 .deleteIn([name, 'error'])
                 .setIn([name, 'items'], Immutable.fromJS(data))
@@ -78,26 +76,23 @@ export default (state = initialState, action) => {
 
         /*WP Posts*/
         case LOAD_POSTS: {
-
-            const {data, store = 'posts'} = action
+            const {data, store} = action
             return state.setIn([store, 'loading'], true)
 
         }
         case LOAD_POSTS_DONE: {
-            const {data, store = 'posts'} = action
-
+            const {data, meta, store} = action
             return state.setIn([store, 'loading'], false)
                 .deleteIn([store, 'error'])
+                .setIn([store, 'meta'], meta)
                 .setIn([store, "items"], data)
 
         }
         case LOAD_POSTS_ERROR: {
-
-            const {store = 'posts'} = action
+            const {store} = action
             return state
                 .setIn([store, 'loading'], false)
                 .setIn([store, 'error'], action.error)
-
         }
 
         /*CUSTOM POST TYPES*/
@@ -107,9 +102,10 @@ export default (state = initialState, action) => {
 
         }
         case LOAD_CUSTOM_POSTS_BY_TAXONOMY_DONE: {
-            const {data, wpType, taxonomy, category} = action
+            const {data, wpType, taxonomy, category, meta} = action
             return state.setIn([wpType, taxonomy, category, 'loading'], false)
                 .deleteIn([wpType, taxonomy, category, 'error'])
+                .setIn([wpType, taxonomy, category, 'meta'], meta)
                 .setIn([wpType, taxonomy, category, 'items'], data)
         }
         case LOAD_CUSTOM_POSTS_BY_TAXONOMY_ERROR: {
@@ -118,8 +114,6 @@ export default (state = initialState, action) => {
                 .setIn([wpType, taxonomy, category, 'loading'], false)
                 .setIn([wpType, taxonomy, category, 'error'], action.error)
         }
-
-
 
         /*WP Posts*/
         case LOAD_POST: {
@@ -131,7 +125,6 @@ export default (state = initialState, action) => {
             return state.setIn([...path, slug, 'loading'], true)
         }
         case LOAD_POST_DONE: {
-
             const {slug, category, data} = action
             const path = ['post']
             if (category) {
@@ -170,29 +163,46 @@ export default (state = initialState, action) => {
                 .setIn(['page', slug, 'error'], action.error)
         }
 
-
         case LOAD_PAGES: {
             const {store} = action
-            return state.setIn(['pages', store, 'loading'], true)
+            return state.setIn([store, 'loading'], true)
         }
         case LOAD_PAGES_DONE: {
-            const {data, store} = action
-            return state.setIn(['pages', store, 'loading'], false)
-                .deleteIn(['pages', store, 'error'])
-                .setIn(['pages', store, 'items'], data)
+            const {data, store, meta} = action
+            return state.setIn([store, 'loading'], false)
+                .deleteIn([store, 'error'])
+                .setIn([store, 'meta'], meta)
+                .setIn([store, 'items'], data)
         }
         case LOAD_PAGES_ERROR: {
             const {store} = action
             return state
-                .setIn(['pages', store, 'loading'], false)
-                .setIn(['pages', store, 'error'], action.error)
+                .setIn([store, 'loading'], false)
+                .setIn([store, 'error'], action.error)
         }
 
+        case LOAD_SEARCH: {
+            const {store} = action
+            return state.setIn([store, 'loading'], true)
+        }
+        case LOAD_SEARCH_DONE: {
+            const {data, store, meta} = action
+            return state.setIn([store, 'loading'], false)
+                .deleteIn([store, 'error'])
+                .setIn([store, 'meta'], meta)
+                .setIn([store, 'items'], data)
+        }
+        case LOAD_SEARCH_ERROR: {
+            const {store} = action
+            return state
+                .setIn([store, 'loading'], false)
+                .setIn([store, 'error'], action.error)
+        }
         case CLEAN_PAGE_DATA: {
             const {data, store} = action
-            return state.setIn(['pages', store, 'loading'], true)
-                .deleteIn(['pages', store, 'error'])
-                .deleteIn(['pages', store, 'items'])
+            return state.setIn([store, 'loading'], true)
+                .deleteIn([store, 'error'])
+                .deleteIn([store, 'items'])
         }
 
         /*WP pages*/
@@ -213,14 +223,12 @@ export default (state = initialState, action) => {
                 .setIn(['media', id, 'error'], action.error)
         }
 
-
         case LOAD_CHILD_PAGES: {
             const {parentId} = action
             return state.setIn(['child', parentId, 'loading'], true)
         }
         case LOAD_CHILD_PAGES_DONE: {
             const {data, parentId} = action
-
             return state.setIn(['children', parentId, 'loading'], false)
                 .deleteIn(['children', parentId, 'error'])
                 .setIn(['children', parentId, 'items'], data)

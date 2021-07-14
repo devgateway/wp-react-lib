@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {getPosts} from '../reducers/actions'
 import {PostContext} from './Context'
+
 import {Container, Loader, Segment} from "semantic-ui-react";
 
 class PostProvider extends React.Component {
@@ -20,9 +20,13 @@ class PostProvider extends React.Component {
             store = "posts",
             locale,
             previewNonce,
-            previewId
+            previewId,
+            search
         } = this.props
-        this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce, previewId)
+        this.props.onLoadPost({
+            slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce,
+            previewId, search
+        })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -38,20 +42,36 @@ class PostProvider extends React.Component {
             store = "posts",
             locale,
             previewNonce,
-            previewId
+            previewId,
+            search
         } = this.props
 
         if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
-            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage
+            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
         ) {
-            this.props.onLoadPost(slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce, previewId)
+            this.props.onLoadPost({
+                slug,
+                type,
+                taxonomy,
+                categories,
+                before,
+                perPage,
+                page,
+                fields,
+                store,
+                locale,
+                previewNonce,
+                previewId,
+                search
+            })
         }
     }
 
     render() {
-        const {posts, loading, error, locale} = this.props
+        const {posts, meta, loading, error, locale} = this.props
+        debugger;
         if (posts && posts.length > 0) {
-            return <PostContext.Provider value={{posts, locale}}>{this.props.children}</PostContext.Provider>
+            return <PostContext.Provider value={{posts, locale, meta}}>{this.props.children}</PostContext.Provider>
         } else if (error) {
             return <Segment color={"red"}>
                 <h1>500</h1>
@@ -74,6 +94,7 @@ class PostProvider extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     const {store = "posts"} = ownProps
     return {
+        meta: state.getIn(['wordpress', store, 'meta']),
         posts: state.getIn(['wordpress', store, 'items']),
         error: state.getIn(['wordpress', store, 'error']),
         loading: state.getIn(['wordpress', store, 'loading']),

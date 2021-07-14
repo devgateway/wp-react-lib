@@ -1,9 +1,17 @@
 version: '3'
 
 services:
+  plugins:
+    build:
+      context: ./wp-react-blocks-plugin/
+    volumes:
+      - ./wp-react-blocks-plugin/blocks/build:/tmp/plugins
+    restart: "no"
+
   wordpress:
     image: library/wordpress:5.7-fpm-alpine
     depends_on:
+      - plugins
       - mysql
     environment:
       WORDPRESS_DB_HOST: mysql

@@ -17,6 +17,6 @@ class AppContextProvider extends React.Component {
         </AppContext.Provider>);
     }
 
-};
+}
 
 export default AppContextProvider
