@@ -32,18 +32,18 @@ class EmbeddedGateway extends React.Component {
                         props[attrs[i].name] = attrs[i].value;
                     }
                     const C = getComponent(component);
-                    if (C){
-                    ReactDOM.render(
-                        <Provider store={store}>
-                            <IntlProvider locale={locale}>
-                                <AppContextProvider getComponent={getComponent} store={store} locale={locale}>
-                                 <C unique={"embeddable_" + index} {...props} childContent={element.innerHTML}/>
-                                </AppContextProvider>
-                            </IntlProvider>
-                        </Provider>, element);
-                    }else{
+                    if (C) {
                         ReactDOM.render(
-                            <span style={{"color":"red"}}>{component} not found </span>, element);
+                            <Provider store={store}>
+                                <IntlProvider locale={locale}>
+                                    <AppContextProvider getComponent={getComponent} store={store} locale={locale}>
+                                        <C unique={"embeddable_" + index} {...props} childContent={element.innerHTML}/>
+                                    </AppContextProvider>
+                                </IntlProvider>
+                            </Provider>, element);
+                    } else {
+                        ReactDOM.render(
+                            <span style={{"color": "red"}}>{component} not found </span>, element);
                     }
 
 
@@ -68,7 +68,7 @@ class EmbeddedGateway extends React.Component {
 
     render() {
         return <React.Fragment>
-                {this.props.children}
+            {this.props.children}
         </React.Fragment>
     }
 }
@@ -79,12 +79,13 @@ const WithContext = (props) => {
         {
             (data) => {
                 if (data) {
-                    return<EmbeddedGateway locale={data.locale} store={data.store} getComponent={data.getComponent} {...props}>
-                            {props.children}
-                        </EmbeddedGateway>
+                    return <EmbeddedGateway locale={data.locale} store={data.store}
+                                            getComponent={data.getComponent} {...props}>
+                        {props.children}
+                    </EmbeddedGateway>
 
                 } else {
-                    return  <React.Fragment>{props.children} </React.Fragment>
+                    return <React.Fragment>{props.children} </React.Fragment>
                 }
             }
         }

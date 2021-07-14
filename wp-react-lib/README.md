@@ -146,6 +146,7 @@ To create an embeddable component you need
 - Create your React component
 - Add a route that exposes your component without your ui layout
 - Create a wordpress plugin that wraps your component and put it available as a wordpress block.
+- Login in wordpress admin site, go to settings > WP React Settings and enter React APP base URL
 
 Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
 

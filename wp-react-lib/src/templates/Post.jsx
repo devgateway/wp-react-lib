@@ -9,7 +9,7 @@ const Wrapper = (props) => {
         if (single) {
             return <React.Fragment><PostContent  {...props} post={posts[0]}></PostContent></React.Fragment>
         } else {
-            return posts.map(p => <PostContent showTitle showDate {...props} post={p} ></PostContent>)
+            return posts.map(p => <PostContent showTitle showDate {...props} post={p}></PostContent>)
         }
     } else {
         return null

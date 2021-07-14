@@ -4,12 +4,13 @@ import './index.css';
 import 'semantic-ui-css/semantic.min.css'
 import ExamplePage from './ExamplePage';
 import ExamplePosts from './ExamplePosts';
+import ExampleMedata from './ExampleMetadata';
 import ExampleRoutes from './ExampleRoutes'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ExamplePosts/>
+        <ExampleMedata/>
     </React.StrictMode>,
     document.getElementById('root')
 );

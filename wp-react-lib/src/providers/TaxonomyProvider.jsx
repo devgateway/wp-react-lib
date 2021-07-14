@@ -8,11 +8,8 @@ class TaxonomyProvider extends React.Component {
     componentDidMount() {
         const {taxonomy, locale} = this.props
         if (this.props.taxonomies.length == 0) {
-            this.props.onLoad(taxonomy ? taxonomy : 'categories', locale)
+            this.props.onLoad({taxonomy: taxonomy ? taxonomy : 'categories', locale})
         }
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
     }
 
     render() {

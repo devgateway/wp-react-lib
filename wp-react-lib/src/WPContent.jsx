@@ -1,8 +1,8 @@
 import React from 'react'
 
 /**
-    Can Render pages and post selecting the appropriate template
-    @Deprecated
+ Can Render pages and post selecting the appropriate template
+ @Deprecated
  **/
 class WPContent extends React.Component {
     constructor(props) {

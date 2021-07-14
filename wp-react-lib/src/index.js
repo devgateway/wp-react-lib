@@ -25,7 +25,6 @@ import PostTitle from "./template-parts/PostTitle";
 import PostIcon from "./template-parts/PostIcon";
 
 
-
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
 
