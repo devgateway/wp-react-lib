@@ -10,3 +10,4 @@ dist
 /wp-react/dist/
 /example/node_modules/
 /wp-content/plugins/dg-react-components/charts/node_modules/
+/wp-react-blocks-plugin/blocks/build/
