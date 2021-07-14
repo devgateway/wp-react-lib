@@ -11,7 +11,7 @@ class Footer extends Component {
 
     render() {
         const {children, fixed, location} = this.props
-        return (<Container fluid className={"tcdi footer"}>
+        return (<Container fluid className={"wp-react-lib footer"}>
 
             <PageProvider slug={"footer"} store={"footer"}>
                 <PageConsumer>

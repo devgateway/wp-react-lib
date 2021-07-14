@@ -22,7 +22,7 @@ const SaveComponent = (props) => {
                      data-width={width}
                      data-color={colorsParams}
                      data-type={type} data-taxonomy={taxonomy} data-categories={categories.toString()}
-                     className={"tcdi-component"}
+                     className={"wp-react-lib-component"}
                      data-show-post-icons={showIcons}
                      data-component={"inlineList"}>
                 </div>

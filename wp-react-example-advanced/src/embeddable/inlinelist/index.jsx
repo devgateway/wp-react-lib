@@ -50,7 +50,7 @@ const Root = (props) => {
 
     } = props
 
-    return <Container className={`tcdi inline list ${editing ? 'editing' : ''}`} fluid={true}>
+    return <Container className={`wp-react-lib inline list ${editing ? 'editing' : ''}`} fluid={true}>
 
         <PostProvider type={type}
                       taxonomy={taxonomy}

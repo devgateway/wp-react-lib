@@ -117,7 +117,7 @@ const SaveComponent = (props) => {
     const divStyles = {width, height, "background-color": customBackgroundColor};
 
     return (<div className={divClass} style={divStyles}>
-            <div width={width} height={height} className={"tcdi-component"} data-component={"body"}></div>
+            <div width={width} height={height} className={"wp-react-lib-component"} data-component={"body"}></div>
         </div>
 
 

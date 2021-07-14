@@ -83,7 +83,7 @@ const EditComponent = (props) => {
 }
 const SaveComponent = (props) => {
     const {navLabel, topTopLabel} = props.attributes;
-    return (<div className={"tcdi-component"} data-component={"pageModules"} data-nav-label={navLabel}
+    return (<div className={"wp-react-lib-component"} data-component={"pageModules"} data-nav-label={navLabel}
                  data-to-top-label={topTopLabel}>
         </div>
     );

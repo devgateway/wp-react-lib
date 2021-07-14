@@ -20,7 +20,7 @@ const SaveComponent = (props) => {
                      data-height={height}
                      data-color={colorsParams}
                      data-type={type} data-taxonomy={taxonomy} data-categories={categories.toString()}
-                     className={"tcdi-component"}
+                     className={"wp-react-lib-component"}
                      data-read-more-label={readMoreLabel}
                      data-component={"featuredTabs"}>
                 </div>

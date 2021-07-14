@@ -30,7 +30,7 @@ const SaveComponent = (props) => {
                 data-show-labels={showLabels}
                 data-show-icons={showIcons}
                 data-theme={theme}
-                className={"tcdi-component"}
+                className={"wp-react-lib-component"}
                 data-component={"tabbedPosts"}>
             </div>
         </div>

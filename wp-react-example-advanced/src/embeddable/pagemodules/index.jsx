@@ -159,7 +159,7 @@ const Root = (props) => {
     } = props
 
 
-    return (<Container className="tcdi dashboard green" fluid={true}>
+    return (<Container className="wp-react-lib dashboard green" fluid={true}>
 
             {props.parent &&
             <PageProvider parent={props.parent} store={"modules_" + parent + "_" + unique} perPage={100}>

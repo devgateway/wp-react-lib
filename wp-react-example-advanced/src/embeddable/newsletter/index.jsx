@@ -51,9 +51,9 @@ class Index extends React.Component {
             </Message>)
         }
 
-        return <div className="tcdi newsLetter">
+        return <div className="wp-react-lib newsLetter">
 
-            <div className="tcdi newsLetter form">
+            <div className="wp-react-lib newsLetter form">
                 <Input icon='envelope' name="email" ref={this.emailRef} iconPosition='left' placeholder={placeholder}/>
                 <Button primary onClick={e => this.submit()}>{label}</Button>
             </div>

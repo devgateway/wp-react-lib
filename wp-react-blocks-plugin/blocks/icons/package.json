@@ -8,10 +8,10 @@
     "WordPress",
     "block"
   ],
-  "homepage": "https://github.com/devgateway/tobacco-control-dashboard",
-  "repository": "git+https://github.com/devgateway/tobacco-control-dashboard",
+  "homepage": "https://github.com/devgateway/wp-react-lib",
+  "repository": "git+https://github.com/devgateway/wp-react-lib",
   "bugs": {
-    "url": "https://github.com/devgateway/tobacco-control-dashboard/issues"
+    "url": "https://github.com/devgateway/wp-react-lib/issues"
   },
   "main": "build/index.js",
   "devDependencies": {
