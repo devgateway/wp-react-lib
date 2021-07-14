@@ -30,6 +30,7 @@
   },
   "scripts": {
     "dist": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files && npm link",
+    "dev": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files --source-maps --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
