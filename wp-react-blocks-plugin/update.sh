@@ -2,6 +2,6 @@
 VOLUME=/tmp/plugins
 echo Replacing files at $VOLUME...
 rm -rf $VOLUME/*
-cp /usr/src/* $VOLUME/
+cp -r /usr/src/* $VOLUME/
 touch $VOLUME/test.tmp
 echo Done
