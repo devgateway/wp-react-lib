@@ -77,10 +77,11 @@ const MyMenuItems = injectIntl(withRouter(({
     </React.Fragment>
 }))
 
-const Header = ({intl, match}) => {
+const Header = ({intl: {locale} , match}) => {
 
     const [selected, setSelected] = useState()
     const {slug} = match.params
+    const logoUrl = process.env.REACT_APP_USE_HASH_LINKS ? `/#/${locale}` : `/${locale}`
 
     return <React.Fragment>
 
@@ -91,7 +92,7 @@ const Header = ({intl, match}) => {
 
                     <Menu className={"branding"} text>
                         <Menu.Item>
-                            <a href="/"><img className="brand logo" size="large" src='/logo_full.png'/></a>
+                            <a href={logoUrl}><img className="brand logo" size="large" src='/logo_full.png'/></a>
                         </Menu.Item>
 
                         <Menu.Item className={"divider"}>
@@ -120,7 +121,7 @@ const Header = ({intl, match}) => {
 
                 <Container fluid={true} className={"child"}>
                     {selected && selected.child_items && <Menu fluid text>
-                        <MyMenuItems active={slug} locale={intl.locale} withIcons onSetSelected={e => null}
+                        <MyMenuItems active={slug} withIcons onSetSelected={e => null}
                                      menu={{items: selected.child_items}}>}</MyMenuItems>
 
                     </Menu>}

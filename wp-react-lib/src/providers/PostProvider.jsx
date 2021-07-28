@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getPosts} from '../reducers/actions'
 import {PostContext} from './Context'
-
 import {Container, Loader, Segment} from "semantic-ui-react";
+import LocalizedProvider from "./LocalizedProvider"
 
 class PostProvider extends React.Component {
 
@@ -105,4 +105,4 @@ const mapActionCreators = {
     onLoadPost: getPosts
 };
 
-export default connect(mapStateToProps, mapActionCreators)(PostProvider);
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PostProvider))

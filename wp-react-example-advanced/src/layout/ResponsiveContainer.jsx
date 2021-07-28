@@ -81,7 +81,7 @@ class ResponsiveContainer extends Component {
 
 
     render() {
-        const {children, fixed, locale} = this.props
+        const {children, fixed} = this.props
         return (<div>
             <style>
                 {Media.mediaStyles}

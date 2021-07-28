@@ -3,6 +3,7 @@ import {Container, Loader, Segment} from "semantic-ui-react";
 import {connect} from 'react-redux'
 import {PageContext} from './Context'
 import {clean, getPages} from "../reducers/actions";
+import LocalizedProvider from "./LocalizedProvider"
 
 /*
 Will load a post base ond passed properties and put in PostContext
@@ -109,4 +110,4 @@ const mapActionCreators = {
     onLoad: getPages
 };
 
-export default connect(mapStateToProps, mapActionCreators)(PageProvider);
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PageProvider))

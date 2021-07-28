@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {loadTaxonomy} from '../reducers/actions'
 import {TaxonomyContext} from './Context'
+import LocalizedProvider from "./LocalizedProvider"
 
 class TaxonomyProvider extends React.Component {
 
@@ -37,4 +38,4 @@ const mapActionCreators = {
     onLoad: loadTaxonomy
 };
 
-export default connect(mapStateToProps, mapActionCreators)((TaxonomyProvider));
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)((TaxonomyProvider)))

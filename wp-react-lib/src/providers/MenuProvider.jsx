@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getMenu} from '../reducers/actions'
-
 import {MenuContext} from './Context'
+import LocalizedProvider from "./LocalizedProvider"
 
 /*
 WP-REST-API V2 Menus plugin is required
@@ -39,7 +39,7 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default connect(mapStateToProps, mapActionCreators)(MenuProvider);
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(MenuProvider));
 
 
 
