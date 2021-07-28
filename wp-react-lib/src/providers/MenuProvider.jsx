@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {injectIntl} from 'react-intl'
 import {getMenu} from '../reducers/actions'
-
 import {MenuContext} from './Context'
+import LocalizedProvider from "./LocalizedProvider"
 
 /*
 WP-REST-API V2 Menus plugin is required
@@ -13,7 +12,7 @@ Will load a post base ond passed properties and put in PostContext
 class MenuProvider extends React.Component {
 
     componentDidMount() {
-        const {onLoad, loading, slug, intl: {locale}} = this.props
+        const {onLoad, loading, slug, locale} = this.props
         if (slug) {
             this.props.onLoad({slug, locale})
         }
@@ -40,7 +39,7 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default injectIntl(connect(mapStateToProps, mapActionCreators)(MenuProvider));
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(MenuProvider));
 
 
 

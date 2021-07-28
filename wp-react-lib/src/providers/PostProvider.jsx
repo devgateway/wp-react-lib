@@ -1,10 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {injectIntl} from 'react-intl'
 import {getPosts} from '../reducers/actions'
 import {PostContext} from './Context'
-
 import {Container, Loader, Segment} from "semantic-ui-react";
+import LocalizedProvider from "./LocalizedProvider"
 
 class PostProvider extends React.Component {
 
@@ -19,7 +18,7 @@ class PostProvider extends React.Component {
             fields,
             slug,
             store = "posts",
-            intl: {locale},
+            locale,
             previewNonce,
             previewId,
             search
@@ -41,13 +40,13 @@ class PostProvider extends React.Component {
             fields,
             slug,
             store = "posts",
-            intl: {locale},
+            locale,
             previewNonce,
             previewId,
             search
         } = this.props
 
-        if (categories != prevProps.categories || locale != prevProps.intl.locale || slug != prevProps.slug ||
+        if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
             taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
         ) {
             this.props.onLoadPost({
@@ -69,7 +68,7 @@ class PostProvider extends React.Component {
     }
 
     render() {
-        const {posts, meta, loading, error, intl: {locale}} = this.props
+        const {posts, meta, loading, error, locale} = this.props
         debugger;
         if (posts && posts.length > 0) {
             return <PostContext.Provider value={{posts, locale, meta}}>{this.props.children}</PostContext.Provider>
@@ -106,4 +105,4 @@ const mapActionCreators = {
     onLoadPost: getPosts
 };
 
-export default injectIntl(connect(mapStateToProps, mapActionCreators)(PostProvider));
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PostProvider))

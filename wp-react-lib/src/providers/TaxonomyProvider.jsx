@@ -1,20 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {injectIntl} from 'react-intl'
 import {loadTaxonomy} from '../reducers/actions'
 import {TaxonomyContext} from './Context'
+import LocalizedProvider from "./LocalizedProvider"
 
 class TaxonomyProvider extends React.Component {
 
     componentDidMount() {
-        const {taxonomy, intl: {locale}} = this.props
+        const {taxonomy, locale} = this.props
         if (this.props.taxonomies.length == 0) {
             this.props.onLoad({taxonomy: taxonomy ? taxonomy : 'categories', locale})
         }
     }
 
     render() {
-        const {taxonomies, intl: {locale}} = this.props
+        const {taxonomies, locale} = this.props
 
         if (taxonomies) {
             return <TaxonomyContext.Provider
@@ -38,4 +38,4 @@ const mapActionCreators = {
     onLoad: loadTaxonomy
 };
 
-export default injectIntl(connect(mapStateToProps, mapActionCreators)((TaxonomyProvider)));
+export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)((TaxonomyProvider)))
