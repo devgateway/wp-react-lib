@@ -26,7 +26,7 @@ const MediaImage = (props) => <img src={props.media && props.media.guid ? props.
 class Module extends React.Component {
 
     render() {
-        const {page, locale} = this.props
+        const {page} = this.props
         return (<Container fluid={true} className={"section " + page.slug} id={page.id}>
 
             <MediaProvider id={page.meta_fields && page.meta_fields.icon ? page.meta_fields.icon[0] : null}>
@@ -132,8 +132,7 @@ class PageIterator extends React.Component {
                                 this.onVisibilityUpdate(p.id, calculations)
                             }}>
 
-                                <Module locale={locale} {...this.props} page={p}
-                                        onVisibilityUpdate={this.onVisibilityUpdate}/>
+                                <Module {...this.props} page={p} onVisibilityUpdate={this.onVisibilityUpdate}/>
 
                             </Visibility>
                         )
@@ -164,8 +163,7 @@ const Root = (props) => {
             {props.parent &&
             <PageProvider parent={props.parent} store={"modules_" + parent + "_" + unique} perPage={100}>
                 <PageConsumer>
-                    <PageIterator toTopLabel={toTopLabel} navTitle={navTitle} editing={editing === "true"}
-                                  locale={locale}></PageIterator>
+                    <PageIterator toTopLabel={toTopLabel} navTitle={navTitle} editing={editing === "true"}></PageIterator>
                 </PageConsumer>
             </PageProvider>}
 

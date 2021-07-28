@@ -78,7 +78,6 @@ class IntlRoutes extends Component {
                         <Route path="/:lan" exact render={props => (
                             <PageProvider
                                 slug={"home"}
-                                locale={locale}
                                 store={"home"}>
                                 <ResponsiveContainer>
                                     <PageConsumer>
@@ -145,7 +144,6 @@ class IntlRoutes extends Component {
                             return (
 
                                 <PageProvider
-                                    locale={locale}
                                     slug={props.match.params.slug}
                                     store={props.match.params.slug}>
                                     <ResponsiveContainer>
@@ -162,7 +160,6 @@ class IntlRoutes extends Component {
                         }
                         <Route path="/:lan/:parent/:slug/" exact render={props => (
                             <PageProvider
-                                locale={locale}
                                 slug={props.match.params.slug}
                                 store={props.match.params.slug}>
                                 <ResponsiveContainer>
@@ -183,7 +180,6 @@ class IntlRoutes extends Component {
                                 <PostProvider
                                     slug={props.match.params.slug}
                                     store={props.match.params.slug}
-                                    locale={locale}
                                 >
                                     <PostConsumer>
                                         <Post></Post>

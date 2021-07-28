@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import {injectIntl} from 'react-intl'
 import {search} from '../reducers/actions'
 import {SearchContext} from './Context'
 
@@ -8,14 +8,14 @@ import {SearchContext} from './Context'
 class PostProvider extends React.Component {
 
     componentDidMount() {
-        const {context, page, perPage, search, type, subtype, locale, store = "results"} = this.props
+        const {context, page, perPage, search, type, subtype, intl: {locale}, store = "results"} = this.props
         if (search && search !== "") {
             this.props.onLoad({context, page, perPage, search, type, subtype, locale, store})
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const {context, page, perPage, search, type, subtype, locale, store = "results"} = this.props
+        const {context, page, perPage, search, type, subtype, intl: {locale}, store = "results"} = this.props
         if (page != prevProps.page
             || search != prevProps.search
             || context != prevProps.context
@@ -30,7 +30,7 @@ class PostProvider extends React.Component {
     }
 
     render() {
-        const {results, loading, error, meta, locale} = this.props
+        const {results, loading, error, meta, intl: {locale}} = this.props
         return <SearchContext.Provider value={{results, meta, locale}}>{this.props.children}</SearchContext.Provider>
 
     }
@@ -50,4 +50,4 @@ const mapActionCreators = {
     onLoad: search
 };
 
-export default connect(mapStateToProps, mapActionCreators)(PostProvider);
+export default injectIntl(connect(mapStateToProps, mapActionCreators)(PostProvider));

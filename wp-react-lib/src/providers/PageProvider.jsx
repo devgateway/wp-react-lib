@@ -1,6 +1,7 @@
 import React from 'react'
 import {Container, Loader, Segment} from "semantic-ui-react";
 import {connect} from 'react-redux'
+import {injectIntl} from 'react-intl'
 import {PageContext} from './Context'
 import {clean, getPages} from "../reducers/actions";
 
@@ -19,12 +20,12 @@ class PageProvider extends React.Component {
             parent,
             slug,
             store = "pages",
-            locale,
+            intl: {locale},
             previewNonce,
             previewId,
             search
         } = this.props
-        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId | search != prevProps.search) {
+        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.intl.locale || previewId !== prevProps.previewId | search != prevProps.search) {
             this.props.onLoad({
                 before,
                 perPage,
@@ -50,7 +51,7 @@ class PageProvider extends React.Component {
             parent,
             slug,
             store = "pages",
-            locale,
+            intl: {locale},
             previewNonce,
             previewId,
             search
@@ -61,12 +62,12 @@ class PageProvider extends React.Component {
 
     componentWillUnmount() {
 
-        const {before, perPage, page, fields, parent, slug, store = "pages", locale} = this.props
+        const {before, perPage, page, fields, parent, slug, store = "pages", intl: {locale}} = this.props
         this.props.onClean({store})
     }
 
     render() {
-        const {pages, meta, loading, error, fallbackComponent, locale} = this.props
+        const {pages, meta, loading, error, fallbackComponent, intl: {locale}} = this.props
         if (pages && pages.length > 0) {
             return <PageContext.Provider value={{pages, meta, locale}}>{this.props.children}</PageContext.Provider>
         } else if (error) {
@@ -109,4 +110,4 @@ const mapActionCreators = {
     onLoad: getPages
 };
 
-export default connect(mapStateToProps, mapActionCreators)(PageProvider);
+export default injectIntl(connect(mapStateToProps, mapActionCreators)(PageProvider));

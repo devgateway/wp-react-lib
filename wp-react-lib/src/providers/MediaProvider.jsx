@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {injectIntl} from 'react-intl'
 import {getMedia} from '../reducers/actions'
 
 export const MediaContext = React.createContext()
@@ -10,15 +11,14 @@ Will load a post base ond passed properties and put in PostContext
 class MediaProvider extends React.Component {
 
     componentDidMount() {
-        //TODO:pass locale
-        const {onLoad, loading, id, locale} = this.props
+        const {onLoad, loading, id, intl: {locale}} = this.props
         if (id) {
             this.props.onLoad({id, locale})
         }
     }
 
     render() {
-        const {media, id, locale} = this.props
+        const {media, id, intl: {locale}} = this.props
         return (<MediaContext.Provider value={{media, locale}}>
             {this.props.children}
         </MediaContext.Provider>);
@@ -41,4 +41,4 @@ const mapActionCreators = {
     onLoad: getMedia
 };
 
-export default connect(mapStateToProps, mapActionCreators)(MediaProvider);
+export default injectIntl(connect(mapStateToProps, mapActionCreators)(MediaProvider));
