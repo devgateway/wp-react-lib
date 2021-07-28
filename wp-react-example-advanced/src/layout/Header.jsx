@@ -81,6 +81,7 @@ const Header = ({intl: {locale} , match}) => {
 
     const [selected, setSelected] = useState()
     const {slug} = match.params
+    const logoUrl = process.env.REACT_APP_USE_HASH_LINKS ? `/#/${locale}` : `/${locale}`
 
     return <React.Fragment>
 
@@ -91,7 +92,7 @@ const Header = ({intl: {locale} , match}) => {
 
                     <Menu className={"branding"} text>
                         <Menu.Item>
-                            <a href="/"><img className="brand logo" size="large" src='/logo_full.png'/></a>
+                            <a href={logoUrl}><img className="brand logo" size="large" src='/logo_full.png'/></a>
                         </Menu.Item>
 
                         <Menu.Item className={"divider"}>
