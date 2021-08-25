@@ -199,7 +199,7 @@ export const getMenu = ({slug, locale = "en"}) => (dispatch, getState) => {
     })
 }
 
-export const getMedia = (id, locale = "en") => (dispatch, getState) => {
+export const getMedia = ({id, locale = "en"}) => (dispatch, getState) => {
     dispatch({type: LOAD_MEDIA, id})
     wp.getMedia(id, locale).then(response => {
         const {data, meta} = response
