@@ -10,11 +10,12 @@ class EmbeddedGateway extends React.Component {
     constructor(props) {
         super(props);
         this.renderEmbeddedComponents = this.renderEmbeddedComponents.bind(this)
+        this.wrapper = React.createRef();
     }
 
     renderEmbeddedComponents() {
         const {locale, store, getComponent} = this.props
-        const node = ReactDOM.findDOMNode(this)
+        const node = this.wrapper.current;
         const elements = node.getElementsByClassName("wp-react-lib-component")
 
 
@@ -67,9 +68,9 @@ class EmbeddedGateway extends React.Component {
 
 
     render() {
-        return <React.Fragment>
+        return <div ref={this.wrapper}>
             {this.props.children}
-        </React.Fragment>
+        </div>
     }
 }
 
