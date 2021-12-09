@@ -1,8 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {Button, Container, Dropdown, Icon} from "semantic-ui-react";
-import {saveAs} from 'file-saver';
 import {exportComponentAsJPEG} from 'react-component-export-image';
-import {toBlob} from 'html-to-image';
 import {PostContent} from "@devgateway/wp-react-lib";
 
 const DownloadableContent = React.forwardRef((props, ref) => (
@@ -33,25 +31,25 @@ const DownloadComponent = (props) => {
         setFileType(e.target.value)
     }
 
-    function filter(node) {
+    function ignoreElements(node) {
         if (node.classList) {
-            return !node.classList.contains("ignore")
+            return node.classList.contains("ignore")
         }
-        return true;
+        return false
     }
 
     const saveJPG = () => {
-        exportComponentAsJPEG(componentRef, {fileName: jpgLabel})
+        exportComponentAsJPEG(componentRef, {fileName: jpgLabel,
+            ignoreElements,
+            backgroundColor: "#FFF",
+        })
     }
     const savePNG = () => {
-
-        toBlob(componentRef.current, {
-            filter,
+        exportComponentAsPNG(componentRef, {
+            fileName: pngLabel,
+            ignoreElements,
             "backgroundColor": "#FFF",
         })
-            .then(function (blob) {
-                saveAs(blob, pngLabel);
-            });
     }
     const onClickHandler = (type) => {
         setFileType(type)
