@@ -2,7 +2,7 @@
 # WordPress React Lib
 An easy way to integrate your react application with the world's **most popular** content management system. **wp-react-lib** uses the [Wordpress REST API](https://developer.wordpress.org/rest-api/) to load content into your classic React.js stack, it also allows embedding your own React.js components within pages and posts.
 
-# Dependecies
+# Dependencies
 
 wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store as the following example:
 
