@@ -11,17 +11,26 @@ Will load a post base ond passed properties and put in PostContext
 class MediaProvider extends React.Component {
 
     componentDidMount() {
+        //TODO:pass locale
         const {onLoad, loading, id, locale} = this.props
         if (id) {
             this.props.onLoad({id, locale})
         }
     }
+    componentDidUpdate(prevState) {
+        //TODO:pass locale
+        const {onLoad, loading, id, locale} = this.props
 
+        if (id!=prevState.id) {
+            this.props.onLoad({id, locale})
+        }
+    }
     render() {
         const {media, id, locale} = this.props
+
         return (<MediaContext.Provider value={{media, locale}}>
-            {this.props.children}
-        </MediaContext.Provider>);
+                  {this.props.children}
+              </MediaContext.Provider>);
 
     }
 

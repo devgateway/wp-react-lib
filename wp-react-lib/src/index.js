@@ -9,6 +9,7 @@ import MediaProvider from './providers/MediaProvider'
 import MenuProvider from './providers/MenuProvider'
 import TaxonomyProvider from './providers/TaxonomyProvider'
 import AppContextProvider from './providers/AppContextProvider'
+import SettingProvider from './providers/SettingProvider'
 
 
 import PostConsumer from './consumers/PostConsumer'
@@ -16,6 +17,8 @@ import PageConsumer from './consumers/PageConsumer'
 import MediaConsumer from './consumers/MediaConsumer'
 import TaxonomyConsumer from './consumers/TaxonomyConsumer'
 import MenuConsumer from "./consumers/MenuConsumer";
+
+import SettingsConsumer from "./consumers/SettingsConsumer";
 
 import PostContent from "./template-parts/PostContent";
 import PostDate from "./template-parts/PostDate";
@@ -40,11 +43,13 @@ export {
     MenuProvider,
     AppContextProvider,
     TaxonomyProvider,
+    SettingProvider,
     PostConsumer,
     PageConsumer,
     MenuConsumer,
     MediaConsumer,
     TaxonomyConsumer,
+    SettingsConsumer,
     utils,
     wordpress,
     PostContent,
@@ -55,6 +60,5 @@ export {
     PostIcon
 
 }
-
 
 export default null;

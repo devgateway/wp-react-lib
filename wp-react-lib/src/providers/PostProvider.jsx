@@ -21,9 +21,11 @@ class PostProvider extends React.Component {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            onLoadPost
         } = this.props
-        this.props.onLoadPost({
+
+        onLoadPost({
             slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce,
             previewId, search
         })
@@ -43,13 +45,14 @@ class PostProvider extends React.Component {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            onLoadPost
         } = this.props
 
         if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
             taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
         ) {
-            this.props.onLoadPost({
+            onLoadPost({
                 slug,
                 type,
                 taxonomy,
@@ -69,7 +72,6 @@ class PostProvider extends React.Component {
 
     render() {
         const {posts, meta, loading, error, locale} = this.props
-        debugger;
         if (posts && posts.length > 0) {
             return <PostContext.Provider value={{posts, locale, meta}}>{this.props.children}</PostContext.Provider>
         } else if (error) {
