@@ -10,7 +10,7 @@ class PostProvider extends React.Component {
     componentDidMount() {
         const {context, page, perPage, search, type, subtype, locale, store = "results"} = this.props
         if (search && search !== "") {
-            this.props.onLoad({context, page, perPage, search, type, subtype, locale, store})
+            this.props.onSearch({context, page, perPage, search, type, subtype, locale, store})
         }
     }
 
@@ -23,7 +23,7 @@ class PostProvider extends React.Component {
             || type != prevProps.subtype
         ) {
             if (search && search !== "") {
-                this.props.onLoad({context, page, perPage, search, type, subtype, locale, store})
+                this.props.onSearch({context, page, perPage, search, type, subtype, locale, store})
             }
 
         }
@@ -47,7 +47,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapActionCreators = {
-    onLoad: search
+    onSearch: search
 };
 
 export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PostProvider))

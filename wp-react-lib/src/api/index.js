@@ -1,5 +1,6 @@
 const API_ROOT = process.env.REACT_APP_WP_API
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
+
 const URL_API_BASE = API_ROOT + '/wp/v2/'
 
 const URL_PAGE = API_ROOT + '/wp/v2/pages'
@@ -7,6 +8,8 @@ const URL_PAGE = API_ROOT + '/wp/v2/pages'
 const URL_SEARCH = API_ROOT + (process.env.REACT_APP_WP_SEARCH_END_POINT ? process.env.REACT_APP_WP_SEARCH_END_POINT : '/wp/v2/search')
 
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
+
+const URL_SETTINGS = API_ROOT + '/dg/v1/settings'
 
 
 export const post = (url, params, isBlob) => {
@@ -91,6 +94,11 @@ export const getPostsByTypeAndTaxonomy = (type, category, value, locale, page = 
     return get(URL_API_BASE + type + "?_embed&" + category + '=' + value + '&lang=' + locale + '&per_page=' + perPage + '&page=' + page)
 }
 
+
+export const getSettings=(locale,changeUUID)=>{
+    return get(URL_SETTINGS+'?cacheBust='+((Math.random() + 1).toString(36).substring(7))+'&lang='+locale+(changeUUID?'&customize_changeset_uuid='+changeUUID:''))
+}
+
 export const getMenu = (name, locale) => {
     return get(URL_MENU + name + '?lang=' + locale)
 }
@@ -110,7 +118,7 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
         + (slug ? '&slug=' + slug : '')
     if (!slug) {
         url += (categories ? (taxonomy ? '&' + taxonomy : '&categories')
-            + "=" + (categories ? categories : "") : '') //ids
+                + "=" + (categories ? categories : "") : '') //ids
             + (before ? "&before=" + before.toISOString() : "")
             + (perPage ? '&per_page=' + perPage : '')
             + (page ? '&page=' + page : '')
@@ -118,7 +126,7 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
             + (search ? '&search=' + search : '')
     }
 
-    url += "&lang=" + locale
+    //url += "&lang=" + locale
     return get(url)
 }
 
@@ -162,3 +170,10 @@ export const getMedia = (slug, locale) => {
     return get(URL_MEDIA + '/' + slug + '?lang=' + locale)
 }
 
+
+
+
+/*
+export const getSettings = (slug, locale) => {
+    return get(URL_SETTINGS)
+}*/

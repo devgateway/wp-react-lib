@@ -28,9 +28,12 @@ import {
     LOAD_SEARCH,
     LOAD_SEARCH_DONE,
     LOAD_SEARCH_ERROR,
+    LOAD_SETTINGS,
+    LOAD_SETTINGS_DONE,
+    LOAD_SETTINGS_ERROR,
     LOAD_TAXONOMY,
     LOAD_TAXONOMY_DONE,
-    LOAD_TAXONOMY_ERROR,
+    LOAD_TAXONOMY_ERROR
 } from "./constans";
 
 
@@ -40,6 +43,22 @@ const initialState = Immutable.Map()
 export default (state = initialState, action) => {
 
     switch (action.type) {
+        case LOAD_SETTINGS: {
+            return state.setIn(['settings', 'loading'], true)
+        }
+        case LOAD_SETTINGS_DONE: {
+            const {data, meta} = action
+            return state.setIn(['settings', 'loading'], false)
+                .deleteIn(['settings', 'error'])
+                .setIn(['settings', 'meta'], meta)
+                .setIn(['settings', 'data'], data)
+        }
+        case LOAD_SETTINGS_ERROR: {
+            const {data} = action
+            return state
+                .setIn(['settings', 'loading'], false)
+                .setIn(['settings', 'error'], action.error)
+        }
 
         case LOAD_MENU: {
             return state.setIn(['menu', 'loading'], true)

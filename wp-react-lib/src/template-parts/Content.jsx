@@ -1,9 +1,6 @@
 import React from 'react'
-
 import EmbeddedGateway from '../embedded/EmbeddedGateway'
-
 import {Container} from "semantic-ui-react";
-
 import {replaceHTMLinks, replaceLink} from "../util";
 
 const Enhance = (props) => {
@@ -20,13 +17,19 @@ const Enhance = (props) => {
 
 
 class Content extends React.Component {
-
-    componentDidMount() {
+    constructor(props) {
+        super(props);
+        this.state = {showContentEnabled: false}
 
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidMount() {
+        if ( this.props.onLoad){
+             this.props.onLoad()
+        }
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
     }
 
     render() {
@@ -36,7 +39,6 @@ class Content extends React.Component {
             showTitle,
             showContent,
             showIntro,
-            showLink,
             showDate,
             showLoading,
             as,
@@ -45,7 +47,7 @@ class Content extends React.Component {
             preview
         } = this.props
 
-        if (post) {
+          if (post) {
             const contentParts = post.content ? post.content.rendered.split("<!--more-->") : []
             const intro = contentParts.length > 1 ? contentParts[0] : null
             const content = contentParts.length > 1 ? contentParts[1] : contentParts[0]
@@ -58,23 +60,20 @@ class Content extends React.Component {
                 body = content
             }
 
-
-            return <EmbeddedGateway locale={locale} messages={messages} parent={preview ? post.parent : post.id}>
+            return <EmbeddedGateway parentUnique={this.props.parentUnique}  messages={messages} parent={preview ? post.parent : post.id}>
                 <Enhance className="entry-content" {...this.props}>
+                    <div></div>
                     {showDate &&
-                    <Container fluid className="date">{post.date.toLocaleString()}</Container>}
+                        <Container fluid className="date">{post.date.toLocaleString()}</Container>}
                     {showTitle &&
-                    <span className="title" dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
+                        <span id={post.slug} className="title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />}
                     {showIntro &&
-                    <Container fluid className="excerpt"
-                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro, locale)}}/>}
+                        <Container fluid className="excerpt"
+                            dangerouslySetInnerHTML={{ __html: replaceHTMLinks(intro, locale) }} />}
                     {showContent &&
-                    <Container fluid className="content"
-                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
-                    {showLink === true &&
+                        <Container fluid className="content"
+                            dangerouslySetInnerHTML={{ __html: replaceHTMLinks(body, locale) }} />}
 
-                    <a href={replaceLink(post.link)}
-                       className="link">Read More</a>}
                 </Enhance>
             </EmbeddedGateway>
         } else {
