@@ -9,7 +9,7 @@ const PageConsumer = (props) => {
                 {
                     ({menu, locale}) => {
                         return menu && <React.Fragment>
-                            {React.Children.map(props.children, (child => React.cloneElement(child, {menu, locale})))}
+                            {React.Children.map(props.children, (child => React.cloneElement(child, {...props, menu, locale})))}
                         </React.Fragment>
                     }
                 }

@@ -24,8 +24,8 @@ class Content extends React.Component {
     }
 
     componentDidMount() {
-        if ( this.props.onLoad){
-             this.props.onLoad()
+        if (this.props.onLoad) {
+            this.props.onLoad()
         }
     }
 
@@ -47,7 +47,7 @@ class Content extends React.Component {
             preview
         } = this.props
 
-          if (post) {
+        if (post) {
             const contentParts = post.content ? post.content.rendered.split("<!--more-->") : []
             const intro = contentParts.length > 1 ? contentParts[0] : null
             const content = contentParts.length > 1 ? contentParts[1] : contentParts[0]
@@ -60,19 +60,21 @@ class Content extends React.Component {
                 body = content
             }
 
-            return <EmbeddedGateway parentUnique={this.props.parentUnique}  messages={messages} parent={preview ? post.parent : post.id}>
+            return <EmbeddedGateway parentUnique={this.props.parentUnique} messages={messages}
+                                    parent={preview ? post.parent : post.id}>
                 <Enhance className="entry-content" {...this.props}>
                     <div></div>
                     {showDate &&
                         <Container fluid className="date">{post.date.toLocaleString()}</Container>}
                     {showTitle &&
-                        <span id={post.slug} className="title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />}
+                        <span id={post.slug} className="title"
+                              dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
                     {showIntro &&
                         <Container fluid className="excerpt"
-                            dangerouslySetInnerHTML={{ __html: replaceHTMLinks(intro, locale) }} />}
+                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro, locale)}}/>}
                     {showContent &&
                         <Container fluid className="content"
-                            dangerouslySetInnerHTML={{ __html: replaceHTMLinks(body, locale) }} />}
+                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
 
                 </Enhance>
             </EmbeddedGateway>
