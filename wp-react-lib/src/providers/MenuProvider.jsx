@@ -18,6 +18,15 @@ class MenuProvider extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        const { slug} = this.props
+        const {onLoad, loading, locale} = this.props
+        if (prevProps.slug!=this.props.slug) {
+            this.props.onLoad({slug, locale})
+        }
+
+    }
+
     render() {
         const {menu, locale} = this.props
         return (<MenuContext.Provider value={{menu, locale}}>
