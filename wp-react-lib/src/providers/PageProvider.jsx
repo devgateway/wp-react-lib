@@ -23,7 +23,8 @@ class PageProvider extends React.Component {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            noCache
         } = this.props
         if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId | search != prevProps.search) {
             this.props.onLoad({
@@ -37,7 +38,8 @@ class PageProvider extends React.Component {
                 locale,
                 previewNonce,
                 previewId,
-                search
+                search,
+                noCache
             })
         }
     }
@@ -54,9 +56,11 @@ class PageProvider extends React.Component {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            noCache
         } = this.props
-        this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search})
+
+        this.props.onLoad({before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,noCache})
     }
 
 
