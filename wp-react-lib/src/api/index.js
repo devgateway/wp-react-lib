@@ -130,7 +130,7 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
     return get(url)
 }
 
-export const getPages = (before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search) => {
+export const getPages = (before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,noCache) => {
 
     let url = URL_PAGE
 
@@ -150,6 +150,7 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
             + (fields ? '&_fields=' + fields : '')
             + (parent ? '&parent=' + parent : '')
             + (search ? '&search=' + search : '')
+            + (noCache ? '&cacheBust='+((Math.random() + 1).toString(36).substring(7)) : '')
     }
     return get(url)
 }
