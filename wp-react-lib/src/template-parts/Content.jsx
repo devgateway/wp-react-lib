@@ -16,6 +16,28 @@ const Enhance = (props) => {
 }
 
 
+/*
+WP_Multilang doesn't support patterns translation, this function eliminates the duplicated pattern
+* */
+const translate = (str, locale = "en") => {
+    let newStr=null;
+    const matches = str.match(/\[:([a-z])+\]([\s\S]*?)\[:\]/img)
+    if (matches != null) {
+        matches.forEach((part) => {
+            let regularExpression = new RegExp(`\\[:${locale}\\][\\s\\S]([\\s\\S]*?)\\[:`, 'g')
+            let tr = part.match(regularExpression)
+            debugger;
+            if (tr != null) {
+                debugger;
+                let translation = tr[0]
+                newStr = str.replace(part, translation.substring(5, translation.length - 2))
+            }
+        })
+    }
+    return newStr?newStr:str
+}
+
+
 class Content extends React.Component {
     constructor(props) {
         super(props);
@@ -34,17 +56,7 @@ class Content extends React.Component {
 
     render() {
         const {
-            post,
-            pageNumber,
-            showTitle,
-            showContent,
-            showIntro,
-            showDate,
-            showLoading,
-            as,
-            locale,
-            messages,
-            preview
+            post, pageNumber, showTitle, showContent, showIntro, showDate, showLoading, as, locale, messages, preview
         } = this.props
 
         if (post) {
@@ -64,17 +76,13 @@ class Content extends React.Component {
                                     parent={preview ? post.parent : post.id}>
                 <Enhance className="entry-content" {...this.props}>
                     <div></div>
-                    {showDate &&
-                        <Container fluid className="date">{post.date.toLocaleString()}</Container>}
-                    {showTitle &&
-                        <span id={post.slug} className="title"
-                              dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
-                    {showIntro &&
-                        <Container fluid className="excerpt"
-                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(intro, locale)}}/>}
-                    {showContent &&
-                        <Container fluid className="content"
-                                   dangerouslySetInnerHTML={{__html: replaceHTMLinks(body, locale)}}/>}
+                    {showDate && <Container fluid className="date">{post.date.toLocaleString()}</Container>}
+                    {showTitle && <span id={post.slug} className="title"
+                                        dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
+                    {showIntro && <Container fluid className="excerpt"
+                                             dangerouslySetInnerHTML={{__html: replaceHTMLinks(translate(intro, locale), locale)}}/>}
+                    {showContent && <Container fluid className="content"
+                                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(translate(body, locale), locale)}}/>}
 
                 </Enhance>
             </EmbeddedGateway>
