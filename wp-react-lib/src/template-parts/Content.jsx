@@ -20,15 +20,19 @@ const Enhance = (props) => {
 WP_Multilang doesn't support patterns translation, this function eliminates the duplicated pattern
 * */
 const translate = (str, locale = "en") => {
+    if (str==null){
+        return null;
+    }
+
     let newStr=null;
     const matches = str.match(/\[:([a-z])+\]([\s\S]*?)\[:\]/img)
     if (matches != null) {
         matches.forEach((part) => {
             let regularExpression = new RegExp(`\\[:${locale}\\][\\s\\S]([\\s\\S]*?)\\[:`, 'g')
             let tr = part.match(regularExpression)
-            debugger;
+            
             if (tr != null) {
-                debugger;
+                
                 let translation = tr[0]
                 newStr = str.replace(part, translation.substring(5, translation.length - 2))
             }
