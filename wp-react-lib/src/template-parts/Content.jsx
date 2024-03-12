@@ -1,7 +1,7 @@
 import React from 'react'
 import EmbeddedGateway from '../embedded/EmbeddedGateway'
 import {Container} from "semantic-ui-react";
-import {replaceHTMLinks, replaceLink} from "../util";
+import {removePatternBrackets, replaceHTMLinks, replaceLink} from "../util";
 
 const Enhance = (props) => {
     const Component = props.as ? props.as : Container;
@@ -85,8 +85,8 @@ class Content extends React.Component {
                                         dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
                     {showIntro && <Container fluid className="excerpt"
                                              dangerouslySetInnerHTML={{__html: replaceHTMLinks(translate(intro, locale), locale)}}/>}
-                    {showContent && <Container fluid className="content"
-                                               dangerouslySetInnerHTML={{__html: replaceHTMLinks(translate(body, locale), locale)}}/>}
+                    {showContent && <Container fluid className="content "
+                                               dangerouslySetInnerHTML={{__html: removePatternBrackets(replaceHTMLinks(translate(body, locale), locale))}}/>}
 
                 </Enhance>
             </EmbeddedGateway>
