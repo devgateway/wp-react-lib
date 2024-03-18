@@ -48,7 +48,11 @@ export const replaceHTMLinks = (html, locale) => {
 export const removePatternBrackets = (html) => {
     const bracketReplacement = `###${Math.random()}###`; //this is a workaround to skip an issue with brackets in regex and tag it for replacement
     const regex = new RegExp(`(?<=${bracketReplacement}).*?(?=])`, 'ig');
-    return html.replaceAll('[:', bracketReplacement).replaceAll(regex, '').replaceAll(`${bracketReplacement}]`, '');
+    if (html) {
+        return html.replaceAll('[:', bracketReplacement).replaceAll(regex, '').replaceAll(`${bracketReplacement}]`, '');
+    } else {
+        return null;
+    }
 }
 
 export default {replaceHTMLinks, replaceLink}
