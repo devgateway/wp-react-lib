@@ -84,7 +84,7 @@ class Content extends React.Component {
                     {showTitle && <span id={post.slug} className="title"
                                         dangerouslySetInnerHTML={{__html: post.title.rendered}}/>}
                     {showIntro && <Container fluid className="excerpt"
-                                             dangerouslySetInnerHTML={{__html: replaceHTMLinks(translate(intro, locale), locale)}}/>}
+                                             dangerouslySetInnerHTML={{__html: removePatternBrackets(replaceHTMLinks(translate(intro, locale), locale))}}/>}
                     {showContent && <Container fluid className="content "
                                                dangerouslySetInnerHTML={{__html: removePatternBrackets(replaceHTMLinks(translate(body, locale), locale))}}/>}
 
