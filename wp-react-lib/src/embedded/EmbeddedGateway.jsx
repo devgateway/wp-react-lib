@@ -16,12 +16,7 @@ class EmbeddedGateway extends React.Component {
     renderEmbeddedComponents() {
         const {locale, store, getComponent} = this.props
 
-        const node = ReactDOM.findDOMNode(this)
-        //const elements = node.getElementsByClassName("viz-component")
-
-        const elements = node.querySelectorAll(".viz-component:not(.self-render-component > .viz-component)")
-
-        if (!(elements == null)) {
+        if (elements) {
             Array.from(elements).forEach((element, index) => {
 
                 let container = element;
@@ -40,32 +35,34 @@ class EmbeddedGateway extends React.Component {
                 }
 
                 if (component) {
-                    const props = {...this.props}
-                    const attrs = element.attributes
+                    const props = { ...this.props };
+                    const attrs = element.attributes;
                     for (let i = attrs.length - 1; i >= 0; i--) {
                         props[attrs[i].name] = attrs[i].value;
                     }
-                    const C =injectIntl( getComponent(component));
-                    if (C) {
+
+                    const ComponentToRender = getComponent(component);
+
+                    if (ComponentToRender) {
+                        const C = injectIntl(ComponentToRender);
                         ReactDOM.render(
                             <Provider store={store}>
                                 <IntlProvider locale={locale}>
                                     <AppContextProvider getComponent={getComponent} store={store} locale={locale}>
                                         <C unique={(this.props.parentUnique ? this.props.parentUnique : '') + "_embeddable_" + index + "" + (Math.random() + 1).toString(36).substring(7)} {...props}
-                                           childContent={element.innerHTML}/>
+                                            childContent={element.innerHTML} />
                                     </AppContextProvider>
                                 </IntlProvider>
                             </Provider>, container);
                     } else {
                         ReactDOM.render(
-                            <span style={{"color": "red"}}>{component} not found </span>, container);
+                            <span style={{ "color": "red" }}>{component} not found </span>, container);
                     }
-
-
                 }
-            })
+            });
         }
     }
+
 
 
     componentDidMount() {
