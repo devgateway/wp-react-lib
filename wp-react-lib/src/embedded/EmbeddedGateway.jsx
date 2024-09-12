@@ -95,7 +95,7 @@ const WithContext = (props) => {
 
                 if (data) {
                     return <EmbeddedGateway
-                        {...pEmbeddedGatewayrops}
+                        {...props}
                         locale={data.locale}
                         store={data.store}
                         getComponent={data.getComponent} >

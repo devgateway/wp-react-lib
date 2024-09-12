@@ -76,7 +76,7 @@ class Content extends React.Component {
                 body = content
             }
 
-            return < parentUnique={this.props.parentUnique} messages={messages}
+            return <EmbeddedGateway parentUnique={this.props.parentUnique} messages={messages}
                                     parent={preview ? post.parent : post.id}>
                 <Enhance className="entry-content" {...this.props}>
                     <div></div>
@@ -89,7 +89,7 @@ class Content extends React.Component {
                                                dangerouslySetInnerHTML={{__html: removePatternBrackets(replaceHTMLinks(translate(body, locale), locale))}}/>}
 
                 </Enhance>
-            </>
+            </EmbeddedGateway>
         } else {
             return showLoading ? 'Loading' : false;
         }
