@@ -1,5 +1,6 @@
-import React from 'react'
-import {AppContext} from './Context'
+import React, { Suspense } from 'react'
+import { AppContext } from './Context';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 class AppContextProvider extends React.Component {
 
@@ -11,11 +12,19 @@ class AppContextProvider extends React.Component {
     }
 
     render() {
-        const {locale, store, getComponent} = this.props
+        const { locale, store, getComponent } = this.props
 
-        return (<AppContext.Provider value={{store, getComponent, locale}}>
-            {this.props.children}
-        </AppContext.Provider>);
+        return (
+            <AppContext.Provider value={{ store, getComponent, locale }}>
+                <Suspense fallback={
+                     <Dimmer active>
+                     <Loader>Loading</Loader>
+                 </Dimmer>
+                }>
+                    {this.props.children}
+                </Suspense>
+            </AppContext.Provider>
+        );
     }
 
 }
