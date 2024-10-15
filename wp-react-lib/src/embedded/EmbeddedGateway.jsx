@@ -18,10 +18,10 @@ class EmbeddedGateway extends React.Component {
 
         
         // @ts-ignore
-        const node = findDOMNode(this);
+        // const node = findDOMNode(this);
         //const elements = node.getElementsByClassName("viz-component")
 
-        const elements = node.querySelectorAll(".viz-component:not(.self-render-component > .viz-component)")
+        const elements = window.document.querySelectorAll(".viz-component:not(.self-render-component > .viz-component)")
 
         if (!(elements == null)) {
             Array.from(elements).forEach((element, index) => {
