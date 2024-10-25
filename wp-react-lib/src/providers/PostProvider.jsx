@@ -107,4 +107,4 @@ const mapActionCreators = {
     onLoadPost: getPosts
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PostProvider))
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(PostProvider));

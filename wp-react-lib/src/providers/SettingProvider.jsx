@@ -8,12 +8,11 @@ import {SettingsContext} from './Context'
 WP-REST-API V2 Menus plugin is required
 Will load a post base ond passed properties and put in PostContext
 */
-
 class SettingProvider extends React.Component {
 
     componentDidMount() {
         const {onLoad, locale, changeUUID} = this.props
-        if (locale) {
+        if (locale && onLoad) {
             this.props.onLoad({locale,changeUUID})
         }
     }
@@ -39,8 +38,3 @@ const mapActionCreators = {
 };
 
 export default connect(mapStateToProps, mapActionCreators)(SettingProvider);
-
-
-
-
-

@@ -50,4 +50,4 @@ const mapActionCreators = {
     onSearch: search
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PostProvider))
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(PostProvider));

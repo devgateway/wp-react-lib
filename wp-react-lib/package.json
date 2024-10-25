@@ -12,6 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.25.7",
+    "@babel/preset-env": "^7.25.9",
     "@babel/preset-react": "^7.25.7",
     "watch": "^1.0.2"
   },
@@ -19,6 +20,7 @@
     "immutable": "^4.3.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-intl": "^6.8.0",
     "react-redux": "^9.1.2",
     "semantic-ui-react": "^2.1.5 || ^3.0.0-beta.2"
   },
@@ -51,7 +53,18 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-react"
+      [
+        "@babel/preset-env",
+        {
+         "modules": false
+        }
+      ], 
+      [
+        "@babel/preset-react",
+        {
+          "runtime": "automatic"
+        }
+      ]
     ]
   },
   "repository": {
@@ -64,11 +77,8 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    },
-    "./dist": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   }
 }
