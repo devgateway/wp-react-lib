@@ -114,4 +114,4 @@ const mapActionCreators = {
     onLoad: getPages
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PageProvider))
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(PageProvider));

@@ -38,7 +38,6 @@ export {
     Page,
     Category,
     Taxonomy,
-
     PostProvider,
     PageProvider,
     MediaProvider,
@@ -52,8 +51,8 @@ export {
     MediaConsumer,
     TaxonomyConsumer,
     SettingsConsumer,
-    utils,
     wordpress,
+    utils,
     PostContent,
     PostDate,
     PostIntro,
@@ -62,7 +61,4 @@ export {
     PostIcon,
     SearchConsumer,
     SearchProvider
-
 }
-
-export default null;
