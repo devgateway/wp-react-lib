@@ -12,6 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.25.7",
+    "@babel/plugin-external-helpers": "^7.25.9",
     "@babel/preset-env": "^7.25.9",
     "@babel/preset-react": "^7.25.7",
     "watch": "^1.0.2"
@@ -25,7 +26,7 @@
     "semantic-ui-react": "^2.1.5 || ^3.0.0-beta.2"
   },
   "scripts": {
-    "dist": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files && npm link",
+    "dist": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files && npm pack",
     "dev": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files --source-maps --watch",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -56,9 +57,9 @@
       [
         "@babel/preset-env",
         {
-         "modules": false
+          "modules": false
         }
-      ], 
+      ],
       [
         "@babel/preset-react",
         {
