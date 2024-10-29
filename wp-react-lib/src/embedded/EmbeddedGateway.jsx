@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
-import { findDOMNode } from 'react-dom'
 import { Provider } from "react-redux";
 import { IntlProvider, injectIntl } from "react-intl";
 import { AppContext } from "../providers/Context"
