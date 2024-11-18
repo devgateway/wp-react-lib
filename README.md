@@ -102,7 +102,7 @@ wp-react-lib@0.1.0 uses Redux and Immutable , you need to configure your store a
 
 _Using router for loading pages_
 
-````jsx
+```jsx
     const params = useParams();
     <Route exact path="/:slug" element={(
       <div className="App">
@@ -114,10 +114,10 @@ _Using router for loading pages_
 		     </div>
 	)}>
     </Route>
-    ```
+  ```
 
 *Using router for loading posts*
-
+```jsx
     <Route path="/:year/:month/:day/:slug/" element= {(
              <PostProvider  slug={props.match.params.slug} >
 		     <PostConsumer>
@@ -126,6 +126,7 @@ _Using router for loading pages_
 	     </PostProvider>
 	 )}>
     </Route>
+```
 
 
 ## Embedded Components
