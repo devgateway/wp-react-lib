@@ -1,11 +1,11 @@
-const API_ROOT = process.env.REACT_APP_WP_API
+const API_ROOT = process.env.VITE_REACT_APP_WP_API
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
 
 const URL_API_BASE = API_ROOT + '/wp/v2/'
 
 const URL_PAGE = API_ROOT + '/wp/v2/pages'
 
-const URL_SEARCH = API_ROOT + (process.env.REACT_APP_WP_SEARCH_END_POINT ? process.env.REACT_APP_WP_SEARCH_END_POINT : '/wp/v2/search')
+const URL_SEARCH = API_ROOT + (process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ? process.env.VITE_REACT_APP_WP_SEARCH_END_POINT : '/wp/v2/search')
 
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
 

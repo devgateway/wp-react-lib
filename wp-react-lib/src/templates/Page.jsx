@@ -10,8 +10,8 @@ const Page = (props) => {
 
     if (pages) {
 
-        return pages.map(page => {
-            return (<React.Fragment>
+        return pages.map((page, idx) => {
+            return (<React.Fragment key={idx}>
                 <PostContent post={page} {...props}></PostContent>
             </React.Fragment>)
         })
