@@ -27,6 +27,8 @@ import PostLabel from "./template-parts/PostLabel";
 import PostTitle from "./template-parts/PostTitle";
 import PostIcon from "./template-parts/PostIcon";
 
+import SearchConsumer from "./consumers/SearchConsumer";
+import SearchProvider from "./providers/SearchProvider";
 
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
@@ -36,7 +38,6 @@ export {
     Page,
     Category,
     Taxonomy,
-
     PostProvider,
     PageProvider,
     MediaProvider,
@@ -50,15 +51,14 @@ export {
     MediaConsumer,
     TaxonomyConsumer,
     SettingsConsumer,
-    utils,
     wordpress,
+    utils,
     PostContent,
     PostDate,
     PostIntro,
     PostLabel,
     PostTitle,
-    PostIcon
-
+    PostIcon,
+    SearchConsumer,
+    SearchProvider
 }
-
-export default null;

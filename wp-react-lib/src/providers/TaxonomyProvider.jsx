@@ -38,4 +38,4 @@ const mapActionCreators = {
     onLoad: loadTaxonomy
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)((TaxonomyProvider)))
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(TaxonomyProvider));
