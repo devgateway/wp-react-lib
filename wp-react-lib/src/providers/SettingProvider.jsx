@@ -1,5 +1,5 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, { useLayoutEffect } from 'react'
+import {connect, useDispatch, useSelector} from 'react-redux'
 import {getSettings} from '../reducers/actions'
 
 import {SettingsContext} from './Context'
@@ -8,39 +8,30 @@ import {SettingsContext} from './Context'
 WP-REST-API V2 Menus plugin is required
 Will load a post base ond passed properties and put in PostContext
 */
+const SettingProvider = (props) => {
+    const {children, locale, changeUUID } = props;
+    const dispatch = useDispatch();
 
-class SettingProvider extends React.Component {
+    const error = useSelector(state => state.getIn(['wordpress', 'settings', 'error']));
+    const data = useSelector(state => state.getIn(['wordpress', 'settings', 'data']));
+    const loading = useSelector(state => state.getIn(['wordpress', 'settings', 'loading']));
 
-    componentDidMount() {
-        const {onLoad, locale, changeUUID} = this.props
-        if (locale) {
-            this.props.onLoad({locale,changeUUID})
+    useLayoutEffect(() => {
+        dispatch(getSettings({
+            locale,
+            changeUUID
+        }));
+
+        return () => {
+            // cleanup
         }
-    }
+    }, [locale, changeUUID]);
 
-    render() {
-        const {data} = this.props
-        return (<SettingsContext.Provider value={{data}}>
-            {this.props.children}
-        </SettingsContext.Provider>);
-
-    }
+    return (
+        <SettingsContext.Provider value={{ data }}>
+            {children}
+        </SettingsContext.Provider>
+    );
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        error: state.getIn(['wordpress', 'settings', 'error']),
-        data: state.getIn(['wordpress', 'settings', 'data']),
-        loading: state.getIn(['wordpress', 'settings', 'loading'])
-    }
-}
-const mapActionCreators = {
-    onLoad: getSettings
-};
-
-export default connect(mapStateToProps, mapActionCreators)(SettingProvider);
-
-
-
-
-
+export default SettingProvider;

@@ -48,7 +48,7 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(MenuProvider));
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(MenuProvider));
 
 
 
