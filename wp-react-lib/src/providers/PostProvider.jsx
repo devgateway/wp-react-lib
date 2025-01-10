@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPosts } from '../reducers/actions'
 import { PostContext } from './Context'
@@ -30,7 +30,10 @@ const PostProvider = (props) => {
     const error = useSelector(state => state.getIn(['wordpress', store, 'error']));
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
+    const prevProps = useRef({categories, locale, slug, taxonomy, page, perPage, search}).current;
+
     useEffect(() => {
+       
         if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
             taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
         ) {
@@ -53,23 +56,23 @@ const PostProvider = (props) => {
         
     }, [categories, locale, slug, taxonomy, page, perPage, search]);
 
-    // useEffect(() => {
-    //     dispatch(getPosts({
-    //         slug,
-    //         type,
-    //         taxonomy,
-    //         categories,
-    //         before,
-    //         perPage,
-    //         page,
-    //         fields,
-    //         store,
-    //         locale,
-    //         previewNonce,
-    //         previewId,
-    //         search
-    //     }));
-    // }, []);
+    useEffect(() => {
+        dispatch(getPosts({
+            slug,
+            type,
+            taxonomy,
+            categories,
+            before,
+            perPage,
+            page,
+            fields,
+            store,
+            locale,
+            previewNonce,
+            previewId,
+            search
+        }));
+    }, []);
 
     if (posts && posts.length > 0) {
         return <PostContext.Provider value={{ posts, locale, meta }}>{children}</PostContext.Provider>;
