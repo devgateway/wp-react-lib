@@ -31,55 +31,81 @@ const PageProvider = (props) => {
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
     useEffect(() => {
-        dispatch(getPages({
-            before,
-            perPage,
-            page,
-            fields,
-            parent,
-            slug,
-            store,
-            locale,
-            previewNonce,
-            previewId,
-            search,
-            noCache
-        }));
+        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId | search != prevProps.search) {
+            dispatch(getPages({
+                before,
+                perPage,
+                page,
+                fields,
+                parent,
+                slug,
+                store,
+                locale,
+                previewNonce,
+                previewId,
+                search,
+                noCache
+            }));
+        }
 
         return () => {
-            dispatch(clean({ store }));
-        };
+            dispatch(clean(store));
+        }
     }, [parent, slug, locale, previewId, search]);
 
-    if (pages && pages.length > 0) {
-        return <PageContext.Provider value={{ pages, meta, locale }}>{children}</PageContext.Provider>;
-    } else if (error) {
+    // useEffect(() => {
+    //     dispatch(getPages({
+    //         before,
+    //         perPage,
+    //         page,
+    //         fields,
+    //         parent,
+    //         slug,
+    //         store,
+    //         locale,
+    //         previewNonce,
+    //         previewId,
+    //         search,
+    //         noCache
+    //     }));
+    // }, []);
+
+    // Keep showing previous content while loading new content
+    if (loading && !pages) {
+        return (
+            <Container>
+                <Loader inverted content='Loading' />
+            </Container>
+        );
+    }
+
+    if (error) {
         return (
             <Segment color={"red"}>
                 <h1>500</h1>
                 <p>The service is not available please try again in a few minutes</p>
             </Segment>
         );
-    } else if (loading) {
-        return (
-            <Container>
-                <Loader inverted content='Loading' />
-            </Container>
-        );
-    } else if (loading === false) {
+    }
+
+    if (pages && pages.length > 0) {
+        return <PageContext.Provider value={{ pages, meta, locale }}>{children}</PageContext.Provider>;
+    }
+
+    if (loading === false) {
         if (fallbackComponent) {
             return <>{fallbackComponent}</>;
-        } else {
-            return (
-                <Container>
-                    <Segment color={"red"}>
-                        <h1>404</h1>
-                        <p>Can't find this page</p>
-                    </Segment>
-                </Container>
-            );
         }
+        return (
+            <Container>
+                <Segment color={"red"}>
+                    <h1>404</h1>
+                    <p>Can't find this page</p>
+                </Segment>
+            </Container>
+        );
     }
+
     return null;
 };
 
