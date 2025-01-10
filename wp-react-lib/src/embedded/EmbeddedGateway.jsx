@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from "react-redux";
 import { IntlProvider, injectIntl } from "react-intl";
 import { AppContext } from "../providers/Context"
-import { AppContextProvider } from "../../dist";
+import AppContextProvider from '../providers/AppContextProvider';
 
 class EmbeddedGateway extends React.Component {
     constructor(props) {

@@ -1,8 +1,11 @@
-import React from 'react'
-import Content from "./Content";
+import React, { Suspense } from 'react'
+
+const Content = React.lazy(() => import('./Content'))
 
 const PostContent = (props) => {
-    return <Content {...props} showContent={true}></Content>
+    return <Suspense>
+        <Content {...props} showContent={true}></Content>
+    </Suspense>
 }
 
 export default PostContent

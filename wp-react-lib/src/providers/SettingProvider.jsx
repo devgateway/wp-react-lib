@@ -17,10 +17,12 @@ const SettingProvider = (props) => {
     const loading = useSelector(state => state.getIn(['wordpress', 'settings', 'loading']));
 
     useLayoutEffect(() => {
-        dispatch(getSettings({
-            locale,
-            changeUUID
-        }));
+        if (locale) {
+            dispatch(getSettings({
+                locale,
+                changeUUID
+            }));
+        }
 
         return () => {
             // cleanup

@@ -31,22 +31,45 @@ const PostProvider = (props) => {
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
     useEffect(() => {
-        dispatch(getPosts({
-            slug,
-            type,
-            taxonomy,
-            categories,
-            before,
-            perPage,
-            page,
-            fields,
-            store,
-            locale,
-            previewNonce,
-            previewId,
-            search
-        }));
+        if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
+            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
+        ) {
+            dispatch(getPosts({
+                slug,
+                type,
+                taxonomy,
+                categories,
+                before,
+                perPage,
+                page,
+                fields,
+                store,
+                locale,
+                previewNonce,
+                previewId,
+                search
+            }));
+        }
+        
     }, [categories, locale, slug, taxonomy, page, perPage, search]);
+
+    // useEffect(() => {
+    //     dispatch(getPosts({
+    //         slug,
+    //         type,
+    //         taxonomy,
+    //         categories,
+    //         before,
+    //         perPage,
+    //         page,
+    //         fields,
+    //         store,
+    //         locale,
+    //         previewNonce,
+    //         previewId,
+    //         search
+    //     }));
+    // }, []);
 
     if (posts && posts.length > 0) {
         return <PostContext.Provider value={{ posts, locale, meta }}>{children}</PostContext.Provider>;
