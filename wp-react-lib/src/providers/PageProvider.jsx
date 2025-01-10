@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Container, Loader, Segment } from "semantic-ui-react"
 import { useDispatch, useSelector } from 'react-redux'
 import { PageContext } from './Context'
@@ -30,8 +30,11 @@ const PageProvider = (props) => {
     const pages = useSelector(state => state.getIn(['wordpress', store, 'items']));
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
+    const prevProps = useRef({parent, slug, locale, previewId, search}).current;
+
     useEffect(() => {
-        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId | search != prevProps.search) {
+        
+        if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId || search !== prevProps.search) {
             dispatch(getPages({
                 before,
                 perPage,
@@ -53,22 +56,22 @@ const PageProvider = (props) => {
         }
     }, [parent, slug, locale, previewId, search]);
 
-    // useEffect(() => {
-    //     dispatch(getPages({
-    //         before,
-    //         perPage,
-    //         page,
-    //         fields,
-    //         parent,
-    //         slug,
-    //         store,
-    //         locale,
-    //         previewNonce,
-    //         previewId,
-    //         search,
-    //         noCache
-    //     }));
-    // }, []);
+    useEffect(() => {
+        dispatch(getPages({
+            before,
+            perPage,
+            page,
+            fields,
+            parent,
+            slug,
+            store,
+            locale,
+            previewNonce,
+            previewId,
+            search,
+            noCache
+        }));
+    }, []);
 
     // Keep showing previous content while loading new content
     if (loading && !pages) {
