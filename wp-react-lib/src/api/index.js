@@ -1,4 +1,4 @@
-const API_ROOT = process.env.VITE_REACT_APP_WP_API
+const API_ROOT = '/wp/wp-json'
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
 
 const URL_API_BASE = API_ROOT + '/wp/v2/'
