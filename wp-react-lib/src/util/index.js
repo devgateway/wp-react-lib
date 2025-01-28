@@ -16,7 +16,7 @@ export const replaceLink = (url, locale) => {
 export const replaceHTMLinks = (html, locale) => {
     //console.log("--------- replaceHTMLinks--------------")
     // console.log(process.env.REACT_APP_WP_HOSTS)
-    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS.split(",")
+    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS?.split(",") || []
     let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
 
     let link;
