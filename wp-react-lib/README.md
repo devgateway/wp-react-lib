@@ -1,6 +1,8 @@
-
 # WordPress React Lib
 An easy way to integrate your react application with the world's **most popular** content management system. **wp-react-lib** uses the [Wordpress REST API](https://developer.wordpress.org/rest-api/) to load content into your classic React.js stack, it also allows embedding your own React.js components within pages and posts.
+
+# Building
+Run npm install to install all dependencies and npm run dist to build the library.
 
 # Dependecies
 
@@ -22,24 +24,6 @@ wp-react-lib@0.1.0 uses  Redux and Immutable , you need to configure your  store
       compose(applyMiddleware(thunk))  
     )
     
-
-
-## Preparing WordPress
-
-- Run dev_services.sh to start docker container using development enviroment
-- Open localhost
-- Follow WordPress setup wizard
-  - Go to settings/permalinks, then choose day and name
-    - *This configuration depends of your react routes setup*
-  - Go to appearance/themes and activate wp-react-theme
-    - *By activating this theme WordPress will disable its front-end*
-  - Go to plugins and activate the following plugins
-    - WP Multilang
-    - WP-REST-API V2 Menus
-    - **WP React Lib Components**
-- Update .env file accordingly
-- run npm install
-- run npm start
 
 ## Loading pages
 
