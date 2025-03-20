@@ -33,6 +33,8 @@ import SearchProvider from "./providers/SearchProvider";
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
 
+import { SettingsContext } from './providers/Context'
+
 export {
     Post,
     Page,
@@ -60,5 +62,6 @@ export {
     PostTitle,
     PostIcon,
     SearchConsumer,
-    SearchProvider
+    SearchProvider,
+    SettingsContext
 }
