@@ -7,9 +7,9 @@ const SettingsConsumer = (props) => {
         <React.Fragment>
             <SettingsContext.Consumer>
                 {
-                    ({data}) => {
-                        return data && <React.Fragment>
-                            {React.Children.map(props.children, (child => React.cloneElement(child, {settings:data})))}
+                    (_obj) => {
+                        return _obj?.data && <React.Fragment>
+                            {React.Children.map(props.children, (child => React.cloneElement(child, {settings: _obj?.data})))}
                         </React.Fragment>
                     }
                 }
