@@ -30,9 +30,9 @@ const SettingProvider = (props) => {
     }, [locale, changeUUID]);
 
     return (
-        <SettingsContext.Provider value={{ data }}>
-            {children}
-        </SettingsContext.Provider>
+        <>{data && <SettingsContext.Provider value={{ data }}>
+        {children}
+        </SettingsContext.Provider>}</>
     );
 }
 
