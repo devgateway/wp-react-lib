@@ -2,7 +2,11 @@ import React from 'react'
 
 import {SettingsContext} from '../providers/Context'
 
-const SettingsConsumer = (props) => {
+interface SettingsConsumerProps {
+    children: React.DetailedReactHTMLElement<any, HTMLElement>;
+}
+
+const SettingsConsumer = (props: SettingsConsumerProps) => {
     return (
         <React.Fragment>
             <SettingsContext.Consumer>
