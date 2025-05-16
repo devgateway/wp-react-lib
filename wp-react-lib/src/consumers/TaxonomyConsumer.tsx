@@ -1,7 +1,11 @@
 import React from 'react'
 import {TaxonomyContext} from '../providers/Context'
 
-const TaxonomyConsumer = (props) => {
+interface TaxonomyConsumerProps {
+    children: React.DetailedReactHTMLElement<any, HTMLElement>;
+}
+
+const TaxonomyConsumer = (props: TaxonomyConsumerProps) => {
     return (
         <TaxonomyContext.Consumer>
             {({taxonomies, locale}) => {

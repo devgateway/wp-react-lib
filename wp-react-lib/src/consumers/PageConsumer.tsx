@@ -2,7 +2,11 @@ import React from 'react'
 
 import {PageContext} from '../providers/Context'
 
-const PageConsumer = (props) => {
+interface PageConsumerProps {
+    children: React.DetailedReactHTMLElement<any, HTMLElement>;
+}
+
+const PageConsumer = (props: PageConsumerProps) => {
 
     return (
         <React.Fragment>

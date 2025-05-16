@@ -1,10 +1,14 @@
 import React from 'react'
-import {PostContext} from '../providers/Context'
+import {PostContext} from '../providers/Context';
 
-const PostConsumer = (props) => {
+interface PostConsumerProps {
+    children: React.DetailedReactHTMLElement<any, HTMLElement>;
+}
+
+const PostConsumer = (props: PostConsumerProps) => {
     return (
         <PostContext.Consumer>
-            {({posts, meta, locale}) => {
+            {({ posts, meta, locale }) => {
                 if (!posts) return null;
                 return (
                     <React.Fragment>

@@ -2,31 +2,44 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getMedia} from '../reducers/actions'
 import LocalizedProvider from "./LocalizedProvider"
+import type { MediaContextType } from './context-types'
+import type { Media } from '../types'
+export const MediaContext = React.createContext<MediaContextType>({
+    media: null,
+    locale: undefined
+});
 
-export const MediaContext = React.createContext()
+interface MediaProviderProps {
+    children: React.ReactNode
+    id: string
+    locale: string
+    onLoad: ({id, locale}: {id: string, locale: string}) => void
+    loading: boolean
+    media: Media[] | null
+}
 
 /*
 Will load a post base ond passed properties and put in PostContext
 */
-class MediaProvider extends React.Component {
+class MediaProvider extends React.Component<MediaProviderProps> {
 
     componentDidMount() {
         //TODO:pass locale
-        const {onLoad, loading, id, locale} = this.props
+        const {id, locale} = this.props
         if (id) {
             this.props.onLoad({id, locale})
         }
     }
-    componentDidUpdate(prevState) {
+    componentDidUpdate(prevState: MediaProviderProps) {
         //TODO:pass locale
-        const {onLoad, loading, id, locale} = this.props
+        const {id, locale} = this.props
 
         if (id!=prevState.id) {
             this.props.onLoad({id, locale})
         }
     }
     render() {
-        const {media, id, locale} = this.props
+        const {media, locale} = this.props
 
         return (<MediaContext.Provider value={{media, locale}}>
                   {this.props.children}
@@ -37,7 +50,7 @@ class MediaProvider extends React.Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: any, ownProps: MediaProviderProps) => {
     const id = ownProps.id
     return {
         error: state.getIn(['wordpress', 'media', id, 'error']),
