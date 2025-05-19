@@ -1,13 +1,13 @@
 import type { Media } from "../types"
 
-const API_ROOT = process.env.VITE_REACT_APP_WP_API || '/wp/wp-json'
+const API_ROOT = process.env.VITE_REACT_APP_WP_API ?? '/wp/wp-json'
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
 
 const URL_API_BASE = API_ROOT + '/wp/v2/'
 
 const URL_PAGE = API_ROOT + '/wp/v2/pages'
 
-const URL_SEARCH = API_ROOT + (process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ? process.env.VITE_REACT_APP_WP_SEARCH_END_POINT : '/wp/v2/search')
+const URL_SEARCH = API_ROOT + (process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? '/wp/v2/search')
 
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
 
@@ -53,7 +53,7 @@ export const post = (url: string, params: Record<string, unknown>, isBlob?: bool
             })
     })
 }
-export const get = (url: string, params: Record<string, unknown> = {}) => {
+export const get = (url: string, _params: Record<string, unknown> = {}) => {
     return new Promise((resolve, reject) => {
 
         fetch(url, {credentials: 'include'})
@@ -106,13 +106,13 @@ export const getMenu = (name: string, locale: string) => {
 }
 
 export const getPosts = (
-    slug: string, 
-    type: string, 
-    taxonomy: string, 
-    categories: string, 
-    before: Date, 
-    perPage: number, 
-    page: number, 
+    slug: string,
+    type: string,
+    taxonomy: string,
+    categories: string,
+    before: Date,
+    perPage: number,
+    page: number,
     fields: string,
     locale: string,
     previewNonce: string,
@@ -146,16 +146,15 @@ export const getPosts = (
 }
 
 export const getPages = (
-    before: Date, 
-    perPage: number, 
-    page: number, 
-    fields: string, 
-    parent: string, 
-    slug: string, 
-    store: string, 
-    locale: string, 
-    previewNonce: string, 
-    previewId: string, 
+    before: Date,
+    perPage: number,
+    page: number,
+    fields: string,
+    parent: string,
+    slug: string,
+    locale: string,
+    previewNonce: string,
+    previewId: string,
     search: string,
     noCache: boolean) => {
 
@@ -183,12 +182,12 @@ export const getPages = (
 }
 
 export const search = (
-    context: string, 
-    page: number, 
-    perPage: number, 
-    search: string, 
-    type: string, 
-    subtype: string, 
+    context: string,
+    page: number,
+    perPage: number,
+    search: string,
+    type: string,
+    subtype: string,
     locale: string) => {
     let url = URL_SEARCH + '?lang=' + locale
         + (context ? "&context=" + context : '')

@@ -15,14 +15,14 @@ class EmbeddedGateway extends React.Component {
     renderEmbeddedComponents() {
         const { locale, store, getComponent } = this.props
 
-        
+
         // @ts-ignore
         // const node = findDOMNode(this);
         //const elements = node.getElementsByClassName("viz-component")
 
         const elements = window.document.querySelectorAll(".viz-component:not(.self-render-component > .viz-component)")
 
-        if (!(elements == null)) {
+        if (elements) {
             Array.from(elements).forEach((element, index) => {
 
                 let container = element;
@@ -61,7 +61,7 @@ class EmbeddedGateway extends React.Component {
                             );
                     } else {
                         ReactDOM.createRoot(container).render(
-                            <span style={{ "color": "red" }}>{component} not found </span>, 
+                            <span style={{ "color": "red" }}>{component} not found </span>,
                         );
                     }
 

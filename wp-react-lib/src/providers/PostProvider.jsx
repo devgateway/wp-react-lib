@@ -33,7 +33,7 @@ const PostProvider = (props) => {
     const prevProps = useRef({categories, locale, slug, taxonomy, page, perPage, search}).current;
 
     useEffect(() => {
-       
+
         if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
             taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
         ) {
@@ -53,7 +53,7 @@ const PostProvider = (props) => {
                 search
             }));
         }
-        
+
     }, [categories, locale, slug, taxonomy, page, perPage, search]);
 
     useEffect(() => {

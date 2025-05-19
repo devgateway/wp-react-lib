@@ -29,8 +29,10 @@ const SettingProvider = (props) => {
         }
     }, [locale, changeUUID]);
 
+    const memoizedData = useMemo(() => data, [data]);
+
     return (
-        <>{data && <SettingsContext.Provider value={{ data }}>
+        <>{data && <SettingsContext.Provider value={{ data : memoizedData}}>
         {children}
         </SettingsContext.Provider>}</>
     );

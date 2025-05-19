@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {connect} from 'react-redux'
 import {getMenu} from '../reducers/actions'
 import {MenuContext} from './Context'
@@ -48,7 +48,7 @@ const mapActionCreators = {
     onLoad: getMenu
 };
 
-export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(MenuProvider));
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(memo(MenuProvider)));
 
 
 

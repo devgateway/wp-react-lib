@@ -4,24 +4,24 @@ import {loadTaxonomy} from '../reducers/actions'
 import {TaxonomyContext} from './Context'
 import LocalizedProvider from "./LocalizedProvider"
 
-class TaxonomyProvider extends React.Component {
+const TaxonomyProvider = (props) => {
+    const {taxonomy, locale, taxonomies, onLoad, children} = props;
 
-    componentDidMount() {
-        const {taxonomy, locale} = this.props
-        if (this.props.taxonomies.length == 0) {
-            this.props.onLoad({taxonomy: taxonomy ? taxonomy : 'categories', locale})
+    useEffect(() => {
+        if (taxonomies.length === 0) {
+            onLoad({taxonomy: taxonomy ? taxonomy : 'categories', locale});
         }
-    }
+    }, []);
 
-    render() {
-        const {taxonomies, locale} = this.props
+    const memoizedTaxonomies = useMemo(() => taxonomies, [taxonomies]);
+    const memoizedLocale = useMemo(() => locale, [locale]);
 
-        if (taxonomies) {
-            return <TaxonomyContext.Provider
-                value={{taxonomies, locale}}>{this.props.children}</TaxonomyContext.Provider>
-        } else {
-            return <h3>Loading</h3>
-        }
+    if (taxonomies) {
+        return <TaxonomyContext.Provider value={{taxonomies: memoizedTaxonomies, locale: memoizedLocale}}>
+            {children}
+        </TaxonomyContext.Provider>;
+    } else {
+        return <h3>Loading</h3>;
     }
 }
 
