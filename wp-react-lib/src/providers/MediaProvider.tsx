@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {connect} from 'react-redux'
 import {getMedia} from '../reducers/actions'
 import LocalizedProvider from "./LocalizedProvider"
@@ -63,4 +63,4 @@ const mapActionCreators = {
     onLoad: getMedia
 };
 
-export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(MediaProvider))
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(memo(MediaProvider)));

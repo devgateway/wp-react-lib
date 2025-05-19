@@ -1,10 +1,14 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, memo, useMemo } from 'react'
 import { AppContext } from './Context';
-import { Dimmer, Loader } from 'semantic-ui-react';
 
 const AppContextProvider = ({ locale, store, getComponent, children }) => {
+    const memoizedValue = useMemo(() => ({
+        store: store,
+        getComponent: getComponent,
+        locale: locale
+    }), [store, getComponent, locale]);
     return (
-        <AppContext.Provider value={{ store, getComponent, locale }}>
+        <AppContext.Provider value={memoizedValue}>
             <Suspense>
                 {children}
             </Suspense>
@@ -12,4 +16,4 @@ const AppContextProvider = ({ locale, store, getComponent, children }) => {
     );
 }
 
-export default AppContextProvider
+export default memo(AppContextProvider);
