@@ -1,7 +1,6 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useMemo } from 'react'
 import {connect, useDispatch, useSelector} from 'react-redux'
 import {getSettings} from '../reducers/actions'
-
 import {SettingsContext} from './Context'
 
 /*
@@ -29,10 +28,8 @@ const SettingProvider = (props) => {
         }
     }, [locale, changeUUID]);
 
-    const memoizedData = useMemo(() => data, [data]);
-
     return (
-        <>{data && <SettingsContext.Provider value={{ data : memoizedData}}>
+        <>{data && <SettingsContext.Provider value={{ data }}>
         {children}
         </SettingsContext.Provider>}</>
     );

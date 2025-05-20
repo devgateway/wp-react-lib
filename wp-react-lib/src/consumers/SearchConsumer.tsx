@@ -2,7 +2,7 @@ import React from 'react'
 import {SearchContext} from '../providers/Context'
 
 interface SearchConsumerProps {
-    children: React.DetailedReactHTMLElement<any, HTMLElement>;
+    children: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[];
 }
 
 const SearchConsumer = (props: SearchConsumerProps) => {
@@ -10,7 +10,7 @@ const SearchConsumer = (props: SearchConsumerProps) => {
         <SearchContext.Consumer>
             {({results, meta, locale}) => {
                 return results && <React.Fragment>
-                    {React.Children.map(props.children, (child => React.cloneElement(child, {results, meta, locale})))}
+                    {React.Children.map(props.children, (child => React.cloneElement(child as React.ReactElement, {results, meta, locale})))}
                 </React.Fragment>
             }}
         </SearchContext.Consumer>
