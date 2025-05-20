@@ -2,7 +2,7 @@ import React from 'react'
 import {PostContext} from '../providers/Context';
 
 interface PostConsumerProps {
-    children: React.DetailedReactHTMLElement<any, HTMLElement>;
+    children: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[];
 }
 
 const PostConsumer = (props: PostConsumerProps) => {
@@ -12,7 +12,7 @@ const PostConsumer = (props: PostConsumerProps) => {
                 if (!posts) return null;
                 return (
                     <React.Fragment>
-                        {React.Children.map(props.children, (child => React.cloneElement(child, {posts, meta, locale})))}
+                        {React.Children.map(props.children, (child => React.cloneElement(child as React.ReactElement, {posts, meta, locale})))}
                     </React.Fragment>
                 );
             }}

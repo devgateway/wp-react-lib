@@ -1,4 +1,4 @@
-import Immutable from 'immutable'
+import * as Immutable from 'immutable'
 import {
     CLEAN_PAGE_DATA,
     LOAD_CHILD_PAGES,

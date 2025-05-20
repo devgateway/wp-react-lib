@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import {connect} from 'react-redux'
 import {loadTaxonomy} from '../reducers/actions'
 import {TaxonomyContext} from './Context'
