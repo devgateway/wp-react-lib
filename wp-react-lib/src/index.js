@@ -65,3 +65,5 @@ export {
     SearchProvider,
     SettingsContext
 }
+
+export * from './types';
