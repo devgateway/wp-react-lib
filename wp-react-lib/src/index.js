@@ -33,7 +33,7 @@ import SearchProvider from "./providers/SearchProvider";
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
 
-import { SettingsContext } from './providers/Context'
+import { SettingsContext, PageContext, AppContext, PostContext } from './providers/Context'
 
 export {
     Post,
@@ -63,7 +63,11 @@ export {
     PostIcon,
     SearchConsumer,
     SearchProvider,
-    SettingsContext
+    SettingsContext,
+    PageContext,
+    AppContext,
+    PostContext
 }
 
 export * from './types';
+export * from './post-type';
