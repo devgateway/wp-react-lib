@@ -34,6 +34,8 @@ export interface Post {
     _links:          PostLinks;
 }
 
+export type PostType = Post;
+
 export interface PostLinks {
     self:                  Self[];
     collection:            About[];
@@ -107,7 +109,9 @@ export interface PostYoastHeadJSON {
     twitter_site?:           string;
     twitter_misc?:           PostTwitterMisc;
     schema?:                 PostSchema;
-    og_description?:        string;
+    og_description?:         string;
+    description?:            string;
+    twitter_image?:          string;
 }
 
 
@@ -216,4 +220,18 @@ export interface TargetClass {
 export interface PostTwitterMisc {
     "Written by":         string;
     "Est. reading time"?: string;
+}
+
+
+export interface PageMetaResponse {
+    "content-type": string;
+    "link": string;
+    "x-wp-total": string;
+    "x-wp-totalpages": string;
+}
+
+
+export interface PageResponse {
+    data: Post[];
+    meta: PageMetaResponse;
 }
