@@ -53,7 +53,7 @@ export const getPostByTaxonomy = ({
 
     dispatch({type: LOAD_CUSTOM_POSTS_BY_TAXONOMY, ...payLoad})
 
-    wp.getPostsByTypeAndTaxonomy(wpType, taxonomy, categoryId, locale, page, perPage)
+    wp.getPostsByTypeAndTaxonomy({type: wpType, category: taxonomy, value: categoryId, locale, page, perPage})
         .then(response => {
             const {data, meta} = response
             dispatch({type: LOAD_CUSTOM_POSTS_BY_TAXONOMY_DONE, data, meta, ...payLoad})
@@ -81,7 +81,7 @@ export const getPosts = ({
 
     dispatch({type: LOAD_POSTS, slug, taxonomy, categories, before, perPage, page, fields, store, locale})
 
-    wp.getPosts(slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search)
+    wp.getPosts({slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search})
         .then(response => {
             const {data, meta} = response
             dispatch({
@@ -151,7 +151,7 @@ export const getPages = ({
                          }) => (dispatch, getState) => {
 
     dispatch({type: LOAD_PAGES, store})
-    wp.getPages(before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search)
+    wp.getPages({before, perPage, page, fields, parent, slug, locale, previewNonce, previewId, search})
         .then(response => {
             const {data, meta} = response
             dispatch({

@@ -8,8 +8,9 @@
     "dist",
     "README.md"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "immutable": "^4.3.7",
@@ -17,16 +18,18 @@
     "react-dom": "^18.3.1",
     "react-intl": "^6.8.0",
     "react-redux": "^9.1.2",
-    "semantic-ui-react": "^3.0.0-beta.2",
-    "react-compiler-runtime": "^19.0.0-beta-6fc168f-20241025"
+    "semantic-ui-react": "^3.0.0-beta.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.7",
-    "@babel/core": "^7.25.7",
-    "@babel/plugin-transform-runtime": "^7.25.9",
-    "@babel/preset-env": "^7.25.9",
-    "@babel/preset-react": "^7.25.7",
-    "babel-plugin-react-compiler": "^19.0.0-beta-6fc168f-20241025",
+    "@types/node": "^22.15.19",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "^4.4.1",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-tsconfig-paths": "^5.1.4",
     "watch": "^1.0.2"
   },
   "peerDependencies": {
@@ -38,9 +41,9 @@
     "semantic-ui-react": "^3.0.0-beta.2"
   },
   "scripts": {
-    "dist": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files && npm link",
-    "dev": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files --source-maps --watch",
-    "watch": "watch ' babel src/ -d dist ' ./src"
+    "dist": "vite build && npm link",
+    "dev": "vite build --watch",
+    "build": "vite build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,54 +51,28 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": false
-        }
-      ],
-      [
-        "@babel/preset-react",
-        {
-          "runtime": "automatic"
-        }
-      ]
-    ],
-    "plugins": [
-      [
-        "babel-plugin-react-compiler",
-        {
-          "target": "18"
-        }
-      ],
-      "@babel/plugin-transform-runtime"
-    ]
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devgateway/dg-wp-react.git"
+    "url": "git+https://github.com/devgateway/dg-wp-react.git",
+    "directory": "wp-react-lib"
   },
   "keywords": [
-    "react"
+    "react",
+    "dg-data-viz",
+    "data-viz",
+    "wp-react-lib",
+    "wordpress"
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./api": {
+      "types": "./dist/types/api/index.d.ts",
+      "import": "./dist/esm/api/index.js",
+      "require": "./dist/cjs/api/index.js"
     }
   }
 }
