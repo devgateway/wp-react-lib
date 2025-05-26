@@ -44,7 +44,8 @@
   "scripts": {
     "dist": "vite build && npm link",
     "dev": "vite build --watch",
-    "build": "vite build"
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
