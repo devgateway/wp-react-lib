@@ -28,6 +28,10 @@ jobs:
         working-directory: wp-react-lib
         run: npm install
 
+      - name: Run TypeScript Check
+        working-directory: wp-react-lib
+        run: npm run typecheck
+
       - name: Build
         working-directory: wp-react-lib
         run: npm run build
