@@ -1,7 +1,6 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useMemo } from 'react'
 import {connect, useDispatch, useSelector} from 'react-redux'
 import {getSettings} from '../reducers/actions'
-
 import {SettingsContext} from './Context'
 
 /*
