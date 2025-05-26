@@ -15,6 +15,10 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: wp-react-lib
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,26 +29,22 @@ jobs:
           node-version: '22.x'
 
       - name: Install dependencies
-        working-directory: wp-react-lib
         run: npm install
 
       - name: Run TypeScript Check
-        working-directory: wp-react-lib
         run: npm run typecheck
 
       - name: Build
-        working-directory: wp-react-lib
         run: npm run build
 
       - name: Create Release
         uses: changesets/action@v1
         id: release
         with:
-          version: pnpm run version
-          publish: pnpm exec changeset publish --git-tag
+          version: npm run version
+          publish: npm exec changeset publish --git-tag
           commit: "chore(release): update version"
           title: "chore(release): update version"
-          cwd: wp-react-lib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
