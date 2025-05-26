@@ -45,13 +45,8 @@
     "dist": "vite build && npm link",
     "dev": "vite build --watch",
     "build": "vite build",
-    "typecheck": "tsc --noEmit"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "typecheck": "tsc --noEmit",
+    "version": "changeset version"
   },
   "repository": {
     "type": "git",
