@@ -10,7 +10,7 @@
 - *(DVIZ-42)* Migrate consumers and some components to typescript
 - *(DVIZ-42)* Migrate from babel to unbuild (rollup)
 - *(DVIZ-42)* Remove unused packages
-- Ui enhancements
+- UI enhancements
 - TCDICORE-146 fix double loader
 - TCDICORE-151 remove unused variables
 - TCDICORE-151 add missing env variable
