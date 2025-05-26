@@ -15,7 +15,7 @@
   "dependencies": {
     "immutable": "^4.3.7",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.1.0",
     "react-intl": "^6.8.0",
     "react-redux": "^9.1.2",
     "semantic-ui-react": "^3.0.0-beta.2"
@@ -24,7 +24,7 @@
     "@changesets/cli": "^2.29.4",
     "@types/node": "^22.15.19",
     "@types/react": "18.3.11",
-    "@types/react-dom": "18.3.1",
+    "@types/react-dom": "19.1.5",
     "@vitejs/plugin-react": "^4.4.1",
     "rollup-plugin-preserve-directives": "^0.4.0",
     "typescript": "^5.8.3",
@@ -36,7 +36,7 @@
   "peerDependencies": {
     "immutable": "^4.3.7",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.1.0",
     "react-intl": "^6.8.0",
     "react-redux": "^9.1.2",
     "semantic-ui-react": "^3.0.0-beta.2"
