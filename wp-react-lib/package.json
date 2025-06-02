@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "immutable": "^4.3.7",
-    "react": "^18.3.1",
+    "react": "^19.1.0",
     "react-dom": "^18.3.1",
     "react-intl": "^6.8.0",
     "react-redux": "^9.1.2",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.4",
     "@types/node": "^22.15.19",
-    "@types/react": "18.3.11",
+    "@types/react": "19.1.6",
     "@types/react-dom": "18.3.1",
     "@vitejs/plugin-react": "^4.4.1",
     "rollup-plugin-preserve-directives": "^0.4.0",
@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "immutable": "^4.3.7",
-    "react": "^18.3.1",
+    "react": "^19.1.0",
     "react-dom": "^18.3.1",
     "react-intl": "^6.8.0",
     "react-redux": "^9.1.2",
