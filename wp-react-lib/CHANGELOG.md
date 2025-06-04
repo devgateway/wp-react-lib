@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.3.2
+
+### Patch Changes
+
+- 7ce74cb: Fix localized provider by fixing the destructured props
+
 ## 0.3.1
 
 ### Patch Changes
