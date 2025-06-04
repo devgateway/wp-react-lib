@@ -3,7 +3,7 @@ import {AppContext} from "./Context"
 
 const LocalizedProvider = (CustomProvider) => (props) => (
   <AppContext.Consumer>
-    {({locale}) => <CustomProvider locale={locale} {...props} />}
+    {(data) => <CustomProvider locale={data?.locale} {...props} />}
   </AppContext.Consumer>)
 
 export default LocalizedProvider
