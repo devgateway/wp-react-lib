@@ -1,5 +1,17 @@
 # @devgateway/wp-react-lib
 
+## 0.3.2
+
+### Patch Changes
+
+- 7ce74cb: Fix localized provider by fixing the destructured props
+
+## 0.3.1
+
+### Patch Changes
+
+- 7ea6235: Fix rendering issues in the replace link but handling empty values
+
 ## 0.3.0
 
 ### Minor Changes

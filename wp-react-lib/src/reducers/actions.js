@@ -201,7 +201,7 @@ export const getMenu = ({slug, locale = "en"}) => (dispatch, getState) => {
 }
 
 
-export const getSettings = ({locale = "en",changeUUID=null}) => (dispatch, getState) => {
+export const getSettings = ({locale = "en", changeUUID=null}) => (dispatch, getState) => {
     dispatch({type: LOAD_SETTINGS})
     wp.getSettings(locale,changeUUID).then(response => {
         const {data, meta} = response
