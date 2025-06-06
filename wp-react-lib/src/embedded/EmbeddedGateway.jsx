@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client';
-import { Provider } from "react-redux";
-import { IntlProvider, injectIntl } from "react-intl";
-import { AppContext } from "../providers/Context"
+import {Provider} from "react-redux";
+import {IntlProvider, injectIntl} from "react-intl";
+import {AppContext} from "../providers/Context"
 import AppContextProvider from '../providers/AppContextProvider';
 
 class EmbeddedGateway extends React.Component {
@@ -13,14 +13,19 @@ class EmbeddedGateway extends React.Component {
     }
 
     renderEmbeddedComponents() {
-        const { locale, store, getComponent } = this.props
+        const {locale, store, getComponent} = this.props
 
 
         // @ts-ignore
         // const node = findDOMNode(this);
         //const elements = node.getElementsByClassName("viz-component")
 
-        const elements = window.document.querySelectorAll(".viz-component:not(.self-render-component > .viz-component)")
+        //const elements = window.document.querySelectorAll(".viz-component:not(.self-render-component > .viz-component)")
+
+        const allVizComponents = document.querySelectorAll(".viz-component");
+        const elements = Array.from(allVizComponents).filter(el => {
+            return !el.closest("self-render-component");
+        });
 
         if (elements) {
             Array.from(elements).forEach((element, index) => {
@@ -41,7 +46,7 @@ class EmbeddedGateway extends React.Component {
                 }
 
                 if (component) {
-                    const props = { ...this.props }
+                    const props = {...this.props}
                     const attrs = element.attributes
                     for (let i = attrs.length - 1; i >= 0; i--) {
                         props[attrs[i].name] = attrs[i].value;
@@ -54,14 +59,14 @@ class EmbeddedGateway extends React.Component {
                                     <IntlProvider locale={locale}>
                                         <AppContextProvider getComponent={getComponent} store={store} locale={locale}>
                                             <C unique={(this.props.parentUnique ? this.props.parentUnique : '') + "_embeddable_" + index + "" + (Math.random() + 1).toString(36).substring(7)} {...props}
-                                                childContent={element.innerHTML} />
+                                               childContent={element.innerHTML}/>
                                         </AppContextProvider>
                                     </IntlProvider>
                                 </Provider>
                             );
                     } else {
                         ReactDOM.createRoot(container).render(
-                            <span style={{ "color": "red" }}>{component} not found </span>,
+                            <span style={{"color": "red"}}>{component} not found </span>,
                         );
                     }
 
@@ -77,7 +82,7 @@ class EmbeddedGateway extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { parent } = this.props
+        const {parent} = this.props
         if (parent != prevProps.parent) {
             this.renderEmbeddedComponents()
         }
@@ -102,7 +107,7 @@ const WithContext = (props) => {
                         {...props}
                         locale={data.locale}
                         store={data.store}
-                        getComponent={data.getComponent} >
+                        getComponent={data.getComponent}>
                         {props.children}
                     </EmbeddedGateway>
 
