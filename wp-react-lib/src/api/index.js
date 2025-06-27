@@ -11,6 +11,8 @@ const URL_MEDIA = API_ROOT + '/wp/v2/media'
 
 const URL_SETTINGS = API_ROOT + '/dg/v1/settings'
 
+const URL_CATEGORIES = API_ROOT + '/wp/v2/categories'
+
 
 export const post = (url, params, isBlob) => {
 
@@ -103,7 +105,7 @@ export const getMenu = (name, locale) => {
     return get(URL_MENU + name + '?lang=' + locale)
 }
 
-export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search) => {
+export const getPosts = (slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search, after) => {
     //language , categories id, date before, record per page, number of page, fields to be included, post type
     //const {lang, slug, wType: type, taxonomy, categories, before, perPage, page, fields} = params
 
@@ -120,6 +122,7 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
         url += (categories ? (taxonomy ? '&' + taxonomy : '&categories')
                 + "=" + (categories ? categories : "") : '') //ids
             + (before ? "&before=" + before.toISOString() : "")
+            + (after ? "&after=" + after.toISOString() : "")
             + (perPage ? '&per_page=' + perPage : '')
             + (page ? '&page=' + page : '')
             + (fields ? '&_fields=' + fields : '')
@@ -130,7 +133,7 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
     return get(url)
 }
 
-export const getPages = (before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,noCache) => {
+export const getPages = (before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,noCache, after) => {
 
     let url = URL_PAGE
 
@@ -145,6 +148,7 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
         + (slug ? '&slug=' + slug : '')
     if (!slug) {
         url += (before ? "&before=" + before.toISOString() : "")
+            + (after ? "&after=" + after.toISOString() : "")
             + (perPage ? '&per_page=' + perPage : '')
             + (page ? '&page=' + page : '')
             + (fields ? '&_fields=' + fields : '')
@@ -171,10 +175,33 @@ export const getMedia = (slug, locale) => {
     return get(URL_MEDIA + '/' + slug + '?lang=' + locale)
 }
 
-
-
-
-/*
-export const getSettings = (slug, locale) => {
-    return get(URL_SETTINGS)
-}*/
+export const getCategories = ({
+    context = 'view',
+    page = 1,
+    perPage = 10,
+    search,
+    exclude,
+    include,
+    order = 'asc',
+    orderby = 'name',
+    hideEmpty,
+    parent,
+    post,
+    slug,
+    locale
+})=> {
+    let url = URL_CATEGORIES + '?lang=' + locale
+    + (context ? '&context=' + context : '')
+    + (page ? '&page=' + page : '')
+    + (perPage ? '&per_page=' + perPage : '')
+    + (search ? '&search=' + search : '')
+    + (exclude ? '&exclude=' + exclude : '')
+    + (include ? '&include=' + include : '')
+    + (order ? '&order=' + order : '')
+    + (orderby ? '&orderby=' + orderby : '')
+    + (hideEmpty ? '&hide_empty=' + hideEmpty : '')
+    + (parent ? '&parent=' + parent : '')
+    + (post ? '&post=' + post : '')
+    + (slug ? '&slug=' + slug : '')
+    return get(url)
+}

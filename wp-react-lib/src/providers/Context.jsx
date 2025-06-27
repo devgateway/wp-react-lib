@@ -7,3 +7,5 @@ export const SearchContext = React.createContext()
 export const MenuContext = React.createContext()
 export const AppContext = React.createContext()
 export const SettingsContext = React.createContext()
+
+export const CategoriesContext = React.createContext()

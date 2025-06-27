@@ -1,6 +1,9 @@
 import Immutable from 'immutable'
 import {
     CLEAN_PAGE_DATA,
+    LOAD_CATEGORIES,
+    LOAD_CATEGORIES_DONE,
+    LOAD_CATEGORIES_ERROR,
     LOAD_CHILD_PAGES,
     LOAD_CHILD_PAGES_DONE,
     LOAD_CHILD_PAGES_ERROR,
@@ -257,6 +260,25 @@ export default (state = initialState, action) => {
             return state
                 .setIn(['children', parentId, 'loading'], false)
                 .setIn(['children', parentId, 'error'], action.error)
+        }
+
+        /*WP Categories API*/
+        case LOAD_CATEGORIES: {
+            const {store} = action
+            return state.setIn([store, 'loading'], true)
+        }
+        case LOAD_CATEGORIES_DONE: {
+            const {data, meta, store} = action
+            return state.setIn([store, 'loading'], false)
+                .deleteIn([store, 'error'])
+                .setIn([store, 'meta'], meta)
+                .setIn([store, 'items'], Immutable.fromJS(data))
+        }
+        case LOAD_CATEGORIES_ERROR: {
+            const {store} = action
+            return state
+                .setIn([store, 'loading'], false)
+                .setIn([store, 'error'], action.error)
         }
 
         default:

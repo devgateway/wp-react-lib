@@ -11,6 +11,7 @@ const PostProvider = (props) => {
         taxonomy,
         categories,
         before,
+        after,
         perPage,
         page,
         fields,
@@ -33,9 +34,10 @@ const PostProvider = (props) => {
     const prevProps = useRef({categories, locale, slug, taxonomy, page, perPage, search}).current;
 
     useEffect(() => {
-       
+
         if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
-            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
+            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search ||
+            before != prevProps.before || after != prevProps.after
         ) {
             dispatch(getPosts({
                 slug,
@@ -50,11 +52,12 @@ const PostProvider = (props) => {
                 locale,
                 previewNonce,
                 previewId,
-                search
+                search,
+                after
             }));
         }
-        
-    }, [categories, locale, slug, taxonomy, page, perPage, search]);
+
+    }, [categories, locale, slug, taxonomy, page, perPage, search, before, after]);
 
     useEffect(() => {
         dispatch(getPosts({
@@ -70,7 +73,8 @@ const PostProvider = (props) => {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            after
         }));
     }, []);
 
