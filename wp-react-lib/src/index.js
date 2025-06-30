@@ -37,6 +37,8 @@ import { SettingsContext, CategoriesContext } from './providers/Context'
 import CategoriesProvider from './providers/CategoriesProvider'
 import CategoriesConsumer from './consumers/CategoriesConsumer'
 
+export * from './api'
+
 export {
     Post,
     Page,

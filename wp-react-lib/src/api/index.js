@@ -13,6 +13,7 @@ const URL_SETTINGS = API_ROOT + '/dg/v1/settings'
 
 const URL_CATEGORIES = API_ROOT + '/wp/v2/categories'
 
+const URL_YEAR_RANGE = API_ROOT + '/util-api/v1/year-range'
 
 export const post = (url, params, isBlob) => {
 
@@ -204,4 +205,8 @@ export const getCategories = ({
     + (post ? '&post=' + post : '')
     + (slug ? '&slug=' + slug : '')
     return get(url)
+}
+
+export const getYearRange = () => {
+    return get(URL_YEAR_RANGE)
 }
