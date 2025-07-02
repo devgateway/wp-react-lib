@@ -31,13 +31,32 @@ const PostProvider = (props) => {
     const error = useSelector(state => state.getIn(['wordpress', store, 'error']));
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
-    const prevProps = useRef({categories, locale, slug, taxonomy, page, perPage, search}).current;
+    const prevPropsRef = useRef();
 
     useEffect(() => {
+        const currentProps = {
+            categories,
+            locale,
+            slug,
+            taxonomy,
+            page,
+            perPage,
+            search,
+            before,
+            after
+        };
 
-        if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
-            taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search ||
-            before != prevProps.before || after != prevProps.after
+        // On first render or when any dependency changes
+        if (!prevPropsRef.current ||
+            categories !== prevPropsRef.current.categories ||
+            locale !== prevPropsRef.current.locale ||
+            slug !== prevPropsRef.current.slug ||
+            taxonomy !== prevPropsRef.current.taxonomy ||
+            page !== prevPropsRef.current.page ||
+            perPage !== prevPropsRef.current.perPage ||
+            search !== prevPropsRef.current.search ||
+            before !== prevPropsRef.current.before ||
+            after !== prevPropsRef.current.after
         ) {
             dispatch(getPosts({
                 slug,
@@ -55,28 +74,12 @@ const PostProvider = (props) => {
                 search,
                 after
             }));
+
+            // Update the ref with current props
+            prevPropsRef.current = currentProps;
         }
 
     }, [categories, locale, slug, taxonomy, page, perPage, search, before, after]);
-
-    useEffect(() => {
-        dispatch(getPosts({
-            slug,
-            type,
-            taxonomy,
-            categories,
-            before,
-            perPage,
-            page,
-            fields,
-            store,
-            locale,
-            previewNonce,
-            previewId,
-            search,
-            after
-        }));
-    }, []);
 
     if (posts && posts.length > 0) {
         return <PostContext.Provider value={{ posts, locale, meta }}>{children}</PostContext.Provider>;

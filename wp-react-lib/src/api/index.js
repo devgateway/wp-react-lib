@@ -122,8 +122,8 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
     if (!slug) {
         url += (categories ? (taxonomy ? '&' + taxonomy : '&categories')
                 + "=" + (categories ? categories : "") : '') //ids
-            + (before ? "&before=" + before.toISOString() : "")
-            + (after ? "&after=" + after.toISOString() : "")
+            + (before != null ? "&before=" + before.toISOString() : "")
+            + (after != null ? "&after=" + after.toISOString() : "")
             + (perPage ? '&per_page=' + perPage : '')
             + (page ? '&page=' + page : '')
             + (fields ? '&_fields=' + fields : '')
@@ -148,14 +148,19 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
     url += 'lang=' + locale
         + (slug ? '&slug=' + slug : '')
     if (!slug) {
-        url += (before ? "&before=" + before.toISOString() : "")
-            + (after ? "&after=" + after.toISOString() : "")
-            + (perPage ? '&per_page=' + perPage : '')
+        url += (perPage ? '&per_page=' + perPage : '')
             + (page ? '&page=' + page : '')
             + (fields ? '&_fields=' + fields : '')
             + (parent ? '&parent=' + parent : '')
             + (search ? '&search=' + search : '')
             + (noCache ? '&cacheBust='+((Math.random() + 1).toString(36).substring(7)) : '')
+
+        if (before !== null && before !== undefined && before !== '') {
+            url += "&before=" + before.toISOString();
+        }
+        if (after !== null && after !== undefined && after !== '') {
+            url += "&after=" + after.toISOString();
+        }
     }
     return get(url)
 }
