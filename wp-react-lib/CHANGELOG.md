@@ -1,5 +1,13 @@
 # @devgateway/wp-react-lib
 
+## 0.4.1
+
+### Patch Changes
+
+- 7e58a8e: # Hotfix
+
+  - Fix missing exports
+
 ## 0.4.0
 
 ### Minor Changes
