@@ -6,7 +6,7 @@ interface SettingsConsumerProps {
 }
 
 /**
- * @deprecated Use the `SettingsContext.Consumer` instead.
+ * @deprecated Use the `SettingsContext.Consumer` instead if you want type safety.
  * SettingsConsumer is a component that provides the settings to its children.
  * @param props - The props for the SettingsConsumer component.
  * @returns The SettingsConsumer component.

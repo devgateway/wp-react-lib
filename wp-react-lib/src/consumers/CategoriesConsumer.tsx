@@ -6,7 +6,7 @@ interface CategoriesConsumerProps {
 }
 
 /**
- * @deprecated Use the `CategoriesContext.Consumer` instead.
+ * @deprecated Use the `CategoriesContext.Consumer` instead if you want type safety.
  * CategoriesConsumer is a component that provides the categories, loading, error, and meta to its children.
  * @param props - The props for the CategoriesConsumer component.
  * @returns The CategoriesConsumer component.

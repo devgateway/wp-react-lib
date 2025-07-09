@@ -6,7 +6,7 @@ interface PostConsumerProps {
 }
 
 /**
- * @deprecated Use the `PostContext.Consumer` instead.
+ * @deprecated Use the `PostContext.Consumer` instead if you want type safety.
  * PostConsumer is a component that provides the posts, meta, and locale to its children.
  * @param props - The props for the PostConsumer component.
  * @returns The PostConsumer component.

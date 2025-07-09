@@ -6,6 +6,12 @@ interface MediaConsumerProps {
     children: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[];
 }
 
+/**
+ * @deprecated Use the `MediaContext.Consumer` instead if you want type safety.
+ * MediaConsumer is a component that provides the media, locale to its children.
+ * @param props - The props for the MediaConsumer component.
+ * @returns The MediaConsumer component.
+ */
 const MediaConsumer = (props: MediaConsumerProps) => {
     return (
         <MediaContext.Consumer>
