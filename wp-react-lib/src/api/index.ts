@@ -12,7 +12,11 @@ const URL_SEARCH = API_ROOT + (process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ??
 
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
 
-const URL_SETTINGS = API_ROOT + '/dg/v1/settings'
+const URL_SETTINGS = API_ROOT + '/dg/v1/settings';
+
+const URL_CATEGORIES = API_ROOT + '/wp/v2/categories'
+
+const URL_YEAR_RANGE = API_ROOT + '/util-api/v1/year-range'
 
 
 export const post = (url: string, params: Record<string, unknown>, isBlob?: boolean) => {
@@ -120,7 +124,8 @@ export const getPosts = ({
     locale,
     previewNonce,
     previewId,
-    search
+    search,
+    after
 }: {
     slug?: string;
     type?: string;
@@ -134,31 +139,44 @@ export const getPosts = ({
     previewNonce?: string;
     previewId?: string;
     search?: string;
+    after?: Date;
 }) => {
-    //language , categories id, date before, record per page, number of page, fields to be included, post type
-    //const {lang, slug, wType: type, taxonomy, categories, before, perPage, page, fields} = params
 
     let url = URL_API_BASE + (type ?? 'posts')
+
     if (previewId) {
         url += '/' + previewId + '/revisions'
             + (previewNonce ? '?_wpnonce=' + previewNonce + '&' : '')
     } else {
         url += "?"
     }
-    url += '_embed=true&lang=' + locale
+
+    url += 'lang=' + locale
         + (slug ? '&slug=' + slug : '')
     if (!slug) {
         url += (categories ? (taxonomy ? '&' + taxonomy : '&categories')
-                + "=" + (categories ??  "") : '') //ids
-            + (before ? "&before=" + before.toISOString() : "")
+            + "=" + (categories ? categories : "") : '') //ids
             + (perPage ? '&per_page=' + perPage : '')
             + (page ? '&page=' + page : '')
             + (fields ? '&_fields=' + fields : '')
             + (search ? '&search=' + search : '')
-    }
 
-    //url += "&lang=" + locale
-    return get(url);
+        if (before !== null && before !== undefined) {
+            if (before instanceof Date) {
+                url += "&before=" + before.toISOString();
+            } else {
+                url += "&before=" + before;
+            }
+        }
+        if (after !== null && after !== undefined) {
+            if (after instanceof Date) {
+                url += "&after=" + after.toISOString();
+            } else {
+                url += "&after=" + after;
+            }
+        }
+    }
+    return get(url)
 }
 
 export const getPages = ({
@@ -232,10 +250,51 @@ export const getMedia = (slug: string, locale: string) : Promise<Media> => {
     return get(URL_MEDIA + '/' + slug + '?lang=' + locale) as Promise<Media>;
 }
 
+export const getCategories = ({
+    context = 'view',
+    page = 1,
+    perPage = 10,
+    search,
+    exclude,
+    include,
+    order = 'asc',
+    orderby = 'name',
+    hideEmpty,
+    parent,
+    post,
+    slug,
+    locale
+}: {
+    context?: string;
+    page?: number;
+    perPage?: number;
+    search?: string;
+    exclude?: string;
+    include?: string;
+    order?: string;
+    orderby?: string;
+    hideEmpty?: boolean;
+    parent?: string;
+    post?: string;
+    slug?: string;
+    locale?: string;
+})=> {
+    let url = URL_CATEGORIES + '?lang=' + locale
+    + (context ? '&context=' + context : '')
+    + (page ? '&page=' + page : '')
+    + (perPage ? '&per_page=' + perPage : '')
+    + (search ? '&search=' + search : '')
+    + (exclude ? '&exclude=' + exclude : '')
+    + (include ? '&include=' + include : '')
+    + (order ? '&order=' + order : '')
+    + (orderby ? '&orderby=' + orderby : '')
+    + (hideEmpty ? '&hide_empty=' + hideEmpty : '')
+    + (parent ? '&parent=' + parent : '')
+    + (post ? '&post=' + post : '')
+    + (slug ? '&slug=' + slug : '')
+    return get(url)
+}
 
-
-
-/*
-export const getSettings = (slug, locale) => {
-    return get(URL_SETTINGS)
-}*/
+export const getYearRange = () => {
+    return get(URL_YEAR_RANGE)
+}
