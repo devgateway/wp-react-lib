@@ -6,7 +6,7 @@ interface PageConsumerProps {
 }
 
 /**
- * @deprecated Use the `PageContext.Consumer` instead.
+ * @deprecated Use the `PageContext.Consumer` instead if you want type safety.
  * PageConsumer is a component that provides the pages, meta, and locale to its children.
  * @param props - The props for the PageConsumer component.
  * @returns The PageConsumer component.
