@@ -30,13 +30,14 @@ import PostIcon from "./template-parts/PostIcon";
 import SearchConsumer from "./consumers/SearchConsumer";
 import SearchProvider from "./providers/SearchProvider";
 
+
 import CategoriesProvider from "./providers/CategoriesProvider";
 import CategoriesConsumer from "./consumers/CategoriesConsumer";
 
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
 
-import { SettingsContext, PageContext, AppContext, PostContext } from './providers/Context'
+import { SettingsContext, PageContext, AppContext, PostContext, CategoriesContext } from './providers/Context'
 
 export {
     Post,
@@ -71,7 +72,8 @@ export {
     AppContext,
     PostContext,
     CategoriesProvider,
-    CategoriesConsumer
+    CategoriesConsumer,
+    CategoriesContext
 }
 
 export * from './types';
