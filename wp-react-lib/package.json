@@ -69,6 +69,11 @@
       "types": "./dist/types/api/index.d.ts",
       "import": "./dist/esm/api/index.js",
       "require": "./dist/cjs/api/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/types/hooks/index.d.ts",
+      "import": "./dist/esm/hooks/index.js",
+      "require": "./dist/cjs/hooks/index.js"
     }
   }
 }

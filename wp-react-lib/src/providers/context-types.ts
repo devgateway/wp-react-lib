@@ -1,5 +1,5 @@
 import type { Post } from "../post-type"
-import type { DgSettings, Media, SearchResult, Taxonomy } from "../types"
+import type { Category, DgSettings, Media, SearchResult, Taxonomy } from "../types"
 
 export interface PostContextType {
     posts: Post[] | null
@@ -32,4 +32,12 @@ export interface SettingsContextType {
 export interface TaxonomyContextType {
     taxonomies: Taxonomy[] | null
     locale: string | undefined
+}
+
+export interface CategoriesContextType {
+    categories: Category[] | null
+    meta: any
+    locale: string | undefined
+    loading: boolean
+    error: any
 }
