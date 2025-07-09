@@ -1,5 +1,26 @@
 # @devgateway/wp-react-lib
 
+## 0.4.0
+
+### Minor Changes
+
+- ad59d59: # Changelog
+
+  ## Changes
+
+  - Update Media Consumer to include type definitions.
+  - Update Page Consumer to include type definitions.
+  - Update Post Consumer to include type definitions.
+  - Update Search Consumer to include type definitions.
+  - Update Settings Consumer to include type definitions.
+  - Update Taxonomy Consumer to include type definitions.
+
+  ## New Features
+
+  - Add Categories consumer.
+  - Add date range API.
+  - Add Categories provider.
+
 ## 0.3.2
 
 ### Patch Changes
