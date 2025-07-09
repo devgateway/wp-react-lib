@@ -1,6 +1,5 @@
 import React from 'react'
 import { MediaContext } from '../providers/MediaProvider'
-import type { Media } from '../types';
 
 interface MediaConsumerProps {
     children: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[];

@@ -17,6 +17,7 @@ interface UsePostsProps {
     previewNonce?: string;
     previewId?: string;
     search?: string;
+    after?: string;
 }
 
 interface UsePostsReturn {
@@ -51,7 +52,8 @@ export const usePosts = (props: UsePostsProps): UsePostsReturn => {
         locale,
         previewNonce,
         previewId,
-        search
+        search,
+        after
     } = props;
 
     const dispatch = useDispatch() as any; // Type assertion to handle thunk actions
@@ -85,7 +87,8 @@ export const usePosts = (props: UsePostsProps): UsePostsReturn => {
                 locale,
                 previewNonce,
                 previewId,
-                search
+                search,
+                after
             }));
         }
     }, [categories, locale, slug, taxonomy, page, perPage, search, dispatch, type, before, fields, store, previewNonce, previewId]);
@@ -104,7 +107,8 @@ export const usePosts = (props: UsePostsProps): UsePostsReturn => {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            after
         }));
     }, []);
 
