@@ -40,6 +40,7 @@ export default defineConfig({
             input: {
                 index: resolve(__dirname, 'src/index.js'),
                 'api/index': resolve(__dirname, 'src/api/index.js'),
+                'hooks/index': resolve(__dirname, 'src/hooks/index.js'),
             },
             plugins: [preserveDirectives()],
             output: [
