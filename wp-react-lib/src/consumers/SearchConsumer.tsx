@@ -6,7 +6,7 @@ interface SearchConsumerProps {
 }
 
 /**
- * @deprecated Use the `SearchContext.Consumer` instead.
+ * @deprecated Use the `SearchContext.Consumer` instead if you want type safety.
  * SearchConsumer is a component that provides the search results, meta, and locale to its children.
  * @param props - The props for the SearchConsumer component.
  * @returns The SearchConsumer component.
