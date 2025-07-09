@@ -5,20 +5,26 @@ interface PostConsumerProps {
     children: React.ReactNode | React.ReactNode[] | React.ReactElement | React.ReactElement[];
 }
 
+/**
+ * @deprecated Use the `PostContext.Consumer` instead.
+ * PostConsumer is a component that provides the posts, meta, and locale to its children.
+ * @param props - The props for the PostConsumer component.
+ * @returns The PostConsumer component.
+ */
 const PostConsumer = (props: PostConsumerProps) => {
     return (
         <PostContext.Consumer>
             {({ posts, meta, locale }) => {
-                if (!posts) return null;
-                return (
-                    <React.Fragment>
-                        {React.Children.map(props.children, (child => React.cloneElement(child as React.ReactElement, {posts, meta, locale})))}
-                    </React.Fragment>
-                );
+                return posts ? <React.Fragment>
+                    {React.Children.map(props.children, (child) =>
+                        React.isValidElement(child) && 'props' in child && child.props && typeof child.type !== 'string'
+                            ? React.cloneElement(child as React.ReactElement<any>, { posts, meta, locale })
+                            : child
+                    )}
+                </React.Fragment> : null;
             }}
         </PostContext.Consumer>
     )
 }
 
-
-export default PostConsumer
+export default PostConsumer;
