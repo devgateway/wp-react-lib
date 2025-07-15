@@ -1,4 +1,5 @@
 const API_ROOT = process.env.VITE_REACT_APP_WP_API || '/wp/wp-json'
+const WP_ROOT = process.env.VITE_REACT_APP_WP || '/wp'
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
 
 const URL_API_BASE = API_ROOT + '/wp/v2/'
@@ -51,11 +52,16 @@ export const post = (url, params, isBlob) => {
             })
     })
 }
-export const get = (url, params = {}) => {
+export const get = (url, params = {},wp_rest_nonce) => {
     return new Promise((resolve, reject) => {
-
-        fetch(url, {credentials: 'include'})
-            .then(
+        const headers={};
+        if (wp_rest_nonce) {
+            headers['X-WP-Nonce'] = wp_rest_nonce;
+        }
+        fetch(url, {
+            credentials: 'include',
+            headers
+        }).then(
                 function (response) {
                     if (response.status !== 200) {
                         reject(response)
@@ -98,7 +104,9 @@ export const getPostsByTypeAndTaxonomy = (type, category, value, locale, page = 
 export const getSettings=(locale,changeUUID)=>{
     return get(URL_SETTINGS+'?cacheBust='+((Math.random() + 1).toString(36).substring(7))+'&lang='+locale+(changeUUID?'&customize_changeset_uuid='+changeUUID:''))
 }
-
+export const getNonce = () => {
+    return get(WP_ROOT + '/get-nonce.php');
+}
 export const getMenu = (name, locale) => {
     return get(URL_MENU + name + '?lang=' + locale)
 }
@@ -130,8 +138,7 @@ export const getPosts = (slug, type, taxonomy, categories, before, perPage, page
     return get(url)
 }
 
-export const getPages = (before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,noCache) => {
-
+export const getPages = (before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,noCache,wp_rest_nonce) => {
     let url = URL_PAGE
 
     if (previewId) {
@@ -152,7 +159,7 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
             + (search ? '&search=' + search : '')
             + (noCache ? '&cacheBust='+((Math.random() + 1).toString(36).substring(7)) : '')
     }
-    return get(url)
+    return get(url, {}, wp_rest_nonce);
 }
 
 export const search = (context, page, perPage, search, type, subtype, locale) => {

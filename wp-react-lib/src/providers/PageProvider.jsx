@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
-import { Container, Loader, Segment } from "semantic-ui-react"
-import { useDispatch, useSelector } from 'react-redux'
-import { PageContext } from './Context'
-import { clean, getPages } from "../reducers/actions"
+import React, {useEffect, useRef} from 'react'
+import {Container, Loader, Segment} from "semantic-ui-react"
+import {useDispatch, useSelector} from 'react-redux'
+import {PageContext} from './Context'
+import {clean, getPages} from "../reducers/actions"
 import LocalizedProvider from "./LocalizedProvider"
 
 const PageProvider = (props) => {
@@ -27,13 +27,14 @@ const PageProvider = (props) => {
 
     const error = useSelector(state => state.getIn(['wordpress', store, 'error']));
     const meta = useSelector(state => state.getIn(['wordpress', store, 'meta']));
+    const data_settings = useSelector(state => state.getIn(['wordpress', 'settings', 'data']));
     const pages = useSelector(state => state.getIn(['wordpress', store, 'items']));
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
     const prevProps = useRef({parent, slug, locale, previewId, search}).current;
 
     useEffect(() => {
-        
+
         if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId || search !== prevProps.search) {
             dispatch(getPages({
                 before,
@@ -47,7 +48,8 @@ const PageProvider = (props) => {
                 previewNonce,
                 previewId,
                 search,
-                noCache
+                noCache,
+                wp_rest_nonce:data_settings.nonce
             }));
         }
 
@@ -69,7 +71,8 @@ const PageProvider = (props) => {
             previewNonce,
             previewId,
             search,
-            noCache
+            noCache,
+            wp_rest_nonce:data_settings.nonce
         }));
     }, []);
 
@@ -77,7 +80,7 @@ const PageProvider = (props) => {
     if (loading && !pages) {
         return (
             <Container>
-                <Loader inverted content='Loading' />
+                <Loader inverted content='Loading'/>
             </Container>
         );
     }
@@ -92,7 +95,7 @@ const PageProvider = (props) => {
     }
 
     if (pages && pages.length > 0) {
-        return <PageContext.Provider value={{ pages, meta, locale }}>{children}</PageContext.Provider>;
+        return <PageContext.Provider value={{pages, meta, locale}}>{children}</PageContext.Provider>;
     }
 
     if (loading === false) {
