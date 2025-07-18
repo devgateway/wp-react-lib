@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import LocalizedProvider from "./LocalizedProvider";
 import { CategoriesContext } from './Context';
-import { getCategories } from '../reducers/actions'
+import { getCategories } from '../reducers/actions.js'
 import { useDispatch, useSelector } from 'react-redux';
 
 interface CategoriesComponentProps {

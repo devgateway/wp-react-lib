@@ -34,3 +34,5 @@ export const CategoriesContext = React.createContext<CategoriesContextType>({
     loading: false,
     error: undefined
 })
+
+export const MediaContext = React.createContext({})

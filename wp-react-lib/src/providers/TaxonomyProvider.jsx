@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import {connect} from 'react-redux'
-import {loadTaxonomy} from '../reducers/actions'
+import {loadTaxonomy} from '../reducers/actions.js'
 import {TaxonomyContext} from './Context'
 import LocalizedProvider from "./LocalizedProvider"
 

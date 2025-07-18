@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import {connect} from 'react-redux'
-import {getMedia} from '../reducers/actions'
+import {getMedia} from '../reducers/actions.js'
 import LocalizedProvider from "./LocalizedProvider"
 import type { MediaContextType } from './context-types'
 import type { Media } from '../types'

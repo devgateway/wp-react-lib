@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Container, Loader, Segment } from "semantic-ui-react"
 import { useDispatch, useSelector } from 'react-redux'
 import { PageContext } from './Context'
-import { clean, getPages } from "../reducers/actions"
+import { clean, getPages } from "../reducers/actions.js"
 import LocalizedProvider from "./LocalizedProvider"
 
 const PageProvider = (props) => {
@@ -33,7 +33,7 @@ const PageProvider = (props) => {
     const prevProps = useRef({parent, slug, locale, previewId, search}).current;
 
     useEffect(() => {
-        
+
         if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId || search !== prevProps.search) {
             dispatch(getPages({
                 before,

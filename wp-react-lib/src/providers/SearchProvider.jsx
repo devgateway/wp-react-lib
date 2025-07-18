@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {search} from '../reducers/actions'
+import {search} from '../reducers/actions.js'
 import {SearchContext} from './Context'
 import LocalizedProvider from "./LocalizedProvider"
 

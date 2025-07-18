@@ -404,3 +404,32 @@ export interface SearchResult {
 }
 
 export type SearchResults = SearchResult[];
+
+export type GetMediaParams = {
+    context?: 'view' | 'embed' | 'edit';
+    page?: number;
+    perPage?: number;
+    search?: string;
+    after?: string | Date;
+    modifiedAfter?: string | Date;
+    author?: number | number[];
+    authorExclude?: number | number[];
+    before?: string | Date;
+    modifiedBefore?: string | Date;
+    exclude?: number | number[];
+    include?: number | number[];
+    offset?: number;
+    order?: 'asc' | 'desc';
+    orderby?: 'author' | 'date' | 'id' | 'include' | 'modified' | 'parent' | 'relevance' | 'slug' | 'include_slugs' | 'title';
+    parent?: number | number[];
+    parentExclude?: number | number[];
+    searchColumns?: string[];
+    slug?: string | string[];
+    status?: string | string[];
+    mediaType?: 'image' | 'video' | 'text' | 'application' | 'audio';
+    mimeType?: string;
+    locale: string;
+} | {
+    id: number;
+    locale: string;
+}

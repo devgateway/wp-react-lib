@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import {connect} from 'react-redux'
-import {getMenu} from '../reducers/actions'
+import {getMenu} from '../reducers/actions.js'
 import {MenuContext} from './Context'
 import LocalizedProvider from "./LocalizedProvider"
 

@@ -1,5 +1,5 @@
 import type { PageResponse } from "../post-type"
-import type { DgSettings, Media } from "../types"
+import type { DgSettings, GetMediaParams, Media } from "../types"
 
 const API_ROOT = process.env.VITE_REACT_APP_WP_API ?? '/wp/wp-json'
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
@@ -246,8 +246,90 @@ export const search = (
     return get(url)
 }
 
-export const getMedia = (slug: string, locale: string) : Promise<Media> => {
-    return get(URL_MEDIA + '/' + slug + '?lang=' + locale) as Promise<Media>;
+export const getMedia = (params: GetMediaParams): Promise<Media> => {
+    // If params has 'id', it's the single-media
+    if ('id' in params) {
+        const { id, locale } = params;
+        return get(URL_MEDIA + '/' + id + '?lang=' + locale) as Promise<Media>;
+    }
+
+    // Otherwise, it's the query
+    const {
+        context,
+        page,
+        perPage,
+        search,
+        after,
+        modifiedAfter,
+        author,
+        authorExclude,
+        before,
+        modifiedBefore,
+        exclude,
+        include,
+        offset,
+        order,
+        orderby,
+        parent,
+        parentExclude,
+        searchColumns,
+        slug,
+        status,
+        mediaType,
+        mimeType,
+        locale
+    } = params;
+
+    let url = URL_MEDIA + '?lang=' + locale
+        + (slug ? '&slug=' + slug : '')
+        + (context ? '&context=' + context : '')
+        + (page ? '&page=' + page : '')
+        + (perPage ? '&per_page=' + perPage : '')
+        + (search ? '&search=' + search : '')
+        + (author ? '&author=' + author : '')
+        + (authorExclude ? '&author_exclude=' + authorExclude : '')
+        + (exclude ? '&exclude=' + exclude : '')
+        + (include ? '&include=' + include : '')
+        + (offset ? '&offset=' + offset : '')
+        + (order ? '&order=' + order : '')
+        + (orderby ? '&orderby=' + orderby : '')
+        + (parent ? '&parent=' + parent : '')
+        + (parentExclude ? '&parent_exclude=' + parentExclude : '')
+        + (searchColumns ? '&search_columns=' + searchColumns.join(',') : '')
+        + (status ? '&status=' + status : '')
+        + (mediaType ? '&media_type=' + mediaType : '')
+        + (mimeType ? '&mime_type=' + mimeType : '');
+
+    if (before !== null && before !== undefined) {
+        if (before instanceof Date) {
+            url += '&before=' + before.toISOString();
+        } else {
+            url += '&before=' + before;
+        }
+    }
+    if (modifiedBefore !== null && modifiedBefore !== undefined) {
+        if (modifiedBefore instanceof Date) {
+            url += '&modified_before=' + modifiedBefore.toISOString();
+        } else {
+            url += '&modified_before=' + modifiedBefore;
+        }
+    }
+    if (after !== null && after !== undefined) {
+        if (after instanceof Date) {
+            url += '&after=' + after.toISOString();
+        } else {
+            url += '&after=' + after;
+        }
+    }
+    if (modifiedAfter !== null && modifiedAfter !== undefined) {
+        if (modifiedAfter instanceof Date) {
+            url += '&modified_after=' + modifiedAfter.toISOString();
+        } else {
+            url += '&modified_after=' + modifiedAfter;
+        }
+    }
+
+    return get(url) as Promise<Media>;
 }
 
 export const getCategories = ({

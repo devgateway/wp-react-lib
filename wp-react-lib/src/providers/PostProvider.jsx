@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPosts } from '../reducers/actions'
+import { getPosts } from '../reducers/actions.js'
 import { PostContext } from './Context'
 import { Container, Loader, Segment } from "semantic-ui-react"
 import LocalizedProvider from "./LocalizedProvider"

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from '../reducers/actions';
+import { getPosts } from '../reducers/actions.js';
 import { PostContext } from '../providers/Context';
 
 interface UsePostsProps {
