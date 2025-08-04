@@ -224,7 +224,10 @@ export const getSettings = ({locale = "en",changeUUID=null}) => (dispatch, getSt
         wp.getNonce()
             .then(nonceResponse => {
                 dispatch({type: LOAD_NONCE_DONE, data: nonceResponse})
-                const dataWithNonce = {...data, nonce: nonceResponse.data.data.nonce};
+                const dataWithNonce = {...data,
+                    nonce: nonceResponse.data.data.nonce,
+                    loggedInUser: nonceResponse.data.data.username
+                };
                 dispatch({type: LOAD_SETTINGS_DONE, data: dataWithNonce, meta});
             })
             .catch(nonceError => {
