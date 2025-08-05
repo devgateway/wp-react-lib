@@ -105,7 +105,7 @@ export const getSettings=(locale,changeUUID)=>{
     return get(URL_SETTINGS+'?cacheBust='+((Math.random() + 1).toString(36).substring(7))+'&lang='+locale+(changeUUID?'&customize_changeset_uuid='+changeUUID:''))
 }
 export const getNonce = () => {
-    return get(WP_ROOT + '/get-nonce.php');
+    return get(WP_ROOT + '/custom-endpoints/get-nonce.php');
 }
 export const getMenu = (name, locale) => {
     return get(URL_MENU + name + '?lang=' + locale)
