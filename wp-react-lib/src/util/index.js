@@ -1,5 +1,3 @@
-const _useHash = process.env.VITE_REACT_APP_USE_HASH_LINKS === "true" || false;
-
 const localReplaceLink = (url, locale) => {
   if (!url) {
     return "";
