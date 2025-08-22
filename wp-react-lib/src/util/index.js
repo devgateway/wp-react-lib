@@ -43,7 +43,7 @@ export const replaceHTMLinks = (html, locale) => {
 
   let link;
   // Match both absolute (http/https) and relative WP links in a single pass
-  let linkRegex = /href\s*=\s*(['"])(https?:\/\/.+?|\/wp\/[^'"\s>]+)\1/ig;
+  let linkRegex = /href\s*=\s*(['"])(https?:\/\/.*?|\/wp\/.*?)\1/ig;
 
   let newHtml = html
   while ((link = linkRegex.exec(html)) !== null) {
