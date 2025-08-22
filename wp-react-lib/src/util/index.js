@@ -1,17 +1,42 @@
-const useHash = process.env.VITE_REACT_APP_USE_HASH_LINKS === "true" || false;
+const _useHash = process.env.VITE_REACT_APP_USE_HASH_LINKS === "true" || false;
 
 const localReplaceLink = (url, locale) => {
-  if (url) {
-    if (!url.substr(url.indexOf("/wp") + 3).startsWith("/" + locale)) {
-      return "/" + locale + url.substr(url.indexOf("/wp") + 3);
-    }
-    return url.substr(url.indexOf("/wp") + 3);
+  if (!url) {
+    return "";
   }
-  return "";
+  const safeLocale = locale || "en";
+
+  try {
+    let pathname = url;
+
+    // If absolute URL, extract pathname and ignore origin
+    if (/^https?:\/\//i.test(url)) {
+      const parsed = new URL(url);
+      pathname = parsed.pathname + (parsed.search || "") + (parsed.hash || "");
+    }
+
+    if (!pathname.startsWith("/wp/")) {
+      return url; // Not a WordPress path, leave unchanged
+    }
+
+    const afterWp = pathname.slice(3); // remove '/wp'
+
+    if (!afterWp.startsWith("/" + safeLocale)) {
+      return "/" + safeLocale + afterWp;
+    }
+
+    return afterWp;
+  } catch (e) {
+    console.error("Error parsing URL:", e);
+    return url;
+  }
 };
 
 export const replaceLink = (url, locale) => {
-  return localReplaceLink(url, locale)
+  if (!url) {
+    return "";
+  }
+  return localReplaceLink(url, locale);
 }
 
 export const replaceHTMLinks = (html, locale) => {
@@ -19,13 +44,16 @@ export const replaceHTMLinks = (html, locale) => {
   // console.log(process.env.REACT_APP_WP_HOSTS)
 
   let link;
-  let regex = /href\s*=\s*(['"])(https?:\/\/.+?)\1/ig;
+  // Match both absolute (http/https) and relative WP links in a single pass
+  let linkRegex = /href\s*=\s*(['"])(https?:\/\/.+?|\/wp\/[^'"\s>]+)\1/ig;
 
   let newHtml = html
-  while ((link = regex.exec(html)) !== null) {
+  while ((link = linkRegex.exec(html)) !== null) {
     let href = link[2]
     let newLink = localReplaceLink(href, locale)
-    newHtml = newHtml.replaceAll(link[2], newLink)
+    if (newLink !== href) {
+      newHtml = newHtml.replaceAll(href, newLink)
+    }
   }
   return newHtml;
 }
