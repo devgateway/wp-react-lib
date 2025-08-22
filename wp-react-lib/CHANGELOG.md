@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.4.3
+
+### Patch Changes
+
+- 7558929: Fix links and remove old process.env.VITE_REACT_APP_WP_HOSTS
+
 ## 0.4.2
 
 ### Patch Changes
