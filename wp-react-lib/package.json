@@ -1,6 +1,6 @@
 {
   "name": "@devgateway/wp-react-lib",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "author": "Sebastian Dimunzio <sdimunzio@developmentgateway.org/>",
   "type": "module",
   "files": [
