@@ -1,5 +1,12 @@
 # @devgateway/wp-react-lib
 
+## 0.4.4
+
+### Patch Changes
+
+- Update version to 0.4.4
+- Add missing menu and search contexts
+
 ## 0.4.3
 
 ### Patch Changes
