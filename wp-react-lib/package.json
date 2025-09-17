@@ -15,14 +15,18 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.14.3",
-    "@babel/preset-react": "^7.13.13"
+    "@babel/preset-react": "^7.13.13",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "semantic-ui-react": "^2.1.5",
+    "immutable": "^4.3.7"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
+    "react": ">=18.0.0 <19",
+    "react-dom": ">=18.0.0 <19",
     "react-redux": "*",
-    "semantic-ui-react": "*",
-    "immutable": "*"
+    "semantic-ui-react": "^2.0.0",
+    "immutable": "^4.0.0"
   },
   "scripts": {
     "dist": "rm -rf dist && mkdir dist &&  babel src/ -d dist --copy-files && npm link",
