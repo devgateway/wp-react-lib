@@ -1,4 +1,4 @@
-const useHash = process.env.REACT_APP_USE_HASH_LINKS.toLowerCase() === "true"
+const useHash = process.env.VITE_REACT_APP_USE_HASH_LINKS.toLowerCase() === "true"
 
 
 export const replaceLink = (url, locale) => {
