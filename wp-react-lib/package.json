@@ -21,6 +21,7 @@
     "semantic-ui-react": "^2.1.5",
     "immutable": "^4.3.7"
   },
+
   "peerDependencies": {
     "react": ">=18.0.0 <19",
     "react-dom": ">=18.0.0 <19",
