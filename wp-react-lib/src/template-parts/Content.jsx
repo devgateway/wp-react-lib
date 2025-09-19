@@ -44,6 +44,8 @@ const translate = (str, locale = "en") => {
 const Content = (props) => {
     const [showContentEnabled, setShowContentEnabled] = React.useState(false);
 
+
+
     React.useEffect(() => {
         if (props.onLoad) {
             props.onLoad();
