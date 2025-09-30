@@ -45,12 +45,20 @@ class EmbeddedGateway extends React.Component {
                     container = div
                 }
 
+
+
                 if (component) {
                     const props = {...this.props}
                     const attrs = element.attributes
                     for (let i = attrs.length - 1; i >= 0; i--) {
                         props[attrs[i].name] = attrs[i].value;
                     }
+
+                    element.getAttributeNames().forEach((name) => {
+                        if (name.startsWith('data-')) {
+                            element.removeAttribute(name);
+                        }
+                    });
                     const C = injectIntl(getComponent(component));
                     if (C) {
                         ReactDOM.createRoot(container)
