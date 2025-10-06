@@ -45,9 +45,9 @@ class EmbeddedGateway extends React.Component {
                     container = div
                 }
 
-
-
-                if (component) {
+                if (component != null && getComponent(component) === null) {
+                    element.innerHTML = "<h1>Data Viz Error </h1><h4>Component<i> " + component + "</i> not found</h4><br>"
+                } else if (component && getComponent(component)) {
                     const props = {...this.props}
                     const attrs = element.attributes
                     for (let i = attrs.length - 1; i >= 0; i--) {
