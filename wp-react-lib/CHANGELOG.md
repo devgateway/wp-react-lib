@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.4.5
+
+### Patch Changes
+
+- 8bf45ce: Upgrade dependencies to fix CVEs
+
 ## 0.4.4
 
 ### Patch Changes
