@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.4.6
+
+### Patch Changes
+
+- 2e20f93: Standardize dependencies for consitency
+
 ## 0.4.5
 
 ### Patch Changes
