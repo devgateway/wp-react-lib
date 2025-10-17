@@ -225,6 +225,7 @@ export const getPages = ({
             + (search ? '&search=' + search : '')
             + (noCache ? '&cacheBust='+((Math.random() + 1).toString(36).substring(7)) : '')
     }
+    console.log("url==>", url);
     return get(url) as Promise<PageResponse>
 }
 
