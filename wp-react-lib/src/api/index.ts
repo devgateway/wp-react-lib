@@ -1,14 +1,15 @@
 import type { PageResponse } from "../post-type"
 import type { DgSettings, Media } from "../types"
 
-const API_ROOT = process.env.VITE_REACT_APP_WP_API ?? '/wp/wp-json'
+// @ts-ignore Types not available
+const API_ROOT = import.meta.env.VITE_REACT_APP_WP_API ?? process.env.VITE_REACT_APP_WP_API ?? '/wp/wp-json'
 const URL_MENU = API_ROOT + '/menus/v1/menus/'
 
 const URL_API_BASE = API_ROOT + '/wp/v2/'
 
 const URL_PAGE = API_ROOT + '/wp/v2/pages'
-
-const URL_SEARCH = API_ROOT + (process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? '/wp/v2/search')
+// @ts-ignore
+const URL_SEARCH = API_ROOT + (import.meta.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? '/wp/v2/search')
 
 const URL_MEDIA = API_ROOT + '/wp/v2/media'
 
