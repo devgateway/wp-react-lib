@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.4.8
+
+### Patch Changes
+
+- a949690: Remove sub-imports to remain with the main import
+
 ## 0.4.7
 
 ### Patch Changes
