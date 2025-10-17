@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.4.7
+
+### Patch Changes
+
+- 7174745: fix env variables imports
+
 ## 0.4.6
 
 ### Patch Changes
