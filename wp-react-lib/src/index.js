@@ -30,6 +30,9 @@ import PostIcon from "./template-parts/PostIcon";
 
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
+import {SettingsContext} from "./providers/Context";
+import SearchConsumer from "./consumers/SearchConsumer";
+import SearchProvider from "./providers/SearchProvider";
 
 export {
     Post,
@@ -57,7 +60,10 @@ export {
     PostIntro,
     PostLabel,
     PostTitle,
-    PostIcon
+    PostIcon,
+    SettingsContext,
+    SearchConsumer,
+    SearchProvider
 
 }
 

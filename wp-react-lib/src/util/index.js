@@ -4,7 +4,7 @@ const useHash = process.env.VITE_REACT_APP_USE_HASH_LINKS.toLowerCase() === "tru
 export const replaceLink = (url, locale) => {
     //console.log("--------- replaceLink--------------")
     //console.log(process.env.REACT_APP_WP_HOSTS)
-    const replacementTarget = process.env.REACT_APP_WP_HOSTS.split(",")
+    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS.split(",")
     let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
     if (useHash && url) {
         return url.replaceAll(all, "#" + locale)
@@ -16,7 +16,7 @@ export const replaceLink = (url, locale) => {
 export const replaceHTMLinks = (html, locale) => {
     //console.log("--------- replaceHTMLinks--------------")
     // console.log(process.env.REACT_APP_WP_HOSTS)
-    const replacementTarget = process.env.REACT_APP_WP_HOSTS.split(",")
+    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS.split(",")
     let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
 
     let link;

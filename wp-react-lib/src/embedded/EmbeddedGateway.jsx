@@ -51,8 +51,10 @@ class EmbeddedGateway extends React.Component {
                             <Provider store={store}>
                                 <IntlProvider locale={locale}>
                                     <AppContextProvider getComponent={getComponent} store={store} locale={locale}>
-                                        <C unique={(this.props.parentUnique ? this.props.parentUnique : '') + "_embeddable_" + index + "" + (Math.random() + 1).toString(36).substring(7)} {...props}
-                                           childContent={element.innerHTML}/>
+                                        <React.Suspense fallback={<div>Loading...</div>}>
+                                            <C unique={(this.props.parentUnique ? this.props.parentUnique : '') + "_embeddable_" + index + "" + (Math.random() + 1).toString(36).substring(7)} {...props}
+                                               childContent={element.innerHTML}/>
+                                        </React.Suspense>
                                     </AppContextProvider>
                                 </IntlProvider>
                             </Provider>, container);
