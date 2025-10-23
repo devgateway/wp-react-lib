@@ -1,5 +1,16 @@
 # @devgateway/wp-react-lib
 
+## 0.5.0
+
+### Minor Changes
+
+This release introduces a minor version update to the @devgateway/wp-react-lib package, primarily focused on improving API endpoint handling for server-side rendering (SSR) scenarios. The main enhancement is the support for dynamic base URLs, allowing the library to better adapt to different SSR contexts.
+
+API improvements:
+
+- Updated API endpoint handling to support dynamic base URLs for SSR contexts, increasing flexibility for server-side rendering environments.
+- e5b7db3: update API endpoint handling to support dynamic base URLs for SSR contexts
+
 ## 0.4.8
 
 ### Patch Changes
