@@ -248,7 +248,7 @@ export const search = (
     subtype?: string,
     locale?: string,
     apiBaseUrl?: string) => {
-    let url = apiBaseUrl ? apiBaseUrl + "/wp/v2/search" : API_ROOT + '/wp/v2/search';
+    let url = apiBaseUrl ? apiBaseUrl + "/dg/v1/search" : API_ROOT + '/dg/v1/search';
     url += '?lang=' + locale
         + (context ? "&context=" + context : '')
         + (perPage ? '&per_page=' + perPage : '')
