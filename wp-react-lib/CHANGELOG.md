@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.5.1
+
+### Patch Changes
+
+- 62fca36: fix wp search endpoint
+
 ## 0.5.0
 
 ### Minor Changes
