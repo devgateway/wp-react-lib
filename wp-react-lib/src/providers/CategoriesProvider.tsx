@@ -4,7 +4,7 @@ import { CategoriesContext } from './Context';
 import { getCategories } from '../reducers/actions'
 import { useDispatch, useSelector } from 'react-redux';
 
-interface CategoriesComponentProps {
+interface CategoriesComponentProps extends React.PropsWithChildren {
     context?: string
     page?: number
     perPage?: number
@@ -19,7 +19,7 @@ interface CategoriesComponentProps {
     slug?: string;
     locale?: string;
     store?: string;
-    children: React.ReactNode;
+    apiBaseUrl?: string | null;
 }
 
 const CategoriesProvider = (props: CategoriesComponentProps) => {
@@ -38,7 +38,8 @@ const CategoriesProvider = (props: CategoriesComponentProps) => {
         slug,
         locale,
         store = 'categories',
-        children
+        children,
+        apiBaseUrl
     } = props;
 
     const dispatch:any = useDispatch();
@@ -72,7 +73,8 @@ const CategoriesProvider = (props: CategoriesComponentProps) => {
                 post,
                 slug,
                 locale,
-                store
+                store,
+                apiBaseUrl
             }));
         }
     }, [context, page, perPage, search, exclude, include, order, orderby, hideEmpty, parent, post, slug, locale]);
@@ -92,7 +94,8 @@ const CategoriesProvider = (props: CategoriesComponentProps) => {
             post,
             slug,
             locale,
-            store
+            store,
+            apiBaseUrl
         }));
     }, []);
 

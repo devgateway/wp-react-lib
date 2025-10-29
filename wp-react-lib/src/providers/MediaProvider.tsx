@@ -10,10 +10,11 @@ export const MediaContext = React.createContext<MediaContextType>({
 });
 
 interface MediaProviderProps {
+    apiBaseUrl?: string | null;
     children: React.ReactNode
     id: string
     locale: string
-    onLoad: ({id, locale}: {id: string, locale: string}) => void
+    onLoad: ({id, locale, apiBaseUrl}: {id: string, locale: string, apiBaseUrl?: string | null}) => void
     loading: boolean
     media: Media[] | null
 }
@@ -25,17 +26,17 @@ class MediaProvider extends React.Component<MediaProviderProps> {
 
     componentDidMount() {
         //TODO:pass locale
-        const {id, locale} = this.props
+        const {id, locale, apiBaseUrl} = this.props
         if (id) {
-            this.props.onLoad({id, locale})
+            this.props.onLoad({id, locale, apiBaseUrl})
         }
     }
     componentDidUpdate(prevState: MediaProviderProps) {
         //TODO:pass locale
-        const {id, locale} = this.props
+        const {id, locale, apiBaseUrl} = this.props
 
         if (id!=prevState.id) {
-            this.props.onLoad({id, locale})
+            this.props.onLoad({id, locale, apiBaseUrl})
         }
     }
     render() {

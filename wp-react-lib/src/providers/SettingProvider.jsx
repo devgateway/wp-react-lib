@@ -8,7 +8,7 @@ WP-REST-API V2 Menus plugin is required
 Will load a post base ond passed properties and put in PostContext
 */
 const SettingProvider = (props) => {
-    const {children, locale, changeUUID } = props;
+    const {children, locale, changeUUID, apiBaseUrl } = props;
     const dispatch = useDispatch();
 
     const error = useSelector(state => state.getIn(['wordpress', 'settings', 'error']));
@@ -19,7 +19,8 @@ const SettingProvider = (props) => {
         if (locale) {
             dispatch(getSettings({
                 locale,
-                changeUUID
+                changeUUID,
+                apiBaseUrl
             }));
         }
 

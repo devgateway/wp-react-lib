@@ -12,17 +12,17 @@ Will load a post base ond passed properties and put in PostContext
 class MenuProvider extends React.Component {
 
     componentDidMount() {
-        const {onLoad, loading, slug, locale} = this.props
+        const {onLoad, loading, slug, locale, apiBaseUrl} = this.props
         if (slug) {
-            this.props.onLoad({slug, locale})
+            this.props.onLoad({slug, locale, apiBaseUrl})
         }
     }
 
     componentDidUpdate(prevProps){
         const { slug} = this.props
-        const {onLoad, loading, locale} = this.props
+        const {onLoad, loading, locale, apiBaseUrl} = this.props
         if (prevProps.slug!=this.props.slug) {
-            this.props.onLoad({slug, locale})
+            this.props.onLoad({slug, locale, apiBaseUrl})
         }
 
     }

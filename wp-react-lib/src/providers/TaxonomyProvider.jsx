@@ -5,11 +5,11 @@ import {TaxonomyContext} from './Context'
 import LocalizedProvider from "./LocalizedProvider"
 
 const TaxonomyProvider = (props) => {
-    const {taxonomy, locale, taxonomies, onLoad, children} = props;
+    const {taxonomy, locale, taxonomies, onLoad, children, apiBaseUrl} = props;
 
     useEffect(() => {
         if (taxonomies.length === 0) {
-            onLoad({taxonomy: taxonomy ? taxonomy : 'categories', locale});
+            onLoad({taxonomy: taxonomy ? taxonomy : 'categories', locale, apiBaseUrl});
         }
     }, []);
 

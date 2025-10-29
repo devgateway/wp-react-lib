@@ -32,13 +32,13 @@ import {
 import * as wp from '../api';
 
 //used to transform categories to id
-export const loadTaxonomy = ({ taxonomy, locale = "en" }) => (dispatch, getState) => {
+export const loadTaxonomy = ({ taxonomy, locale = "en", apiBaseUrl = null }) => (dispatch, getState) => {
     dispatch({ type: LOAD_TAXONOMY });
-    wp.getTaxonomy(taxonomy, locale).then(response => {
+    wp.getTaxonomy(taxonomy, locale, apiBaseUrl).then(response => {
         const { data, meta } = response;
-        dispatch({ type: LOAD_TAXONOMY_DONE, data, meta, taxonomy });
+        dispatch({ type: LOAD_TAXONOMY_DONE, data, meta, taxonomy, apiBaseUrl });
     }).catch(error => {
-        dispatch({ type: LOAD_TAXONOMY_ERROR, taxonomy });
+        dispatch({ type: LOAD_TAXONOMY_ERROR, taxonomy, apiBaseUrl });
     });
 };
 
@@ -50,13 +50,14 @@ export const getPostByTaxonomy = ({
     categoryId,
     page,
     perPage,
-    locale = "en"
+    locale = "en",
+    apiBaseUrl = null
 }) => (dispatch, getState) => {
     const payLoad = { wpType, taxonomy, category };
 
     dispatch({ type: LOAD_CUSTOM_POSTS_BY_TAXONOMY, ...payLoad });
 
-    wp.getPostsByTypeAndTaxonomy({ type: wpType, category: taxonomy, value: categoryId, locale, page, perPage })
+    wp.getPostsByTypeAndTaxonomy({ type: wpType, category: taxonomy, value: categoryId, locale, page, perPage, apiBaseUrl })
         .then(response => {
             const { data, meta } = response;
             dispatch({ type: LOAD_CUSTOM_POSTS_BY_TAXONOMY_DONE, data, meta, ...payLoad });
@@ -80,12 +81,13 @@ export const getPosts = ({
     previewNonce,
     previewId,
     search,
-    after
+    after,
+    apiBaseUrl = null
 }) => (dispatch, getState) => {
 
     dispatch({ type: LOAD_POSTS, slug, taxonomy, categories, before, perPage, page, fields, store, locale, after });
 
-    wp.getPosts({ slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search, after })
+    wp.getPosts({ slug, type, taxonomy, categories, before, perPage, page, fields, locale, previewNonce, previewId, search, after, apiBaseUrl })
         .then(response => {
             const { data, meta } = response;
             dispatch({
@@ -103,7 +105,8 @@ export const getPosts = ({
                 previewNonce,
                 previewId,
                 after,
-                meta
+                meta,
+                apiBaseUrl
             });
 
         }).catch(error => {
@@ -121,7 +124,8 @@ export const getPosts = ({
                 locale,
                 previewNonce,
                 previewId,
-                after
+                after,
+                apiBaseUrl
             });
         });
 };
@@ -131,9 +135,9 @@ export const clean = (params) => (dispatch, getState) => {
 
 };
 
-export const search = ({ context, page, perPage, search, type, subtype, store, locale }) => (dispatch, getState) => {
+export const search = ({ context, page, perPage, search, type, subtype, store, locale, apiBaseUrl = null }) => (dispatch, getState) => {
     dispatch({ type: LOAD_SEARCH, store });
-    wp.search(context, page, perPage, search, type, subtype, locale)
+    wp.search(context, page, perPage, search, type, subtype, locale, apiBaseUrl)
         .then(response => {
             const { data, meta } = response;
             dispatch({ type: LOAD_SEARCH_DONE, store, data, meta });
@@ -154,11 +158,12 @@ export const getPages = ({
     locale = "en",
     previewNonce,
     previewId,
-    search
+    search,
+    apiBaseUrl = null
 }) => (dispatch, getState) => {
 
     dispatch({ type: LOAD_PAGES, store });
-    wp.getPages({ before, perPage, page, fields, parent, slug, locale, previewNonce, previewId, search })
+    wp.getPages({ before, perPage, page, fields, parent, slug, locale, previewNonce, previewId, search, apiBaseUrl })
         .then(response => {
             const { data, meta } = response;
             dispatch({
@@ -174,7 +179,8 @@ export const getPages = ({
                 store,
                 locale,
                 previewNonce,
-                previewId
+                previewId,
+                apiBaseUrl
             });
         }).catch(error => {
             dispatch({
@@ -189,7 +195,8 @@ export const getPages = ({
                 store,
                 locale,
                 previewNonce,
-                previewId
+                previewId,
+                apiBaseUrl
             });
         });
 };
@@ -197,9 +204,9 @@ export const getPages = ({
 /*
 Gt WP Menus  (WP-REST-API V2 Menus plugin requiered)
 */
-export const getMenu = ({ slug, locale = "en" }) => (dispatch, getState) => {
+export const getMenu = ({ slug, locale = "en", apiBaseUrl = null }) => (dispatch, getState) => {
     dispatch({ type: LOAD_MENU, slug });
-    wp.getMenu(slug, locale).then(response => {
+    wp.getMenu(slug, locale, apiBaseUrl).then(response => {
         const { data, meta } = response;
         dispatch({ type: LOAD_MENU_DONE, slug, data, meta });
     }).catch(error => {
@@ -208,9 +215,9 @@ export const getMenu = ({ slug, locale = "en" }) => (dispatch, getState) => {
 };
 
 
-export const getSettings = ({ locale = "en", changeUUID = null }) => (dispatch, getState) => {
+export const getSettings = ({ locale = "en", changeUUID = null , apiBaseUrl = null}) => (dispatch, getState) => {
     dispatch({ type: LOAD_SETTINGS });
-    wp.getSettings(locale, changeUUID).then(response => {
+    wp.getSettings(locale, changeUUID,  apiBaseUrl).then(response => {
         const { data, meta } = response;
         dispatch({ type: LOAD_SETTINGS_DONE, data, meta });
     }).catch(error => {
@@ -218,9 +225,9 @@ export const getSettings = ({ locale = "en", changeUUID = null }) => (dispatch, 
     });
 };
 
-export const getMedia = ({ id, locale = "en" }) => (dispatch, getState) => {
+export const getMedia = ({ id, locale = "en", apiBaseUrl }) => (dispatch, getState) => {
     dispatch({ type: LOAD_MEDIA, id });
-    wp.getMedia(id, locale).then(response => {
+    wp.getMedia(id, locale, apiBaseUrl).then(response => {
         const { data, meta } = response;
         dispatch({ type: LOAD_MEDIA_DONE, data, meta, id });
     }).catch(error => {
@@ -242,10 +249,11 @@ export const getCategories = ({
     post,
     slug,
     locale,
-    store
+    store,
+    apiBaseUrl
 }) => (dispatch, getState) => {
     dispatch({ type: LOAD_CATEGORIES, context, page, perPage, search, exclude, include, order, orderby, hideEmpty, parent, post, slug, locale, store });
-    wp.getCategories({ context, page, perPage, search, exclude, include, order, orderby, hideEmpty, parent, post, slug, locale })
+    wp.getCategories({ context, page, perPage, search, exclude, include, order, orderby, hideEmpty, parent, post, slug, locale, apiBaseUrl })
         .then(response => {
             const { data, meta } = response;
             dispatch({
@@ -265,7 +273,8 @@ export const getCategories = ({
                 post,
                 slug,
                 locale,
-                store
+                store,
+                apiBaseUrl
             });
         })
         .catch(error => {
@@ -285,7 +294,8 @@ export const getCategories = ({
                 post,
                 slug,
                 locale,
-                store
+                store,
+                apiBaseUrl
             });
         });
 };

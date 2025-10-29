@@ -20,7 +20,8 @@ const PageProvider = (props) => {
         search,
         noCache,
         children,
-        fallbackComponent
+        fallbackComponent,
+        apiBaseUrl
     } = props;
 
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const PageProvider = (props) => {
     const prevProps = useRef({parent, slug, locale, previewId, search}).current;
 
     useEffect(() => {
-        
+
         if (prevProps.parent !== parent || prevProps.slug !== slug || locale !== prevProps.locale || previewId !== prevProps.previewId || search !== prevProps.search) {
             dispatch(getPages({
                 before,
@@ -47,7 +48,8 @@ const PageProvider = (props) => {
                 previewNonce,
                 previewId,
                 search,
-                noCache
+                noCache,
+                apiBaseUrl
             }));
         }
 
@@ -69,7 +71,8 @@ const PageProvider = (props) => {
             previewNonce,
             previewId,
             search,
-            noCache
+            noCache,
+            apiBaseUrl
         }));
     }, []);
 

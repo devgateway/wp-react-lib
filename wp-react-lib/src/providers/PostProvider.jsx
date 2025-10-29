@@ -20,7 +20,8 @@ const PostProvider = (props) => {
         previewNonce,
         previewId,
         search,
-        children
+        children,
+        apiBaseUrl
     } = props;
 
     const dispatch = useDispatch();
@@ -50,7 +51,8 @@ const PostProvider = (props) => {
                 locale,
                 previewNonce,
                 previewId,
-                search
+                search,
+                apiBaseUrl
             }));
         }
 
@@ -70,7 +72,8 @@ const PostProvider = (props) => {
             locale,
             previewNonce,
             previewId,
-            search
+            search,
+            apiBaseUrl
         }));
     }, []);
 
