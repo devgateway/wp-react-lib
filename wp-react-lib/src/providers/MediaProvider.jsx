@@ -50,4 +50,4 @@ const mapActionCreators = {
     onLoad: getMedia
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(MediaProvider))
+export default connect(mapStateToProps, mapActionCreators)(LocalizedProvider(MediaProvider))

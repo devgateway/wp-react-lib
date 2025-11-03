@@ -9,6 +9,9 @@ import {
     LOAD_MENU,
     LOAD_MENU_DONE,
     LOAD_MENU_ERROR,
+    LOAD_NONCE,
+    LOAD_NONCE_DONE,
+    LOAD_NONCE_ERROR,
     LOAD_PAGES,
     LOAD_PAGES_DONE,
     LOAD_PAGES_ERROR,
@@ -147,11 +150,13 @@ export const getPages = ({
                              locale = "en",
                              previewNonce,
                              previewId,
-                             search
+                             search,
+                             wp_rest_nonce
                          }) => (dispatch, getState) => {
 
     dispatch({type: LOAD_PAGES, store})
-    wp.getPages(before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search)
+    console.log('get pages',wp_rest_nonce);
+    wp.getPages(before, perPage, page, fields, parent, slug, store, locale, previewNonce, previewId, search,false,wp_rest_nonce)
         .then(response => {
             const {data, meta} = response
             dispatch({
@@ -200,12 +205,36 @@ export const getMenu = ({slug, locale = "en"}) => (dispatch, getState) => {
     })
 }
 
-
+export const getNonce=()=>(dispatch, getState) => {
+    dispatch({type: LOAD_NONCE})
+    wp.getNonce().then(response => {
+        const {data} = response
+        dispatch({type: LOAD_NONCE_DONE, data})
+    }).catch(error => {
+        dispatch({type: LOAD_NONCE_ERROR, error})
+    })
+}
 export const getSettings = ({locale = "en",changeUUID=null}) => (dispatch, getState) => {
     dispatch({type: LOAD_SETTINGS})
     wp.getSettings(locale,changeUUID).then(response => {
-        const {data, meta} = response
-        dispatch({type: LOAD_SETTINGS_DONE, data, meta})
+        const {data, meta} = response;
+        // Settings loaded, now load nonce
+        //dispatch({type: LOAD_SETTINGS_DONE, data, meta});
+        // After settings, get nonce
+        wp.getNonce()
+            .then(nonceResponse => {
+                dispatch({type: LOAD_NONCE_DONE, data: nonceResponse})
+                const dataWithNonce = {...data,
+                    nonce: nonceResponse.data.data.nonce,
+                    loggedInUser: nonceResponse.data.data.username
+                };
+                dispatch({type: LOAD_SETTINGS_DONE, data: dataWithNonce, meta});
+            })
+            .catch(nonceError => {
+                // Settings succeeded, nonce failed
+                dispatch({type: LOAD_SETTINGS_DONE, data, meta});
+                dispatch({type: LOAD_NONCE_ERROR, error: nonceError});
+            });
     }).catch(error => {
         dispatch({type: LOAD_SETTINGS_ERROR, error})
     })

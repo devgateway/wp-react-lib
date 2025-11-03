@@ -13,6 +13,9 @@ import {
     LOAD_MENU,
     LOAD_MENU_DONE,
     LOAD_MENU_ERROR,
+    LOAD_NONCE,
+    LOAD_NONCE_DONE,
+    LOAD_NONCE_ERROR,
     LOAD_PAGE,
     LOAD_PAGE_DONE,
     LOAD_PAGE_ERROR,
@@ -43,6 +46,19 @@ const initialState = Immutable.Map()
 export default (state = initialState, action) => {
 
     switch (action.type) {
+        case LOAD_NONCE: {
+            return state.setIn(['nonce', 'loading'], true)
+        }
+        case LOAD_NONCE_DONE: {
+            const {data} = action
+            return state.setIn(['nonce', 'loading'], false)
+                .deleteIn(['nonce', 'error'])
+                .setIn(['nonce', 'data'], data)
+        }
+        case LOAD_NONCE_ERROR: {
+            return state.setIn(['nonce', 'loading'], false)
+                .setIn(['nonce', 'error'], action.error)
+        }
         case LOAD_SETTINGS: {
             return state.setIn(['settings', 'loading'], true)
         }

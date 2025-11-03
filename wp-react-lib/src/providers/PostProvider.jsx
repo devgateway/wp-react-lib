@@ -1,58 +1,43 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {getPosts} from '../reducers/actions'
-import {PostContext} from './Context'
-import {Container, Loader, Segment} from "semantic-ui-react";
+import React, { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPosts } from '../reducers/actions'
+import { PostContext } from './Context'
+import { Container, Loader, Segment } from "semantic-ui-react"
 import LocalizedProvider from "./LocalizedProvider"
 
-class PostProvider extends React.Component {
+const PostProvider = (props) => {
+    const {
+        type = 'posts',
+        taxonomy,
+        categories,
+        before,
+        perPage,
+        page,
+        fields,
+        slug,
+        store = "posts",
+        locale,
+        previewNonce,
+        previewId,
+        search,
+        children
+    } = props;
 
-    componentDidMount() {
-        const {
-            type = 'posts',
-            taxonomy,
-            categories,
-            before,
-            perPage,
-            page,
-            fields,
-            slug,
-            store = "posts",
-            locale,
-            previewNonce,
-            previewId,
-            search,
-            onLoadPost
-        } = this.props
+    const dispatch = useDispatch();
 
-        onLoadPost({
-            slug, type, taxonomy, categories, before, perPage, page, fields, store, locale, previewNonce,
-            previewId, search
-        })
-    }
+    const meta = useSelector(state => state.getIn(['wordpress', store, 'meta']));
+    const posts = useSelector(state => state.getIn(['wordpress', store, 'items']));
+    const error = useSelector(state => state.getIn(['wordpress', store, 'error']));
+    const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const {
-            type = 'posts',
-            taxonomy,
-            categories,
-            before,
-            perPage,
-            page,
-            fields,
-            slug,
-            store = "posts",
-            locale,
-            previewNonce,
-            previewId,
-            search,
-            onLoadPost
-        } = this.props
+    const prevProps = useRef({categories, locale, slug, taxonomy, page, perPage, search}).current;
 
+    useEffect(() => {
+       
         if (categories != prevProps.categories || locale != prevProps.locale || slug != prevProps.slug ||
             taxonomy != prevProps.taxonomy || page != prevProps.page || perPage != prevProps.perPage || search != prevProps.search
         ) {
-            onLoadPost({
+            dispatch(getPosts({
                 slug,
                 type,
                 taxonomy,
@@ -66,45 +51,53 @@ class PostProvider extends React.Component {
                 previewNonce,
                 previewId,
                 search
-            })
+            }));
         }
-    }
+        
+    }, [categories, locale, slug, taxonomy, page, perPage, search]);
 
-    render() {
-        const {posts, meta, loading, error, locale} = this.props
-        if (posts && posts.length > 0) {
-            return <PostContext.Provider value={{posts, locale, meta}}>{this.props.children}</PostContext.Provider>
-        } else if (error) {
-            return <Segment color={"red"}>
+    useEffect(() => {
+        dispatch(getPosts({
+            slug,
+            type,
+            taxonomy,
+            categories,
+            before,
+            perPage,
+            page,
+            fields,
+            store,
+            locale,
+            previewNonce,
+            previewId,
+            search
+        }));
+    }, []);
+
+    if (posts && posts.length > 0) {
+        return <PostContext.Provider value={{ posts, locale, meta }}>{children}</PostContext.Provider>;
+    } else if (error) {
+        return (
+            <Segment color={"red"}>
                 <h1>500</h1>
                 <p>The service is not available please try again in a few minutes</p>
             </Segment>
-        } else if (loading) {
-            return (<Container>
+        );
+    } else if (loading) {
+        return (
+            <Container>
                 <Loader>Loading</Loader>
-            </Container>)
-        } else {
-            return <Container>
+            </Container>
+        );
+    } else {
+        return (
+            <Container>
                 <Segment color={"red"}>
                     <p>No entries found</p>
                 </Segment>
             </Container>
-        }
+        );
     }
-}
-
-const mapStateToProps = (state, ownProps) => {
-    const {store = "posts"} = ownProps
-    return {
-        meta: state.getIn(['wordpress', store, 'meta']),
-        posts: state.getIn(['wordpress', store, 'items']),
-        error: state.getIn(['wordpress', store, 'error']),
-        loading: state.getIn(['wordpress', store, 'loading']),
-    }
-}
-
-const mapActionCreators = {
-    onLoadPost: getPosts
 };
 
-export default LocalizedProvider(connect(mapStateToProps, mapActionCreators)(PostProvider))
+export default LocalizedProvider(PostProvider);
