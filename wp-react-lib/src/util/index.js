@@ -29,7 +29,7 @@ export const replaceHTMLinks = (html, locale) => {
         if (useHash) {
             newLink = href.replace(all, '#' + locale) //TODO:fix it!
         } else {
-            newLink = href.replace(all, '' + locale) //TODO:fix it!
+            newLink = href.replace(all, '/' + locale) //TODO:fix it!
         }
         newHtml = newHtml.replaceAll(link[2], newLink)
     }
