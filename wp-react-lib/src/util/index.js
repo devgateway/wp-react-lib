@@ -1,38 +1,79 @@
 const useHash = process.env.VITE_REACT_APP_USE_HASH_LINKS;
 
+// Escape special regex characters in domain names
+const escapeRegex = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 export const replaceLink = (url, locale) => {
+    if (!url || !locale) return url;
     //console.log("--------- replaceLink--------------")
     //console.log(process.env.REACT_APP_WP_HOSTS)
-    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS.split(",")
-    let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
-    if (useHash && url) {
-        return url.replaceAll(all, "#" + locale)
-    } else if (url) {
-        return url.replaceAll(all, "/" + locale)
+    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS?.split(",").map(d => escapeRegex(d.trim())) || []
+    if (replacementTarget.length === 0) return url;
+    
+    // Match protocol and domain, capture everything after (path, query, fragment)
+    let all = new RegExp("^(https?://)(" + replacementTarget.join('|') + ")(.*)$", "i");
+    
+    if (useHash) {
+        const match = url.match(all);
+        if (match) {
+            const path = match[3] || '/';
+            return '#' + locale + path;
+        }
+    } else {
+        const match = url.match(all);
+        if (match) {
+            const path = match[3] || '/';
+            return '/' + locale + path;
+        }
     }
+    return url;
 }
 
 export const replaceHTMLinks = (html, locale) => {
+    if (!html || !locale) return html;
     //console.log("--------- replaceHTMLinks--------------")
     // console.log(process.env.REACT_APP_WP_HOSTS)
-    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS?.split(",") || []
-    let all = new RegExp("^(http|https)://(" + replacementTarget.join('|') + ")", "ig");
+    const replacementTarget = process.env.VITE_REACT_APP_WP_HOSTS?.split(",").map(d => escapeRegex(d.trim())) || []
+    if (replacementTarget.length === 0) return html;
+    
+    // Match protocol and domain, capture everything after (path, query, fragment)
+    let all = new RegExp("^(https?://)(" + replacementTarget.join('|') + ")(.*)$", "i");
 
     let link;
     let regex = /href\s*=\s*(['"])(https?:\/\/.+?)\1/ig;
 
     let newHtml = html
+    const processedLinks = new Map(); // Track processed URLs to avoid duplicate processing
+    
+    // First pass: collect all URLs that need to be replaced
     while ((link = regex.exec(html)) !== null) {
         let href = link[2]
-        let newLink
-        if (useHash) {
-            newLink = href.replace(all, '#' + locale) //TODO:fix it!
-        } else {
-            newLink = href.replace(all, '/' + locale) //TODO:fix it!
+        // Skip if we've already processed this URL
+        if (processedLinks.has(href)) {
+            continue;
         }
-        newHtml = newHtml.replaceAll(link[2], newLink)
+        
+        const match = href.match(all);
+        if (match) {
+            const path = match[3] || '/';
+            let newLink;
+            if (useHash) {
+                newLink = '#' + locale + path;
+            } else {
+                newLink = '/' + locale + path;
+            }
+            processedLinks.set(href, newLink);
+        }
     }
+    
+    // Second pass: replace all occurrences of processed URLs within href attributes
+    processedLinks.forEach((newLink, oldLink) => {
+        // Match href attributes containing the old URL and replace just the URL part
+        const hrefPattern = new RegExp(`(href\\s*=\\s*['"])${escapeRegex(oldLink)}(['"])`, 'gi');
+        newHtml = newHtml.replace(hrefPattern, `$1${newLink}$2`);
+    });
     if (useHash) {
         let anchor = /href="#([^"]*)"/ig;
         let re2 = new RegExp(anchor, "i");
