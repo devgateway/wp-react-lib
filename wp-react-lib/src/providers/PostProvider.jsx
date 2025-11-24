@@ -20,13 +20,16 @@ const PostProvider = (props) => {
         previewNonce,
         previewId,
         search,
-        children
+        children,
+        fallbackComponent
     } = props;
 
     const dispatch = useDispatch();
 
     const meta = useSelector(state => state.getIn(['wordpress', store, 'meta']));
-    const posts = useSelector(state => state.getIn(['wordpress', store, 'items']));
+    const postsRaw = useSelector(state => state.getIn(['wordpress', store, 'items']));
+    // Handle both Immutable List and plain array
+    const posts = postsRaw && typeof postsRaw.toJS === 'function' ? postsRaw.toJS() : postsRaw;
     const error = useSelector(state => state.getIn(['wordpress', store, 'error']));
     const loading = useSelector(state => state.getIn(['wordpress', store, 'loading']));
 
@@ -74,8 +77,18 @@ const PostProvider = (props) => {
         }));
     }, []);
 
-    if (posts && posts.length > 0) {
-        return <PostContext.Provider value={{ posts, locale, meta }}>{children}</PostContext.Provider>;
+    // Check if we have posts - handle both array and single object cases
+    const hasPosts = posts && (Array.isArray(posts) ? posts.length > 0 : posts);
+    
+
+    if (slug && !loading && !hasPosts && !error) {
+        console.log('PostProvider: No posts found', { slug, store, locale, posts, loading, error });
+    }
+    
+    if (hasPosts) {
+        // Ensure posts is always an array for the context
+        const postsArray = Array.isArray(posts) ? posts : [posts];
+        return <PostContext.Provider value={{ posts: postsArray, locale, meta }}>{children}</PostContext.Provider>;
     } else if (error) {
         return (
             <Segment color={"red"}>
@@ -90,10 +103,14 @@ const PostProvider = (props) => {
             </Container>
         );
     } else {
+        // If no posts found and fallback component provided, use it
+        if (fallbackComponent) {
+            return <>{fallbackComponent}</>;
+        }
         return (
             <Container>
                 <Segment color={"red"}>
-                    <p>No entries found</p>
+                    <p>No posts found</p>
                 </Segment>
             </Container>
         );

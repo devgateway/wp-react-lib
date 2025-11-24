@@ -74,6 +74,71 @@ export const replaceHTMLinks = (html, locale) => {
         const hrefPattern = new RegExp(`(href\\s*=\\s*['"])${escapeRegex(oldLink)}(['"])`, 'gi');
         newHtml = newHtml.replace(hrefPattern, `$1${newLink}$2`);
     });
+    
+    // Fix malformed URLs where locale is concatenated with domain (e.g., /enlocalhost/...)
+    // This handles cases where the URL replacement went wrong
+    // Pattern matches: /enlocalhost/... or /en<any-domain>/...
+    const localeDomainConcatenationPattern = new RegExp(`(href\\s*=\\s*['"])(/${escapeRegex(locale)})([^/]+)(/.*?)(['"])`, 'gi');
+    newHtml = newHtml.replace(localeDomainConcatenationPattern, (match, prefix, localePart, domainPart, pathPart, suffix) => {
+        // Reconstruct the correct URL: /locale/path (removing the domain part)
+        let newLink;
+        if (useHash) {
+            newLink = '#' + locale + pathPart;
+        } else {
+            newLink = '/' + locale + pathPart;
+        }
+        return prefix + newLink + suffix;
+    });
+    
+    // Handle relative URLs that start with /wp/ but don't have locale prefix
+    // This ensures relative WordPress URLs get the locale prefix added
+    // Also handles cases where WordPress embeds locale in path like /wp/fr/news-post/
+    const relativeWpPattern = /href\s*=\s*(['"])(\/wp\/[^'"]+)\1/gi;
+    newHtml = newHtml.replace(relativeWpPattern, (match, quote, path) => {
+        // Check if path already has locale prefix at the start (e.g., /fr/wp/...)
+        if (path.startsWith(`/${locale}/`) || path.match(new RegExp(`^/${locale}[^/]`))) {
+            return match; // Already has locale prefix, don't modify
+        }
+        
+        // Check if WordPress embedded locale in path like /wp/fr/news-post/
+        // Match pattern: /wp/{locale}/... where locale is 2-3 letter code
+        const wpLocalePattern = /^\/wp\/([a-z]{2,3})(\/.*)$/i;
+        const wpLocaleMatch = path.match(wpLocalePattern);
+        
+        if (wpLocaleMatch) {
+            const embeddedLocale = wpLocaleMatch[1];
+            const restOfPath = wpLocaleMatch[2];
+            // If embedded locale matches current locale, reconstruct without duplicate
+            if (embeddedLocale === locale) {
+                let newLink;
+                if (useHash) {
+                    newLink = '#' + locale + '/wp' + restOfPath;
+                } else {
+                    newLink = '/' + locale + '/wp' + restOfPath;
+                }
+                return `href=${quote}${newLink}${quote}`;
+            } else {
+                // Different locale embedded, use current locale instead
+                let newLink;
+                if (useHash) {
+                    newLink = '#' + locale + '/wp' + restOfPath;
+                } else {
+                    newLink = '/' + locale + '/wp' + restOfPath;
+                }
+                return `href=${quote}${newLink}${quote}`;
+            }
+        }
+        
+        // No locale in path, add it
+        let newLink;
+        if (useHash) {
+            newLink = '#' + locale + path;
+        } else {
+            newLink = '/' + locale + path;
+        }
+        return `href=${quote}${newLink}${quote}`;
+    });
+    
     if (useHash) {
         let anchor = /href="#([^"]*)"/ig;
         let re2 = new RegExp(anchor, "i");

@@ -120,7 +120,7 @@ export default (state = initialState, action) => {
             return state.setIn([store, 'loading'], false)
                 .deleteIn([store, 'error'])
                 .setIn([store, 'meta'], meta)
-                .setIn([store, "items"], data)
+                .setIn([store, "items"], Array.isArray(data) ? data : (data ? [data] : []))
 
         }
         case LOAD_POSTS_ERROR: {
