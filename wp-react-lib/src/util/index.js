@@ -57,7 +57,19 @@ export const replaceHTMLinks = (html, locale) => {
         
         const match = href.match(all);
         if (match) {
-            const path = match[3] || '/';
+            let path = match[3] || '/';
+            
+            // Check if path has locale embedded in /wp/ like /wp/fr/post-name/
+            // If so, remove the embedded locale to avoid duplicates
+            const wpLocalePattern = /^\/wp\/([a-z]{2,3})(\/.*)$/i;
+            const wpLocaleMatch = path.match(wpLocalePattern);
+            if (wpLocaleMatch) {
+                const embeddedLocale = wpLocaleMatch[1];
+                const restOfPath = wpLocaleMatch[2];
+                // Remove embedded locale, we'll add it at the start
+                path = '/wp' + restOfPath;
+            }
+            
             let newLink;
             if (useHash) {
                 newLink = '#' + locale + path;
@@ -137,6 +149,19 @@ export const replaceHTMLinks = (html, locale) => {
             newLink = '/' + locale + path;
         }
         return `href=${quote}${newLink}${quote}`;
+    });
+    
+    // Fix duplicate locale in paths like /fr/wp/fr/post-name/ -> /fr/wp/post-name/
+    // This handles cases where the locale was added both at the start and embedded in /wp/
+    const duplicateLocalePattern = new RegExp(`(href\\s*=\\s*['"])(/${escapeRegex(locale)}/wp/${escapeRegex(locale)})(/.*?)(['"])`, 'gi');
+    newHtml = newHtml.replace(duplicateLocalePattern, (match, prefix, duplicatePart, restOfPath, suffix) => {
+        let newLink;
+        if (useHash) {
+            newLink = '#' + locale + '/wp' + restOfPath;
+        } else {
+            newLink = '/' + locale + '/wp' + restOfPath;
+        }
+        return prefix + newLink + suffix;
     });
     
     if (useHash) {
