@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.6.0
+
+### Minor Changes
+
+- 6c19194: Removing data attributes from components container,and some other small fixes
+
 ## 0.5.1
 
 ### Patch Changes
