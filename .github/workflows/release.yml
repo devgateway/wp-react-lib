@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: wp-react-lib
+        working-directory: ${{ github.workspace }}/wp-react-lib
 
     steps:
       - uses: actions/checkout@v4
