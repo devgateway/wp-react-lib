@@ -38,13 +38,14 @@ jobs:
         run: npm run build
 
       - name: Create Release
-        uses: changesets/action@v1
+        uses: changesets/action@v1.5.1
         id: release
         with:
           version: npm run version
           publish: npm exec changeset publish --git-tag
           commit: "chore(release): update version"
           title: "chore(release): update version"
+          cwd: ./wp-react-lib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
