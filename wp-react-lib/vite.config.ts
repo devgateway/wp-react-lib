@@ -22,7 +22,7 @@ export default defineConfig({
         copyPublicDir: false,
         lib: {
             entry: resolve(__dirname, 'src/index.js'),
-            name: '@devgateway/dvz-ui'
+            name: '@devgateway/wp-react-lib'
         },
         commonjsOptions: {
             transformMixedEsModules: true,

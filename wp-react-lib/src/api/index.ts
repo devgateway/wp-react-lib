@@ -1,22 +1,23 @@
 import type { PageResponse } from "../post-type"
 import type { DgSettings, Media } from "../types"
 
-const API_ROOT = process.env.VITE_REACT_APP_WP_API ?? '/wp/wp-json'
-const URL_MENU = API_ROOT + '/menus/v1/menus/'
+// @ts-ignore Types not available
+const API_ROOT = import.meta.env.VITE_REACT_APP_WP_API ?? process.env.VITE_REACT_APP_WP_API ?? '/wp/wp-json'
+// const URL_MENU = API_ROOT + '/menus/v1/menus/'
 
-const URL_API_BASE = API_ROOT + '/wp/v2/'
+// const URL_API_BASE = API_ROOT + '/wp/v2/'
 
-const URL_PAGE = API_ROOT + '/wp/v2/pages'
+// const URL_PAGE = API_ROOT + '/wp/v2/pages'
+// // @ts-ignore
+// const URL_SEARCH = API_ROOT + (import.meta.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? '/wp/v2/search')
 
-const URL_SEARCH = API_ROOT + (process.env.VITE_REACT_APP_WP_SEARCH_END_POINT ?? '/wp/v2/search')
+// const URL_MEDIA = API_ROOT + '/wp/v2/media'
 
-const URL_MEDIA = API_ROOT + '/wp/v2/media'
+// const URL_SETTINGS = API_ROOT + '/dg/v1/settings';
 
-const URL_SETTINGS = API_ROOT + '/dg/v1/settings';
+// const URL_CATEGORIES = API_ROOT + '/wp/v2/categories'
 
-const URL_CATEGORIES = API_ROOT + '/wp/v2/categories'
-
-const URL_YEAR_RANGE = API_ROOT + '/util-api/v1/year-range'
+// const URL_YEAR_RANGE = API_ROOT + '/util-api/v1/year-range'
 
 
 export const post = (url: string, params: Record<string, unknown>, isBlob?: boolean) => {
@@ -59,6 +60,7 @@ export const post = (url: string, params: Record<string, unknown>, isBlob?: bool
     })
 }
 export const get = (url: string, _params: Record<string, unknown> = {}) => {
+    console.log("get", url);
     return new Promise((resolve, reject) => {
 
         fetch(url, {credentials: 'include'})
@@ -91,25 +93,29 @@ export const queryParams = (params: Record<string, any>) => {
 }
 
 
-export const getTaxonomy = (name: string, locale: string) => {
-    return get(URL_API_BASE + "" + name + '?lang=' + locale + '&per_page=100')
+export const getTaxonomy = (name: string, locale: string, apiBaseUrl: string = API_ROOT + '/wp/v2/') => {
+    const apiUrl = apiBaseUrl + "/wp/v2/"
+    return get(apiUrl + "" + name + '?lang=' + locale + '&per_page=100')
 
 }
 
 //TODO:make a unique getPost method
 export const getPostsByTypeAndTaxonomy = (
-    {type, category, value, locale, page = 1, perPage = 1}:
-    {type: string, category: string, value: string, locale: string, page?: number, perPage?: number}) => {
-    return get(URL_API_BASE + type + "?_embed&" + category + '=' + value + '&lang=' + locale + '&per_page=' + perPage + '&page=' + page)
+    {type, category, value, locale, page = 1, perPage = 1, apiBaseUrl}:
+    {type: string, category: string, value: string, locale: string, page?: number, perPage?: number, apiBaseUrl?: string}) => {
+    const apiUrl = apiBaseUrl ? apiBaseUrl + "/wp/v2/" : API_ROOT + '/wp/v2/';
+    return get(apiUrl + type + "?_embed&" + category + '=' + value + '&lang=' + locale + '&per_page=' + perPage + '&page=' + page)
 }
 
 
-export const getSettings=(locale: string,changeUUID?: string) : Promise<DgSettings> =>{
-    return get(URL_SETTINGS+'?cacheBust='+((Math.random() + 1).toString(36).substring(7))+'&lang='+locale+(changeUUID?'&customize_changeset_uuid='+changeUUID:'')) as Promise<DgSettings>
+export const getSettings=(locale: string,changeUUID?: string, apiBaseUrl?: string) : Promise<DgSettings> =>{
+    const apiUrl = apiBaseUrl ? apiBaseUrl + "/dg/v1/settings" : API_ROOT + '/dg/v1/settings';
+    return get(apiUrl+'?cacheBust='+((Math.random() + 1).toString(36).substring(7))+'&lang='+locale+(changeUUID?'&customize_changeset_uuid='+changeUUID:'')) as Promise<DgSettings>
 }
 
-export const getMenu = (name: string, locale: string) => {
-    return get(URL_MENU + name + '?lang=' + locale)
+export const getMenu = (name: string, locale: string, apiBaseUrl?: string) => {
+    const apiUrl = apiBaseUrl ? apiBaseUrl + "/menus/v1/menus/" : API_ROOT + '/menus/v1/menus/';
+    return get(apiUrl + name + '?lang=' + locale)
 }
 
 export const getPosts = ({
@@ -125,7 +131,8 @@ export const getPosts = ({
     previewNonce,
     previewId,
     search,
-    after
+    after,
+    apiBaseUrl
 }: {
     slug?: string;
     type?: string;
@@ -140,9 +147,11 @@ export const getPosts = ({
     previewId?: string;
     search?: string;
     after?: Date;
+    apiBaseUrl?: string;
 }) => {
 
-    let url = URL_API_BASE + (type ?? 'posts')
+    let url = apiBaseUrl ? apiBaseUrl + "/wp/v2/" : API_ROOT + '/wp/v2/';
+    url += (type ?? 'posts')
 
     if (previewId) {
         url += '/' + previewId + '/revisions'
@@ -190,7 +199,8 @@ export const getPages = ({
     previewNonce,
     previewId,
     search,
-    noCache
+    noCache,
+    apiBaseUrl
 }: {
     before?: Date;
     perPage?: number;
@@ -203,8 +213,9 @@ export const getPages = ({
     previewId?: string;
     search?: string;
     noCache?: boolean;
+    apiBaseUrl?: string;
 }) => {
-    let url = URL_PAGE
+    let url = apiBaseUrl ? apiBaseUrl + "/wp/v2/pages" : API_ROOT + '/wp/v2/pages'
 
     if (previewId) {
         url += '/' + previewId + '/revisions'
@@ -224,6 +235,7 @@ export const getPages = ({
             + (search ? '&search=' + search : '')
             + (noCache ? '&cacheBust='+((Math.random() + 1).toString(36).substring(7)) : '')
     }
+    console.log("url==>", url);
     return get(url) as Promise<PageResponse>
 }
 
@@ -234,8 +246,10 @@ export const search = (
     search?: string,
     type?: string,
     subtype?: string,
-    locale?: string) => {
-    let url = URL_SEARCH + '?lang=' + locale
+    locale?: string,
+    apiBaseUrl?: string) => {
+    let url = apiBaseUrl ? apiBaseUrl + "/dg/v1/search" : API_ROOT + '/dg/v1/search';
+    url += '?lang=' + locale
         + (context ? "&context=" + context : '')
         + (perPage ? '&per_page=' + perPage : '')
         + (page ? '&page=' + page : '')
@@ -246,8 +260,9 @@ export const search = (
     return get(url)
 }
 
-export const getMedia = (slug: string, locale: string) : Promise<Media> => {
-    return get(URL_MEDIA + '/' + slug + '?lang=' + locale) as Promise<Media>;
+export const getMedia = (slug: string, locale: string, apiBaseUrl?: string) : Promise<Media> => {
+    const apiUrl = apiBaseUrl ? apiBaseUrl + "/wp/v2/media" : API_ROOT + '/wp/v2/media';
+    return get(apiUrl + '/' + slug + '?lang=' + locale) as Promise<Media>;
 }
 
 export const getCategories = ({
@@ -263,7 +278,8 @@ export const getCategories = ({
     parent,
     post,
     slug,
-    locale
+    locale,
+    apiBaseUrl
 }: {
     context?: string;
     page?: number;
@@ -278,8 +294,10 @@ export const getCategories = ({
     post?: string;
     slug?: string;
     locale?: string;
+    apiBaseUrl?: string;
 })=> {
-    let url = URL_CATEGORIES + '?lang=' + locale
+    const apiUrl = apiBaseUrl ? apiBaseUrl + "/wp/v2/categories" : API_ROOT + '/wp/v2/categories';
+    let url = apiUrl + '?lang=' + locale
     + (context ? '&context=' + context : '')
     + (page ? '&page=' + page : '')
     + (perPage ? '&per_page=' + perPage : '')
@@ -295,6 +313,8 @@ export const getCategories = ({
     return get(url)
 }
 
-export const getYearRange = () => {
-    return get(URL_YEAR_RANGE)
+export const getYearRange = (apiBaseUrl?: string) => {
+    const apiUrl = apiBaseUrl ? apiBaseUrl + "/util-api/v1/year-range" : API_ROOT + '/util-api/v1/year-range';
+
+    return get(apiUrl)
 }

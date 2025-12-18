@@ -1,5 +1,52 @@
 # @devgateway/wp-react-lib
 
+## 0.6.0
+
+### Minor Changes
+
+- 6c19194: Removing data attributes from components container,and some other small fixes
+
+## 0.5.1
+
+### Patch Changes
+
+- 62fca36: fix wp search endpoint
+
+## 0.5.0
+
+### Minor Changes
+
+This release introduces a minor version update to the @devgateway/wp-react-lib package, primarily focused on improving API endpoint handling for server-side rendering (SSR) scenarios. The main enhancement is the support for dynamic base URLs, allowing the library to better adapt to different SSR contexts.
+
+API improvements:
+
+- Updated API endpoint handling to support dynamic base URLs for SSR contexts, increasing flexibility for server-side rendering environments.
+- e5b7db3: update API endpoint handling to support dynamic base URLs for SSR contexts
+
+## 0.4.8
+
+### Patch Changes
+
+- a949690: Remove sub-imports to remain with the main import
+
+## 0.4.7
+
+### Patch Changes
+
+- 7174745: fix env variables imports
+
+## 0.4.6
+
+### Patch Changes
+
+- 2e20f93: Standardize dependencies for consitency
+
+## 0.4.5
+
+### Patch Changes
+
+- 8bf45ce: Upgrade dependencies to fix CVEs
+
 ## 0.4.4
 
 ### Patch Changes
