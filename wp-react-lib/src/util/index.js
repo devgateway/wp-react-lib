@@ -42,7 +42,6 @@ export const replaceLink = (url, locale) => {
 }
 
 export const replaceHTMLinks = (html, locale) => {
-  debugger;
   //console.log("--------- replaceHTMLinks--------------")
   // console.log(process.env.REACT_APP_WP_HOSTS)
 
