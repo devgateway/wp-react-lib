@@ -38,7 +38,7 @@ jobs:
         run: npm run build
 
       - name: Create Release
-        uses: changesets/action@v1.5.1
+        uses: changesets/action@v1.5.2
         id: release
         with:
           version: npm run version
