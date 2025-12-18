@@ -16,6 +16,10 @@ const localReplaceLink = (url, locale) => {
     if (!pathname.startsWith("/wp/")) {
       return url; // Not a WordPress path, leave unchanged
     }
+    //ensuring access to media library files
+    if (pathname.startsWith("/wp/wp-content")){
+      return url
+    }
 
     const afterWp = pathname.slice(3); // remove '/wp'
 
