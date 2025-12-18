@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ github.workspace }}/wp-react-lib
+        working-directory: wp-react-lib
 
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +45,7 @@ jobs:
           publish: npm exec changeset publish --git-tag
           commit: "chore(release): update version"
           title: "chore(release): update version"
+          cwd: ${{ github.workspace }}/wp-react-lib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
