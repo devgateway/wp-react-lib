@@ -74,6 +74,10 @@
       "types": "./dist/types/hooks/index.d.ts",
       "import": "./dist/esm/hooks/index.js",
       "require": "./dist/cjs/hooks/index.js"
+    },
+    "publishConfig": {
+      "access": "public",
+      "provenance": false
     }
   }
 }
