@@ -45,7 +45,6 @@ jobs:
           publish: npm exec changeset publish --git-tag
           commit: "chore(release): update version"
           title: "chore(release): update version"
-          cwd: wp-react-lib"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
