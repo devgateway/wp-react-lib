@@ -24,12 +24,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-
-      - name: Install dependencies
-        run: npm install
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Run TypeScript Check
         run: npm run typecheck
@@ -38,16 +34,16 @@ jobs:
         run: npm run build
 
       - name: Create Release
-        uses: changesets/action@v1.5.2
+        uses: changesets/action@v1.5.1
         id: release
         with:
           version: npm run version
           publish: npm exec changeset publish --git-tag
           commit: "chore(release): update version"
           title: "chore(release): update version"
-          cwd: ${{ github.workspace }}/wp-react-lib
+          cwd: ./wp-react-lib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          NPM_CONFIG_PROVENANCE: false
 
 
