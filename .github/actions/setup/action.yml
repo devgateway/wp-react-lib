@@ -7,6 +7,7 @@ runs:
   steps:
     - name: Setup Node.js
       uses: actions/setup-node@v6
+      working-directory: ./wp-react-lib
       with:
         node-version: 22.x
         cache: npm
@@ -15,11 +16,13 @@ runs:
 
     - name: Upgrade npm for OIDC support
       run: npm install -g npm@latest
+      working-directory: ./wp-react-lib
       shell: bash
 
     - name: Restore node_modules cache
       id: modules-cache
       uses: actions/cache@v4
+      working-directory: ./wp-react-lib
       with:
         path: |
           node_modules
@@ -28,4 +31,5 @@ runs:
     - name: Install dependencies
       if: steps.modules-cache.outputs.cache-hit != 'true'
       run: npm ci
+      working-directory: ./wp-react-lib
       shell: bash
