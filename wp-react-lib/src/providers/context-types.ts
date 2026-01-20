@@ -14,7 +14,7 @@ export interface PageContextType {
 }
 
 export interface MediaContextType {
-    media: Media[] | null
+    media: Media | null
     locale: string | undefined
 }
 

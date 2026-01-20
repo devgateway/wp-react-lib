@@ -11,7 +11,7 @@ interface MediaProviderProps {
     locale: string
     onLoad: ({id, locale}: {id: string, locale: string}) => void
     loading: boolean
-    media: Media[] | null
+    media: Media | null
 }
 
 /*
