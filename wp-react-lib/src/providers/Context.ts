@@ -1,5 +1,5 @@
 import React from 'react'
-import type { PostContextType, PageContextType, SearchContextType, SettingsContextType, TaxonomyContextType, CategoriesContextType } from './context-types'
+import type { PostContextType, PageContextType, SearchContextType, SettingsContextType, TaxonomyContextType, CategoriesContextType, MediaContextType } from './context-types'
 
 export const PostContext = React.createContext<PostContextType>({
     posts: null,
@@ -34,3 +34,8 @@ export const CategoriesContext = React.createContext<CategoriesContextType>({
     loading: false,
     error: undefined
 })
+
+export const MediaContext = React.createContext<MediaContextType>({
+    media: null,
+    locale: undefined
+});

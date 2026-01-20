@@ -37,7 +37,7 @@ import CategoriesConsumer from "./consumers/CategoriesConsumer";
 import utils from "./util";
 import wordpress from "./reducers/wordpress";
 
-import { SettingsContext, PageContext, AppContext, PostContext, CategoriesContext, TaxonomyContext, SearchContext, MenuContext } from './providers/Context'
+import { SettingsContext, PageContext, AppContext, PostContext, CategoriesContext, TaxonomyContext, SearchContext, MenuContext, MediaContext } from './providers/Context'
 
 export {
     Post,
@@ -76,7 +76,8 @@ export {
     CategoriesContext,
     TaxonomyContext,
     SearchContext,
-    MenuContext
+    MenuContext,
+    MediaContext
 }
 
 export * from './types';

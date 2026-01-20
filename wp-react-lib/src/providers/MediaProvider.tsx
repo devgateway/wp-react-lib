@@ -2,12 +2,8 @@ import React, { memo } from 'react'
 import {connect} from 'react-redux'
 import {getMedia} from '../reducers/actions'
 import LocalizedProvider from "./LocalizedProvider"
-import type { MediaContextType } from './context-types'
 import type { Media } from '../types'
-export const MediaContext = React.createContext<MediaContextType>({
-    media: null,
-    locale: undefined
-});
+import { MediaContext } from './Context'
 
 interface MediaProviderProps {
     children: React.ReactNode
