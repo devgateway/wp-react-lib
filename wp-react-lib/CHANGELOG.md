@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.6.1
+
+### Patch Changes
+
+- 025d44f: Add missing MediaContext export
+
 ## 0.6.0
 
 ### Minor Changes
