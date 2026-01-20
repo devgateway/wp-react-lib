@@ -7,7 +7,6 @@ runs:
   steps:
     - name: Setup Node.js
       uses: actions/setup-node@v6
-      working-directory: ./wp-react-lib
       with:
         node-version: 22.x
         cache: npm
@@ -22,7 +21,6 @@ runs:
     - name: Restore node_modules cache
       id: modules-cache
       uses: actions/cache@v4
-      working-directory: ./wp-react-lib
       with:
         path: |
           node_modules
