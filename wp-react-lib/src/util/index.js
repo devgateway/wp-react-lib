@@ -29,7 +29,8 @@ const buildUrlRegex = () => {
     if (!hosts.length) return null;
     const hostsPattern = hosts.map(escapeRegex).join('|');
     const wpRootPattern = escapeRegex(normalizeWpRoot(WP_ROOT));
-    return new RegExp(`^(http|https)://(${hostsPattern})(?:${wpRootPattern}(?=/|$))?`, 'ig');
+    // Match scheme + allowed host + optional :port + optional WP root, with a strict boundary after the host/root.
+    return new RegExp(`^https?:\/\/(?:${hostsPattern})(?::\\d+)?(?:${wpRootPattern})?(?=[\/?#]|$)`, 'ig');
 };
 
 export const replaceLink = (url, locale) => {
