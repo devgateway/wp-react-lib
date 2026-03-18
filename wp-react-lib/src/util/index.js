@@ -4,6 +4,21 @@ const WP_ROOT = process.env.VITE_REACT_APP_WP || '/wp';
 // Escapes special regex metacharacters in a literal string.
 const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// Normalizes WP_ROOT to have exactly one leading "/" and no trailing "/".
+// Examples:
+//   "wp"    -> "/wp"
+//   "/wp/"  -> "/wp"
+//   "//wp//"-> "/wp"
+//   "/"     -> ""   (no subdirectory)
+const normalizeWpRoot = (root) => {
+    if (!root) return '';
+    let r = root.trim();
+    // Remove all leading and trailing slashes
+    r = r.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (!r) return '';
+    return '/' + r;
+};
+
 // Builds a regex that matches the scheme + configured WP hostname(s) + optional WP
 // subdirectory path (e.g. /wp), so the entire origin prefix can be replaced with the
 // locale slug in one step.
@@ -13,7 +28,7 @@ const buildUrlRegex = () => {
         ?.split(",").map(h => h.trim()).filter(Boolean) || [];
     if (!hosts.length) return null;
     const hostsPattern = hosts.map(escapeRegex).join('|');
-    const wpRootPattern = escapeRegex(WP_ROOT);
+    const wpRootPattern = escapeRegex(normalizeWpRoot(WP_ROOT));
     return new RegExp(`^(http|https)://(${hostsPattern})(?:${wpRootPattern}(?=/|$))?`, 'ig');
 };
 
