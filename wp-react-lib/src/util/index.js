@@ -14,7 +14,7 @@ const buildUrlRegex = () => {
     if (!hosts.length) return null;
     const hostsPattern = hosts.map(escapeRegex).join('|');
     const wpRootPattern = escapeRegex(WP_ROOT);
-    return new RegExp(`^(http|https)://(${hostsPattern})(${wpRootPattern})?`, 'ig');
+    return new RegExp(`^(http|https)://(${hostsPattern})(?:${wpRootPattern}(?=/|$))?`, 'ig');
 };
 
 export const replaceLink = (url, locale) => {
