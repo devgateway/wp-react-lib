@@ -73,4 +73,4 @@ export const removePatternBrackets = (html) => {
   }
 };
 
-export default { replaceHTMLinks, replaceLink }
+export default { replaceHTMLinks, replaceLink, removePatternBrackets, localReplaceLink };

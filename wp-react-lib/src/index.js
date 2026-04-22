@@ -83,3 +83,5 @@ export {
 export * from './types';
 export * from './post-type';
 export * from './api';
+export * from './template-parts';
+export { default as EmbeddedGateway } from './embedded/EmbeddedGateway';
