@@ -1,5 +1,11 @@
 # @devgateway/wp-react-lib
 
+## 0.6.2
+
+### Patch Changes
+
+- 940029f: Expose more existing functions
+
 ## 0.6.1
 
 ### Patch Changes
