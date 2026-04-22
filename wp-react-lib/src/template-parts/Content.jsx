@@ -3,7 +3,7 @@ import EmbeddedGateway from '../embedded/EmbeddedGateway'
 import {Container} from "semantic-ui-react";
 import {removePatternBrackets, replaceHTMLinks, replaceLink} from "../util";
 
-const Enhance = (props) => {
+export const Enhance = (props) => {
     const Component = props.as ? props.as : Container;
     const filteredProps = ['post', 'pageNumber', 'visibility', 'intl', "as"]
     const newProps = {}
@@ -19,7 +19,7 @@ const Enhance = (props) => {
 /*
 WP_Multilang doesn't support patterns translation, this function eliminates the duplicated pattern
 * */
-const translate = (str, locale = "en") => {
+export const translate = (str, locale = "en") => {
     if (str==null){
         return null;
     }
