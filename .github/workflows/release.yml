@@ -27,6 +27,14 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Upgrade npm for OIDC support
+        working-directory: ./wp-react-lib
+        run: |
+          npm_major=$(npm --version | cut -d. -f1)
+          if [ "$npm_major" -lt 11 ]; then
+            npm install -g npm@10 && npm install -g npm@11
+          fi
+
       - name: Run TypeScript Check
         run: npm run typecheck
 

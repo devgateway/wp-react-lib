@@ -13,11 +13,6 @@ runs:
         cache-dependency-path: package-lock.json
         registry-url: https://registry.npmjs.org
 
-    - name: Upgrade npm for OIDC support
-      run: npm install -g npm@latest
-      working-directory: ./wp-react-lib
-      shell: bash
-
     - name: Restore node_modules cache
       id: modules-cache
       uses: actions/cache@v4
