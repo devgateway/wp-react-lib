@@ -151,11 +151,13 @@ Please look at **wp-react-example-advanced** and **wp-react-blocks-plugin**
 
 For details about how to send pull requests, please read [CONTRIBUTING.md](https://github.com/devgateway/wp-react-lib/blob/main/CONTRIBUTING.md).
 
-## Autor
+## Author
 
 * **Sebastian Dimunzio** - *Architecture and code* - [sdimunzio](https://github.com/sdimunzio)
 
-The list of all contributors to this project can be read at [contributors](https://github.com/devgateway/wp-react-lib/graphs/contributors).
+## Contributors
+
+* **Timothy Gachengo** - *Refactoring* - [timothygachengo](https://github.com/timothygachengo)
 
 ## License
 
