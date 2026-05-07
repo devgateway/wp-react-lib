@@ -1,7 +1,10 @@
 {
   "name": "@devgateway/wp-react-lib",
   "version": "0.6.2",
-  "author": "Sebastian Dimunzio <sdimunzio@developmentgateway.org/>",
+  "author": "Sebastian Dimunzio <sdimunzio@gmail.com>",
+  "contributors": [
+    "Timothy Gachengo (https://github.com/timothygachengo)"
+  ],
   "type": "module",
   "files": [
     "dist",
@@ -10,7 +13,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "immutable": "^5.1.3",
     "react": "^18.3.1",
@@ -48,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devgateway/dg-wp-react.git",
+    "url": "git+https://github.com/devgateway/wp-react-lib.git",
     "directory": "wp-react-lib"
   },
   "keywords": [
