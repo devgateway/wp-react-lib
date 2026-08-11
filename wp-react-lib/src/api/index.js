@@ -148,7 +148,7 @@ export const getPages = (before, perPage, page, fields, parent, slug, store, loc
         url += "?"
     }
 
-    url += 'lang=' + locale
+    url += '_embed=true&lang=' + locale
         + (slug ? '&slug=' + slug : '')
     if (!slug) {
         url += (before ? "&before=" + before.toISOString() : "")
